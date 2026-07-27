@@ -34,9 +34,11 @@
       --muted: #77716a;
       --line: rgba(18, 20, 23, 0.1);
       --line-strong: rgba(18, 20, 23, 0.16);
-      --champagne: #b89762;
-      --champagne-soft: #eadfce;
-      --champagne-deep: #8f7040;
+      /* Accent is for interactive states only (hover, copied, focus, chips). */
+      --champagne: #d5ff2f;
+      --champagne-bright: #eeff66;
+      --champagne-soft: #f6f1e9;
+      --champagne-deep: #6f8b00;
       --deep: #121417;
       --shadow: 0 18px 48px rgba(18, 20, 23, 0.055);
       --shadow-hover: 0 24px 70px rgba(18, 20, 23, 0.11);
@@ -271,6 +273,11 @@
       transform: translateY(-1px);
     }
 
+    .site-header.is-scrolled .header-contact .copy-email:hover {
+      text-shadow: none;
+      opacity: 1;
+    }
+
     .header-contact .flag {
       font-size: 16px;
       line-height: 1;
@@ -498,17 +505,17 @@
     }
 
     .hero-card.primary:hover {
-      --btn-a: #f7ecd9;
-      --btn-b: #c4a06a;
-      box-shadow: 0 28px 72px rgba(184, 151, 98, 0.34);
+      --btn-a: #f7f3ec;
+      --btn-b: #efe8dc;
+      box-shadow: 0 28px 72px rgba(18, 20, 23, 0.16);
     }
 
     .hero-card.secondary:hover {
-      --btn-a: #f8efdf;
-      --btn-b: #d4b688;
+      --btn-a: #f7f3ec;
+      --btn-b: #e8e2d8;
       color: #111111;
       border-color: transparent;
-      box-shadow: 0 24px 64px rgba(184, 151, 98, 0.28);
+      box-shadow: 0 24px 64px rgba(18, 20, 23, 0.18);
     }
 
     .hero-card.secondary:hover .card-arrow {
@@ -764,7 +771,7 @@
     }
 
     .tag.sold {
-      color: #8f7040;
+      color: var(--ink-soft);
     }
 
     .listing-body {
@@ -861,8 +868,9 @@
     }
 
     .tab-button:hover:not(.is-active) {
-      background: linear-gradient(135deg, #f8f3ec, var(--champagne-soft));
+      background: #ffffff;
       color: var(--ink);
+      box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.12);
     }
 
     .pagination {
@@ -905,6 +913,7 @@
       color: var(--ink);
       border-color: rgba(18, 20, 23, 0.18);
       transform: scale(1.06);
+      box-shadow: 0 8px 20px rgba(18, 20, 23, 0.08);
     }
 
     .page-button.is-active {
@@ -1012,37 +1021,129 @@
       letter-spacing: -0.015em;
     }
 
-    .services .section-header {
-      margin-bottom: 18px;
+    .services-wrap {
+      display: grid;
+      gap: 0;
     }
 
-    .services-lead {
-      max-width: 34rem;
-      margin: 0 0 36px;
+    .services-wrap.is-engaged {
+      gap: 16px;
+    }
+
+    .services-engage-head {
+      display: grid;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(-10px);
+      max-height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition:
+        opacity 320ms var(--ease-out),
+        transform 380ms var(--ease-out),
+        max-height 380ms var(--ease-out);
+    }
+
+    .services-wrap.is-engaged .services-engage-head {
+      opacity: 1;
+      transform: none;
+      max-height: 140px;
+      pointer-events: auto;
+    }
+
+    .services-back {
+      justify-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 0;
+      padding: 2px 0 2px 2px;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: color 180ms ease;
+    }
+
+    .services-back::before {
+      content: "←";
+      line-height: 1;
+    }
+
+    .services-back:hover {
+      color: var(--ink);
+    }
+
+    .services-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      padding: 5px;
+      border-radius: 16px;
+      background: rgba(18, 20, 23, 0.04);
+      border: 1px solid var(--line);
+    }
+
+    .services-tab {
+      position: relative;
+      min-height: 48px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.8vw, 22px);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+      transition:
+        background 220ms var(--ease-out),
+        color 220ms var(--ease-out),
+        box-shadow 220ms var(--ease-out),
+        transform 180ms var(--ease-out);
+    }
+
+    .services-tab:hover:not(.is-active) {
       color: var(--ink-soft);
-      font-size: clamp(15px, 1.35vw, 17px);
-      line-height: 1.65;
-      font-weight: 400;
-      letter-spacing: -0.015em;
-      text-wrap: pretty;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .services-tab:active:not(.is-active) {
+      transform: scale(0.98);
+    }
+
+    .services-tab.is-active {
+      background: #ffffff;
+      color: var(--ink);
+      box-shadow: 0 4px 14px rgba(18, 20, 23, 0.08);
+    }
+
+    .services-tab:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 2px;
     }
 
     .services-stack {
       display: flex;
       align-items: stretch;
       gap: 12px;
-      min-height: 460px;
     }
 
     .service-path {
-      --service-flex: 1;
       position: relative;
-      flex: var(--service-flex) 1 0;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       gap: 22px;
       min-width: 0;
-      padding: 30px 26px;
+      min-height: min-content;
+      padding: 30px 26px 52px;
       border-radius: 22px;
       background: #ffffff;
       border: 1px solid rgba(18, 20, 23, 0.08);
@@ -1050,84 +1151,138 @@
       cursor: pointer;
       overflow: hidden;
       isolation: isolate;
-      transform: translate3d(0, 0, 0) scale(1);
-      opacity: 1;
+      transform: translateY(0);
       transition:
-        flex 580ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 580ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 420ms ease,
-        box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 420ms ease,
-        background 420ms ease,
-        padding 480ms cubic-bezier(0.22, 1, 0.36, 1);
+        border-color 240ms var(--ease-out),
+        box-shadow 280ms var(--ease-out),
+        transform 280ms var(--ease-out);
+    }
+
+    .service-path::after {
+      content: "Get started";
+      position: absolute;
+      right: 26px;
+      bottom: 22px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(8px);
+      transition:
+        opacity 240ms var(--ease-out),
+        transform 280ms var(--ease-out);
+      pointer-events: none;
+      z-index: 2;
     }
 
     .service-path::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top right, rgba(184, 151, 98, 0.16), transparent 42%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 48%);
-      opacity: 0;
-      transition: opacity 480ms ease;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 320ms var(--ease-out);
+      z-index: 2;
       pointer-events: none;
-      z-index: 0;
     }
 
-    .service-path > * {
-      position: relative;
-      z-index: 1;
+    @media (hover: hover) and (pointer: fine) {
+      .service-path:hover {
+        border-color: rgba(18, 20, 23, 0.16);
+        box-shadow: 0 24px 56px rgba(18, 20, 23, 0.1);
+        transform: translateY(-6px);
+      }
+
+      .service-path:hover::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .service-path:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-path:hover .service-icon {
+        background: rgba(18, 20, 23, 0.1);
+        color: var(--ink);
+        transform: translateY(-2px);
+      }
+
+      .service-path:hover .service-path-kicker {
+        letter-spacing: -0.05em;
+      }
     }
 
-    .service-path:hover {
-      border-color: rgba(18, 20, 23, 0.14);
-      transform: translate3d(0, -4px, 0) scale(1.01);
-      box-shadow: 0 22px 54px rgba(18, 20, 23, 0.09);
+    .service-path:active {
+      transform: translateY(-2px) scale(0.992);
     }
 
     .service-path:focus-visible {
-      outline: 2px solid var(--champagne);
+      outline: 2px solid var(--line-strong);
       outline-offset: 3px;
     }
 
-    .services-stack.is-focused .service-path {
-      --service-flex: 0.38;
-      opacity: 0.38;
-      transform: translate3d(0, 12px, 0) scale(0.92);
-      background: rgba(255, 255, 255, 0.68);
-      box-shadow: none;
-      filter: saturate(0.85);
-      padding: 26px 18px;
-      gap: 0;
+    .services-wrap.is-engaged .services-stack {
+      display: block;
     }
 
-    .services-stack.is-focused .service-path:hover {
-      opacity: 0.58;
-      transform: translate3d(0, 6px, 0) scale(0.94);
+    .services-wrap.is-engaged .service-path {
+      display: none;
+      cursor: default;
+      transform: none;
     }
 
-    .services-stack.is-focused .service-path.is-active {
-      --service-flex: 2.55;
-      opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
-      z-index: 3;
-      background: #111417;
-      color: #ffffff;
-      border-color: transparent;
-      box-shadow: 0 28px 80px rgba(18, 20, 23, 0.28);
-      padding: 34px 30px;
-      gap: 22px;
-      filter: none;
+    .services-wrap.is-engaged .service-path.is-active {
+      display: flex;
+      width: 100%;
+      padding: 28px 26px;
+      border-color: rgba(18, 20, 23, 0.08);
+      box-shadow: 0 16px 40px rgba(18, 20, 23, 0.045);
+      animation: service-card-enter 460ms var(--ease-out) both;
     }
 
-    .services-stack.is-focused .service-path.is-active::before {
-      opacity: 1;
+    .services-wrap.is-engaged .service-path.is-active:hover {
+      border-color: rgba(18, 20, 23, 0.08);
+      box-shadow: 0 16px 40px rgba(18, 20, 23, 0.045);
+      transform: none;
     }
 
-    .services-stack.is-focused .service-path.is-active:hover {
-      transform: translate3d(0, 0, 0) scale(1);
-      opacity: 1;
+    .services-wrap.is-engaged .service-path.is-active::before,
+    .services-wrap.is-engaged .service-path.is-active::after {
+      display: none;
+    }
+
+    .services-wrap.is-engaged .service-path-head,
+    .services-wrap.is-engaged .service-path.is-active .service-list {
+      display: none;
+    }
+
+    @keyframes service-card-enter {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes service-panel-enter {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     .service-path-head {
@@ -1140,11 +1295,12 @@
       margin: 0;
       font-family: var(--serif);
       font-size: clamp(34px, 3.4vw, 46px);
-      line-height: 0.95;
+      line-height: 1.05;
       font-weight: 600;
       letter-spacing: -0.045em;
       color: var(--ink);
-      transition: color 420ms ease;
+      transition: letter-spacing 280ms var(--ease-out);
+      overflow: visible;
     }
 
     .service-path-lead {
@@ -1154,50 +1310,17 @@
       line-height: 1.35;
       font-weight: 500;
       letter-spacing: -0.015em;
-      transition: color 420ms ease, opacity 320ms ease;
-    }
-
-    .services-stack.is-focused .service-path:not(.is-active) .service-path-lead {
-      opacity: 0.72;
-    }
-
-    .services-stack.is-focused .service-path.is-active .service-path-kicker {
-      color: #ffffff;
-    }
-
-    .services-stack.is-focused .service-path.is-active .service-path-lead {
-      color: rgba(255, 255, 255, 0.68);
     }
 
     .service-path-body {
       min-width: 0;
       display: grid;
       gap: 0;
-      max-height: 900px;
-      opacity: 1;
-      overflow: hidden;
-      transform: translateY(0);
-      transition:
-        max-height 580ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 380ms ease,
-        transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .services-stack.is-focused .service-path:not(.is-active) .service-path-body {
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    .services-stack.is-focused .service-path.is-active .service-path-body {
-      max-height: 900px;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .service-list {
       list-style: none;
-      margin: 0;
+      margin: 0 0 8px;
       padding: 4px 0 0;
       display: grid;
       gap: 14px;
@@ -1211,7 +1334,15 @@
       padding: 0;
       border: 0;
       background: transparent;
+      transition: transform 220ms var(--ease-out);
     }
+
+    .service-path:hover .service-list li:nth-child(1) { transition-delay: 20ms; }
+    .service-path:hover .service-list li:nth-child(2) { transition-delay: 40ms; }
+    .service-path:hover .service-list li:nth-child(3) { transition-delay: 60ms; }
+    .service-path:hover .service-list li:nth-child(4) { transition-delay: 80ms; }
+    .service-path:hover .service-list li:nth-child(5) { transition-delay: 100ms; }
+    .service-path:hover .service-list li:nth-child(6) { transition-delay: 120ms; }
 
     .service-icon {
       display: grid;
@@ -1219,15 +1350,13 @@
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: rgba(184, 151, 98, 0.14);
-      color: var(--champagne-deep);
+      background: rgba(18, 20, 23, 0.06);
+      color: var(--ink-soft);
       flex-shrink: 0;
-      transition: background 420ms ease, color 420ms ease;
-    }
-
-    .services-stack.is-focused .service-path.is-active .service-icon {
-      background: rgba(255, 255, 255, 0.1);
-      color: #eadfce;
+      transition:
+        background 240ms var(--ease-out),
+        color 240ms var(--ease-out),
+        transform 240ms var(--ease-out);
     }
 
     .service-icon svg {
@@ -1253,24 +1382,588 @@
       font-weight: 400;
       letter-spacing: -0.01em;
       text-wrap: pretty;
-      transition: color 420ms ease;
     }
 
-    .services-stack.is-focused .service-path.is-active .service-item-copy p {
-      color: rgba(255, 255, 255, 0.82);
+    .service-panel {
+      display: none;
+    }
+
+    .services-wrap.is-engaged .service-path.is-active .service-panel {
+      display: block;
+      animation: service-panel-enter 480ms var(--ease-out) both;
+    }
+
+    .services-wrap.is-engaged .service-path.is-active.is-switching .service-panel {
+      animation: service-panel-enter 360ms var(--ease-out) both;
+    }
+
+    .service-panel-intro {
+      margin-bottom: 14px;
+    }
+
+    .service-panel-intro h4 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .service-panel-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+
+    .service-steps {
+      list-style: none;
+      margin: 0 0 24px;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-steps li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .service-steps strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .service-step-num {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .service-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .service-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+    }
+
+    .service-form-section {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .service-form-section h4 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .service-form-note {
+      margin: -4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .service-form--quick .service-form-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .service-form--quick .service-form-grid--split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .service-form-optional {
+      margin-top: 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      overflow: hidden;
+      transition: border-color 200ms ease, box-shadow 220ms var(--ease-out);
+    }
+
+    .service-form-optional:hover {
+      border-color: rgba(18, 20, 23, 0.16);
+    }
+
+    .service-form-optional summary {
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      list-style: none;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .service-form-optional summary:hover {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .service-form-optional summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .service-form-optional summary::after {
+      content: "+";
+      float: right;
+      font-weight: 400;
+      color: var(--muted);
+      transition: transform 220ms var(--ease-out), color 180ms ease;
+    }
+
+    .service-form-optional[open] summary::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+
+    .service-form-optional[open] summary {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service-form-optional-body {
+      padding: 12px 14px 14px;
+      display: grid;
+      gap: 8px;
+      animation: service-panel-enter 280ms var(--ease-out) both;
+    }
+
+    .service-form-optional-body .service-field label {
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .service-form-optional-body .service-field textarea {
+      min-height: 72px;
+    }
+
+    .service-field {
+      display: grid;
+      gap: 4px;
+    }
+
+    .service-field label {
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .service-field label .req {
+      color: var(--ink);
+    }
+
+    .service-field input,
+    .service-field select,
+    .service-field textarea {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.35;
+      outline: 0;
+      transition:
+        border-color 200ms var(--ease-out),
+        background 200ms var(--ease-out),
+        box-shadow 220ms var(--ease-out),
+        transform 180ms var(--ease-out);
+    }
+
+    .service-field textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .service-field--full {
+      grid-column: 1 / -1;
+    }
+
+    .service-field input::placeholder,
+    .service-field textarea::placeholder {
+      color: rgba(18, 20, 23, 0.38);
+    }
+
+    .service-field input[type="date"] {
+      color-scheme: light;
+    }
+
+    .service-field select {
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 36px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2377716a' d='M1.1 1.2 6 6.1l4.9-4.9 1.1 1.1L6 8.2 0 2.3z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      cursor: pointer;
+    }
+
+    .service-field select option {
+      color: #121417;
+      background: #ffffff;
+    }
+
+    .service-field input:hover,
+    .service-field select:hover,
+    .service-field textarea:hover {
+      border-color: rgba(18, 20, 23, 0.18);
+    }
+
+    .service-field input:focus,
+    .service-field select:focus,
+    .service-field textarea:focus {
+      border-color: rgba(18, 20, 23, 0.34);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(18, 20, 23, 0.07);
+    }
+
+    .service-form.is-attempted .service-field input:invalid,
+    .service-form.is-attempted .service-field select:invalid,
+    .service-form.is-attempted .service-field textarea:invalid {
+      border-color: rgba(220, 80, 80, 0.72);
+    }
+
+    .service-form--lease > fieldset.choice-field {
+      margin: 2px 0 4px;
+    }
+
+    .service-form--lease .lease-panel-block {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice-field {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .choice-field legend {
+      padding: 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .choice-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .chip-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .chip-option {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+
+    .chip-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chip-option span {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 38px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.3;
+      transition: border-color 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .chip-option input:checked + span {
+      border-color: var(--ink);
+      background: var(--surface-soft);
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.06);
+    }
+
+    .chip-option input:focus-visible + span {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 2px;
+    }
+
+    .choice-option {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+
+    .choice-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice-option span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      transition:
+        border-color 200ms var(--ease-out),
+        background 200ms var(--ease-out),
+        color 200ms var(--ease-out),
+        box-shadow 220ms var(--ease-out),
+        transform 180ms var(--ease-out);
+    }
+
+    .choice-option:hover span {
+      border-color: rgba(18, 20, 23, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .choice-option input:checked + span {
+      border-color: var(--ink);
+      background: var(--surface-soft);
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.06);
+      transform: none;
+    }
+
+    .choice-option input:focus-visible + span {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 2px;
+    }
+
+    .service-form.is-attempted .choice-field--required:not(:has(input:checked)) .choice-group,
+    .service-form.is-attempted .choice-field--required.is-invalid .chip-group {
+      box-shadow: inset 0 0 0 1px rgba(255, 140, 140, 0.72);
+      border-radius: 12px;
+    }
+
+    .lease-panel-block {
+      display: grid;
+      gap: 18px;
+    }
+
+    .lease-panel-block[hidden] {
+      display: none;
+    }
+
+    .service-form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .service-form-status {
+      margin: 0;
+      min-height: 1.2em;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .service-form-status.is-error {
+      color: #c44;
+    }
+
+    .service-form-status.is-success {
+      color: #2f6b3f;
+    }
+
+    .service-submit {
+      margin-left: auto;
+      min-height: 42px;
+      padding: 0 24px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition:
+        transform 200ms var(--ease-out),
+        background 200ms ease,
+        border-color 200ms ease,
+        box-shadow 220ms var(--ease-out),
+        opacity 160ms ease;
+    }
+
+    .service-submit:hover:not(:disabled) {
+      background: #2a2d31;
+      border-color: #2a2d31;
+      box-shadow: 0 12px 28px rgba(18, 20, 23, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .service-submit:active:not(:disabled) {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .service-submit:disabled {
+      opacity: 0.68;
+      cursor: wait;
+    }
+
+    .service-honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    [data-tip].is-copied::after {
+      opacity: 1;
+      background: #ffffff;
+      color: #121417;
+      font-weight: 700;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+      animation: tip-copied-pop 360ms var(--ease-out);
+    }
+
+    .site-header [data-tip].is-copied::after,
+    .contact-section [data-tip].is-copied::after {
+      background: #ffffff;
+      color: #121417;
+    }
+
+    @keyframes tip-copied-pop {
+      0% {
+        opacity: 0.65;
+        transform: translateX(-50%) translateY(6px) scale(0.94);
+      }
+
+      70% {
+        transform: translateX(-50%) translateY(-1px) scale(1.03);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+
+    .site-header [data-tip].is-copied::after {
+      animation-name: tip-copied-pop-header;
+    }
+
+    @keyframes tip-copied-pop-header {
+      0% {
+        opacity: 0.65;
+        transform: translateX(-50%) translateY(-6px) scale(0.94);
+      }
+
+      70% {
+        transform: translateX(-50%) translateY(1px) scale(1.03);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-tip].is-copied::after {
+        animation: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .service-path,
-      .service-path-body {
-        transition: none;
+      .service-path-body,
+      .service-path::before,
+      .service-path::after,
+      .service-icon,
+      .service-path-kicker,
+      .services-engage-head,
+      .services-tab,
+      .services-back,
+      .service-field input,
+      .service-field select,
+      .service-field textarea,
+      .choice-option span,
+      .service-form-optional,
+      .service-form-optional summary,
+      .service-form-optional summary::after,
+      .service-submit {
+        transition: none !important;
+      }
+
+      .service-path:hover,
+      .service-path:active,
+      .services-tab:active:not(.is-active),
+      .choice-option:hover span,
+      .service-submit:hover:not(:disabled),
+      .service-submit:active:not(:disabled),
+      .services-back:hover {
+        transform: none;
+      }
+
+      .services-wrap.is-engaged .service-path.is-active,
+      .services-wrap.is-engaged .service-path.is-active .service-panel,
+      .service-form-optional-body {
+        animation: none;
       }
     }
 
     .journal {
       padding: 122px 0;
       background:
-        radial-gradient(circle at top right, rgba(184, 151, 98, 0.12), transparent 36rem),
+        radial-gradient(circle at top right, rgba(18, 20, 23, 0.04), transparent 36rem),
         linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
       border-top: 1px solid rgba(18, 20, 23, 0.06);
       border-bottom: 1px solid rgba(18, 20, 23, 0.06);
@@ -1425,7 +2118,7 @@
     .contact-bar-details .copy-email:hover {
       color: #ffffff;
       transform: translateY(-1px);
-      text-shadow: 0 0 24px rgba(212, 182, 136, 0.55);
+      text-shadow: none;
     }
 
     .contact-bar .divider {
@@ -1620,6 +2313,120 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    .back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+      z-index: 900;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 50%;
+      background: rgba(18, 20, 23, 0.52);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(12px) scale(0.92);
+      box-shadow: 0 8px 24px rgba(18, 20, 23, 0.12);
+      transition:
+        opacity 220ms var(--ease-out),
+        transform 280ms var(--ease-out),
+        visibility 220ms ease,
+        background 220ms var(--ease-out),
+        border-color 220ms var(--ease-out),
+        box-shadow 280ms var(--ease-out);
+    }
+
+    .back-to-top:hover {
+      background: rgba(18, 20, 23, 0.72);
+      border-color: rgba(255, 255, 255, 0.24);
+      box-shadow: 0 14px 34px rgba(18, 20, 23, 0.22);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .back-to-top.is-visible:hover {
+      transform: translateY(-6px) scale(1.07);
+    }
+
+    .back-to-top.is-visible:active {
+      transform: translateY(-2px) scale(0.96);
+      transition-duration: 120ms;
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.55);
+      outline-offset: 3px;
+    }
+
+    .back-to-top svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 280ms var(--ease-out);
+    }
+
+    .back-to-top:hover svg {
+      transform: translateY(-3px);
+    }
+
+    .back-to-top:active svg {
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes back-to-top-enter {
+        0% {
+          opacity: 0;
+          transform: translateY(16px) scale(0.88);
+        }
+
+        70% {
+          transform: translateY(-2px) scale(1.04);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .back-to-top.is-visible {
+        animation: back-to-top-enter 420ms var(--ease-out) both;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .back-to-top,
+      .back-to-top svg {
+        transition: none;
+      }
+
+      .back-to-top.is-visible:hover,
+      .back-to-top.is-visible:active {
+        transform: translateY(0) scale(1);
+      }
+
+      .back-to-top:hover svg,
+      .back-to-top:active svg {
+        transform: none;
+      }
+    }
+
     @media (max-width: 1080px) {
       .listings-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1685,54 +2492,51 @@
 
       .services-stack {
         flex-direction: column;
-        min-height: 0;
         gap: 12px;
       }
 
       .service-path,
-      .services-stack.is-focused .service-path {
+      .services-wrap.is-engaged .service-path.is-active {
         flex: none;
-        transform: none;
-        filter: none;
-        opacity: 1;
-        padding: 24px 20px;
-        box-shadow: 0 12px 30px rgba(18, 20, 23, 0.04);
-        background: #ffffff;
-        color: inherit;
+        width: 100%;
+        min-height: min-content;
+        padding: 24px 20px 48px;
+        overflow: hidden;
       }
 
-      .services-stack.is-focused .service-path:not(.is-active) {
-        opacity: 0.7;
+      .services-wrap.is-engaged .service-path.is-active {
+        padding: 24px 20px 28px;
       }
 
-      .services-stack.is-focused .service-path.is-active {
-        opacity: 1;
-        background: #111417;
-        color: #ffffff;
-        box-shadow: 0 22px 56px rgba(18, 20, 23, 0.22);
+      .service-path::after {
+        right: 20px;
+        bottom: 18px;
       }
 
-      .services-stack.is-focused .service-path.is-active .service-path-kicker {
-        color: #ffffff;
+      .services-tabs {
+        gap: 4px;
+        padding: 4px;
       }
 
-      .services-stack.is-focused .service-path.is-active .service-path-lead {
-        color: rgba(255, 255, 255, 0.68);
+      .services-tab {
+        min-height: 44px;
+        padding: 8px 8px;
+        font-size: 16px;
       }
 
-      .service-path-body {
-        max-height: 960px;
-        opacity: 1;
+      .service-form-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
       }
 
-      .services-stack.is-focused .service-path:not(.is-active) .service-path-body {
-        max-height: 0;
-        opacity: 0;
+      .service-form-footer {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .services-stack.is-focused .service-path.is-active .service-path-body {
-        max-height: 960px;
-        opacity: 1;
+      .service-submit {
+        width: 100%;
+        margin-left: 0;
       }
     }
 
@@ -2028,7 +2832,7 @@
 
       <div class="header-utils">
         <div class="header-contact">
-          <a href="tel:+16473608179" data-tip="Call Josh" aria-label="Call Josh">
+          <a class="call-phone" href="tel:+16473608179" data-phone="+16473608179" data-tip="Call Josh" aria-label="Call Josh">
             <span class="flag" aria-hidden="true">🇨🇦</span>
             <span class="phone-text">647-360-8179</span>
           </a>
@@ -2197,13 +3001,23 @@
           <div>
             <h2 class="section-title">Services</h2>
           </div>
+
+          <p class="section-copy">
+            Buy, sell, and lease each need a different playbook.
+          </p>
         </div>
 
-        <p class="services-lead reveal" data-reveal>
-          Buy, sell, and lease each need a different playbook.
-        </p>
+        <div class="services-wrap reveal" data-reveal>
+          <div class="services-engage-head" aria-hidden="true">
+            <button type="button" class="services-back">All services</button>
+            <div class="services-tabs" role="tablist" aria-label="Service type">
+              <button type="button" class="services-tab" data-service="buy" role="tab" aria-selected="false" aria-controls="service-buy">Buying</button>
+              <button type="button" class="services-tab" data-service="sell" role="tab" aria-selected="false" aria-controls="service-sell">Selling</button>
+              <button type="button" class="services-tab" data-service="lease" role="tab" aria-selected="false" aria-controls="service-lease">Leasing</button>
+            </div>
+          </div>
 
-        <div class="services-stack reveal" data-reveal>
+          <div class="services-stack">
           <article class="service-path" id="service-buy" data-service="buy" tabindex="0" role="button" aria-expanded="true" aria-controls="service-buy-details">
             <div class="service-path-head">
               <h3 class="service-path-kicker">Buying</h3>
@@ -2260,6 +3074,75 @@
                 </div>
               </li>
               </ul>
+
+                <div class="service-panel">
+                <form
+                  class="service-form service-form--quick"
+                  id="buyLeadForm"
+                  action="https://formsubmit.co/ajax/josh@thaparteam.ca"
+                  method="POST"
+                  novalidate
+                >
+                  <input type="hidden" name="_subject" value="New Buyer Inquiry - Website">
+                  <input type="hidden" name="_template" value="table">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input class="service-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                  <div class="service-panel-intro">
+                    <h4>Start your home search</h4>
+                    <p class="service-form-note">Share a few basics and I will follow up with listings that fit.</p>
+                  </div>
+
+                  <div class="service-form-grid service-form-grid--split">
+                    <div class="service-field">
+                      <label for="buy-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                      <input id="buy-name" name="Name" type="text" placeholder="First and last name" autocomplete="name" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="buy-email">Email <span class="req" aria-hidden="true">*</span></label>
+                      <input id="buy-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="buy-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                      <input id="buy-phone" name="Phone" type="tel" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" required>
+                    </div>
+
+                    <div class="service-field service-field--full">
+                      <label for="buy-location">Where do you want to buy? <span class="req" aria-hidden="true">*</span></label>
+                      <input id="buy-location" name="Desired Area" type="text" placeholder="Neighbourhood or city" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="buy-price">Budget <span class="req" aria-hidden="true">*</span></label>
+                      <select id="buy-price" name="Budget" required>
+                        <option value="" selected disabled>Select a range</option>
+                        <option value="Under $500,000">Under $500,000</option>
+                        <option value="$500,000 to $750,000">$500,000 to $750,000</option>
+                        <option value="$750,000 to $1,000,000">$750,000 to $1,000,000</option>
+                        <option value="$1,000,000 to $1,500,000">$1,000,000 to $1,500,000</option>
+                        <option value="$1,500,000+">$1,500,000+</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <details class="service-form-optional">
+                    <summary>Bedrooms, property type, timeline</summary>
+                    <div class="service-form-optional-body">
+                      <div class="service-field">
+                        <label for="buy-comments">Anything else about what you are looking for</label>
+                        <textarea id="buy-comments" name="Additional Details" placeholder="e.g. 2 bed condo, move in spring, first-time buyer"></textarea>
+                      </div>
+                    </div>
+                  </details>
+
+                  <div class="service-form-footer">
+                    <p class="service-form-status" aria-live="polite"></p>
+                    <button class="service-submit" type="submit">Get started</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </article>
 
@@ -2303,6 +3186,75 @@
                 </div>
               </li>
               </ul>
+
+              <div class="service-panel">
+                <form
+                  class="service-form service-form--quick"
+                  id="sellLeadForm"
+                  action="https://formsubmit.co/ajax/josh@thaparteam.ca"
+                  method="POST"
+                  novalidate
+                >
+                  <input type="hidden" name="_subject" value="Home Evaluation Request - Website">
+                  <input type="hidden" name="_template" value="table">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input class="service-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                  <div class="service-panel-intro">
+                    <h4>Get a home evaluation</h4>
+                    <p class="service-form-note">Tell me about your property and I will follow up with pricing insight.</p>
+                  </div>
+
+                  <div class="service-form-grid service-form-grid--split">
+                    <div class="service-field">
+                      <label for="sell-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                      <input id="sell-name" name="Name" type="text" placeholder="First and last name" autocomplete="name" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="sell-email">Email <span class="req" aria-hidden="true">*</span></label>
+                      <input id="sell-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="sell-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                      <input id="sell-phone" name="Phone" type="tel" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" required>
+                    </div>
+
+                    <div class="service-field service-field--full">
+                      <label for="sell-address">Property address <span class="req" aria-hidden="true">*</span></label>
+                      <input id="sell-address" name="Property Address" type="text" placeholder="Street address, city" autocomplete="street-address" required>
+                    </div>
+
+                    <div class="service-field service-field--full">
+                      <label for="sell-timeline">When are you thinking of selling? <span class="req" aria-hidden="true">*</span></label>
+                      <select id="sell-timeline" name="Timeline" required>
+                        <option value="" selected disabled>Select</option>
+                        <option value="ASAP">ASAP</option>
+                        <option value="1 to 3 months">1 to 3 months</option>
+                        <option value="3 to 6 months">3 to 6 months</option>
+                        <option value="6 to 12 months">6 to 12 months</option>
+                        <option value="Just exploring">Just exploring</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <details class="service-form-optional">
+                    <summary>Property type, beds, baths, upgrades</summary>
+                    <div class="service-form-optional-body">
+                      <div class="service-field">
+                        <label for="sell-details">More about your property</label>
+                        <textarea id="sell-details" name="Property Details" placeholder="e.g. 3 bed semi, finished basement, recent kitchen reno"></textarea>
+                      </div>
+                    </div>
+                  </details>
+
+                  <div class="service-form-footer">
+                    <p class="service-form-status" aria-live="polite"></p>
+                    <button class="service-submit" type="submit">Get started</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </article>
 
@@ -2346,8 +3298,127 @@
                 </div>
               </li>
               </ul>
+
+              <div class="service-panel">
+                <form
+                  class="service-form service-form--quick service-form--lease"
+                  id="leaseLeadForm"
+                  action="https://formsubmit.co/ajax/josh@thaparteam.ca"
+                  method="POST"
+                  novalidate
+                >
+                  <input type="hidden" name="_subject" value="New Lease Inquiry - Website">
+                  <input type="hidden" name="_template" value="table">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input class="service-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                  <div class="service-panel-intro">
+                    <h4>Tell me what you need</h4>
+                    <p class="service-form-note">A few basics so I can help. No long application.</p>
+                  </div>
+
+                  <div class="service-form-grid service-form-grid--split">
+                    <div class="service-field">
+                      <label for="lease-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                      <input id="lease-name" name="Name" type="text" placeholder="First and last name" autocomplete="name" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="lease-email">Email <span class="req" aria-hidden="true">*</span></label>
+                      <input id="lease-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="lease-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                      <input id="lease-phone" name="Phone" type="tel" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" required>
+                    </div>
+                  </div>
+
+                  <fieldset class="choice-field choice-field--required">
+                    <legend>I am <span class="req" aria-hidden="true">*</span></legend>
+                    <div class="choice-group">
+                      <label class="choice-option">
+                        <input type="radio" name="I am" value="Looking to lease out my property" required>
+                        <span>Lease out my property</span>
+                      </label>
+                      <label class="choice-option">
+                        <input type="radio" name="I am" value="Looking to rent" required checked>
+                        <span>Looking to rent</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <div class="lease-panel-block" id="leaseTenantPanel">
+                    <div class="service-form-grid service-form-grid--split">
+                      <div class="service-field service-field--full">
+                        <label for="lease-area">Where do you want to rent? <span class="req" aria-hidden="true">*</span></label>
+                        <input id="lease-area" name="Desired Area" type="text" placeholder="Neighbourhood or city" data-tenant-required required>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="lease-budget">Monthly budget <span class="req" aria-hidden="true">*</span></label>
+                        <select id="lease-budget" name="Monthly Budget" data-tenant-required required>
+                          <option value="" selected disabled>Select a range</option>
+                          <option value="Under $2,000">Under $2,000</option>
+                          <option value="$2,000 to $2,500">$2,000 to $2,500</option>
+                          <option value="$2,500 to $3,000">$2,500 to $3,000</option>
+                          <option value="$3,000 to $4,000">$3,000 to $4,000</option>
+                          <option value="$4,000+">$4,000+</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="lease-timeline">Move timeline <span class="req" aria-hidden="true">*</span></label>
+                        <select id="lease-timeline" name="Move Timeline" data-tenant-required required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="ASAP">ASAP</option>
+                          <option value="1 to 3 months">1 to 3 months</option>
+                          <option value="3 to 6 months">3 to 6 months</option>
+                          <option value="Just exploring">Just exploring</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <details class="service-form-optional">
+                      <summary>Employment, credit, pets, viewing times</summary>
+                      <div class="service-form-optional-body">
+                        <div class="service-field">
+                          <label for="lease-tenant-details">Share what helps me match you faster</label>
+                          <textarea id="lease-tenant-details" name="Additional Details" placeholder="e.g. full-time employed, one small dog, free weekday evenings"></textarea>
+                        </div>
+                        <p class="service-form-note">Only share what you are comfortable with. I will follow up personally.</p>
+                      </div>
+                    </details>
+                  </div>
+
+                  <div class="lease-panel-block" id="leaseLandlordPanel" hidden>
+                    <div class="service-form-grid service-form-grid--split">
+                      <div class="service-field service-field--full">
+                        <label for="lease-property-address">Property address <span class="req" aria-hidden="true">*</span></label>
+                        <input id="lease-property-address" name="Property Address" type="text" placeholder="Street address, city">
+                      </div>
+                    </div>
+
+                    <details class="service-form-optional">
+                      <summary>Expected rent, beds, parking, tenant status</summary>
+                      <div class="service-form-optional-body">
+                        <div class="service-field">
+                          <label for="lease-landlord-notes">More about the unit</label>
+                          <textarea id="lease-landlord-notes" name="Property Notes" placeholder="e.g. 2 bed, 1 parking, tenant leaves March 1"></textarea>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+
+                  <div class="service-form-footer">
+                    <p class="service-form-status" aria-live="polite"></p>
+                    <button class="service-submit" type="submit">Get started</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </article>
+        </div>
         </div>
       </div>
     </section>
@@ -2356,7 +3427,7 @@
       <div class="container">
         <div class="contact-bar reveal" data-reveal>
           <div class="contact-bar-details">
-            <a href="tel:+16473608179" data-tip="Call Josh" aria-label="Call Josh">
+            <a class="call-phone" href="tel:+16473608179" data-phone="+16473608179" data-tip="Call Josh" aria-label="Call Josh">
               <span class="flag" aria-hidden="true">🇨🇦</span>
               647-360-8179
             </a>
@@ -2399,8 +3470,16 @@
 
   <div class="site-toast" id="siteToast" role="status" aria-live="polite"></div>
 
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 19V5"></path>
+      <path d="m6 11 6-6 6 6"></path>
+    </svg>
+  </button>
+
   <script>
     const header = document.getElementById("siteHeader");
+    const backToTop = document.getElementById("backToTop");
     const yearElement = document.getElementById("year");
     const revealItems = document.querySelectorAll(".reveal[data-reveal]");
     const listingsGrid = document.getElementById("listingsGrid");
@@ -2644,6 +3723,18 @@
       } else {
         header.classList.remove("is-scrolled");
       }
+
+      const showBackToTop = window.scrollY > 480;
+      backToTop.classList.toggle("is-visible", showBackToTop);
+      backToTop.hidden = !showBackToTop;
+    }
+
+    function scrollToTop() {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
     }
 
     function populateAreaFilter() {
@@ -2830,6 +3921,7 @@
     renderReels();
 
     window.addEventListener("scroll", updateHeaderState, { passive: true });
+    backToTop.addEventListener("click", scrollToTop);
 
     const revealObserver = new IntersectionObserver(
       entries => {
@@ -2872,64 +3964,306 @@
       document.body.removeChild(input);
     }
 
-    const siteToast = document.getElementById("siteToast");
-    let toastTimer;
-
-    function showToast(message) {
-      if (!siteToast) return;
-      siteToast.textContent = message;
-      siteToast.classList.add("is-visible");
-      window.clearTimeout(toastTimer);
-      toastTimer = window.setTimeout(() => {
-        siteToast.classList.remove("is-visible");
-      }, 1800);
-    }
-
     document.querySelectorAll(".copy-email").forEach(button => {
+      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      let copiedTimer;
+
       button.addEventListener("click", async () => {
         const email = button.dataset.email;
         if (!email) return;
 
         try {
           await copyText(email);
-          showToast("Email copied");
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          window.clearTimeout(copiedTimer);
+          copiedTimer = window.setTimeout(() => {
+            button.setAttribute("data-tip", defaultTip);
+            button.classList.remove("is-copied");
+          }, 2000);
         } catch (error) {
           window.prompt("Copy email address:", email);
         }
       });
     });
 
-    (function initServiceFocus() {
-      const stack = document.querySelector(".services-stack");
-      const cards = Array.from(document.querySelectorAll(".service-path"));
-      if (!stack || !cards.length) return;
+    (function initCallPhone() {
+      const ua = navigator.userAgent;
+      const isApplePhone =
+        /iPhone|iPod/i.test(ua) ||
+        (ua.includes("iPad") && navigator.maxTouchPoints > 1);
+      const isAndroidPhone = /Android/i.test(ua) && /Mobile/i.test(ua);
+      const isMacDesktop = /Macintosh|Mac OS X/i.test(ua) && !isApplePhone;
+      const canDialNative = isApplePhone || isAndroidPhone || /Windows Phone/i.test(ua);
 
-      function setExpandedState() {
-        const focused = stack.classList.contains("is-focused");
-        cards.forEach(item => {
-          const active = item.classList.contains("is-active");
-          item.setAttribute("aria-expanded", !focused || active ? "true" : "false");
-        });
+      function formatPhone(raw) {
+        const digits = String(raw || "").replace(/\D/g, "");
+        if (digits.length === 11 && digits.startsWith("1")) {
+          return `${digits.slice(1, 4)}-${digits.slice(4, 7)}-${digits.slice(7)}`;
+        }
+        if (digits.length === 10) {
+          return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+        }
+        return raw;
       }
 
-      function resetOverview() {
-        stack.classList.remove("is-focused");
-        cards.forEach(item => item.classList.remove("is-active"));
-        setExpandedState();
-      }
+      document.querySelectorAll(".call-phone").forEach(link => {
+        const phone = link.dataset.phone || link.getAttribute("href")?.replace(/^tel:/i, "") || "";
+        let copiedTimer;
 
-      function focusCard(card) {
-        const alreadyActive =
-          stack.classList.contains("is-focused") && card.classList.contains("is-active");
-
-        if (alreadyActive) {
-          resetOverview();
+        // Mac: FaceTime audio call (avoids Skype hijacking tel: links)
+        if (isMacDesktop && phone) {
+          link.setAttribute("href", `facetime-audio:${phone}`);
+          link.setAttribute("data-tip", "Call Josh");
           return;
         }
 
-        stack.classList.add("is-focused");
+        if (canDialNative) {
+          link.setAttribute("href", `tel:${phone}`);
+          link.setAttribute("data-tip", "Call Josh");
+          return;
+        }
+
+        // Other desktops: copy number
+        link.setAttribute("data-tip", "Copy phone");
+
+        link.addEventListener("click", async event => {
+          event.preventDefault();
+          if (!phone) return;
+
+          const displayPhone = formatPhone(phone);
+
+          try {
+            await copyText(displayPhone);
+            link.setAttribute("data-tip", "Copied!");
+            link.classList.add("is-copied");
+            window.clearTimeout(copiedTimer);
+            copiedTimer = window.setTimeout(() => {
+              link.setAttribute("data-tip", "Copy phone");
+              link.classList.remove("is-copied");
+            }, 2000);
+          } catch (error) {
+            window.prompt("Phone number:", displayPhone);
+          }
+        });
+      });
+    })();
+
+    (function initServiceForms() {
+      document.querySelectorAll(".service-form").forEach(form => {
+        const status = form.querySelector(".service-form-status");
+        const submitBtn = form.querySelector(".service-submit");
+        const defaultLabel = submitBtn ? submitBtn.textContent.trim() : "Send";
+
+        form.addEventListener("click", event => {
+          event.stopPropagation();
+        });
+
+        form.addEventListener("keydown", event => {
+          event.stopPropagation();
+        });
+
+        form.addEventListener("submit", async event => {
+          event.preventDefault();
+          event.stopPropagation();
+          form.classList.add("is-attempted");
+
+          if (!form.reportValidity()) {
+            if (status) {
+              status.textContent = "Please complete all required fields.";
+              status.classList.add("is-error");
+              status.classList.remove("is-success");
+            }
+            return;
+          }
+
+          if (form.querySelector('[name="_honey"]')?.value) {
+            return;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+          }
+
+          if (status) {
+            status.textContent = "";
+            status.classList.remove("is-error", "is-success");
+          }
+
+          try {
+            const response = await fetch(form.action, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" }
+            });
+
+            if (!response.ok) {
+              throw new Error("Submit failed");
+            }
+
+            if (status) {
+              status.textContent = "Thanks! I will be in touch shortly.";
+              status.classList.add("is-success");
+              status.classList.remove("is-error");
+            }
+
+            form.reset();
+            form.classList.remove("is-attempted");
+          } catch (error) {
+            if (status) {
+              status.textContent = "Couldn't send right now. Please email josh@thaparteam.ca.";
+              status.classList.add("is-error");
+              status.classList.remove("is-success");
+            }
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = defaultLabel;
+            }
+          }
+        });
+      });
+    })();
+
+    (function initLeaseForm() {
+      const form = document.getElementById("leaseLeadForm");
+      if (!form) return;
+
+      const tenantPanel = document.getElementById("leaseTenantPanel");
+      const landlordPanel = document.getElementById("leaseLandlordPanel");
+      const propertyAddress = document.getElementById("lease-property-address");
+      const tenantRequiredFields = form.querySelectorAll("[data-tenant-required]");
+
+      function isLandlord() {
+        return form.querySelector('input[name="I am"]:checked')?.value === "Looking to lease out my property";
+      }
+
+      function syncLeaseMode() {
+        const landlord = isLandlord();
+
+        if (tenantPanel) {
+          tenantPanel.hidden = landlord;
+        }
+
+        if (landlordPanel) {
+          landlordPanel.hidden = !landlord;
+        }
+
+        tenantRequiredFields.forEach(field => {
+          field.required = !landlord;
+        });
+
+        if (propertyAddress) {
+          propertyAddress.required = landlord;
+        }
+      }
+
+      form.querySelectorAll('input[name="I am"]').forEach(input => {
+        input.addEventListener("change", syncLeaseMode);
+      });
+
+      form.addEventListener("reset", () => {
+        window.requestAnimationFrame(syncLeaseMode);
+      });
+
+      syncLeaseMode();
+    })();
+
+    (function initServiceFocus() {
+      const wrap = document.querySelector(".services-wrap");
+      const engageHead = document.querySelector(".services-engage-head");
+      const tabs = Array.from(document.querySelectorAll(".services-tab"));
+      const backBtn = document.querySelector(".services-back");
+      const cards = Array.from(document.querySelectorAll(".service-path"));
+      if (!wrap || !cards.length) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function setTabState(activeCard) {
+        const service = activeCard?.dataset.service;
+
+        tabs.forEach(tab => {
+          const isActive = tab.dataset.service === service;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+      }
+
+      function setExpandedState(activeCard) {
+        const engaged = wrap.classList.contains("is-engaged");
+
+        cards.forEach(item => {
+          const active = engaged && item === activeCard;
+          item.setAttribute("aria-expanded", active ? "true" : "false");
+        });
+      }
+
+      function replayEnter(card, switching) {
+        if (prefersReducedMotion || !card) return;
+
+        card.classList.remove("is-switching");
+        const panel = card.querySelector(".service-panel");
+        if (panel) {
+          panel.style.animation = "none";
+          void panel.offsetWidth;
+          panel.style.animation = "";
+        }
+
+        if (switching) {
+          card.classList.add("is-switching");
+        }
+      }
+
+      function resetOverview() {
+        wrap.classList.remove("is-engaged");
+        if (engageHead) {
+          engageHead.setAttribute("aria-hidden", "true");
+        }
+        cards.forEach(item => {
+          item.classList.remove("is-active", "is-switching");
+        });
+        tabs.forEach(tab => {
+          tab.classList.remove("is-active");
+          tab.setAttribute("aria-selected", "false");
+        });
+        setExpandedState(null);
+      }
+
+      function engageCard(card) {
+        const wasEngaged = wrap.classList.contains("is-engaged");
+        const sameCard = card.classList.contains("is-active");
+
+        wrap.classList.add("is-engaged");
+        if (engageHead) {
+          engageHead.setAttribute("aria-hidden", "false");
+        }
         cards.forEach(item => item.classList.toggle("is-active", item === card));
-        setExpandedState();
+        setTabState(card);
+        setExpandedState(card);
+
+        if (!sameCard) {
+          replayEnter(card, wasEngaged);
+        }
+
+        if (!prefersReducedMotion && !wasEngaged) {
+          window.requestAnimationFrame(() => {
+            card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          });
+        }
+      }
+
+      function focusCard(card) {
+        if (!wrap.classList.contains("is-engaged")) {
+          engageCard(card);
+          return;
+        }
+
+        if (card.classList.contains("is-active")) {
+          return;
+        }
+
+        engageCard(card);
       }
 
       cards.forEach(card => {
@@ -2939,6 +4273,23 @@
             event.preventDefault();
             focusCard(card);
           }
+        });
+      });
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          const card = cards.find(item => item.dataset.service === tab.dataset.service);
+          if (card) {
+            engageCard(card);
+          }
+        });
+      });
+
+      backBtn?.addEventListener("click", resetOverview);
+
+      document.querySelectorAll(".service-panel").forEach(panel => {
+        panel.addEventListener("click", event => {
+          event.stopPropagation();
         });
       });
 
