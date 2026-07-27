@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://www.instagram.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="assets/JS.jpg" fetchpriority="high" />
 
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;450;500;600;700&display=swap"
@@ -253,7 +254,7 @@
       gap: 7px;
       color: inherit;
       font: inherit;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: -0.01em;
       opacity: 0.92;
@@ -271,19 +272,19 @@
     }
 
     .header-contact .flag {
-      font-size: 13px;
+      font-size: 16px;
       line-height: 1;
     }
 
     .header-social {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .header-social a {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       display: grid;
       place-items: center;
       border-radius: 50%;
@@ -311,11 +312,11 @@
     }
 
     .header-social svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.9;
+      stroke-width: 1.85;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
@@ -336,13 +337,13 @@
     }
 
     .header-social .icon-tiktok svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
 
     .header-social .icon-threads svg {
-      width: 15px;
-      height: 15px;
+      width: 18px;
+      height: 18px;
     }
 
     .hero {
@@ -820,7 +821,7 @@
     .listings-more-label {
       margin: 0;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 500;
       letter-spacing: 0.02em;
     }
@@ -829,7 +830,7 @@
       display: inline-flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 8px 14px;
+      gap: 8px 16px;
     }
 
     .listings-more-links a {
@@ -837,7 +838,7 @@
       align-items: center;
       gap: 6px;
       color: var(--ink);
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 600;
       letter-spacing: -0.01em;
       text-decoration: underline;
@@ -853,7 +854,7 @@
     }
 
     .listings-more-ext {
-      font-size: 12px;
+      font-size: 14px;
       opacity: 0.45;
       line-height: 1;
       text-decoration: none;
@@ -1012,48 +1013,258 @@
     }
 
     .services .section-header {
-      margin-bottom: 34px;
+      margin-bottom: 18px;
     }
 
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .services-lead {
+      max-width: 34rem;
+      margin: 0 0 36px;
+      color: var(--ink-soft);
+      font-size: clamp(15px, 1.35vw, 17px);
+      line-height: 1.65;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      text-wrap: pretty;
     }
 
-    .service-card {
-      min-height: 170px;
-      padding: 26px;
-      border-radius: var(--radius);
+    .services-stack {
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      min-height: 460px;
+    }
+
+    .service-path {
+      --service-flex: 1;
+      position: relative;
+      flex: var(--service-flex) 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-width: 0;
+      padding: 30px 26px;
+      border-radius: 22px;
       background: #ffffff;
-      border: 1px solid var(--line);
-      box-shadow: 0 12px 30px rgba(18, 20, 23, 0.032);
-      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      border: 1px solid rgba(18, 20, 23, 0.08);
+      box-shadow: 0 16px 40px rgba(18, 20, 23, 0.045);
+      cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+      transition:
+        flex 580ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 580ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 420ms ease,
+        box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 420ms ease,
+        background 420ms ease,
+        padding 480ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .service-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow-hover);
+    .service-path::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(184, 151, 98, 0.16), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 48%);
+      opacity: 0;
+      transition: opacity 480ms ease;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .service-card strong {
-      display: block;
+    .service-path > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-path:hover {
+      border-color: rgba(18, 20, 23, 0.14);
+      transform: translate3d(0, -4px, 0) scale(1.01);
+      box-shadow: 0 22px 54px rgba(18, 20, 23, 0.09);
+    }
+
+    .service-path:focus-visible {
+      outline: 2px solid var(--champagne);
+      outline-offset: 3px;
+    }
+
+    .services-stack.is-focused .service-path {
+      --service-flex: 0.38;
+      opacity: 0.38;
+      transform: translate3d(0, 12px, 0) scale(0.92);
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: none;
+      filter: saturate(0.85);
+      padding: 26px 18px;
+      gap: 0;
+    }
+
+    .services-stack.is-focused .service-path:hover {
+      opacity: 0.58;
+      transform: translate3d(0, 6px, 0) scale(0.94);
+    }
+
+    .services-stack.is-focused .service-path.is-active {
+      --service-flex: 2.55;
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      z-index: 3;
+      background: #111417;
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 28px 80px rgba(18, 20, 23, 0.28);
+      padding: 34px 30px;
+      gap: 22px;
+      filter: none;
+    }
+
+    .services-stack.is-focused .service-path.is-active::before {
+      opacity: 1;
+    }
+
+    .services-stack.is-focused .service-path.is-active:hover {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+    }
+
+    .service-path-head {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .service-path-kicker {
+      margin: 0;
       font-family: var(--serif);
-      font-size: 36px;
+      font-size: clamp(34px, 3.4vw, 46px);
       line-height: 0.95;
       font-weight: 600;
-      letter-spacing: -0.055em;
+      letter-spacing: -0.045em;
+      color: var(--ink);
+      transition: color 420ms ease;
     }
 
-    .service-card span {
-      display: block;
-      margin-top: 18px;
+    .service-path-lead {
+      margin: 0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      transition: color 420ms ease, opacity 320ms ease;
+    }
+
+    .services-stack.is-focused .service-path:not(.is-active) .service-path-lead {
+      opacity: 0.72;
+    }
+
+    .services-stack.is-focused .service-path.is-active .service-path-kicker {
+      color: #ffffff;
+    }
+
+    .services-stack.is-focused .service-path.is-active .service-path-lead {
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .service-path-body {
+      min-width: 0;
+      display: grid;
+      gap: 0;
+      max-height: 900px;
+      opacity: 1;
+      overflow: hidden;
+      transform: translateY(0);
+      transition:
+        max-height 580ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 380ms ease,
+        transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .services-stack.is-focused .service-path:not(.is-active) .service-path-body {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .services-stack.is-focused .service-path.is-active .service-path-body {
+      max-height: 900px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-list {
+      list-style: none;
+      margin: 0;
+      padding: 4px 0 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .service-list li {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .service-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(184, 151, 98, 0.14);
+      color: var(--champagne-deep);
+      flex-shrink: 0;
+      transition: background 420ms ease, color 420ms ease;
+    }
+
+    .services-stack.is-focused .service-path.is-active .service-icon {
+      background: rgba(255, 255, 255, 0.1);
+      color: #eadfce;
+    }
+
+    .service-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-item-copy {
+      min-width: 0;
+      padding-top: 12px;
+    }
+
+    .service-item-copy p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      line-height: 1.5;
       font-weight: 400;
+      letter-spacing: -0.01em;
       text-wrap: pretty;
+      transition: color 420ms ease;
+    }
+
+    .services-stack.is-focused .service-path.is-active .service-item-copy p {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .service-path,
+      .service-path-body {
+        transition: none;
+      }
     }
 
     .journal {
@@ -1180,6 +1391,7 @@
       justify-content: center;
       gap: 32px;
       text-align: center;
+      overflow: visible;
     }
 
     .contact-bar-details {
@@ -1188,6 +1400,7 @@
       align-items: center;
       justify-content: center;
       gap: 16px 56px;
+      overflow: visible;
     }
 
     .contact-bar-details a,
@@ -1198,7 +1411,7 @@
       gap: 10px;
       color: inherit;
       font: inherit;
-      font-size: clamp(18px, 2vw, 24px);
+      font-size: clamp(22px, 2.8vw, 30px);
       font-weight: 550;
       letter-spacing: -0.02em;
       background: none;
@@ -1217,12 +1430,12 @@
 
     .contact-bar .divider {
       width: 1px;
-      height: 28px;
+      height: 32px;
       background: rgba(255, 255, 255, 0.22);
     }
 
     .contact-bar .flag {
-      font-size: 1.05em;
+      font-size: 1.15em;
       line-height: 1;
     }
 
@@ -1231,12 +1444,12 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
     }
 
     .contact-bar-social a {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       display: grid;
       place-items: center;
       border-radius: 50%;
@@ -1257,11 +1470,11 @@
     }
 
     .contact-bar-social svg {
-      width: 26px;
-      height: 26px;
+      width: 34px;
+      height: 34px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.85;
+      stroke-width: 1.75;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
@@ -1272,23 +1485,23 @@
     }
 
     .contact-bar-social .icon-ig svg {
-      width: 29px;
-      height: 29px;
+      width: 34px;
+      height: 34px;
     }
 
     .contact-bar-social .icon-fb svg {
-      width: 28px;
-      height: 28px;
+      width: 33px;
+      height: 33px;
     }
 
     .contact-bar-social .icon-tiktok svg {
-      width: 24px;
-      height: 24px;
+      width: 31px;
+      height: 31px;
     }
 
     .contact-bar-social .icon-threads svg {
-      width: 20px;
-      height: 20px;
+      width: 28px;
+      height: 28px;
     }
 
     footer {
@@ -1310,14 +1523,21 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 700ms ease, transform 700ms ease;
+      opacity: 1;
+      transform: none;
     }
 
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal[data-reveal] {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 420ms ease, transform 420ms ease;
+      }
+
+      .reveal[data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     [data-tip] {
@@ -1330,15 +1550,17 @@
       left: 50%;
       bottom: calc(100% + 6px);
       transform: translateX(-50%) translateY(2px);
-      padding: 5px 8px;
-      border-radius: 6px;
-      background: rgba(18, 20, 23, 0.9);
+      padding: 7px 11px;
+      border-radius: 7px;
+      background: rgba(18, 20, 23, 0.96);
+      border: 0;
       color: #ffffff;
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.01em;
       line-height: 1;
       white-space: nowrap;
+      box-shadow: none;
       opacity: 0;
       pointer-events: none;
       transition: opacity 140ms ease, transform 140ms ease;
@@ -1363,22 +1585,31 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* Dark contact band: light tip so it stays clear without a wireframe. */
+    .contact-section [data-tip]::after {
+      background: #ffffff;
+      color: #121417;
+      border: 0;
+      box-shadow: none;
+    }
+
     .site-toast {
       position: fixed;
       left: 50%;
       bottom: 28px;
       z-index: 1000;
       transform: translateX(-50%) translateY(12px);
-      min-width: 180px;
-      padding: 12px 18px;
+      min-width: 200px;
+      padding: 14px 22px;
       border-radius: 999px;
-      background: rgba(18, 20, 23, 0.94);
-      color: #ffffff;
+      background: #ffffff;
+      border: 0;
+      color: #121417;
       text-align: center;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: -0.01em;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+      box-shadow: none;
       opacity: 0;
       pointer-events: none;
       transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
@@ -1416,6 +1647,20 @@
       .contact-bar-details .divider {
         display: none;
       }
+
+      /* Centered stack: keep tips above so long labels stay on-screen. */
+      .contact-bar-details [data-tip]::after {
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: calc(100% + 8px);
+        transform: translateX(-50%) translateY(4px);
+      }
+
+      .contact-bar-details [data-tip]:hover::after,
+      .contact-bar-details [data-tip]:focus-visible::after {
+        transform: translateX(-50%) translateY(0);
+      }
     }
 
     @media (max-width: 980px) {
@@ -1438,8 +1683,56 @@
         gap: 24px;
       }
 
-      .service-grid {
-        grid-template-columns: 1fr;
+      .services-stack {
+        flex-direction: column;
+        min-height: 0;
+        gap: 12px;
+      }
+
+      .service-path,
+      .services-stack.is-focused .service-path {
+        flex: none;
+        transform: none;
+        filter: none;
+        opacity: 1;
+        padding: 24px 20px;
+        box-shadow: 0 12px 30px rgba(18, 20, 23, 0.04);
+        background: #ffffff;
+        color: inherit;
+      }
+
+      .services-stack.is-focused .service-path:not(.is-active) {
+        opacity: 0.7;
+      }
+
+      .services-stack.is-focused .service-path.is-active {
+        opacity: 1;
+        background: #111417;
+        color: #ffffff;
+        box-shadow: 0 22px 56px rgba(18, 20, 23, 0.22);
+      }
+
+      .services-stack.is-focused .service-path.is-active .service-path-kicker {
+        color: #ffffff;
+      }
+
+      .services-stack.is-focused .service-path.is-active .service-path-lead {
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .service-path-body {
+        max-height: 960px;
+        opacity: 1;
+      }
+
+      .services-stack.is-focused .service-path:not(.is-active) .service-path-body {
+        max-height: 0;
+        opacity: 0;
+      }
+
+      .services-stack.is-focused .service-path.is-active .service-path-body {
+        max-height: 960px;
+        opacity: 1;
       }
     }
 
@@ -1461,9 +1754,27 @@
         gap: 4px;
       }
 
+      /* Stacked phone/email: open tips to the left so they don't cover the row below. */
+      .header-contact [data-tip]::after {
+        left: auto;
+        right: calc(100% + 8px);
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%) translateX(4px);
+      }
+
+      .header-contact [data-tip]:hover::after,
+      .header-contact [data-tip]:focus-visible::after {
+        transform: translateY(-50%) translateX(0);
+      }
+
       .header-contact a,
       .header-contact .copy-email {
-        font-size: 12px;
+        font-size: 14px;
+      }
+
+      .header-contact .flag {
+        font-size: 15px;
       }
 
       .brand-snobar {
@@ -1661,7 +1972,7 @@
 
       .contact-bar-details a,
       .contact-bar-details .copy-email {
-        font-size: 17px;
+        font-size: 20px;
       }
 
       .contact-bar-social a {
@@ -1670,23 +1981,23 @@
       }
 
       .contact-bar-social .icon-ig svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      .contact-bar-social .icon-fb svg {
+        width: 29px;
+        height: 29px;
+      }
+
+      .contact-bar-social .icon-tiktok svg {
         width: 27px;
         height: 27px;
       }
 
-      .contact-bar-social .icon-fb svg {
-        width: 26px;
-        height: 26px;
-      }
-
-      .contact-bar-social .icon-tiktok svg {
-        width: 22px;
-        height: 22px;
-      }
-
       .contact-bar-social .icon-threads svg {
-        width: 18px;
-        height: 18px;
+        width: 24px;
+        height: 24px;
       }
     }
   </style>
@@ -1712,7 +2023,6 @@
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#listings">Listings</a>
         <a href="#about">About</a>
-        <a href="#reels">Reels</a>
         <a href="#services">Services</a>
       </nav>
 
@@ -1726,7 +2036,7 @@
             class="copy-email email-text"
             type="button"
             data-email="josh@thaparteam.ca"
-            data-tip="Copy email address"
+            data-tip="Copy email"
             aria-label="Copy email address"
           >
             <span class="copy-email-text">josh@thaparteam.ca</span>
@@ -1754,25 +2064,27 @@
     <section class="hero">
       <div class="hero-media" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <div class="agent-photo-frame reveal">
+        <div class="agent-photo-frame">
           <img
             class="agent-photo"
             src="assets/JS.jpg"
             alt="Josh Schwartz"
+            fetchpriority="high"
+            decoding="async"
           />
         </div>
 
-        <h1 class="reveal">Josh Schwartz</h1>
+        <h1>Josh Schwartz</h1>
 
-        <p class="hero-eyebrow reveal">
+        <p class="hero-eyebrow">
           Buying or selling in Etobicoke &amp; the GTA?
         </p>
 
-        <p class="hero-subtitle reveal">
+        <p class="hero-subtitle">
           Partner with a local realtor who knows the market and keeps the process clear.
         </p>
 
-        <div class="hero-actions reveal">
+        <div class="hero-actions">
           <a class="hero-card primary" href="#contact" aria-label="Contact Josh">
             <span>
               <span class="card-label">Work With Josh</span>
@@ -1798,7 +2110,7 @@
 
     <section class="section compact" id="listings">
       <div class="container">
-        <div class="listing-tabs reveal">
+        <div class="listing-tabs reveal" data-reveal>
           <div class="tab-buttons" role="tablist" aria-label="Listing tabs">
             <button class="tab-button is-active" type="button" data-tab="current">Active Listings</button>
             <button class="tab-button" type="button" data-tab="sold">Sold & Leased</button>
@@ -1822,7 +2134,7 @@
           <div class="pagination" id="pagination" aria-label="Sold and leased pagination"></div>
         </div>
 
-        <div class="listings-more reveal">
+        <div class="listings-more reveal" data-reveal>
           <p class="listings-more-label">Browse more listings</p>
           <div class="listings-more-links">
             <a
@@ -1848,7 +2160,7 @@
 
     <section class="about" id="about">
       <div class="container">
-        <div class="about-inner reveal">
+        <div class="about-inner reveal" data-reveal>
           <div class="about-photo">
             <img src="assets/J_S.png" alt="Josh Schwartz" />
           </div>
@@ -1864,7 +2176,7 @@
 
     <section class="journal" id="reels">
       <div class="container">
-        <div class="section-header reveal">
+        <div class="section-header reveal" data-reveal>
           <div>
             <h2 class="section-title">Latest from Josh</h2>
           </div>
@@ -1875,36 +2187,166 @@
           </p>
         </div>
 
-        <div class="reels-grid reveal" id="reelsGrid"></div>
+        <div class="reels-grid reveal" data-reveal id="reelsGrid"></div>
       </div>
     </section>
 
     <section class="services" id="services" aria-label="Buy sell lease services">
       <div class="container">
-        <div class="section-header reveal">
+        <div class="section-header reveal" data-reveal>
           <div>
             <h2 class="section-title">Services</h2>
           </div>
-
-          <p class="section-copy">
-            Pick the path that fits, then reach out to take the next step.
-          </p>
         </div>
 
-        <div class="service-grid reveal">
-          <article class="service-card" id="service-buy">
-            <strong>Buy</strong>
-            <span>Neighbourhood fit, value clarity, and negotiation support.</span>
+        <p class="services-lead reveal" data-reveal>
+          Buy, sell, and lease each need a different playbook.
+        </p>
+
+        <div class="services-stack reveal" data-reveal>
+          <article class="service-path" id="service-buy" data-service="buy" tabindex="0" role="button" aria-expanded="true" aria-controls="service-buy-details">
+            <div class="service-path-head">
+              <h3 class="service-path-kicker">Buying</h3>
+              <p class="service-path-lead">I will</p>
+            </div>
+            <div class="service-path-body" id="service-buy-details">
+              <ul class="service-list">
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-4"/><path d="M12 15V8"/><path d="M16 15v-6"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Educate you about the current housing market conditions.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8 11h6"/><path d="M11 8v6"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Discuss and analyze best alternatives that best fit your budget and criteria.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Resolve any challenges that may arise when purchasing a new home.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V7l-8-4z"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Provide the highest quality of service so that you feel comfortable and confident in the process.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M16 3v4"/><path d="M8 7V3"/><path d="M4 7h16v14H4z"/><path d="M9 12h6"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Guide first-time buyers through each step, from pre-approval readiness to offer strategy and closing timelines.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Coordinate with trusted mortgage professionals so financing, conditions, and purchase timing stay aligned.</p>
+                </div>
+              </li>
+              </ul>
+            </div>
           </article>
 
-          <article class="service-card" id="service-sell">
-            <strong>Sell</strong>
-            <span>Pricing, presentation, and intentional positioning.</span>
+          <article class="service-path" id="service-sell" data-service="sell" tabindex="0" role="button" aria-expanded="false" aria-controls="service-sell-details">
+            <div class="service-path-head">
+              <h3 class="service-path-kicker">Selling</h3>
+              <p class="service-path-lead">I will</p>
+            </div>
+            <div class="service-path-body" id="service-sell-details">
+              <ul class="service-list">
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M7 10v11"/><path d="M12 6v15"/><path d="M17 3v18"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Expertly market your home through channels like social media, websites, and multiple listing services.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M7 14l3-4 3 2 4-5"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Conduct a comparative market analysis to demonstrate what other homes in your area have been sold for in the recent months.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8 4h8v4H8z"/><path d="M6 8h12v12H6z"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Secure the assistance of other professionals for completing the paperwork accurately and while meeting critical deadlines.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Complete a property profile of your home, including current conditions, surroundings and special features.</p>
+                </div>
+              </li>
+              </ul>
+            </div>
           </article>
 
-          <article class="service-card" id="service-lease">
-            <strong>Lease</strong>
-            <span>Practical support for landlords and tenants.</span>
+          <article class="service-path" id="service-lease" data-service="lease" tabindex="0" role="button" aria-expanded="false" aria-controls="service-lease-details">
+            <div class="service-path-head">
+              <h3 class="service-path-kicker">Leasing</h3>
+              <p class="service-path-lead">I will</p>
+            </div>
+            <div class="service-path-body" id="service-lease-details">
+              <ul class="service-list">
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Align rent expectations with current lease comps so pricing and offers stay realistic from day one.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M16 19a4 4 0 0 0-8 0"/><circle cx="12" cy="9" r="3"/><path d="M20 19a3.5 3.5 0 0 0-3-3.4"/><path d="M4 19a3.5 3.5 0 0 1 3-3.4"/><path d="M17.5 8.5a2.5 2.5 0 1 1 0 0.01"/><path d="M6.5 8.5a2.5 2.5 0 1 0 0 0.01"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Shortlist homes or tenants that fit criteria, timeline, and budget without wasting showings.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8 3h8v5H8z"/><path d="M7 8h10v13H7z"/><path d="m9.5 14 1.5 1.5 3-3"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Guide applications, deposits, and lease language so the agreement is clear before anyone signs.</p>
+                </div>
+              </li>
+              <li>
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+                <div class="service-item-copy">
+                  <p>Keep the handoff organized from showings to move-in or tenant placement.</p>
+                </div>
+              </li>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -1912,7 +2354,7 @@
 
     <section class="contact-section" id="contact">
       <div class="container">
-        <div class="contact-bar reveal">
+        <div class="contact-bar reveal" data-reveal>
           <div class="contact-bar-details">
             <a href="tel:+16473608179" data-tip="Call Josh" aria-label="Call Josh">
               <span class="flag" aria-hidden="true">🇨🇦</span>
@@ -1923,7 +2365,7 @@
               class="copy-email"
               type="button"
               data-email="josh@thaparteam.ca"
-              data-tip="Copy email address"
+              data-tip="Copy email"
               aria-label="Copy email address"
             >
               <span class="copy-email-text">josh@thaparteam.ca</span>
@@ -1960,7 +2402,7 @@
   <script>
     const header = document.getElementById("siteHeader");
     const yearElement = document.getElementById("year");
-    const revealItems = document.querySelectorAll(".reveal");
+    const revealItems = document.querySelectorAll(".reveal[data-reveal]");
     const listingsGrid = document.getElementById("listingsGrid");
     const pagination = document.getElementById("pagination");
     const emptyState = document.getElementById("emptyState");
@@ -2399,11 +2841,19 @@
         });
       },
       {
-        threshold: 0.12
+        threshold: 0.08,
+        rootMargin: "0px 0px -8% 0px"
       }
     );
 
-    revealItems.forEach(item => revealObserver.observe(item));
+    revealItems.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92) {
+        item.classList.add("is-visible");
+      } else {
+        revealObserver.observe(item);
+      }
+    });
 
     async function copyText(text) {
       if (navigator.clipboard && window.isSecureContext) {
@@ -2448,6 +2898,52 @@
         }
       });
     });
+
+    (function initServiceFocus() {
+      const stack = document.querySelector(".services-stack");
+      const cards = Array.from(document.querySelectorAll(".service-path"));
+      if (!stack || !cards.length) return;
+
+      function setExpandedState() {
+        const focused = stack.classList.contains("is-focused");
+        cards.forEach(item => {
+          const active = item.classList.contains("is-active");
+          item.setAttribute("aria-expanded", !focused || active ? "true" : "false");
+        });
+      }
+
+      function resetOverview() {
+        stack.classList.remove("is-focused");
+        cards.forEach(item => item.classList.remove("is-active"));
+        setExpandedState();
+      }
+
+      function focusCard(card) {
+        const alreadyActive =
+          stack.classList.contains("is-focused") && card.classList.contains("is-active");
+
+        if (alreadyActive) {
+          resetOverview();
+          return;
+        }
+
+        stack.classList.add("is-focused");
+        cards.forEach(item => item.classList.toggle("is-active", item === card));
+        setExpandedState();
+      }
+
+      cards.forEach(card => {
+        card.addEventListener("click", () => focusCard(card));
+        card.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            focusCard(card);
+          }
+        });
+      });
+
+      resetOverview();
+    })();
   </script>
 </body>
 </html>
