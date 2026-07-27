@@ -868,9 +868,10 @@
     .listing-mls {
       display: inline-flex;
       align-items: center;
-      width: 100%;
-      margin: 0;
-      padding: 0 20px 20px;
+      width: auto;
+      max-width: calc(100% - 20px);
+      margin: 0 0 20px;
+      padding: 0 0 0 20px;
       border: 0;
       background: transparent;
       color: var(--muted);
@@ -889,6 +890,34 @@
     .listing-mls:focus-visible {
       color: var(--ink);
       outline: none;
+    }
+
+    .listing-mls[data-tip]::after {
+      left: calc(100% + 8px);
+      right: auto;
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: opacity 140ms ease;
+    }
+
+    .listing-mls[data-tip]:hover::after,
+    .listing-mls[data-tip].is-copied::after {
+      opacity: 1;
+      transform: translateY(-50%);
+    }
+
+    .listing-mls[data-tip]:focus-visible::after {
+      opacity: 0;
+    }
+
+    .listing-mls[data-tip].is-copied:focus-visible::after,
+    .listing-mls[data-tip].is-copied::after {
+      opacity: 1;
+    }
+
+    .listing-mls[data-tip].is-copied::after {
+      animation: none;
     }
 
     .text-link {
@@ -3160,7 +3189,8 @@
       }
 
       .listing-mls {
-        padding: 0 20px 20px;
+        margin: 0 0 20px;
+        padding: 0 0 0 20px;
       }
 
       .contact-bar {
@@ -5251,7 +5281,23 @@
     });
 
     (function initCopyMls() {
+      const defaultTip = "Copy MLS#";
       let copiedTimer;
+      let activeButton = null;
+
+      function clearCopiedState(button) {
+        if (!button) return;
+        button.setAttribute("data-tip", defaultTip);
+        button.classList.remove("is-copied");
+      }
+
+      // Keep mouse clicks from focusing the button (avoids scroll jump / tip flicker).
+      listingsGrid.addEventListener("mousedown", event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button || !listingsGrid.contains(button)) return;
+        event.preventDefault();
+      });
+
       listingsGrid.addEventListener("click", async event => {
         const button = event.target.closest(".listing-mls");
         if (!button || !listingsGrid.contains(button)) return;
@@ -5262,18 +5308,24 @@
         const mls = button.dataset.mls;
         if (!mls) return;
 
-        const defaultTip = "Copy MLS#";
+        window.clearTimeout(copiedTimer);
+        if (activeButton && activeButton !== button) {
+          clearCopiedState(activeButton);
+        }
 
         try {
           await copyText(mls);
+          activeButton = button;
           button.setAttribute("data-tip", "Copied!");
           button.classList.add("is-copied");
-          window.clearTimeout(copiedTimer);
+          button.blur();
           copiedTimer = window.setTimeout(() => {
-            button.setAttribute("data-tip", defaultTip);
-            button.classList.remove("is-copied");
-          }, 2000);
+            clearCopiedState(button);
+            if (activeButton === button) activeButton = null;
+          }, 1600);
         } catch (error) {
+          clearCopiedState(button);
+          activeButton = null;
           window.prompt("Copy MLS#:", mls);
         }
       });
