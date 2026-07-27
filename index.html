@@ -1133,14 +1133,24 @@
     .reviews-marquee {
       position: relative;
       margin: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
       cursor: grab;
       -webkit-user-select: none;
       user-select: none;
-      touch-action: pan-y;
+      scrollbar-width: none;
+    }
+
+    .reviews-marquee::-webkit-scrollbar {
+      display: none;
     }
 
     .reviews-marquee.is-dragging {
       cursor: grabbing;
+      scroll-snap-type: none;
     }
 
     .reviews-marquee::before,
@@ -1170,8 +1180,6 @@
       width: max-content;
       gap: 16px;
       padding: 8px 24px 12px;
-      will-change: transform;
-      transform: translate3d(0, 0, 0);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1182,11 +1190,14 @@
         margin: 0 auto;
         justify-content: center;
         padding-inline: 20px;
-        transform: none !important;
       }
 
       .reviews-track .review-card[aria-hidden="true"] {
         display: none;
+      }
+
+      .reviews-marquee {
+        overflow: visible;
       }
 
       .reviews-marquee::before,
@@ -4004,28 +4015,24 @@
       track.innerHTML = firstPass + secondPass;
 
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let offset = 0;
       let paused = false;
       let inView = true;
-      let dragging = false;
-      let moved = false;
-      let pointerId = null;
-      let lastX = 0;
+      let interacting = false;
       let halfWidth = 0;
-      const speed = 0.45;
+      const speed = 0.55;
+      let resumeTimer = 0;
 
       const measure = () => {
         halfWidth = track.scrollWidth / 2;
       };
 
-      const wrapOffset = () => {
+      const wrapScroll = () => {
         if (!halfWidth) return;
-        while (offset <= -halfWidth) offset += halfWidth;
-        while (offset > 0) offset -= halfWidth;
-      };
-
-      const apply = () => {
-        track.style.transform = `translate3d(${offset}px, 0, 0)`;
+        if (marquee.scrollLeft >= halfWidth) {
+          marquee.scrollLeft -= halfWidth;
+        } else if (marquee.scrollLeft <= 0) {
+          marquee.scrollLeft += halfWidth;
+        }
       };
 
       const setPaused = next => {
@@ -4034,30 +4041,41 @@
         marquee.setAttribute("aria-pressed", paused ? "true" : "false");
       };
 
+      const bumpInteraction = () => {
+        interacting = true;
+        setPaused(true);
+        window.clearTimeout(resumeTimer);
+        resumeTimer = window.setTimeout(() => {
+          interacting = false;
+        }, 1800);
+      };
+
       marquee.setAttribute("role", "region");
       marquee.setAttribute("aria-roledescription", "carousel");
-      marquee.setAttribute("aria-label", "Client reviews. Drag or scroll sideways. Click to pause or resume.");
+      marquee.setAttribute("aria-label", "Client reviews. Swipe sideways to browse.");
       marquee.setAttribute("aria-pressed", "false");
 
       if (!reduceMotion) {
         const tick = () => {
-          if (inView && !paused && !dragging) {
-            offset -= speed;
-            wrapOffset();
-            apply();
+          if (inView && !paused && !interacting) {
+            marquee.scrollLeft += speed;
+            wrapScroll();
           }
           requestAnimationFrame(tick);
         };
 
         requestAnimationFrame(() => {
           measure();
+          // Start mid-loop so users can swipe either direction.
+          if (halfWidth > 0) marquee.scrollLeft = 1;
           requestAnimationFrame(tick);
         });
 
         window.addEventListener("resize", () => {
+          const ratio = halfWidth ? marquee.scrollLeft / halfWidth : 0;
           measure();
-          wrapOffset();
-          apply();
+          marquee.scrollLeft = ratio * halfWidth;
+          wrapScroll();
         });
 
         const observeTarget = section || marquee;
@@ -4066,12 +4084,11 @@
             entries.forEach(entry => {
               const wasInView = inView;
               inView = entry.isIntersecting && entry.intersectionRatio > 0.12;
-              // Leaving then returning: always resume auto-scroll.
               if (inView && !wasInView) {
+                interacting = false;
                 setPaused(false);
                 measure();
-                wrapOffset();
-                apply();
+                wrapScroll();
               }
             });
           },
@@ -4081,81 +4098,78 @@
       }
 
       marquee.addEventListener(
+        "scroll",
+        () => {
+          wrapScroll();
+        },
+        { passive: true }
+      );
+
+      marquee.addEventListener(
         "wheel",
         event => {
           const absX = Math.abs(event.deltaX);
           const absY = Math.abs(event.deltaY);
-          const horizontal = absX > absY || event.shiftKey;
-          if (!horizontal && absX < 1) return;
-
-          event.preventDefault();
-          const delta = event.shiftKey && absX < absY ? event.deltaY : event.deltaX || event.deltaY;
-          offset -= delta;
-          wrapOffset();
-          apply();
-          setPaused(true);
+          if (absX > absY || event.shiftKey) {
+            bumpInteraction();
+          }
         },
-        { passive: false }
+        { passive: true }
       );
 
-      marquee.addEventListener("pointerdown", event => {
-        if (event.button !== 0) return;
-        dragging = true;
-        moved = false;
-        pointerId = event.pointerId;
-        lastX = event.clientX;
-        marquee.classList.add("is-dragging");
-        marquee.setPointerCapture(pointerId);
-      });
+      marquee.addEventListener(
+        "touchstart",
+        () => {
+          bumpInteraction();
+        },
+        { passive: true }
+      );
 
-      marquee.addEventListener("pointermove", event => {
-        if (!dragging || event.pointerId !== pointerId) return;
-        const dx = event.clientX - lastX;
-        if (Math.abs(dx) > 2) moved = true;
-        lastX = event.clientX;
-        offset += dx;
-        wrapOffset();
-        apply();
-      });
+      marquee.addEventListener(
+        "pointerdown",
+        event => {
+          if (event.pointerType === "touch") return;
+          if (event.button !== 0) return;
+          bumpInteraction();
+          marquee.classList.add("is-dragging");
 
-      const endDrag = event => {
-        if (!dragging || (pointerId !== null && event.pointerId !== pointerId)) return;
-        dragging = false;
-        marquee.classList.remove("is-dragging");
-        if (pointerId !== null && marquee.hasPointerCapture(pointerId)) {
-          marquee.releasePointerCapture(pointerId);
+          const startX = event.clientX;
+          const startLeft = marquee.scrollLeft;
+          let moved = false;
+
+          const onMove = moveEvent => {
+            const dx = moveEvent.clientX - startX;
+            if (Math.abs(dx) > 3) moved = true;
+            marquee.scrollLeft = startLeft - dx;
+            wrapScroll();
+          };
+
+          const onUp = () => {
+            marquee.classList.remove("is-dragging");
+            window.removeEventListener("pointermove", onMove);
+            window.removeEventListener("pointerup", onUp);
+            if (!moved) {
+              setPaused(!paused);
+            }
+          };
+
+          window.addEventListener("pointermove", onMove);
+          window.addEventListener("pointerup", onUp);
         }
-        pointerId = null;
-
-        if (!moved) {
-          setPaused(!paused);
-        } else {
-          setPaused(true);
-        }
-      };
-
-      marquee.addEventListener("pointerup", endDrag);
-      marquee.addEventListener("pointercancel", endDrag);
+      );
 
       marquee.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          setPaused(!paused);
-          return;
-        }
         if (event.key === "ArrowLeft") {
           event.preventDefault();
-          offset += 80;
-          wrapOffset();
-          apply();
-          setPaused(true);
+          marquee.scrollLeft -= 120;
+          wrapScroll();
+          bumpInteraction();
         }
         if (event.key === "ArrowRight") {
           event.preventDefault();
-          offset -= 80;
-          wrapOffset();
-          apply();
-          setPaused(true);
+          marquee.scrollLeft += 120;
+          wrapScroll();
+          bumpInteraction();
         }
       });
     }
