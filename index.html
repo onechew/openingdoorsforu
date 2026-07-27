@@ -652,9 +652,9 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
       min-height: 48px;
-      margin-bottom: 26px;
+      margin-bottom: 14px;
     }
 
     .tab-buttons {
@@ -687,7 +687,7 @@
     }
 
     .listings-compliance {
-      margin: -4px 0 16px;
+      margin: 0 0 12px;
       color: rgba(119, 113, 106, 0.55);
       font-size: 11px;
       line-height: 1.4;
@@ -704,22 +704,17 @@
 
     .listings-compliance[hidden] {
       display: none !important;
+      margin: 0;
     }
 
     .sold-controls {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 10px;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 160ms ease;
     }
 
     .sold-controls.is-visible {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
+      display: flex;
     }
 
     .area-select {
