@@ -311,8 +311,8 @@
     }
 
     .header-social svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       fill: none;
       stroke: currentColor;
       stroke-width: 1.9;
@@ -323,6 +323,26 @@
     .header-social .fill-icon svg {
       fill: currentColor;
       stroke: none;
+    }
+
+    .header-social .icon-ig svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .header-social .icon-fb svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .header-social .icon-tiktok svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .header-social .icon-threads svg {
+      width: 15px;
+      height: 15px;
     }
 
     .hero {
@@ -1155,15 +1175,23 @@
 
     .contact-bar {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 22px 36px;
+      gap: 32px;
       text-align: center;
     }
 
-    .contact-bar > a,
-    .contact-bar .copy-email {
+    .contact-bar-details {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px 56px;
+    }
+
+    .contact-bar-details a,
+    .contact-bar-details .copy-email {
       position: relative;
       display: inline-flex;
       align-items: center;
@@ -1180,8 +1208,8 @@
       transition: color 180ms ease, transform 180ms var(--ease-out), text-shadow 180ms ease;
     }
 
-    .contact-bar > a:hover,
-    .contact-bar .copy-email:hover {
+    .contact-bar-details a:hover,
+    .contact-bar-details .copy-email:hover {
       color: #ffffff;
       transform: translateY(-1px);
       text-shadow: 0 0 24px rgba(212, 182, 136, 0.55);
@@ -1201,6 +1229,8 @@
     .contact-bar-social {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 12px;
     }
 
@@ -1227,8 +1257,8 @@
     }
 
     .contact-bar-social svg {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       fill: none;
       stroke: currentColor;
       stroke-width: 1.85;
@@ -1239,6 +1269,26 @@
     .contact-bar-social .fill-icon svg {
       fill: currentColor;
       stroke: none;
+    }
+
+    .contact-bar-social .icon-ig svg {
+      width: 29px;
+      height: 29px;
+    }
+
+    .contact-bar-social .icon-fb svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .contact-bar-social .icon-tiktok svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .contact-bar-social .icon-threads svg {
+      width: 20px;
+      height: 20px;
     }
 
     footer {
@@ -1351,8 +1401,19 @@
       .header-social {
         display: none;
       }
+    }
 
-      .contact-bar .divider {
+    @media (max-width: 720px) {
+      .contact-bar {
+        gap: 26px;
+      }
+
+      .contact-bar-details {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .contact-bar-details .divider {
         display: none;
       }
     }
@@ -1584,7 +1645,7 @@
       }
 
       .contact-bar {
-        gap: 14px 18px;
+        gap: 24px;
       }
 
       .footer-inner {
@@ -1598,8 +1659,8 @@
         font-size: 13px;
       }
 
-      .contact-bar > a,
-      .contact-bar .copy-email {
+      .contact-bar-details a,
+      .contact-bar-details .copy-email {
         font-size: 17px;
       }
 
@@ -1608,9 +1669,24 @@
         height: 52px;
       }
 
-      .contact-bar-social svg {
+      .contact-bar-social .icon-ig svg {
+        width: 27px;
+        height: 27px;
+      }
+
+      .contact-bar-social .icon-fb svg {
         width: 26px;
         height: 26px;
+      }
+
+      .contact-bar-social .icon-tiktok svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .contact-bar-social .icon-threads svg {
+        width: 18px;
+        height: 18px;
       }
     }
   </style>
@@ -1657,14 +1733,17 @@
           </button>
         </div>
         <div class="header-social" aria-label="Social links">
-          <a href="https://www.instagram.com/openingdoorsforu/" target="_blank" rel="noopener noreferrer" data-tip="Instagram" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"></rect><circle cx="12" cy="12" r="3.2"></circle><path d="M16.8 7.4h.01"></path></svg>
+          <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="Threads" aria-label="Threads">
+            <svg viewBox="0 0 24 24"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"></path></svg>
           </a>
-          <a class="fill-icon" href="https://www.facebook.com/OpeningdoorsforU/" target="_blank" rel="noopener noreferrer" data-tip="Facebook" aria-label="Facebook">
+          <a class="fill-icon icon-tiktok" href="https://www.tiktok.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="TikTok" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M16.3 3c.4 2.6 1.9 4.3 4.2 4.7v3.3c-1.6 0-3-.5-4.1-1.3v5.9c0 3.4-2.3 5.4-5.4 5.4-3 0-5.2-2-5.2-4.8 0-3 2.4-5 5.7-4.7v3.4c-1.3-.3-2.2.3-2.2 1.3 0 .9.7 1.5 1.7 1.5 1.1 0 1.8-.7 1.8-2V3h3.5z"></path></svg>
+          </a>
+          <a class="fill-icon icon-fb" href="https://www.facebook.com/OpeningdoorsforU/" target="_blank" rel="noopener noreferrer" data-tip="Facebook" aria-label="Facebook">
             <svg viewBox="0 0 24 24"><path d="M14.5 8.5h2V5.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.5H7v3.3h2.5V21h3.3v-5h2.6l.5-3.3h-3.1V10.5c0-1 .3-1.9 1.7-1.9z"></path></svg>
           </a>
-          <a class="fill-icon" href="https://www.tiktok.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="TikTok" aria-label="TikTok">
-            <svg viewBox="0 0 24 24"><path d="M16.3 3c.4 2.6 1.9 4.3 4.2 4.7v3.3c-1.6 0-3-.5-4.1-1.3v5.9c0 3.4-2.3 5.4-5.4 5.4-3 0-5.2-2-5.2-4.8 0-3 2.4-5 5.7-4.7v3.4c-1.3-.3-2.2.3-2.2 1.3 0 .9.7 1.5 1.7 1.5 1.1 0 1.8-.7 1.8-2V3h3.5z"></path></svg>
+          <a class="icon-ig" href="https://www.instagram.com/openingdoorsforu/" target="_blank" rel="noopener noreferrer" data-tip="Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"></rect><circle cx="12" cy="12" r="3.2"></circle><path d="M16.8 7.4h.01"></path></svg>
           </a>
         </div>
       </div>
@@ -1834,30 +1913,34 @@
     <section class="contact-section" id="contact">
       <div class="container">
         <div class="contact-bar reveal">
-          <a href="tel:+16473608179" data-tip="Call Josh" aria-label="Call Josh">
-            <span class="flag" aria-hidden="true">🇨🇦</span>
-            647-360-8179
-          </a>
-          <span class="divider" aria-hidden="true"></span>
-          <button
-            class="copy-email"
-            type="button"
-            data-email="josh@thaparteam.ca"
-            data-tip="Copy email address"
-            aria-label="Copy email address"
-          >
-            <span class="copy-email-text">josh@thaparteam.ca</span>
-          </button>
-          <span class="divider" aria-hidden="true"></span>
-          <div class="contact-bar-social">
-            <a href="https://www.instagram.com/openingdoorsforu/" target="_blank" rel="noopener noreferrer" data-tip="Instagram" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"></rect><circle cx="12" cy="12" r="3.2"></circle><path d="M16.8 7.4h.01"></path></svg>
+          <div class="contact-bar-details">
+            <a href="tel:+16473608179" data-tip="Call Josh" aria-label="Call Josh">
+              <span class="flag" aria-hidden="true">🇨🇦</span>
+              647-360-8179
             </a>
-            <a class="fill-icon" href="https://www.facebook.com/OpeningdoorsforU/" target="_blank" rel="noopener noreferrer" data-tip="Facebook" aria-label="Facebook">
+            <span class="divider" aria-hidden="true"></span>
+            <button
+              class="copy-email"
+              type="button"
+              data-email="josh@thaparteam.ca"
+              data-tip="Copy email address"
+              aria-label="Copy email address"
+            >
+              <span class="copy-email-text">josh@thaparteam.ca</span>
+            </button>
+          </div>
+          <div class="contact-bar-social">
+            <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="Threads" aria-label="Threads">
+              <svg viewBox="0 0 24 24"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"></path></svg>
+            </a>
+            <a class="fill-icon icon-tiktok" href="https://www.tiktok.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="TikTok" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M16.3 3c.4 2.6 1.9 4.3 4.2 4.7v3.3c-1.6 0-3-.5-4.1-1.3v5.9c0 3.4-2.3 5.4-5.4 5.4-3 0-5.2-2-5.2-4.8 0-3 2.4-5 5.7-4.7v3.4c-1.3-.3-2.2.3-2.2 1.3 0 .9.7 1.5 1.7 1.5 1.1 0 1.8-.7 1.8-2V3h3.5z"></path></svg>
+            </a>
+            <a class="fill-icon icon-fb" href="https://www.facebook.com/OpeningdoorsforU/" target="_blank" rel="noopener noreferrer" data-tip="Facebook" aria-label="Facebook">
               <svg viewBox="0 0 24 24"><path d="M14.5 8.5h2V5.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.5H7v3.3h2.5V21h3.3v-5h2.6l.5-3.3h-3.1V10.5c0-1 .3-1.9 1.7-1.9z"></path></svg>
             </a>
-            <a class="fill-icon" href="https://www.tiktok.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="TikTok" aria-label="TikTok">
-              <svg viewBox="0 0 24 24"><path d="M16.3 3c.4 2.6 1.9 4.3 4.2 4.7v3.3c-1.6 0-3-.5-4.1-1.3v5.9c0 3.4-2.3 5.4-5.4 5.4-3 0-5.2-2-5.2-4.8 0-3 2.4-5 5.7-4.7v3.4c-1.3-.3-2.2.3-2.2 1.3 0 .9.7 1.5 1.7 1.5 1.1 0 1.8-.7 1.8-2V3h3.5z"></path></svg>
+            <a class="icon-ig" href="https://www.instagram.com/openingdoorsforu/" target="_blank" rel="noopener noreferrer" data-tip="Instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"></rect><circle cx="12" cy="12" r="3.2"></circle><path d="M16.8 7.4h.01"></path></svg>
             </a>
           </div>
         </div>
