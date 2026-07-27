@@ -752,7 +752,7 @@
     }
 
     .listing-card {
-      overflow: hidden;
+      overflow: visible;
       border-radius: var(--radius);
       background: var(--surface);
       border: 1px solid rgba(18, 20, 23, 0.06);
@@ -768,7 +768,6 @@
     .listing-card-link {
       display: block;
       color: inherit;
-      height: 100%;
     }
 
     .listing-media {
@@ -776,6 +775,7 @@
       display: block;
       aspect-ratio: 4 / 3;
       overflow: hidden;
+      border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
       background: #d8d2c8;
       line-height: 0;
     }
@@ -789,7 +789,8 @@
       transition: transform 520ms ease;
     }
 
-    .listing-card:hover .listing-media img {
+    .listing-media:hover img,
+    .listing-media:focus-visible img {
       transform: scale(1.03);
     }
 
@@ -823,6 +824,10 @@
       padding: 20px 20px 22px;
     }
 
+    .listing-card:has(.listing-mls) .listing-body {
+      padding-bottom: 8px;
+    }
+
     .listing-price {
       margin: 0;
       color: var(--ink);
@@ -836,9 +841,18 @@
       margin: 10px 0 0;
       color: var(--ink-soft);
       font-size: 15px;
-      line-height: 1.45;
+      line-height: 1.35;
       font-weight: 500;
       letter-spacing: -0.015em;
+    }
+
+    .listing-location {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 500;
+      letter-spacing: -0.01em;
     }
 
     .listing-specs {
@@ -849,6 +863,32 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .listing-mls {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      margin: 0;
+      padding: 0 20px 20px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
+      text-align: left;
+      cursor: pointer;
+      transition: color 160ms ease;
+    }
+
+    .listing-mls:hover,
+    .listing-mls:focus-visible {
+      color: var(--ink);
+      outline: none;
     }
 
     .text-link {
@@ -954,59 +994,99 @@
 
     .pagination {
       display: none;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      gap: 10px;
-      margin-top: 28px;
-      padding: 10px 0 4px;
-      min-height: 56px;
-      overflow: visible;
+      gap: 14px;
+      margin-top: 36px;
+      padding: 4px 0 0;
     }
 
     .pagination.is-visible {
       display: flex;
     }
 
-    .page-button {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      border: 1px solid rgba(18, 20, 23, 0.12);
+    .pagination-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px;
+      border-radius: 14px;
       background: #ffffff;
+      border: 1px solid rgba(18, 20, 23, 0.1);
+      box-shadow: 0 8px 24px rgba(18, 20, 23, 0.04);
+    }
+
+    .page-button {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
       color: var(--ink-soft);
       font-size: 13px;
       font-weight: 600;
+      line-height: 1;
       cursor: pointer;
       transition:
-        background 180ms var(--ease-out),
-        color 180ms ease,
-        border-color 180ms ease,
-        transform 180ms var(--ease-out),
-        box-shadow 180ms var(--ease-out);
+        background 160ms var(--ease-out),
+        color 160ms ease;
     }
 
-    .page-button:hover {
-      background: #f4f1ec;
+    .page-button svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .page-button:hover:not(:disabled):not(.is-active) {
+      background: rgba(18, 20, 23, 0.06);
       color: var(--ink);
-      border-color: rgba(18, 20, 23, 0.18);
-      transform: scale(1.06);
-      box-shadow: 0 8px 20px rgba(18, 20, 23, 0.08);
     }
 
     .page-button.is-active {
       background: var(--ink);
       color: #ffffff;
-      border-color: var(--ink);
-      box-shadow: 0 8px 20px rgba(18, 20, 23, 0.16);
     }
 
-    .page-button.is-active:hover {
-      background: #1c1f24;
-      color: #ffffff;
-      border-color: #1c1f24;
-      transform: scale(1.04);
+    .page-button:disabled {
+      color: rgba(18, 20, 23, 0.22);
+      opacity: 0.38;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .page-button.is-nav {
+      color: var(--ink);
+    }
+
+    .page-button.is-nav:disabled {
+      color: rgba(18, 20, 23, 0.22);
+      opacity: 0.34;
+      background: transparent;
+    }
+
+    .page-ellipsis {
+      width: 28px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      user-select: none;
+    }
+
+    .pagination-status {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.02em;
     }
 
     .visually-hidden {
@@ -1153,33 +1233,19 @@
       scroll-snap-type: none;
     }
 
-    .reviews-marquee::before,
-    .reviews-marquee::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: min(72px, 8vw);
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .reviews-marquee::before {
-      left: 0;
-      background: linear-gradient(90deg, #f7f3ec 0%, transparent 100%);
-    }
-
-    .reviews-marquee::after {
-      right: 0;
-      background: linear-gradient(270deg, #f7f3ec 0%, transparent 100%);
-    }
-
     .reviews-track {
       display: flex;
       align-items: stretch;
       width: max-content;
       gap: 16px;
-      padding: 8px 24px 12px;
+      padding: 8px max(24px, calc((100vw - var(--max)) / 2 + 24px)) 12px;
+    }
+
+    @media (max-width: 720px) {
+      .reviews-track {
+        gap: 12px;
+        padding: 6px 16px 10px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1199,14 +1265,11 @@
       .reviews-marquee {
         overflow: visible;
       }
-
-      .reviews-marquee::before,
-      .reviews-marquee::after {
-        display: none;
-      }
     }
 
     .review-card {
+      position: relative;
+      z-index: 1;
       flex: 0 0 auto;
       width: min(340px, 82vw);
       padding: 18px 18px 16px;
@@ -1257,6 +1320,18 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .review-role {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -2423,6 +2498,23 @@
 
     .contact-bar-social {
       display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .contact-bar-social-label {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contact-bar-social-links {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
@@ -3061,6 +3153,14 @@
 
       .listing-body {
         padding: 20px;
+      }
+
+      .listing-card:has(.listing-mls) .listing-body {
+        padding-bottom: 8px;
+      }
+
+      .listing-mls {
+        padding: 0 20px 20px;
       }
 
       .contact-bar {
@@ -3786,6 +3886,8 @@
             </button>
           </div>
           <div class="contact-bar-social">
+            <p class="contact-bar-social-label">Follow along</p>
+            <div class="contact-bar-social-links">
             <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" data-tip="Threads" aria-label="Threads">
               <svg viewBox="0 0 24 24"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"></path></svg>
             </a>
@@ -3798,6 +3900,7 @@
             <a class="icon-ig" href="https://www.instagram.com/openingdoorsforu/" target="_blank" rel="noopener noreferrer" data-tip="Instagram" aria-label="Instagram">
               <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"></rect><circle cx="12" cy="12" r="3.2"></circle><path d="M16.8 7.4h.01"></path></svg>
             </a>
+            </div>
           </div>
         </div>
       </div>
@@ -3912,6 +4015,17 @@
 
     const clientReviews = [
       {
+        name: "Aaron, Damaris & Michael",
+        text: "Josh made the somewhat daunting home buying experience comforting at every turn. From setting up showings at a moments notice, at locations across the city, to drawing up a successful hardball negotiation strategy that wound up landing us our dream home. Our growing family, which includes our 6mo old son, owe a lot of future memories in our new forever home to Josh's hard work, careful attention, and outstanding industry expertise.",
+        tone: "1"
+      },
+      {
+        name: "Keswick Clients",
+        address: "Keswick, ON",
+        text: "Josh has been so patient and helpful during our search for our first home. He stuck with us while we were looking into renting, buying, renting then finally making the big move to buy! He always jumped at the opportunity to meet us at showings all around the GTA and beyond always with a great attitude and some good jokes to help ease the stress! Thank you Josh we are so happy we found our first home with you!",
+        tone: "2"
+      },
+      {
         name: "Roz York Brodsky",
         text: "I was impressed with every aspect of dealing with Josh during a recent real estate transaction. From the time he listed our property to the time he sold it for over the asking price to his post sale service he has been a consummate professional and a charming and thoughtful man. Josh is a hard worker who truly does the utmost for his clients and I recommend him highly.",
         tone: "1"
@@ -3950,8 +4064,9 @@
       },
       {
         name: "Greg Monroe",
+        role: "NBA · Toronto Raptors",
         address: "St. Regis, Toronto",
-        text: "Josh's knowledge and experience in the Toronto real estate scene helped me identify and secure the best solution for my needs.",
+        text: "Josh's knowledge and experience in the Toronto real estate scene helped me identify and secure the best solution for my needs during the 2018–19 season.",
         tone: "3"
       },
       {
@@ -3982,6 +4097,9 @@
 
     function createReviewCard(review, { duplicate = false } = {}) {
       const initial = review.name.trim().charAt(0).toUpperCase();
+      const role = review.role
+        ? `<p class="review-role">${review.role}</p>`
+        : "";
       const address = review.address
         ? `<p class="review-address">${review.address}</p>`
         : "";
@@ -3991,6 +4109,7 @@
             <div class="review-avatar" data-tone="${review.tone}" aria-hidden="true">${initial}</div>
             <div class="review-card-identity">
               <p class="review-name">${review.name}</p>
+              ${role}
               <div class="review-stars" aria-label="5 out of 5 stars">
                 ${starSvg.repeat(5)}
               </div>
@@ -4184,6 +4303,7 @@
         baths: "4",
         size: "2,000-2,500 SQ.FT.",
         price: "$1,349,888",
+        mls: "W13486650",
         image: "assets/listings/aura-lea.jpg",
         alt: "1 Aura Lea Blvd detached home exterior",
         url: "https://app.realmmlp.ca/view/listing/TREB-W13486650?view=listing-customer-full"
@@ -4197,6 +4317,7 @@
         baths: "1",
         size: "700-1,100 SQ.FT.",
         price: "$1,999/mo",
+        mls: "W13580606",
         image: "assets/listings/portland.jpg",
         alt: "150 Portland Street triplex exterior",
         url: "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full"
@@ -4210,96 +4331,627 @@
         baths: "1",
         size: "600-699 SQ.FT.",
         price: "$2,600/mo",
+        mls: "W13524942",
         image: "assets/listings/legion.jpg",
         alt: "15 Legion Road condo lobby",
         url: "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/PEnGAbgkZncRBqjN8zPriKgp42gNajtNKBG7PGnmTG2XNrLRLwfGPZpkbMaGIAwGelJOD5CYyw3AJ1LmU6yjX9WmnaFlGZmym6GmS5LOlVl2LlSB3m6b43oeh1qlblqlpXteNeagk/view/listing/TREB-W13524942?view=listing-customer-full"
       }
     ];
 
-    // Past deals: MLS details + Realm links. Sorted newest-first via `date` (not shown on cards).
-    // Price line shows Sold/Leased only — no sale/lease amounts (Ontario RECO / TRESA advertising).
+    // Past deals newest → oldest. No prices / no external links (RECO / TRESA).
     const soldTransactions = [
       {
-        title: "1003 - 33 Shore Breeze Dr",
-        location: "Mimico · Toronto, ON",
-        area: "Mimico",
+        title: "36 Olive Ave #1706",
+        location: "Willowdale East · Toronto",
+        area: "Willowdale",
         status: "Leased",
         tagClass: "lease",
-        beds: "2",
-        baths: "2",
-        size: "800-899 SQ.FT.",
         price: "Leased",
-        date: "2026-07-24",
-        image: "assets/past/33-shore-breeze.jpg",
-        alt: "1003 - 33 Shore Breeze Drive, Mimico",
-        url: "https://app.realmmlp.ca/view/listing/TREB-W13593546?view=listing-customer-full"
+        date: "2026-07-20",
+        image: "assets/past/1706-36-olive.jpg",
+        alt: "36 Olive Ave #1706"
       },
       {
-        title: "2502 - 56 Annie Craig Dr",
-        location: "Mimico · Toronto, ON",
-        area: "Mimico",
+        title: "35 Hayden St #911",
+        location: "Church-Yonge Corridor · Toronto",
+        area: "Downtown",
         status: "Leased",
         tagClass: "lease",
-        beds: "2",
-        baths: "1",
-        size: "700-799 SQ.FT.",
         price: "Leased",
-        date: "2026-07-22",
-        image: "assets/past/56-annie-craig.jpg",
-        alt: "2502 - 56 Annie Craig Drive, Mimico",
-        url: "https://app.realmmlp.ca/view/listing/TREB-W13586310?view=listing-customer-full"
+        date: "2026-07-06",
+        image: "assets/past/911-35-hayden.jpg",
+        alt: "35 Hayden St #911"
       },
       {
-        title: "201 - 200 Manitoba St",
-        location: "Mimico · Toronto, ON",
-        area: "Mimico",
+        title: "97 Lawton Blvd #604",
+        location: "Yonge-St. Clair · Toronto",
+        area: "Midtown",
         status: "Leased",
         tagClass: "lease",
-        beds: "1+1",
-        baths: "2",
-        size: "1,000-1,199 SQ.FT.",
         price: "Leased",
-        date: "2026-07-15",
-        image: "assets/past/200-manitoba.jpg",
-        alt: "201 - 200 Manitoba Street, Mimico",
-        url: "https://app.realmmlp.ca/view/listing/TREB-W13565254?view=listing-customer-full"
+        date: "2026-06-22",
+        image: "assets/past/604-97-lawton.jpg",
+        alt: "97 Lawton Blvd #604"
       },
       {
-        title: "4306 - 20 Shore Breeze Dr",
-        location: "Mimico · Toronto, ON",
-        area: "Mimico",
+        title: "371 Jones Ave, Lower",
+        location: "South Riverdale · Toronto",
+        area: "East End",
         status: "Leased",
         tagClass: "lease",
-        beds: "2+1",
-        baths: "2",
-        size: "800-899 SQ.FT.",
         price: "Leased",
-        date: "2026-06-20",
-        image: "assets/past/20-30-shore-breeze.jpg",
-        alt: "4306 - 20 Shore Breeze Drive, Mimico",
-        url: "https://app.realmmlp.ca/view/listing/TREB-W13509730?view=listing-customer-full"
+        date: "2026-06-08",
+        image: "assets/past/371-jones-lower.jpg",
+        alt: "371 Jones Ave, Lower"
       },
       {
-        title: "25 - 1523 Fish Hatchery Rd",
-        location: "Skeleton Lake · Muskoka Lakes, ON",
+        title: "1523 Fish Hatchery Rd #25",
+        location: "Skeleton Lake · Muskoka Lakes",
         area: "Muskoka",
         status: "Sold",
         tagClass: "sold",
-        beds: "3",
-        baths: "3",
-        size: "2,000-2,500 SQ.FT.",
         price: "Sold",
-        date: "2025-11-20",
-        image: "assets/past/1523-fish-hatchery.jpg",
-        alt: "25 - 1523 Fish Hatchery Road, Muskoka Lakes",
-        url: "https://app.realmmlp.ca/view/listing/TREB-X12299766?view=listing-customer-full"
+        date: "2026-05-25",
+        image: "assets/past/25-1523-fish-hatchery.jpg",
+        alt: "1523 Fish Hatchery Rd #25"
+      },
+      {
+        title: "80 Marine Parade Dr #403",
+        location: "Mimico · Toronto",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-05-11",
+        image: "assets/past/403-80-marine-parade.jpg",
+        alt: "80 Marine Parade Dr #403"
+      },
+      {
+        title: "2212 Lake Shore Blvd W #1005",
+        location: "Mimico · Toronto",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-04-27",
+        image: "assets/past/1005-2212-lake-shore.jpg",
+        alt: "2212 Lake Shore Blvd W #1005"
+      },
+      {
+        title: "59 Annie Craig Dr #1907",
+        location: "Mimico · Toronto",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-04-13",
+        image: "assets/past/1907-59-annie-craig.jpg",
+        alt: "59 Annie Craig Dr #1907"
+      },
+      {
+        title: "880 The Queensway #605",
+        location: "Islington-City Centre West · Toronto",
+        area: "Etobicoke",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-03-30",
+        image: "assets/past/605-880-queensway.jpg",
+        alt: "880 The Queensway #605"
+      },
+      {
+        title: "20 Shore Breeze Dr",
+        location: "Mimico · Toronto",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-03-16",
+        image: "assets/past/20-shore-breeze.jpg",
+        alt: "20 Shore Breeze Dr"
+      },
+      {
+        title: "22 East Haven Dr #518",
+        location: "Cliffcrest · Toronto",
+        area: "Scarborough",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-03-02",
+        image: "assets/past/518-22-east-haven.jpg",
+        alt: "22 East Haven Dr #518"
+      },
+      {
+        title: "50 Charles St E #2301",
+        location: "Church-Yonge Corridor · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-02-16",
+        image: "assets/past/2301-50-charles.jpg",
+        alt: "50 Charles St E #2301"
+      },
+      {
+        title: "115 Blue Jays Way #2112",
+        location: "Waterfront Communities · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-02-02",
+        image: "assets/past/2112-115-blue-jays.jpg",
+        alt: "115 Blue Jays Way #2112"
+      },
+      {
+        title: "308 Jarvis St #1806",
+        location: "Church-Yonge Corridor · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-01-19",
+        image: "assets/past/1806-808-jarvis.jpg",
+        alt: "308 Jarvis St #1806"
+      },
+      {
+        title: "11 Ordnance St #711",
+        location: "Niagara · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-01-05",
+        image: "assets/past/711-11-ordnance.jpg",
+        alt: "11 Ordnance St #711"
+      },
+      {
+        title: "315 Dunsmore Lane",
+        location: "Georgian Drive · Barrie",
+        area: "Simcoe",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-12-22",
+        image: "assets/past/315-dunsmore.jpg",
+        alt: "315 Dunsmore Lane"
+      },
+      {
+        title: "160 Wellington St E #304",
+        location: "Aurora Village · Aurora",
+        area: "York Region",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-12-08",
+        image: "assets/past/304-160-wellington.jpg",
+        alt: "160 Wellington St E #304"
+      },
+      {
+        title: "628 Fleet St #1003",
+        location: "Niagara · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-11-24",
+        image: "assets/past/1003-628-fleet.jpg",
+        alt: "628 Fleet St #1003"
+      },
+      {
+        title: "133 Torresdale Ave #2501",
+        location: "Westminster-Branson · Toronto",
+        area: "North York",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-11-10",
+        image: "assets/past/2501-123-torresdale.jpg",
+        alt: "133 Torresdale Ave #2501"
+      },
+      {
+        title: "20 Edward St #1706",
+        location: "Bay Street Corridor · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-10-27",
+        image: "assets/past/170-edward.jpg",
+        alt: "20 Edward St #1706"
+      },
+      {
+        title: "69 Joymar Dr",
+        location: "Mississauga",
+        area: "Mississauga",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-10-13",
+        image: "assets/past/69-joymar.jpg",
+        alt: "69 Joymar Dr"
+      },
+      {
+        title: "59B Hackwood Cres",
+        location: "Aurora Grove · Aurora",
+        area: "York Region",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-09-29",
+        image: "assets/past/59b-hackwood.jpg",
+        alt: "59B Hackwood Cres"
+      },
+      {
+        title: "25 Greenview Ave #820",
+        location: "Willowdale West · Toronto",
+        area: "Willowdale",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-09-15",
+        image: "assets/past/820-25-greenview.jpg",
+        alt: "25 Greenview Ave #820"
+      },
+      {
+        title: "30 Meadowglen Pl #2707",
+        location: "Woburn · Toronto",
+        area: "Scarborough",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-09-01",
+        image: "assets/past/2707-30-meadowglen.jpg",
+        alt: "30 Meadowglen Pl #2707"
+      },
+      {
+        title: "365 Dundas St E #201",
+        location: "Moss Park · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-08-18",
+        image: "assets/past/201-365-dundas.jpg",
+        alt: "365 Dundas St E #201"
+      },
+      {
+        title: "15 Legion Rd #2203",
+        location: "Mimico · Toronto",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-08-04",
+        image: "assets/past/2203-15-legion.jpg",
+        alt: "15 Legion Rd #2203"
+      },
+      {
+        title: "37 Metcalfe St #5",
+        location: "Cabbagetown-South St. James Town · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-07-21",
+        image: "assets/past/5-37-metcalfe.jpg",
+        alt: "37 Metcalfe St #5"
+      },
+      {
+        title: "36 Ruscoe Cres",
+        location: "Etobicoke",
+        area: "Etobicoke",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-07-07",
+        image: "assets/past/36-ruscoe.jpg",
+        alt: "36 Ruscoe Cres"
+      },
+      {
+        title: "115 Ranee Ave",
+        location: "Englemount-Lawrence · Toronto",
+        area: "North York",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-06-23",
+        image: "assets/past/115-ranee-leased.jpg",
+        alt: "115 Ranee Ave"
+      },
+      {
+        title: "158 Judith Ave",
+        location: "Vaughan",
+        area: "York Region",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-06-09",
+        image: "assets/past/158-judith.jpg",
+        alt: "158 Judith Ave"
+      },
+      {
+        title: "209472 Hwy 26 #4",
+        location: "Craigleith · Blue Mountains",
+        area: "Simcoe",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-05-26",
+        image: "assets/past/4-209472-hwy-26.jpg",
+        alt: "209472 Hwy 26 #4"
+      },
+      {
+        title: "88 Caines Ave, Bsmt",
+        location: "York",
+        area: "York",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-05-12",
+        image: "assets/past/88-caines-bsmt.jpg",
+        alt: "88 Caines Ave, Bsmt"
+      },
+      {
+        title: "75 Rockwood Cres",
+        location: "Beverley Glen · Vaughan",
+        area: "York Region",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-04-28",
+        image: "assets/past/75-rockwood.jpg",
+        alt: "75 Rockwood Cres"
+      },
+      {
+        title: "1 Treen Cres",
+        location: "Whitby",
+        area: "Durham",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-04-14",
+        image: "assets/past/1-terrn.jpg",
+        alt: "1 Treen Cres, Whitby"
+      },
+      {
+        title: "2321 Pindar Cres",
+        location: "Oshawa",
+        area: "Durham",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-03-31",
+        image: "assets/past/2321-pindar.jpg",
+        alt: "2321 Pindar Cres"
+      },
+      {
+        title: "23 Finlay Rd, Upper",
+        location: "Barrie",
+        area: "Simcoe",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-03-17",
+        image: "assets/past/23-finlay-upper.jpg",
+        alt: "23 Finlay Rd, Upper"
+      },
+      {
+        title: "53 Newbury Dr",
+        location: "Newmarket",
+        area: "Newmarket",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-03-03",
+        image: "assets/past/53-newbury.jpg",
+        alt: "53 Newbury Dr"
+      },
+      {
+        title: "23 Finlay Rd, Lower",
+        location: "Barrie",
+        area: "Simcoe",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-02-17",
+        image: "assets/past/23-finlay-lower.jpg",
+        alt: "23 Finlay Rd, Lower"
+      },
+      {
+        title: "38 Chichester Rd",
+        location: "Milliken Mills · Markham",
+        area: "York Region",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-02-03",
+        image: "assets/past/38-chichester.jpg",
+        alt: "38 Chichester Rd"
+      },
+      {
+        title: "1032 Lemar Rd",
+        location: "Newmarket",
+        area: "Newmarket",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2025-01-20",
+        image: "assets/past/1032-lemar.jpg",
+        alt: "1032 Lemar Rd"
+      },
+      {
+        title: "481 Rosewell Ave #409",
+        location: "Lawrence Park South · Toronto",
+        area: "Midtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2025-01-06",
+        image: "assets/past/409-481-rosewell.jpg",
+        alt: "481 Rosewell Ave #409"
+      },
+      {
+        title: "24155 Thorah Park Blvd",
+        location: "Brock",
+        area: "Durham",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-12-23",
+        image: "assets/past/24155-thorah-park.jpg",
+        alt: "24155 Thorah Park Blvd"
+      },
+      {
+        title: "16220 Weston Rd",
+        location: "King",
+        area: "York Region",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-12-09",
+        image: "assets/past/16220-weston.jpg",
+        alt: "16220 Weston Rd"
+      },
+      {
+        title: "181 Bedford Rd #1404",
+        location: "Annex · Toronto",
+        area: "Downtown",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2024-11-25",
+        image: "assets/past/1404-181-bedford.jpg",
+        alt: "181 Bedford Rd #1404"
+      },
+      {
+        title: "294 Church St S",
+        location: "Harding · Richmond Hill",
+        area: "York Region",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2024-11-11",
+        image: "assets/past/294-church-s.jpg",
+        alt: "294 Church St S, Richmond Hill"
+      },
+      {
+        title: "125 McCauley Ct",
+        location: "Newmarket",
+        area: "Newmarket",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-10-28",
+        image: "assets/past/125-mccauley.jpg",
+        alt: "125 McCauley Ct"
+      },
+      {
+        title: "260 Heath St W #1204",
+        location: "Forest Hill South · Toronto",
+        area: "Midtown",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-10-14",
+        image: "assets/past/1204-260-heath.jpg",
+        alt: "260 Heath St W #1204"
+      },
+      {
+        title: "167 Locksley Ave",
+        location: "York",
+        area: "York",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-09-30",
+        image: "assets/past/167-locksley.jpg",
+        alt: "167 Locksley Ave"
+      },
+      {
+        title: "200 Sackville St #1209",
+        location: "Moss Park · Toronto",
+        area: "Downtown",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-09-16",
+        image: "assets/past/1209-200-sackville.jpg",
+        alt: "200 Sackville St #1209"
+      },
+      {
+        title: "115 Ranee Ave",
+        location: "Englemount-Lawrence · Toronto",
+        area: "North York",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-09-02",
+        image: "assets/past/115-ranee-sold.jpg",
+        alt: "115 Ranee Ave"
+      },
+      {
+        title: "1068 William St",
+        location: "London",
+        area: "London",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-08-19",
+        image: "assets/past/1068-william.jpg",
+        alt: "1068 William St"
+      },
+      {
+        title: "19 Alma Ave",
+        location: "Toronto",
+        area: "Toronto",
+        status: "Sold",
+        tagClass: "sold",
+        price: "Sold",
+        date: "2024-08-05",
+        image: "assets/past/19-alma.jpg",
+        alt: "19 Alma Ave"
       }
     ];
 
     let activeTab = "current";
     let activeArea = "all";
     let currentPage = 1;
-    const itemsPerPage = 6;
+
+    function getItemsPerPage() {
+      const width = window.innerWidth;
+      if (width <= 720) return 6;   // 1 col × 6 rows
+      if (width <= 1080) return 12; // 2 cols × 6 rows
+      return 18;                    // 3 cols × 6 rows
+    }
+
+    function getPaginationPages(current, total) {
+      if (total <= 7) {
+        return Array.from({ length: total }, (_, index) => index + 1);
+      }
+
+      const pages = new Set([1, total, current, current - 1, current + 1]);
+      if (current <= 3) {
+        pages.add(2);
+        pages.add(3);
+        pages.add(4);
+      }
+      if (current >= total - 2) {
+        pages.add(total - 1);
+        pages.add(total - 2);
+        pages.add(total - 3);
+      }
+
+      const sorted = [...pages].filter(page => page >= 1 && page <= total).sort((a, b) => a - b);
+      const result = [];
+      sorted.forEach((page, index) => {
+        if (index > 0 && page - sorted[index - 1] > 1) {
+          result.push("ellipsis");
+        }
+        result.push(page);
+      });
+      return result;
+    }
 
     yearElement.textContent = new Date().getFullYear();
 
@@ -4344,27 +4996,43 @@
       return parts.join(" • ");
     }
 
+    // Match Active cards + GTA marketing norm: "15 Legion Rd #2203" / no postal / city without ", ON"
+    function formatListingStreet(title) {
+      const unitFirst = String(title || "").match(/^(\d+[A-Za-z]?)\s+-\s+(.+)$/);
+      if (unitFirst) return `${unitFirst[2]} #${unitFirst[1]}`;
+      return String(title || "");
+    }
+
+    function formatListingLocation(location) {
+      return String(location || "").replace(/,\s*ON\s*$/i, "").trim();
+    }
+
     function createListingCard(listing) {
-      const href = listing.url || "#contact";
-      const externalAttrs = listing.url
-        ? ' target="_blank" rel="noopener noreferrer"'
-        : "";
-      const address = `${listing.title}, ${listing.location}`;
+      const street = formatListingStreet(listing.title);
+      const place = formatListingLocation(listing.location);
       const specs = listingSpecs(listing);
+      const mlsButton = listing.mls
+        ? `<button type="button" class="listing-mls" data-mls="${listing.mls}" data-tip="Copy MLS#" aria-label="Copy MLS# ${listing.mls}">MLS# ${listing.mls}</button>`
+        : "";
+      const mediaInner = `
+              <img src="${listing.image}" alt="${listing.alt || street}" loading="lazy" />
+              <span class="tag ${listing.tagClass}">${listing.status}</span>`;
+      const media = listing.url
+        ? `<a class="listing-media listing-card-link" href="${listing.url}" target="_blank" rel="noopener noreferrer" aria-label="View ${street}">${mediaInner}</a>`
+        : `<div class="listing-media">${mediaInner}</div>`;
+      const body = `
+            <div class="listing-body">
+              <p class="listing-price">${listing.price}</p>
+              <p class="listing-address">${street}</p>
+              ${place ? `<p class="listing-location">${place}</p>` : ""}
+              ${specs ? `<p class="listing-specs">${specs}</p>` : ""}
+            </div>`;
 
       return `
         <article class="listing-card">
-          <a class="listing-card-link" href="${href}"${externalAttrs} aria-label="${listing.title}">
-            <div class="listing-media">
-              <img src="${listing.image}" alt="${listing.alt}" loading="lazy" />
-              <span class="tag ${listing.tagClass}">${listing.status}</span>
-            </div>
-            <div class="listing-body">
-              <p class="listing-price">${listing.price}</p>
-              <p class="listing-address">${address}</p>
-              ${specs ? `<p class="listing-specs">${specs}</p>` : ""}
-            </div>
-          </a>
+          ${media}
+          ${body}
+          ${mlsButton}
         </article>
       `;
     }
@@ -4390,6 +5058,7 @@
     }
 
     function renderPagination(totalItems) {
+      const itemsPerPage = getItemsPerPage();
       const totalPages = Math.ceil(totalItems / itemsPerPage);
 
       if (activeTab !== "sold" || totalPages <= 1) {
@@ -4398,37 +5067,32 @@
         return;
       }
 
+      const start = (currentPage - 1) * itemsPerPage + 1;
+      const end = Math.min(currentPage * itemsPerPage, totalItems);
+      const pages = getPaginationPages(currentPage, totalPages);
+      const chevronPrev = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const chevronNext = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
       pagination.classList.add("is-visible");
-
-      const existingButtons = pagination.querySelectorAll(".page-button");
-      const canReuse =
-        existingButtons.length === totalPages &&
-        [...existingButtons].every((button, index) => Number(button.dataset.page) === index + 1);
-
-      if (!canReuse) {
-        pagination.innerHTML = "";
-        for (let page = 1; page <= totalPages; page += 1) {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "page-button";
-          button.textContent = page;
-          button.dataset.page = String(page);
-          button.setAttribute("aria-label", `Go to page ${page}`);
-          pagination.appendChild(button);
-        }
-      }
-
-      pagination.querySelectorAll(".page-button").forEach(button => {
-        const page = Number(button.dataset.page);
-        const isActive = page === currentPage;
-        button.classList.toggle("is-active", isActive);
-        button.setAttribute("aria-current", isActive ? "page" : "false");
-      });
+      pagination.innerHTML = `
+        <div class="pagination-nav" role="navigation" aria-label="Pagination">
+          <button type="button" class="page-button is-nav" data-page="${currentPage - 1}" ${currentPage === 1 ? "disabled" : ""} aria-label="Previous page">${chevronPrev}</button>
+          ${pages.map(page => {
+            if (page === "ellipsis") {
+              return `<span class="page-ellipsis" aria-hidden="true">…</span>`;
+            }
+            const isActive = page === currentPage;
+            return `<button type="button" class="page-button${isActive ? " is-active" : ""}" data-page="${page}" aria-label="Go to page ${page}" ${isActive ? 'aria-current="page"' : ""}>${page}</button>`;
+          }).join("")}
+          <button type="button" class="page-button is-nav" data-page="${currentPage + 1}" ${currentPage === totalPages ? "disabled" : ""} aria-label="Next page">${chevronNext}</button>
+        </div>
+        <p class="pagination-status">${start}–${end} of ${totalItems}</p>
+      `;
     }
 
     pagination.addEventListener("click", event => {
       const button = event.target.closest(".page-button");
-      if (!button || !pagination.contains(button)) return;
+      if (!button || !pagination.contains(button) || button.disabled) return;
 
       const page = Number(button.dataset.page);
       if (!page || page === currentPage) return;
@@ -4441,6 +5105,7 @@
       const { preserveScroll = false } = options;
       const savedScrollY = preserveScroll ? window.scrollY : null;
       const previousGridHeight = preserveScroll ? listingsGrid.offsetHeight : 0;
+      const itemsPerPage = getItemsPerPage();
       let listingsToRender = [];
 
       if (preserveScroll && previousGridHeight > 0) {
@@ -4501,6 +5166,14 @@
     areaFilter.addEventListener("change", () => {
       activeArea = areaFilter.value;
       currentPage = 1;
+      renderListings({ preserveScroll: true });
+    });
+
+    let lastItemsPerPage = getItemsPerPage();
+    window.addEventListener("resize", () => {
+      const nextItemsPerPage = getItemsPerPage();
+      if (nextItemsPerPage === lastItemsPerPage || activeTab !== "sold") return;
+      lastItemsPerPage = nextItemsPerPage;
       renderListings({ preserveScroll: true });
     });
 
@@ -4576,6 +5249,35 @@
         }
       });
     });
+
+    (function initCopyMls() {
+      let copiedTimer;
+      listingsGrid.addEventListener("click", async event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button || !listingsGrid.contains(button)) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const mls = button.dataset.mls;
+        if (!mls) return;
+
+        const defaultTip = "Copy MLS#";
+
+        try {
+          await copyText(mls);
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          window.clearTimeout(copiedTimer);
+          copiedTimer = window.setTimeout(() => {
+            button.setAttribute("data-tip", defaultTip);
+            button.classList.remove("is-copied");
+          }, 2000);
+        } catch (error) {
+          window.prompt("Copy MLS#:", mls);
+        }
+      });
+    })();
 
     (function initCallPhone() {
       const ua = navigator.userAgent;
