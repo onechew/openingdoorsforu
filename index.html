@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Josh Schwartz | GTA Real Estate Agent</title>
+  <title>Josh Schwartz | Etobicoke &amp; GTA Real Estate</title>
   <meta
     name="description"
-    content="Josh Schwartz is a GTA real estate agent helping clients buy, sell, and lease across Etobicoke and the Greater Toronto Area."
+    content="Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage, helping clients buy, sell, and lease across Etobicoke and the Greater Toronto Area."
   />
 
   <link rel="icon" href="assets/js.svg" type="image/svg+xml" />
@@ -366,7 +366,7 @@
       inset: 0;
       z-index: 0;
       background:
-        url("assets/hero-bg.JPG")
+        url("assets/hero-bg-web.jpg")
           center 78% / cover no-repeat;
     }
 
@@ -504,23 +504,22 @@
       transform: translateY(-3px);
     }
 
+    .hero-card:active {
+      transform: translateY(-1px);
+    }
+
     .hero-card.primary:hover {
-      --btn-a: #f7f3ec;
-      --btn-b: #efe8dc;
-      box-shadow: 0 28px 72px rgba(18, 20, 23, 0.16);
+      --btn-a: #ffffff;
+      --btn-b: #ebe3d7;
+      box-shadow: 0 30px 78px rgba(0, 0, 0, 0.34);
     }
 
     .hero-card.secondary:hover {
-      --btn-a: #f7f3ec;
-      --btn-b: #e8e2d8;
-      color: #111111;
-      border-color: transparent;
-      box-shadow: 0 24px 64px rgba(18, 20, 23, 0.18);
-    }
-
-    .hero-card.secondary:hover .card-arrow {
-      background: #111111;
+      --btn-a: rgba(28, 30, 34, 0.9);
+      --btn-b: rgba(52, 48, 42, 0.78);
       color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 30px 78px rgba(0, 0, 0, 0.34);
     }
 
     .card-label {
@@ -543,17 +542,16 @@
     }
 
     .card-arrow {
-      width: 36px;
-      height: 36px;
+      position: relative;
+      width: 46px;
+      height: 46px;
       flex: 0 0 auto;
+      align-self: center;
       display: grid;
       place-items: center;
       border-radius: 50%;
       background: #111111;
       color: #ffffff;
-      font-size: 17px;
-      font-weight: 600;
-      transition: background 200ms ease, color 200ms ease;
     }
 
     .hero-card.secondary .card-arrow {
@@ -561,25 +559,55 @@
       color: #111111;
     }
 
-    .hero-bottom-bar {
-      position: absolute;
-      z-index: 3;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      min-height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 24px;
-      background: rgba(18, 20, 23, 0.55);
-      backdrop-filter: blur(10px);
-      color: rgba(255, 255, 255, 0.86);
-      text-align: center;
-      font-size: clamp(15px, 1.55vw, 19px);
-      line-height: 1.55;
-      font-weight: 400;
-      letter-spacing: -0.025em;
+    .card-arrow svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      margin: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes back-arrow-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
+
+      @keyframes back-arrow-boost {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        40% {
+          transform: translateY(-9px);
+          opacity: 0;
+        }
+        41% {
+          transform: translateY(7px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .back-to-top.is-visible svg {
+        animation: back-arrow-float 1.8s ease-in-out infinite;
+      }
+
+      .back-to-top.is-visible:hover svg {
+        animation: back-arrow-boost 560ms var(--ease-out) 1;
+      }
     }
 
     .section {
@@ -658,6 +686,26 @@
       color: #ffffff;
     }
 
+    .listings-compliance {
+      margin: -4px 0 16px;
+      color: rgba(119, 113, 106, 0.55);
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      scrollbar-width: none;
+    }
+
+    .listings-compliance::-webkit-scrollbar {
+      display: none;
+    }
+
+    .listings-compliance[hidden] {
+      display: none !important;
+    }
+
     .sold-controls {
       display: flex;
       align-items: center;
@@ -733,10 +781,12 @@
       display: block;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      background: var(--champagne-soft);
+      background: #d8d2c8;
+      line-height: 0;
     }
 
     .listing-media img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -817,7 +867,7 @@
     .listings-more {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: baseline;
       justify-content: center;
       gap: 10px 18px;
       margin-top: 18px;
@@ -831,28 +881,62 @@
       font-size: 15px;
       font-weight: 500;
       letter-spacing: 0.02em;
+      line-height: 1.3;
     }
 
     .listings-more-links {
       display: inline-flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 16px;
+      align-items: baseline;
+      gap: 8px 18px;
     }
 
     .listings-more-links a {
       display: inline-flex;
-      align-items: center;
+      align-items: baseline;
       gap: 6px;
       color: var(--ink);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: -0.01em;
+      line-height: 1.3;
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 4px;
       text-decoration-color: rgba(18, 20, 23, 0.22);
       transition: color 160ms ease, text-decoration-color 160ms ease;
+    }
+
+    .listings-more-links a.listings-more-thapar {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 8px;
+      text-decoration: none;
+    }
+
+    .listings-more-thapar .listings-more-name {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(18, 20, 23, 0.22);
+      transition: text-decoration-color 160ms ease;
+    }
+
+    .listings-more-thapar:hover .listings-more-name {
+      text-decoration-color: var(--ink);
+    }
+
+    .listings-more-claim {
+      color: rgba(119, 113, 106, 0.72);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+      white-space: nowrap;
     }
 
     .listings-more-links a:hover {
@@ -861,7 +945,7 @@
     }
 
     .listings-more-ext {
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.45;
       line-height: 1;
       text-decoration: none;
@@ -1004,21 +1088,213 @@
 
     .about-title {
       margin: 0;
-      font-family: var(--sans);
-      font-size: clamp(42px, 5.4vw, 64px);
-      line-height: 1;
+      font-family: var(--serif);
+      font-size: clamp(36px, 4.6vw, 52px);
+      line-height: 1.05;
       font-weight: 600;
-      letter-spacing: -0.055em;
+      letter-spacing: -0.03em;
+    }
+
+    .about-rule {
+      width: 72px;
+      height: 1px;
+      margin: 18px 0 22px;
+      background: rgba(255, 255, 255, 0.35);
+      border: 0;
+    }
+
+    .about-kicker {
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .about-copy {
-      margin: 20px 0 0;
-      max-width: 34em;
+      margin: 0 0 16px;
+      max-width: 38em;
       color: rgba(255, 255, 255, 0.78);
       font-size: clamp(15px, 1.35vw, 17px);
       line-height: 1.75;
       font-weight: 400;
       letter-spacing: -0.015em;
+    }
+
+    .about-copy:last-child {
+      margin-bottom: 0;
+    }
+
+    .reviews {
+      padding: 48px 0 56px;
+      background:
+        linear-gradient(180deg, #f7f3ec 0%, var(--bg) 100%);
+      border-bottom: 1px solid rgba(18, 20, 23, 0.06);
+      overflow: hidden;
+    }
+
+    .reviews-marquee {
+      position: relative;
+      margin: 0;
+      cursor: grab;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    .reviews-marquee.is-dragging {
+      cursor: grabbing;
+    }
+
+    .reviews-marquee::before,
+    .reviews-marquee::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: min(72px, 8vw);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .reviews-marquee::before {
+      left: 0;
+      background: linear-gradient(90deg, #f7f3ec 0%, transparent 100%);
+    }
+
+    .reviews-marquee::after {
+      right: 0;
+      background: linear-gradient(270deg, #f7f3ec 0%, transparent 100%);
+    }
+
+    .reviews-track {
+      display: flex;
+      align-items: stretch;
+      width: max-content;
+      gap: 16px;
+      padding: 8px 24px 12px;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reviews-track {
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: var(--max);
+        margin: 0 auto;
+        justify-content: center;
+        padding-inline: 20px;
+        transform: none !important;
+      }
+
+      .reviews-track .review-card[aria-hidden="true"] {
+        display: none;
+      }
+
+      .reviews-marquee::before,
+      .reviews-marquee::after {
+        display: none;
+      }
+    }
+
+    .review-card {
+      flex: 0 0 auto;
+      width: min(340px, 82vw);
+      padding: 18px 18px 16px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid rgba(18, 20, 23, 0.08);
+      box-shadow: 0 8px 24px rgba(18, 20, 23, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .review-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .review-avatar {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      background: #5f6368;
+    }
+
+    .review-avatar[data-tone="1"] { background: #1a73e8; }
+    .review-avatar[data-tone="2"] { background: #188038; }
+    .review-avatar[data-tone="3"] { background: #e37400; }
+    .review-avatar[data-tone="4"] { background: #a142f4; }
+    .review-avatar[data-tone="5"] { background: #d93025; }
+
+    .review-card-identity {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .review-name {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .review-stars {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 3px;
+      color: #fbbc04;
+      line-height: 1;
+    }
+
+    .review-stars svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+
+    .review-date {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .review-address {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .review-card blockquote {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.55;
+      text-wrap: pretty;
     }
 
     .services-wrap {
@@ -1798,6 +2074,13 @@
 
     .service-form-footer {
       display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+    }
+
+    .service-form-footer-row {
+      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
@@ -2207,12 +2490,30 @@
 
     .footer-inner {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
       padding-top: 22px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin: 0;
+      max-width: 40rem;
+      color: rgba(255, 255, 255, 0.38);
+      font-size: 11px;
+      line-height: 1.55;
+      text-wrap: pretty;
     }
 
     .reveal {
@@ -2377,15 +2678,7 @@
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 280ms var(--ease-out);
-    }
-
-    .back-to-top:hover svg {
-      transform: translateY(-3px);
-    }
-
-    .back-to-top:active svg {
-      transform: translateY(-1px);
+      transform-origin: center;
     }
 
     @media (prefers-reduced-motion: no-preference) {
@@ -2414,6 +2707,7 @@
       .back-to-top,
       .back-to-top svg {
         transition: none;
+        animation: none !important;
       }
 
       .back-to-top.is-visible:hover,
@@ -2680,15 +2974,14 @@
         font-size: 14px;
       }
 
-      .hero-bottom-bar {
-        min-height: 72px;
-        font-size: 14.5px;
-      }
-
       .section,
       .journal,
       .about {
         padding: 82px 0;
+      }
+
+      .reviews {
+        padding: 36px 0 44px;
       }
 
       .about {
@@ -2710,6 +3003,11 @@
       .about-copy-wrap {
         text-align: center;
         padding-bottom: 0;
+      }
+
+      .about-rule {
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .about-copy {
@@ -2764,8 +3062,14 @@
       }
 
       .footer-inner {
-        display: grid;
+        display: flex;
+        flex-direction: column;
         gap: 14px;
+      }
+
+      .footer-meta {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -2872,7 +3176,7 @@
           <img
             class="agent-photo"
             src="assets/JS.jpg"
-            alt="Josh Schwartz"
+            alt="Josh Schwartz, Sales Representative"
             fetchpriority="high"
             decoding="async"
           />
@@ -2881,20 +3185,25 @@
         <h1>Josh Schwartz</h1>
 
         <p class="hero-eyebrow">
-          Buying or selling in Etobicoke &amp; the GTA?
+          Sales Representative · Snobar Realty Group Inc., Brokerage
         </p>
 
         <p class="hero-subtitle">
-          Partner with a local realtor who knows the market and keeps the process clear.
+          Helping buyers, sellers, and renters across Etobicoke and the GTA with clear local guidance.
         </p>
 
         <div class="hero-actions">
-          <a class="hero-card primary" href="#contact" aria-label="Contact Josh">
+          <a class="hero-card primary" href="#services" aria-label="Buy or sell a home with Josh">
             <span>
               <span class="card-label">Work With Josh</span>
-              <span class="card-title">Start a Conversation</span>
+              <span class="card-title">Buy or Sell a Home</span>
             </span>
-            <span class="card-arrow">↘</span>
+            <span class="card-arrow card-arrow--go" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h12"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </span>
           </a>
 
           <a class="hero-card secondary" href="#listings" aria-label="View active listings">
@@ -2902,13 +3211,14 @@
               <span class="card-label">Featured Inventory</span>
               <span class="card-title">View Active Listings</span>
             </span>
-            <span class="card-arrow">↓</span>
+            <span class="card-arrow card-arrow--down" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 5v12"></path>
+                <path d="m6 13 6 6 6-6"></path>
+              </svg>
+            </span>
           </a>
         </div>
-      </div>
-
-      <div class="hero-bottom-bar">
-        Clear guidance across Etobicoke and the GTA.
       </div>
     </section>
 
@@ -2927,6 +3237,10 @@
             </select>
           </div>
         </div>
+
+        <p class="listings-compliance" id="listingsCompliance" hidden>
+          Sold&nbsp;&amp;&nbsp;leased highlights from official MLS&nbsp;/&nbsp;Realm records.
+        </p>
 
         <div class="listings-panel">
           <div class="listings-grid" id="listingsGrid"></div>
@@ -2950,12 +3264,16 @@
               <span class="listings-more-ext" aria-hidden="true">↗</span>
             </a>
             <a
+              class="listings-more-thapar"
               href="https://www.thaparteam.ca/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Thapar Team
-              <span class="listings-more-ext" aria-hidden="true">↗</span>
+              <span class="listings-more-name">
+                Thapar Team
+                <span class="listings-more-ext" aria-hidden="true">↗</span>
+              </span>
+              <span class="listings-more-claim">⭐ #1 Team in Etobicoke</span>
             </a>
           </div>
         </div>
@@ -2966,15 +3284,28 @@
       <div class="container">
         <div class="about-inner reveal" data-reveal>
           <div class="about-photo">
-            <img src="assets/J_S.png" alt="Josh Schwartz" />
+            <img src="assets/J_S.jpg" alt="Josh Schwartz, Sales Representative" loading="lazy" decoding="async" />
           </div>
           <div class="about-copy-wrap">
             <h2 class="about-title">Hi, I'm Josh</h2>
+            <hr class="about-rule" />
+            <p class="about-kicker">Sales Representative · Snobar Realty Group Inc., Brokerage</p>
             <p class="about-copy">
-              I help buyers, sellers, and renters move with clarity across Etobicoke and the GTA. Local insight, straightforward advice, and steady support from first call to closing.
+              I help buyers and sellers across Etobicoke and the GTA with clear facts, no gimmicks. My job is to put you in the driver's seat so you can make confident decisions and get the deal you actually want.
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews" aria-label="Client reviews">
+      <div
+        class="reviews-marquee reveal"
+        data-reveal
+        id="reviewsMarquee"
+        tabindex="0"
+      >
+        <div class="reviews-track" id="reviewsTrack"></div>
       </div>
     </section>
 
@@ -3030,7 +3361,7 @@
                   <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-4"/><path d="M12 15V8"/><path d="M16 15v-6"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Educate you about the current housing market conditions.</p>
+                  <p>Share a clear Etobicoke market brief before you start looking, so neighbourhood choice and budget stay realistic.</p>
                 </div>
               </li>
               <li>
@@ -3038,7 +3369,7 @@
                   <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8 11h6"/><path d="M11 8v6"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Discuss and analyze best alternatives that best fit your budget and criteria.</p>
+                  <p>Match homes to what you actually need, not a long list of options that waste evenings.</p>
                 </div>
               </li>
               <li>
@@ -3046,7 +3377,7 @@
                   <svg viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Resolve any challenges that may arise when purchasing a new home.</p>
+                  <p>Guide first-time buyers step by step, with no up-front agent fee from you when you buy.</p>
                 </div>
               </li>
               <li>
@@ -3054,7 +3385,7 @@
                   <svg viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V7l-8-4z"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Provide the highest quality of service so that you feel comfortable and confident in the process.</p>
+                  <p>Include a new-buyer guide and a mortgage consult with my in-house advisor so financing stays on track.</p>
                 </div>
               </li>
               <li>
@@ -3062,7 +3393,7 @@
                   <svg viewBox="0 0 24 24"><path d="M16 3v4"/><path d="M8 7V3"/><path d="M4 7h16v14H4z"/><path d="M9 12h6"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Guide first-time buyers through each step, from pre-approval readiness to offer strategy and closing timelines.</p>
+                  <p>Negotiate under pressure so you get the home you want at a price that still makes sense.</p>
                 </div>
               </li>
               <li>
@@ -3070,7 +3401,7 @@
                   <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Coordinate with trusted mortgage professionals so financing, conditions, and purchase timing stay aligned.</p>
+                  <p>Stay focused on your needs, not rushing another closing for the sake of volume.</p>
                 </div>
               </li>
               </ul>
@@ -3090,7 +3421,7 @@
 
                   <div class="service-panel-intro">
                     <h4>Start your home search</h4>
-                    <p class="service-form-note">Share a few basics and I will follow up with listings that fit.</p>
+                    <p class="service-form-note">Tell me where you want to buy. I will follow up with fits, local context, and next steps.</p>
                   </div>
 
                   <div class="service-form-grid service-form-grid--split">
@@ -3138,8 +3469,10 @@
                   </details>
 
                   <div class="service-form-footer">
-                    <p class="service-form-status" aria-live="polite"></p>
-                    <button class="service-submit" type="submit">Get started</button>
+                    <div class="service-form-footer-row">
+                      <p class="service-form-status" aria-live="polite"></p>
+                      <button class="service-submit" type="submit">Get started</button>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -3158,7 +3491,7 @@
                   <svg viewBox="0 0 24 24"><path d="M7 10v11"/><path d="M12 6v15"/><path d="M17 3v18"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Expertly market your home through channels like social media, websites, and multiple listing services.</p>
+                  <p>Show you what nearby homes actually sold for, so pricing stays grounded in facts.</p>
                 </div>
               </li>
               <li>
@@ -3166,7 +3499,7 @@
                   <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M7 14l3-4 3 2 4-5"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Conduct a comparative market analysis to demonstrate what other homes in your area have been sold for in the recent months.</p>
+                  <p>Skip the cheesy sales lines. You get clear advice on how to position the home for a stronger result.</p>
                 </div>
               </li>
               <li>
@@ -3174,7 +3507,7 @@
                   <svg viewBox="0 0 24 24"><path d="M8 4h8v4H8z"/><path d="M6 8h12v12H6z"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Secure the assistance of other professionals for completing the paperwork accurately and while meeting critical deadlines.</p>
+                  <p>Market with purpose across MLS, social, and the channels that reach serious buyers.</p>
                 </div>
               </li>
               <li>
@@ -3182,7 +3515,7 @@
                   <svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/></svg>
                 </span>
                 <div class="service-item-copy">
-                  <p>Complete a property profile of your home, including current conditions, surroundings and special features.</p>
+                  <p>Keep you in control of decisions while we push for the best offer the market will support.</p>
                 </div>
               </li>
               </ul>
@@ -3202,7 +3535,7 @@
 
                   <div class="service-panel-intro">
                     <h4>Get a home evaluation</h4>
-                    <p class="service-form-note">Tell me about your property and I will follow up with pricing insight.</p>
+                    <p class="service-form-note">Share your address. I will follow up with pricing context and a straight plan to sell.</p>
                   </div>
 
                   <div class="service-form-grid service-form-grid--split">
@@ -3250,8 +3583,10 @@
                   </details>
 
                   <div class="service-form-footer">
-                    <p class="service-form-status" aria-live="polite"></p>
-                    <button class="service-submit" type="submit">Get started</button>
+                    <div class="service-form-footer-row">
+                      <p class="service-form-status" aria-live="polite"></p>
+                      <button class="service-submit" type="submit">Get started</button>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -3338,26 +3673,26 @@
                     <legend>I am <span class="req" aria-hidden="true">*</span></legend>
                     <div class="choice-group">
                       <label class="choice-option">
-                        <input type="radio" name="I am" value="Looking to lease out my property" required>
+                        <input type="radio" name="I am" value="Looking to lease out my property" required checked>
                         <span>Lease out my property</span>
                       </label>
                       <label class="choice-option">
-                        <input type="radio" name="I am" value="Looking to rent" required checked>
+                        <input type="radio" name="I am" value="Looking to rent" required>
                         <span>Looking to rent</span>
                       </label>
                     </div>
                   </fieldset>
 
-                  <div class="lease-panel-block" id="leaseTenantPanel">
+                  <div class="lease-panel-block" id="leaseTenantPanel" hidden>
                     <div class="service-form-grid service-form-grid--split">
                       <div class="service-field service-field--full">
                         <label for="lease-area">Where do you want to rent? <span class="req" aria-hidden="true">*</span></label>
-                        <input id="lease-area" name="Desired Area" type="text" placeholder="Neighbourhood or city" data-tenant-required required>
+                        <input id="lease-area" name="Desired Area" type="text" placeholder="Neighbourhood or city" data-tenant-required>
                       </div>
 
                       <div class="service-field">
                         <label for="lease-budget">Monthly budget <span class="req" aria-hidden="true">*</span></label>
-                        <select id="lease-budget" name="Monthly Budget" data-tenant-required required>
+                        <select id="lease-budget" name="Monthly Budget" data-tenant-required>
                           <option value="" selected disabled>Select a range</option>
                           <option value="Under $2,000">Under $2,000</option>
                           <option value="$2,000 to $2,500">$2,000 to $2,500</option>
@@ -3369,7 +3704,7 @@
 
                       <div class="service-field">
                         <label for="lease-timeline">Move timeline <span class="req" aria-hidden="true">*</span></label>
-                        <select id="lease-timeline" name="Move Timeline" data-tenant-required required>
+                        <select id="lease-timeline" name="Move Timeline" data-tenant-required>
                           <option value="" selected disabled>Select</option>
                           <option value="ASAP">ASAP</option>
                           <option value="1 to 3 months">1 to 3 months</option>
@@ -3391,11 +3726,11 @@
                     </details>
                   </div>
 
-                  <div class="lease-panel-block" id="leaseLandlordPanel" hidden>
+                  <div class="lease-panel-block" id="leaseLandlordPanel">
                     <div class="service-form-grid service-form-grid--split">
                       <div class="service-field service-field--full">
                         <label for="lease-property-address">Property address <span class="req" aria-hidden="true">*</span></label>
-                        <input id="lease-property-address" name="Property Address" type="text" placeholder="Street address, city">
+                        <input id="lease-property-address" name="Property Address" type="text" placeholder="Street address, city" required>
                       </div>
                     </div>
 
@@ -3411,8 +3746,10 @@
                   </div>
 
                   <div class="service-form-footer">
-                    <p class="service-form-status" aria-live="polite"></p>
-                    <button class="service-submit" type="submit">Get started</button>
+                    <div class="service-form-footer-row">
+                      <p class="service-form-status" aria-live="polite"></p>
+                      <button class="service-submit" type="submit">Get started</button>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -3463,8 +3800,13 @@
 
   <footer>
     <div class="container footer-inner">
-      <div>© <span id="year"></span> Josh Schwartz. All rights reserved.</div>
-      <div>Realtor® · Etobicoke & GTA · Snobar Realty Group Inc., Brokerage</div>
+      <div class="footer-meta">
+        <div>© <span id="year"></span> Josh Schwartz</div>
+        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
+      </div>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA.
+      </p>
     </div>
   </footer>
 
@@ -3486,6 +3828,7 @@
     const pagination = document.getElementById("pagination");
     const emptyState = document.getElementById("emptyState");
     const soldControls = document.getElementById("soldControls");
+    const listingsCompliance = document.getElementById("listingsCompliance");
     const areaFilter = document.getElementById("areaFilter");
     const tabButtons = document.querySelectorAll(".tab-button");
     const reelsGrid = document.getElementById("reelsGrid");
@@ -3561,6 +3904,267 @@
       });
     }
 
+    const clientReviews = [
+      {
+        name: "Roz York Brodsky",
+        text: "I was impressed with every aspect of dealing with Josh during a recent real estate transaction. From the time he listed our property to the time he sold it for over the asking price to his post sale service he has been a consummate professional and a charming and thoughtful man. Josh is a hard worker who truly does the utmost for his clients and I recommend him highly.",
+        tone: "1"
+      },
+      {
+        name: "Jeffrey Carl McCart",
+        text: "One of the best! Josh is always my first call when I'm thinking real estate.",
+        tone: "2"
+      },
+      {
+        name: "Rukie Liyanage",
+        text: "Josh was an absolute pleasure to deal with, and was tremendously patient when it came to finding the right place for me! He really goes above and beyond!",
+        tone: "3"
+      },
+      {
+        name: "Aly Somani",
+        text: "I would definitely recommend Josh as a trusted and intelligent real estate agent.",
+        tone: "4"
+      },
+      {
+        name: "Ainsley Bainsley",
+        text: "Josh is a dedicated real estate professional who goes above and beyond for all his clients. He is extremely thoughtful, patient, and supportive in his approach to finding you the perfect home. I would absolutely recommend him to any of my friends or family.",
+        tone: "5"
+      },
+      {
+        name: "Rick & Kathi",
+        address: "124 McCauley Court, Newmarket",
+        text: "Thank You Josh! You did a fantastic job! Even the Co-Op Agent said to us, \"you have a great Agent.\" She is right! We are amazed at your great communication and the pace you work at. Please use us a reference any time.",
+        tone: "1"
+      },
+      {
+        name: "Dean & Linda",
+        address: "125 McCauley Court, Newmarket",
+        text: "Josh worked tirelessly to sell our family home in a shifting market. He was quick to change strategies when we faced hurdles and communicated with us every step of the way. His top priority was getting us the most amount of money for our home, and he did that and more. From start to finish, we are very glad we chose Josh as our Realtor.",
+        tone: "2"
+      },
+      {
+        name: "Greg Monroe",
+        address: "St. Regis, Toronto",
+        text: "Josh's knowledge and experience in the Toronto real estate scene helped me identify and secure the best solution for my needs.",
+        tone: "3"
+      },
+      {
+        name: "Doug & Karla Ford",
+        address: "6 Tettenhall Road, Etobicoke",
+        text: "Monica's marketing is absolutely brilliant — everything she did with her team, they knocked it out of the park! From the assistance in moving, packing, loading, unloading. Staging was absolutely breathtaking. We love Monica and Team Thapar. We would use them again but hopefully our new home will be our forever home.",
+        tone: "4"
+      },
+      {
+        name: "Susan",
+        address: "128 McCauley Crt, Newmarket",
+        text: "My neighbour had a very successful experience selling their home with Josh as realtor. They advised me to contact Josh if I was ever considering selling my home of 30 years. I contacted Josh and met with him numerous times during the sales process. He made helpful suggestions and adjusted the plan during the very volatile market. My home sold for over asking and I am very grateful for Josh's guidance. I would highly recommend Josh Schwartz for any real estate transaction.",
+        tone: "5"
+      },
+      {
+        name: "Don & Cathy",
+        address: "298 Plymouth Tr, Newmarket",
+        text: "Josh impressed us from the start. We have sold a number of houses and compared to other agents, his marketing knowledge, materials and strategies to sell our house are far superior — from the quality of his brochures and the wonderful work he did in showcasing our house. It took us some time to realize we weren't going to get the price we wanted for our house, but Josh was patient, very positive and professional with us during the process. We are still working with Josh to find a property to build on. Josh's hard work and commitment is impressive, but he is also fun to work with. We give Josh our highest recommendation.",
+        tone: "1"
+      }
+    ];
+
+    const starSvg = `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/>
+      </svg>
+    `;
+
+    function createReviewCard(review, { duplicate = false } = {}) {
+      const initial = review.name.trim().charAt(0).toUpperCase();
+      const address = review.address
+        ? `<p class="review-address">${review.address}</p>`
+        : "";
+      return `
+        <article class="review-card"${duplicate ? ' aria-hidden="true"' : ""}>
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="${review.tone}" aria-hidden="true">${initial}</div>
+            <div class="review-card-identity">
+              <p class="review-name">${review.name}</p>
+              <div class="review-stars" aria-label="5 out of 5 stars">
+                ${starSvg.repeat(5)}
+              </div>
+            </div>
+          </div>
+          ${address}
+          <blockquote>${review.text}</blockquote>
+        </article>
+      `;
+    }
+
+    function renderReviewsMarquee() {
+      const track = document.getElementById("reviewsTrack");
+      const marquee = document.getElementById("reviewsMarquee");
+      const section = document.getElementById("reviews");
+      if (!track || !marquee) return;
+
+      const firstPass = clientReviews.map(review => createReviewCard(review)).join("");
+      const secondPass = clientReviews
+        .map(review => createReviewCard(review, { duplicate: true }))
+        .join("");
+      track.innerHTML = firstPass + secondPass;
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let offset = 0;
+      let paused = false;
+      let inView = true;
+      let dragging = false;
+      let moved = false;
+      let pointerId = null;
+      let lastX = 0;
+      let halfWidth = 0;
+      const speed = 0.45;
+
+      const measure = () => {
+        halfWidth = track.scrollWidth / 2;
+      };
+
+      const wrapOffset = () => {
+        if (!halfWidth) return;
+        while (offset <= -halfWidth) offset += halfWidth;
+        while (offset > 0) offset -= halfWidth;
+      };
+
+      const apply = () => {
+        track.style.transform = `translate3d(${offset}px, 0, 0)`;
+      };
+
+      const setPaused = next => {
+        paused = next;
+        marquee.classList.toggle("is-paused", paused);
+        marquee.setAttribute("aria-pressed", paused ? "true" : "false");
+      };
+
+      marquee.setAttribute("role", "region");
+      marquee.setAttribute("aria-roledescription", "carousel");
+      marquee.setAttribute("aria-label", "Client reviews. Drag or scroll sideways. Click to pause or resume.");
+      marquee.setAttribute("aria-pressed", "false");
+
+      if (!reduceMotion) {
+        const tick = () => {
+          if (inView && !paused && !dragging) {
+            offset -= speed;
+            wrapOffset();
+            apply();
+          }
+          requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(() => {
+          measure();
+          requestAnimationFrame(tick);
+        });
+
+        window.addEventListener("resize", () => {
+          measure();
+          wrapOffset();
+          apply();
+        });
+
+        const observeTarget = section || marquee;
+        const visibilityObserver = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              const wasInView = inView;
+              inView = entry.isIntersecting && entry.intersectionRatio > 0.12;
+              // Leaving then returning: always resume auto-scroll.
+              if (inView && !wasInView) {
+                setPaused(false);
+                measure();
+                wrapOffset();
+                apply();
+              }
+            });
+          },
+          { threshold: [0, 0.12, 0.25] }
+        );
+        visibilityObserver.observe(observeTarget);
+      }
+
+      marquee.addEventListener(
+        "wheel",
+        event => {
+          const absX = Math.abs(event.deltaX);
+          const absY = Math.abs(event.deltaY);
+          const horizontal = absX > absY || event.shiftKey;
+          if (!horizontal && absX < 1) return;
+
+          event.preventDefault();
+          const delta = event.shiftKey && absX < absY ? event.deltaY : event.deltaX || event.deltaY;
+          offset -= delta;
+          wrapOffset();
+          apply();
+          setPaused(true);
+        },
+        { passive: false }
+      );
+
+      marquee.addEventListener("pointerdown", event => {
+        if (event.button !== 0) return;
+        dragging = true;
+        moved = false;
+        pointerId = event.pointerId;
+        lastX = event.clientX;
+        marquee.classList.add("is-dragging");
+        marquee.setPointerCapture(pointerId);
+      });
+
+      marquee.addEventListener("pointermove", event => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        const dx = event.clientX - lastX;
+        if (Math.abs(dx) > 2) moved = true;
+        lastX = event.clientX;
+        offset += dx;
+        wrapOffset();
+        apply();
+      });
+
+      const endDrag = event => {
+        if (!dragging || (pointerId !== null && event.pointerId !== pointerId)) return;
+        dragging = false;
+        marquee.classList.remove("is-dragging");
+        if (pointerId !== null && marquee.hasPointerCapture(pointerId)) {
+          marquee.releasePointerCapture(pointerId);
+        }
+        pointerId = null;
+
+        if (!moved) {
+          setPaused(!paused);
+        } else {
+          setPaused(true);
+        }
+      };
+
+      marquee.addEventListener("pointerup", endDrag);
+      marquee.addEventListener("pointercancel", endDrag);
+
+      marquee.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setPaused(!paused);
+          return;
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          offset += 80;
+          wrapOffset();
+          apply();
+          setPaused(true);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          offset -= 80;
+          wrapOffset();
+          apply();
+          setPaused(true);
+        }
+      });
+    }
+
     const currentListings = [
       {
         title: "1 Aura Lea Blvd",
@@ -3603,110 +4207,82 @@
       }
     ];
 
+    // Past deals: MLS details + Realm links. Sorted newest-first via `date` (not shown on cards).
     const soldTransactions = [
       {
-        title: "Kingsway Detached",
-        location: "The Kingsway · Etobicoke",
-        area: "Etobicoke",
-        status: "Sold",
-        tagClass: "sold",
-        beds: "4",
-        baths: "4",
-        size: "3,000+ SQ.FT.",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1000&q=86",
-        alt: "Sold detached home exterior"
-      },
-      {
-        title: "Humber Bay Condo",
-        location: "Humber Bay Shores · Mimico",
+        title: "1003 - 33 Shore Breeze Dr",
+        location: "Mimico · Toronto, ON",
         area: "Mimico",
-        status: "Sold",
-        tagClass: "sold",
-        beds: "2",
-        baths: "2",
-        size: "900-1,100 SQ.FT.",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=86",
-        alt: "Sold modern condo interior"
-      },
-      {
-        title: "Waterfront Lease",
-        location: "Toronto Waterfront",
-        area: "Toronto Waterfront",
         status: "Leased",
         tagClass: "lease",
-        beds: "1",
-        baths: "1",
-        size: "550-650 SQ.FT.",
-        price: "Leased",
-        image: "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1000&q=86",
-        alt: "Leased condo living room"
+        beds: "2",
+        baths: "2",
+        size: "800-899 SQ.FT.",
+        price: "$3,350/mo",
+        date: "2026-07-24",
+        image: "assets/past/33-shore-breeze.jpg",
+        alt: "1003 - 33 Shore Breeze Drive, Mimico",
+        url: "https://app.realmmlp.ca/view/listing/TREB-W13593546?view=listing-customer-full"
       },
       {
-        title: "Islington Townhome",
-        location: "Islington-City Centre West",
-        area: "Islington-City Centre West",
+        title: "2502 - 56 Annie Craig Dr",
+        location: "Mimico · Toronto, ON",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        beds: "2",
+        baths: "1",
+        size: "700-799 SQ.FT.",
+        price: "$2,860/mo",
+        date: "2026-07-22",
+        image: "assets/past/56-annie-craig.jpg",
+        alt: "2502 - 56 Annie Craig Drive, Mimico",
+        url: "https://app.realmmlp.ca/view/listing/TREB-W13586310?view=listing-customer-full"
+      },
+      {
+        title: "201 - 200 Manitoba St",
+        location: "Mimico · Toronto, ON",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        beds: "1+1",
+        baths: "2",
+        size: "1,000-1,199 SQ.FT.",
+        price: "$3,200/mo",
+        date: "2026-07-15",
+        image: "assets/past/200-manitoba.jpg",
+        alt: "201 - 200 Manitoba Street, Mimico",
+        url: "https://app.realmmlp.ca/view/listing/TREB-W13565254?view=listing-customer-full"
+      },
+      {
+        title: "4306 - 20 Shore Breeze Dr",
+        location: "Mimico · Toronto, ON",
+        area: "Mimico",
+        status: "Leased",
+        tagClass: "lease",
+        beds: "2+1",
+        baths: "2",
+        size: "800-899 SQ.FT.",
+        price: "$4,100/mo",
+        date: "2026-06-20",
+        image: "assets/past/20-30-shore-breeze.jpg",
+        alt: "4306 - 20 Shore Breeze Drive, Mimico",
+        url: "https://app.realmmlp.ca/view/listing/TREB-W13509730?view=listing-customer-full"
+      },
+      {
+        title: "25 - 1523 Fish Hatchery Rd",
+        location: "Skeleton Lake · Muskoka Lakes, ON",
+        area: "Muskoka",
         status: "Sold",
         tagClass: "sold",
         beds: "3",
         baths: "3",
-        size: "1,600-1,800 SQ.FT.",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1600566753191-384129cf4e3e?auto=format&fit=crop&w=1000&q=86",
-        alt: "Sold townhouse kitchen"
-      },
-      {
-        title: "Central Etobicoke Suite",
-        location: "Central Etobicoke",
-        area: "Etobicoke",
-        status: "Sold",
-        tagClass: "sold",
-        beds: "1+Den",
-        baths: "1",
-        size: "650-750 SQ.FT.",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=86",
-        alt: "Sold Etobicoke condo"
-      },
-      {
-        title: "Mimico Lease",
-        location: "Mimico",
-        area: "Mimico",
-        status: "Leased",
-        tagClass: "lease",
-        beds: "1",
-        baths: "1",
-        size: "500-600 SQ.FT.",
-        price: "Leased",
-        image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1000&q=86",
-        alt: "Leased Mimico residence"
-      },
-      {
-        title: "GTA Family Home",
-        location: "Greater Toronto Area",
-        area: "GTA",
-        status: "Sold",
-        tagClass: "sold",
-        beds: "4",
-        baths: "3",
-        size: "2,200-2,500 SQ.FT.",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=86",
-        alt: "Sold GTA family home"
-      },
-      {
-        title: "Waterfront Corner Suite",
-        location: "Toronto Waterfront",
-        area: "Toronto Waterfront",
-        status: "Sold",
-        tagClass: "sold",
-        beds: "2",
-        baths: "2",
-        size: "1,000-1,200 SQ.FT.",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=86",
-        alt: "Sold waterfront corner suite"
+        size: "2,000-2,500 SQ.FT.",
+        price: "$3,950,000",
+        date: "2025-11-20",
+        image: "assets/past/1523-fish-hatchery.jpg",
+        alt: "25 - 1523 Fish Hatchery Road, Muskoka Lakes",
+        url: "https://app.realmmlp.ca/view/listing/TREB-X12299766?view=listing-customer-full"
       }
     ];
 
@@ -3784,11 +4360,12 @@
     }
 
     function getFilteredSoldTransactions() {
-      if (activeArea === "all") {
-        return soldTransactions;
-      }
+      const filtered =
+        activeArea === "all"
+          ? [...soldTransactions]
+          : soldTransactions.filter(transaction => transaction.area === activeArea);
 
-      return soldTransactions.filter(transaction => transaction.area === activeArea);
+      return filtered.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
     }
 
     function restoreScrollY(scrollY) {
@@ -3863,6 +4440,7 @@
       if (activeTab === "current") {
         listingsToRender = currentListings;
         soldControls.classList.remove("is-visible");
+        if (listingsCompliance) listingsCompliance.hidden = true;
         pagination.innerHTML = "";
         pagination.classList.remove("is-visible");
       } else {
@@ -3875,6 +4453,7 @@
         const end = start + itemsPerPage;
         listingsToRender = filtered.slice(start, end);
         soldControls.classList.add("is-visible");
+        if (listingsCompliance) listingsCompliance.hidden = false;
         renderPagination(filtered.length);
       }
 
@@ -3919,6 +4498,7 @@
     updateHeaderState();
     renderListings();
     renderReels();
+    renderReviewsMarquee();
 
     window.addEventListener("scroll", updateHeaderState, { passive: true });
     backToTop.addEventListener("click", scrollToTop);
