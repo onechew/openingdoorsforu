@@ -68,6 +68,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: clip;
     }
 
     section[id],
@@ -82,6 +83,7 @@
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
       text-rendering: geometricPrecision;
+      overflow-x: clip;
     }
 
     a {
@@ -2465,12 +2467,232 @@
     }
 
     .contact-section {
+      position: relative;
+      z-index: 1;
       padding: 96px 0;
-      background: #121417;
+      background: transparent;
       color: rgba(255, 255, 255, 0.92);
     }
 
+    .contact-section .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-end {
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      background: #121417;
+      /* Fallback; JS syncs to footer-inner border-top */
+      --ascii-baseline: calc(40px + 22px + 12px + (12px * 1.6) + (11px * 1.55));
+    }
+
+    .ascii-garden {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      overflow: visible;
+      opacity: 0.4;
+    }
+
+    .ascii-stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      min-height: 0;
+      pointer-events: none;
+      /* Shift whole scene left; overflow past edges is fine */
+      transform: translateX(-96px);
+      --ascii-stage-scale: 1;
+    }
+
+    .ascii-layer {
+      position: absolute;
+      bottom: var(--ascii-baseline);
+      margin: 0;
+      white-space: pre;
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(8.5px, 0.92vw, 13.5px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: 0.015em;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke: 0.2px currentColor;
+    }
+
+    /* Above Sales Representative */
+    .ascii-house {
+      left: auto;
+      right: max(-36px, calc((100% - var(--max)) / 2 - 56px));
+      transform: scale(0.92);
+      transform-origin: bottom right;
+      color: rgba(194, 199, 208, 0.82);
+      z-index: 3;
+      text-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Above © Josh Schwartz */
+    .ascii-garden-left {
+      left: max(4px, calc((100% - var(--max)) / 2 - 12px));
+      transform: none;
+      transform-origin: bottom left;
+      color: rgba(142, 179, 147, 0.82);
+      z-index: 4;
+    }
+
+    /* Desktop: two dense flowers left of the house */
+    .ascii-garden-mid {
+      left: auto;
+      right: max(300px, calc((100% - var(--max)) / 2 + 270px));
+      transform: none;
+      transform-origin: bottom right;
+      color: rgba(142, 179, 147, 0.82);
+      z-index: 4;
+    }
+
+    /* Desktop: dense plants extending past the right of the house */
+    .ascii-garden-right {
+      left: auto;
+      right: -88px;
+      transform: none;
+      transform-origin: bottom right;
+      color: rgba(142, 179, 147, 0.78);
+      z-index: 2;
+    }
+
+    .ascii-ground {
+      display: none;
+    }
+
+    .flower-pink { color: #dfb2c8; }
+    .flower-yellow { color: #f2ce85; }
+    .flower-lavender { color: #c8b7ea; }
+    .flower-coral { color: #e8a07c; }
+    .flower-blue { color: #aac7e8; }
+
+    @media (max-width: 900px) {
+      /* Mobile layout follows the reference ASCII garden composition */
+      .ascii-garden {
+        opacity: 0.62;
+      }
+
+      .ascii-stage {
+        inset: auto;
+        left: 50%;
+        bottom: 0;
+        top: 0;
+        width: 820px;
+        margin-left: -410px;
+        transform: scale(0.82);
+        transform-origin: center bottom;
+        --ascii-stage-scale: 0.82;
+      }
+
+      .ascii-layer {
+        font-size: 11px;
+        font-weight: 600;
+        -webkit-text-stroke: 0.25px currentColor;
+      }
+
+      .ascii-house {
+        left: 58%;
+        right: auto;
+        transform: translateX(-50%);
+        transform-origin: bottom center;
+        color: rgba(210, 214, 222, 0.95);
+        z-index: 4;
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.42);
+      }
+
+      .ascii-garden-left {
+        left: 28%;
+        right: auto;
+        max-width: none;
+        overflow: visible;
+        transform: translateX(-50%) scale(1.08);
+        transform-origin: bottom center;
+        color: rgba(158, 196, 164, 0.98);
+        z-index: 5;
+        text-shadow: 0 0 10px rgba(142, 179, 147, 0.16);
+      }
+
+      .ascii-garden-mid {
+        display: none !important;
+      }
+
+      .ascii-garden-right {
+        display: block;
+        left: 80%;
+        right: auto;
+        transform: translateX(-50%) scale(1.08);
+        transform-origin: bottom center;
+        color: rgba(158, 196, 164, 0.95);
+        opacity: 1;
+        z-index: 5;
+        text-shadow: 0 0 10px rgba(142, 179, 147, 0.14);
+      }
+
+      .flower-pink,
+      .flower-yellow,
+      .flower-lavender,
+      .flower-coral,
+      .flower-blue {
+        display: inline;
+        width: auto;
+        transform: none;
+        filter: brightness(1.12);
+        vertical-align: baseline;
+        -webkit-text-stroke: 0;
+      }
+
+      .flower-pink { color: #e8c4d6; text-shadow: 0 0 8px rgba(223, 178, 200, 0.28); }
+      .flower-yellow { color: #f7d999; text-shadow: 0 0 8px rgba(242, 206, 133, 0.28); }
+      .flower-lavender { color: #d4c4f0; text-shadow: 0 0 8px rgba(200, 183, 234, 0.28); }
+      .flower-coral { color: #f0b898; text-shadow: 0 0 8px rgba(232, 160, 124, 0.28); }
+      .flower-blue { color: #bdd4f0; text-shadow: 0 0 8px rgba(170, 199, 232, 0.28); }
+
+      .contact-bar {
+        gap: 28px;
+        padding-bottom: 40px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .ascii-garden {
+        opacity: 0.58;
+      }
+
+      .ascii-stage {
+        transform: scale(0.72);
+        --ascii-stage-scale: 0.72;
+      }
+
+      .ascii-garden-left,
+      .ascii-garden-right {
+        transform: translateX(-50%) scale(1.12);
+      }
+
+      .contact-bar {
+        gap: 24px;
+        padding-bottom: 56px;
+      }
+
+      .contact-bar-details {
+        transform: translateY(-14px);
+      }
+
+      .contact-bar-social-label {
+        display: none;
+      }
+    }
+
     .contact-bar {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2487,6 +2709,7 @@
       justify-content: center;
       gap: 16px 56px;
       overflow: visible;
+      transform: translateY(-10px);
     }
 
     .contact-bar-details a,
@@ -2504,6 +2727,7 @@
       border: 0;
       padding: 0;
       cursor: pointer;
+      text-shadow: 0 1px 12px rgba(18, 20, 23, 0.55);
       transition: color 180ms ease, transform 180ms var(--ease-out), text-shadow 180ms ease;
     }
 
@@ -2556,7 +2780,7 @@
       display: grid;
       place-items: center;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
       background: rgba(255, 255, 255, 0.06);
       transition:
         background 220ms var(--ease-out),
@@ -2577,7 +2801,7 @@
       height: 34px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.75;
+      stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
@@ -2608,14 +2832,18 @@
     }
 
     footer {
+      position: relative;
+      z-index: 2;
       padding: 28px 0 40px;
       color: var(--muted);
       font-size: 12px;
       line-height: 1.6;
-      background: #121417;
+      background: transparent;
     }
 
     .footer-inner {
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: stretch;
@@ -2626,21 +2854,27 @@
     }
 
     .footer-meta {
+      position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
       width: 100%;
       flex-wrap: wrap;
+      text-shadow: 0 1px 10px rgba(18, 20, 23, 0.65);
     }
 
     .footer-note {
+      position: relative;
+      z-index: 2;
       margin: 0;
       max-width: 40rem;
       color: rgba(255, 255, 255, 0.38);
       font-size: 11px;
       line-height: 1.55;
       text-wrap: pretty;
+      text-shadow: 0 1px 10px rgba(18, 20, 23, 0.65);
     }
 
     .reveal {
@@ -3147,7 +3381,7 @@
       }
 
       .contact-section {
-        padding: 72px 0;
+        padding: 72px 0 96px;
       }
 
       .section.compact {
@@ -3200,12 +3434,13 @@
       .footer-inner {
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 8px;
       }
 
       .footer-meta {
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
       }
     }
 
@@ -3896,6 +4131,19 @@
       </div>
     </section>
 
+  </main>
+
+  <div class="site-end">
+      <div class="ascii-garden" aria-hidden="true">
+        <div class="ascii-stage">
+          <pre class="ascii-layer ascii-house" id="asciiHouse"></pre>
+          <pre class="ascii-layer ascii-garden-left" id="asciiGardenLeft"></pre>
+          <pre class="ascii-layer ascii-garden-mid" id="asciiGardenMid"></pre>
+          <pre class="ascii-layer ascii-garden-right" id="asciiGardenRight"></pre>
+          <pre class="ascii-layer ascii-ground" id="asciiGround"></pre>
+        </div>
+      </div>
+
     <section class="contact-section" id="contact">
       <div class="container">
         <div class="contact-bar reveal" data-reveal>
@@ -3935,7 +4183,6 @@
         </div>
       </div>
     </section>
-  </main>
 
   <footer>
     <div class="container footer-inner">
@@ -3948,6 +4195,7 @@
       </p>
     </div>
   </footer>
+  </div>
 
   <div class="site-toast" id="siteToast" role="status" aria-live="polite"></div>
 
@@ -5624,6 +5872,251 @@
       });
 
       resetOverview();
+    })();
+
+    (function initAsciiGarden() {
+      const houseEl = document.getElementById("asciiHouse");
+      const gardenLeftEl = document.getElementById("asciiGardenLeft");
+      const gardenMidEl = document.getElementById("asciiGardenMid");
+      const gardenRightEl = document.getElementById("asciiGardenRight");
+      const siteEnd = document.querySelector(".site-end");
+      const footerInner = document.querySelector(".footer-inner");
+      if (!houseEl || !gardenLeftEl || !gardenMidEl || !gardenRightEl || !siteEnd || !footerInner) return;
+
+      const syncAsciiBaseline = () => {
+        const siteRect = siteEnd.getBoundingClientRect();
+        const borderTop = footerInner.getBoundingClientRect().top;
+        const gap = Math.max(0, siteRect.bottom - borderTop);
+        // Mobile stage is CSS-scaled from the bottom; compensate so art baseline
+        // lands on the footer border (not below it).
+        const stage = siteEnd.querySelector(".ascii-stage");
+        const scaleRaw = stage
+          ? getComputedStyle(stage).getPropertyValue("--ascii-stage-scale").trim()
+          : "";
+        const scale = Number.parseFloat(scaleRaw);
+        const factor = Number.isFinite(scale) && scale > 0 ? scale : 1;
+        const baseline = Math.max(0, Math.round(gap / factor));
+        siteEnd.style.setProperty("--ascii-baseline", `${baseline}px`);
+      };
+
+      syncAsciiBaseline();
+      window.addEventListener("resize", syncAsciiBaseline);
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(syncAsciiBaseline);
+      }
+
+      const houseArt =
+`                         _||_
+                        |____|
+                         |  |
+                  _______|__|_______
+                 /                  \\
+                /____________________\\
+               /\\                    /\\
+              /  \\__________________/  \\
+             /____\\________________/____\\
+             |                          |
+             |   ____________________   |
+             |  |   __        __     |  |
+             |  |  |__|      |__|    |  |
+             |  |                    |  |
+             |  |     .--------.     |  |
+             |  |     |   __   |     |  |
+             |  |     |  |  |  |     |  |
+             |  |_____|__|__|__|_____|  |
+             |                          |
+             |   []       ()       []   |`;
+
+      const gardenLeftFrames = [
+`                  {pink:✿}              {yellow:❁}              {blue:❀}
+            w    \\|/     v      \\|/      w     \\|/
+           /|\\    |     /|\\      |      /|\\     |
+          v | w  /|\\   w | v    /|\\    v | w   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {yellow:❁}              {lavender:✿}              {coral:❀}
+            v    |/      w       \\|      v      |/
+           /|\\    |     /|\\       |\\    /|\\     |
+          w | v  /|\\   v | w     /|\\   w | v   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {pink:✿}              {blue:❁}              {yellow:✿}
+            w    \\|      v       |/      w     \\|/
+           /|\\    |\\    /|\\      |      /|\\     |
+          v | w  /|\\   w | v    /|\\    v | w   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {lavender:❁}              {coral:✿}              {pink:❀}
+            v     |/     w      \\|/      v      \\|
+           /|\\    |     /|\\      |      /|\\     |\\
+          w | v  /|\\   v | w    /|\\    w | v   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`
+      ];
+
+      /* Desktop: flowers between left garden and house */
+      const gardenMidFrames = [
+`                  {pink:✿}               {blue:❀}
+            w    \\|/        v    \\|/
+           /|\\    |        /|\\    |
+          v | w  /|\\      w | v  /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {yellow:❁}               {lavender:✿}
+            v     |/        w     \\|
+           /|\\    |        /|\\    |\\
+          w | v  /|\\      v | w  /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {coral:❀}               {pink:✿}
+            w    \\|         v    \\|/
+           /|\\    |\\       /|\\    |
+          v | w  /|\\      w | v  /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {blue:❁}               {yellow:✿}
+            v     |/        w     \\|
+           /|\\    |        /|\\    |\\
+          w | v  /|\\      v | w  /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|_\\|/___,,_`
+      ];
+
+      /* Desktop: plants extending past the right of the house */
+      const gardenRightDesktopFrames = [
+`      v          {yellow:❁}
+w   /|\\         \\|/
+/|\\   |           |
+w|v  /|\\         /|\\
+,,_\\_|_|______,,____,,_`,
+`      w          {pink:✿}
+v   /|\\          |/
+/|\\   |           |
+v|w  /|\\         /|\\
+,,_\\_|_|______,,____,,_`,
+`      v          {lavender:❀}
+w    |/         \\|/
+/|\\   |           |
+w|v  /|\\         /|\\
+,,_\\_|_|______,,____,,_`,
+`      w          {coral:✿}
+v   /|\\          \\|
+/|\\   |            |\\
+v|w  /|\\         /|\\
+,,_\\_|_|______,,____,,_`
+      ];
+
+      /* Mobile: reference garden frames (wind sway, sides of house) */
+      const gardenLeftMobileFrames = [
+`                  {pink:✿}              {yellow:❁}              {blue:❀}
+            w    \\|/     v      \\|/      w     \\|/
+           /|\\    |     /|\\      |      /|\\     |
+          v | w  /|\\   w | v    /|\\    v | w   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {yellow:❁}              {lavender:✿}              {coral:❀}
+            v    |/      w       \\|      v      |/
+           /|\\    |     /|\\       |\\    /|\\     |
+          w | v  /|\\   v | w     /|\\   w | v   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {pink:✿}              {blue:❁}              {yellow:✿}
+            w    \\|      v       |/      w     \\|/
+           /|\\    |\\    /|\\      |      /|\\     |
+          v | w  /|\\   w | v    /|\\    v | w   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`,
+`                  {lavender:❁}              {coral:✿}              {pink:❀}
+            v     |/     w      \\|/      v      \\|
+           /|\\    |     /|\\      |      /|\\     |\\
+          w | v  /|\\   v | w    /|\\    w | v   /|\\
+___,,______\\_|_|_\\|/_\\___\\_|_|____\\|/_\\___\\_|_|_\\|/___,,_`
+      ];
+
+      const gardenRightMobileFrames = [
+`           {blue:❀}                     v
+          \\|/          w        /|\\
+           |          /|\\        |
+          /|\\        w | v      /|\\
+___,,______|____,,____\\_|_|______|______,,___`,
+`           {yellow:❁}                     w
+           |/          v        /|\\
+           |          /|\\        |
+          /|\\        v | w      /|\\
+___,,______|____,,____\\_|_|______|______,,___`,
+`           {pink:✿}                     v
+          \\|           w         |/
+           |\\         /|\\        |
+          /|\\        w | v      /|\\
+___,,______|____,,____\\_|_|______|______,,___`
+      ];
+
+      function colorizeAscii(template) {
+        return template.replace(
+          /\{(pink|yellow|lavender|coral|blue):([^}]+)\}/g,
+          (_, colorName, symbol) => `<span class="flower-${colorName}">${symbol}</span>`
+        );
+      }
+
+      function colorizeAligned(template, colorPairs) {
+        let i = 0;
+        return template.replace(/[✿❁❀]/g, () => {
+          const [colorName, symbol] = colorPairs[i % colorPairs.length];
+          i += 1;
+          return `<span class="flower-${colorName}">${symbol}</span>`;
+        });
+      }
+
+      houseEl.textContent = houseArt;
+
+      const desktopMq = window.matchMedia("(min-width: 901px)");
+      let frame = 0;
+      const renderFrame = () => {
+        if (desktopMq.matches) {
+          gardenLeftEl.innerHTML = colorizeAscii(
+            gardenLeftFrames[frame % gardenLeftFrames.length]
+          );
+          gardenMidEl.innerHTML = colorizeAscii(
+            gardenMidFrames[(frame + 2) % gardenMidFrames.length]
+          );
+          gardenRightEl.innerHTML = colorizeAscii(
+            gardenRightDesktopFrames[(frame + 1) % gardenRightDesktopFrames.length]
+          );
+        } else {
+          gardenLeftEl.innerHTML = colorizeAscii(
+            gardenLeftMobileFrames[frame % gardenLeftMobileFrames.length]
+          );
+          gardenMidEl.innerHTML = "";
+          gardenRightEl.innerHTML = colorizeAscii(
+            gardenRightMobileFrames[(frame + 1) % gardenRightMobileFrames.length]
+          );
+        }
+        frame += 1;
+      };
+
+      renderFrame();
+      if (typeof desktopMq.addEventListener === "function") {
+        desktopMq.addEventListener("change", () => {
+          syncAsciiBaseline();
+          renderFrame();
+        });
+      } else if (typeof desktopMq.addListener === "function") {
+        desktopMq.addListener(() => {
+          syncAsciiBaseline();
+          renderFrame();
+        });
+      }
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let timer = null;
+
+      const start = () => {
+        if (timer || reduceMotion.matches) return;
+        timer = window.setInterval(renderFrame, 780);
+      };
+
+      const stop = () => {
+        if (!timer) return;
+        window.clearInterval(timer);
+        timer = null;
+      };
+
+      start();
+      if (typeof reduceMotion.addEventListener === "function") {
+        reduceMotion.addEventListener("change", () => {
+          stop();
+          if (!reduceMotion.matches) start();
+        });
+      }
     })();
   </script>
 </body>
