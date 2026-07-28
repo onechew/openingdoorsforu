@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date
+from datetime import datetime, timezone
 from pathlib import Path
+from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = json.loads((ROOT / "data" / "listings.json").read_text())
-TODAY = date.today().isoformat()
+DATA = json.loads((ROOT / "data" / "listings.json").read_text(encoding="utf-8"))
+# Sitemap lastmod: ISO 8601 with timezone (W3C Datetime / sitemaps.org)
+LASTMOD = (
+    datetime.now(timezone.utc)
+    .replace(hour=0, minute=0, second=0, microsecond=0)
+    .isoformat()
+)
 ORIGIN = "https://openingdoorsforu.com"
 
 CITIES = {
@@ -687,13 +693,17 @@ def write_listing_pages():
 
 
 def write_sitemap(extra_urls: list[tuple[str, str, str]]):
+    """Write a standards-compliant XML sitemap (UTF-8, ISO 8601 lastmod).
+
+    Served from GitHub Pages as application/xml via the .xml extension.
+    """
     city_urls = [(f"{ORIGIN}/{k}/", "weekly", "0.9") for k in CITIES]
     base = [
         (f"{ORIGIN}/", "weekly", "1.0"),
         *city_urls,
         *extra_urls,
     ]
-    # dedupe
+    # dedupe (preserve order; do not alter URL strings)
     seen = set()
     urls = []
     for loc, freq, pri in base:
@@ -701,16 +711,22 @@ def write_sitemap(extra_urls: list[tuple[str, str, str]]):
             continue
         seen.add(loc)
         urls.append((loc, freq, pri))
-    body = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
     for loc, freq, pri in urls:
-        body.append("  <url>")
-        body.append(f"    <loc>{loc}</loc>")
-        body.append(f"    <lastmod>{TODAY}</lastmod>")
-        body.append(f"    <changefreq>{freq}</changefreq>")
-        body.append(f"    <priority>{pri}</priority>")
-        body.append("  </url>")
-    body.append("</urlset>")
-    (ROOT / "sitemap.xml").write_text("\n".join(body) + "\n")
+        lines.append("  <url>")
+        lines.append(f"    <loc>{xml_escape(loc)}</loc>")
+        lines.append(f"    <lastmod>{LASTMOD}</lastmod>")
+        lines.append(f"    <changefreq>{xml_escape(freq)}</changefreq>")
+        lines.append(f"    <priority>{xml_escape(pri)}</priority>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+
+    sitemap_path = ROOT / "sitemap.xml"
+    sitemap_path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(f"sitemap urls: {len(urls)}")
 
 
