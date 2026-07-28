@@ -1,0 +1,10 @@
+# https://onechew.github.io/openingdoorsforu/
+User-agent: *
+Allow: /
+
+# Keep tooling / local env out of the index if ever uploaded
+Disallow: /.git/
+Disallow: /.venv/
+Disallow: /.github/
+
+Sitemap: https://onechew.github.io/openingdoorsforu/sitemap.xml
