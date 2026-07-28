@@ -1,4 +1,4 @@
-# https://onechew.github.io/openingdoorsforu/
+# https://openingdoorsforu.com/
 User-agent: *
 Allow: /
 
@@ -7,4 +7,4 @@ Disallow: /.git/
 Disallow: /.venv/
 Disallow: /.github/
 
-Sitemap: https://onechew.github.io/openingdoorsforu/sitemap.xml
+Sitemap: https://openingdoorsforu.com/sitemap.xml
