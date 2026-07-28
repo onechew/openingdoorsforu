@@ -4,6 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-722E5PD8H3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-722E5PD8H3", {
+      anonymize_ip: true,
+      send_page_view: true
+    });
+
+    /* Single-page hash sections (#listings, #services, …) as virtual page views */
+    window.__gaTrackPage = function (path) {
+      if (typeof gtag !== "function") return;
+      const pagePath = path || window.location.pathname + window.location.search + window.location.hash;
+      gtag("event", "page_view", {
+        page_path: pagePath,
+        page_location: window.location.origin + pagePath,
+        page_title: document.title
+      });
+    };
+
+    window.addEventListener("hashchange", function () {
+      window.__gaTrackPage();
+    });
+  </script>
+
   <!-- Primary SEO -->
   <title>Etobicoke Realtor | Josh Schwartz Etobicoke Real Estate</title>
   <meta
@@ -6027,6 +6054,12 @@
         button.classList.add("is-active");
 
         renderListings({ preserveScroll: true });
+
+        if (typeof window.__gaTrackPage === "function") {
+          window.__gaTrackPage(
+            `/#listings/${activeTab === "sold" ? "sold-leased" : "active"}`
+          );
+        }
       });
     });
 
