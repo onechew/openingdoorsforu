@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
@@ -25,11 +25,11 @@ CITIES = {
         "areas": ["Downtown Toronto", "Midtown Toronto", "East Toronto", "West Toronto"],
         "title": "Toronto Realtor | Homes for Sale, Sold & Lease | Josh Schwartz",
         "description": "Buy, sell, or lease in Toronto with Josh Schwartz. Browse current listings, recently sold and leased homes across Downtown, Midtown, East Toronto, and West Toronto.",
-        "about": "Toronto is the core of the GTA housing market — from waterfront condos and downtown suites to midtown apartments and west-end houses. Josh Schwartz helps buyers, sellers, and renters navigate neighbourhood fit, pricing, and timing with clear local guidance.",
+        "about": "Toronto is the core of the GTA housing market, from waterfront condos and downtown suites to midtown apartments and west-end houses. Josh Schwartz helps buyers, sellers, and renters navigate neighbourhood fit, pricing, and timing with clear local guidance.",
         "schools": [
             "University of Toronto and nearby college campuses shape strong rental demand downtown.",
             "Families often weigh school catchments in midtown and the east/west ends alongside commute time.",
-            "Ask Josh for catchment context before you write an offer — school boundaries change buyer pools.",
+            "Ask Josh for catchment context before you write an offer. School boundaries change buyer pools.",
         ],
         "transit": [
             "TTC subway, streetcar, and GO connections make many Toronto neighbourhoods workable without a long drive.",
@@ -39,15 +39,15 @@ CITIES = {
         "snapshot": {
             "focus": "Condos & urban homes",
             "buyer": "First-time, downsizers, investors",
-            "note": "Inventory and days-on-market shift by pocket — downtown lease velocity differs from midtown sales.",
+            "note": "Inventory and days-on-market shift by pocket. Downtown lease velocity differs from midtown sales.",
         },
     },
     "etobicoke": {
         "name": "Etobicoke",
         "areas": ["Etobicoke"],
         "title": "Etobicoke Realtor | Homes for Sale, Sold & Lease | Josh Schwartz",
-        "description": "Etobicoke realtor Josh Schwartz. Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.",
-        "about": "Etobicoke sits on Toronto’s west side with lake shore condo corridors, established family streets, and quick links to downtown and the airport. It is a primary focus for Josh Schwartz and Opening Doors For U — practical advice for buyers, sellers, and renters who want local clarity without gimmicks.",
+        "description": "Etobicoke realtor Josh Schwartz with Thapar Team, #1 Team in Etobicoke. Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.",
+        "about": "Etobicoke sits on Toronto’s west side with lake shore condo corridors, established family streets, and quick links to downtown and the airport. It is a primary focus for Josh Schwartz and Opening Doors For U. Thapar Team is #1 Team in Etobicoke, and Josh works with that team to give buyers, sellers, and renters practical local advice without gimmicks.",
         "schools": [
             "Families often compare schools across south Etobicoke and inland neighbourhoods when choosing between houses and condos.",
             "Proximity to parks, the waterfront trail, and community centres matters as much as classroom rankings for many buyers.",
@@ -68,7 +68,7 @@ CITIES = {
         "name": "North York",
         "areas": ["North York"],
         "title": "North York Realtor | Condos & Homes | Josh Schwartz",
-        "description": "North York real estate with Josh Schwartz — current listings plus recently sold and leased homes around Willowdale, Yonge corridor, and surrounding North York communities.",
+        "description": "North York real estate with Josh Schwartz: current listings plus recently sold and leased homes around Willowdale, Yonge corridor, and surrounding North York communities.",
         "about": "North York blends high-rise living along Yonge with quieter residential pockets. Buyers often compare condo amenities, subway access, and value against downtown Toronto pricing. Josh helps clients read the trade-offs clearly.",
         "schools": [
             "Yonge-corridor living attracts students and professionals tied to nearby colleges and tutoring hubs.",
@@ -94,7 +94,7 @@ CITIES = {
         "about": "Markham is a key York Region market known for family homes, newer communities, and strong employment nodes. Buyers often compare Markham with Richmond Hill and Vaughan on schools, commute, and house-versus-condo trade-offs.",
         "schools": [
             "School quality and catchments are frequent decision drivers for Markham family buyers.",
-            "New-build and resale pockets can feed different school boundaries — verify before you offer.",
+            "New-build and resale pockets can feed different school boundaries. Verify before you offer.",
             "Josh helps families map shortlists to the schools and routines that actually fit their day.",
         ],
         "transit": [
@@ -112,11 +112,11 @@ CITIES = {
         "name": "Richmond Hill",
         "areas": ["Richmond Hill"],
         "title": "Richmond Hill Realtor | Sold Homes & Local Guidance | Josh Schwartz",
-        "description": "Richmond Hill real estate guidance from Josh Schwartz — recently sold and leased highlights, plus help buying or selling across Richmond Hill.",
+        "description": "Richmond Hill real estate guidance from Josh Schwartz: recently sold and leased highlights, plus help buying or selling across Richmond Hill.",
         "about": "Richmond Hill sits between Toronto and northern York Region communities, with a mix of established neighbourhoods and newer housing. Clients often weigh Richmond Hill against Markham and Aurora for lifestyle and value.",
         "schools": [
             "Family buyers commonly shortlist Richmond Hill for school options and quieter residential streets.",
-            "Confirm boundaries early — they influence both pricing and days on market.",
+            "Confirm boundaries early. They influence both pricing and days on market.",
             "Josh can connect housing product type to the school and commute profile you need.",
         ],
         "transit": [
@@ -156,10 +156,10 @@ CITIES = {
         "name": "Mississauga",
         "areas": ["Mississauga"],
         "title": "Mississauga Realtor | GTA Homes | Josh Schwartz",
-        "description": "Mississauga and west-GTA guidance from Josh Schwartz — sold and leased highlights plus help buying, selling, or leasing across Mississauga.",
+        "description": "Mississauga and west-GTA guidance from Josh Schwartz: sold and leased highlights plus help buying, selling, or leasing across Mississauga.",
         "about": "Mississauga is one of the GTA’s largest housing markets, spanning condo nodes, townhomes, and detached streets. Clients often compare Mississauga with Etobicoke and Oakville on commute, schools, and value.",
         "schools": [
-            "School choice varies widely by neighbourhood — treat Mississauga as many micro-markets, not one.",
+            "School choice varies widely by neighbourhood. Treat Mississauga as many micro-markets, not one.",
             "Families should align budget, commute, and catchment before touring broadly.",
             "Josh helps narrow the map so you are not comparing unrelated pockets.",
         ],
@@ -204,7 +204,10 @@ def page_shell(
     json_ld: dict | None = None,
 ) -> str:
     css = asset_href("assets/seo-pages.css", depth)
-    icon = asset_href("assets/js.svg", depth)
+    icon_svg = asset_href("assets/js.svg", depth)
+    icon_png = asset_href("assets/favicon-48.png", depth)
+    icon_apple = asset_href("apple-touch-icon.png", depth)
+    icon_ico = asset_href("favicon.ico", depth)
     home = asset_href("", depth) or "./"
     if not home.endswith("/") and home != "./":
         home += "/"
@@ -233,7 +236,10 @@ def page_shell(
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(title)}" />
   <meta name="twitter:description" content="{esc(description)}" />
-  <link rel="icon" href="{icon}" type="image/svg+xml" />
+  <link rel="icon" href="{icon_ico}" sizes="any" />
+  <link rel="icon" href="{icon_svg}" type="image/svg+xml" />
+  <link rel="icon" href="{icon_png}" type="image/png" sizes="48x48" />
+  <link rel="apple-touch-icon" href="{icon_apple}" sizes="180x180" />
   {fonts}
   <link rel="stylesheet" href="{css}" />
   {ld}
@@ -266,7 +272,7 @@ def page_shell(
 
 def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
     if not items:
-        return '<p class="empty">No matching homes to show here yet — <a href="{}#contact">contact Josh</a> for a private search.</p>'.format(
+        return '<p class="empty">No matching homes to show here yet. <a href="{}#contact">Contact Josh</a> for a private search.</p>'.format(
             asset_href("", depth) or "./"
         )
     bits = []
@@ -464,7 +470,7 @@ def neighbourhood_blurb(item: dict) -> str:
     return (
         f"{item['title']} sits in {loc}. Buyers and renters comparing options in {area} "
         f"usually weigh commute, building or lot utility, and nearby daily needs. "
-        f"Josh Schwartz helps you read those trade-offs with clear local context — not hype."
+        f"Josh Schwartz helps you read those trade-offs with clear local context, not hype."
     )
 
 
@@ -647,7 +653,7 @@ def write_listing_pages():
         <div>
           <p class="eyebrow">{esc(status)}</p>
           <h1>{esc(item['title'])}</h1>
-          <p class="lead">{esc(headline)} — {esc(item.get('location') or item.get('area') or '')}</p>
+          <p class="lead">{esc(headline)} · {esc(item.get('location') or item.get('area') or '')}</p>
           <p class="section-copy">Closed with Josh Schwartz. Sale prices are not displayed here, consistent with Ontario RECO / TRESA advertising rules.</p>
           <div class="cta-row">
             <a class="btn btn-primary" href="{asset_href('', depth)}#contact">Get a home valuation</a>
@@ -657,7 +663,7 @@ def write_listing_pages():
       </div>
     </div>
   </section>
-  <section class="section"><div class="container"><h2>Property Features</h2><div class="prose"><p>{esc(item['title'])} is part of Josh’s {esc(status.lower())} track record in {esc(item.get('area') or 'the GTA')}. Use this page for neighbourhood context and comparable activity — then talk to Josh for a tailored brief on your next move.</p></div></div></section>
+  <section class="section"><div class="container"><h2>Property Features</h2><div class="prose"><p>{esc(item['title'])} is part of Josh’s {esc(status.lower())} track record in {esc(item.get('area') or 'the GTA')}. Use this page for neighbourhood context and comparable activity. Then talk to Josh for a tailored brief on your next move.</p></div></div></section>
   <section class="section"><div class="container"><h2>Neighbourhood</h2><div class="prose"><p>{esc(neighbourhood_blurb(item))}</p><p>See more activity in {city_link}.</p></div></div></section>
   <section class="section"><div class="container"><h2>Nearby Schools</h2><div class="prose"><p>School preferences vary by household. If you are buying or leasing nearby, Josh can outline the local options that usually come up for {esc(item.get('area') or 'this neighbourhood')}.</p></div></div></section>
   <section class="section"><div class="container"><h2>Why Buyers Love This Area</h2><div class="prose"><p>{esc(why_blurb(item))}</p></div></div></section>
