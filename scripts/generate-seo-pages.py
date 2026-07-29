@@ -211,6 +211,7 @@ def page_shell(
     home = asset_href("", depth) or "./"
     if not home.endswith("/") and home != "./":
         home += "/"
+    brand_home = "/"
     fonts = """
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -247,7 +248,7 @@ def page_shell(
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="{home}">
+      <a class="brand" href="{brand_home}" aria-label="Josh Schwartz home">
         <img src="{asset_href('assets/js.svg', depth)}" alt="" />
         Josh Schwartz
       </a>
