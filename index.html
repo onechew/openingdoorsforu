@@ -2162,10 +2162,15 @@
     .services-wrap {
       display: grid;
       gap: 0;
+      width: 100%;
+      margin-inline: auto;
     }
 
     .services-wrap.is-engaged {
       gap: 16px;
+      width: 100%;
+      max-width: none;
+      margin-inline: 0;
     }
 
     .services-engage-head {
@@ -2270,7 +2275,7 @@
     .services-stack {
       display: flex;
       align-items: stretch;
-      gap: 12px;
+      gap: 16px;
     }
 
     .service-path {
@@ -2345,16 +2350,6 @@
       .service-path:hover::before {
         transform: scaleX(1);
       }
-
-      .service-path:hover .service-icon {
-        background: rgba(18, 20, 23, 0.1);
-        color: var(--ink);
-        transform: translateY(-2px);
-      }
-
-      .service-path:hover .service-path-kicker {
-        letter-spacing: -0.05em;
-      }
     }
 
     .service-path:active {
@@ -2379,6 +2374,7 @@
     .services-wrap.is-engaged .service-path.is-active {
       display: flex;
       width: 100%;
+      max-width: 100%;
       padding: 28px 26px;
       border-color: rgba(18, 20, 23, 0.08);
       box-shadow: 0 16px 40px rgba(18, 20, 23, 0.045);
@@ -2423,6 +2419,84 @@
       }
     }
 
+    @keyframes service-overview-in {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes service-line-in {
+      from {
+        opacity: 0;
+        transform: translateX(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .services-wrap:not(.is-engaged) .service-path {
+        opacity: 0;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path {
+        animation: service-overview-in 700ms var(--ease-out) both;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) {
+        animation-delay: 40ms;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(2) {
+        animation-delay: 140ms;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(3) {
+        animation-delay: 240ms;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-list li {
+        opacity: 0;
+        animation: service-line-in 460ms var(--ease-out) both;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) .service-list li:nth-child(1) { animation-delay: 260ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) .service-list li:nth-child(2) { animation-delay: 320ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) .service-list li:nth-child(3) { animation-delay: 380ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) .service-list li:nth-child(4) { animation-delay: 440ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) .service-list li:nth-child(5) { animation-delay: 500ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(1) .service-list li:nth-child(6) { animation-delay: 560ms; }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(2) .service-list li:nth-child(1) { animation-delay: 340ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(2) .service-list li:nth-child(2) { animation-delay: 400ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(2) .service-list li:nth-child(3) { animation-delay: 460ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(2) .service-list li:nth-child(4) { animation-delay: 520ms; }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(3) .service-list li:nth-child(1) { animation-delay: 420ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(3) .service-list li:nth-child(2) { animation-delay: 480ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(3) .service-list li:nth-child(3) { animation-delay: 540ms; }
+      .services-wrap.is-ready:not(.is-engaged) .service-path:nth-child(3) .service-list li:nth-child(4) { animation-delay: 600ms; }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-path.is-settled {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .services-wrap.is-ready:not(.is-engaged) .service-list li.is-settled {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     .service-path-head {
       display: grid;
       gap: 8px;
@@ -2437,7 +2511,6 @@
       font-weight: 600;
       letter-spacing: -0.045em;
       color: var(--ink);
-      transition: letter-spacing 280ms var(--ease-out);
       overflow: visible;
     }
 
@@ -2472,15 +2545,7 @@
       padding: 0;
       border: 0;
       background: transparent;
-      transition: transform 220ms var(--ease-out);
     }
-
-    .service-path:hover .service-list li:nth-child(1) { transition-delay: 20ms; }
-    .service-path:hover .service-list li:nth-child(2) { transition-delay: 40ms; }
-    .service-path:hover .service-list li:nth-child(3) { transition-delay: 60ms; }
-    .service-path:hover .service-list li:nth-child(4) { transition-delay: 80ms; }
-    .service-path:hover .service-list li:nth-child(5) { transition-delay: 100ms; }
-    .service-path:hover .service-list li:nth-child(6) { transition-delay: 120ms; }
 
     .service-icon {
       position: relative;
@@ -2489,8 +2554,8 @@
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: rgba(18, 20, 23, 0.06);
-      color: var(--ink-soft);
+      background: rgba(18, 20, 23, 0.07);
+      color: var(--ink);
       flex-shrink: 0;
       transition:
         background 240ms var(--ease-out),
@@ -2502,7 +2567,7 @@
       grid-area: 1 / 1;
       width: 26px;
       height: 26px;
-      transition: opacity 180ms var(--ease-out);
+      transition: opacity 180ms ease;
     }
 
     .service-icon .icon-outline {
@@ -2521,13 +2586,13 @@
 
     .service-item-copy {
       min-width: 0;
-      padding-top: 12px;
+      padding-top: 0;
     }
 
     .service-item-copy p {
       margin: 0;
-      color: var(--ink-soft);
-      font-size: 14.5px;
+      color: var(--ink);
+      font-size: 15px;
       line-height: 1.5;
       font-weight: 400;
       letter-spacing: -0.01em;
@@ -2535,7 +2600,6 @@
     }
 
     @media (hover: hover) and (pointer: fine) {
-      /* Line hover: icon only (solid + color). Text stays the same. */
       .service-list li:hover .icon-outline {
         opacity: 0;
       }
@@ -2544,43 +2608,37 @@
         opacity: 1;
       }
 
-      .service-list li:nth-child(1):hover .service-icon,
-      .service-path:hover .service-list li:nth-child(1):hover .service-icon {
+      .service-list li:nth-child(1):hover .service-icon {
         background: rgba(42, 122, 108, 0.12);
         color: #2a7a6c;
         transform: translateY(-2px);
       }
 
-      .service-list li:nth-child(2):hover .service-icon,
-      .service-path:hover .service-list li:nth-child(2):hover .service-icon {
+      .service-list li:nth-child(2):hover .service-icon {
         background: rgba(58, 110, 168, 0.12);
         color: #3a6ea8;
         transform: translateY(-2px);
       }
 
-      .service-list li:nth-child(3):hover .service-icon,
-      .service-path:hover .service-list li:nth-child(3):hover .service-icon {
+      .service-list li:nth-child(3):hover .service-icon {
         background: rgba(176, 122, 48, 0.14);
         color: #b07a30;
         transform: translateY(-2px);
       }
 
-      .service-list li:nth-child(4):hover .service-icon,
-      .service-path:hover .service-list li:nth-child(4):hover .service-icon {
+      .service-list li:nth-child(4):hover .service-icon {
         background: rgba(196, 92, 78, 0.12);
         color: #c45c4e;
         transform: translateY(-2px);
       }
 
-      .service-list li:nth-child(5):hover .service-icon,
-      .service-path:hover .service-list li:nth-child(5):hover .service-icon {
+      .service-list li:nth-child(5):hover .service-icon {
         background: rgba(111, 139, 0, 0.14);
         color: var(--champagne-deep);
         transform: translateY(-2px);
       }
 
-      .service-list li:nth-child(6):hover .service-icon,
-      .service-path:hover .service-list li:nth-child(6):hover .service-icon {
+      .service-list li:nth-child(6):hover .service-icon {
         background: rgba(90, 108, 142, 0.14);
         color: #5a6c8e;
         transform: translateY(-2px);
@@ -2601,28 +2659,32 @@
     }
 
     .service-panel-intro {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 4px;
     }
 
     .service-panel-intro h4 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      line-height: 1.3;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      margin: 0 0 10px;
+      font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.025em;
       color: var(--ink);
     }
 
     .service-panel-intro p {
       margin: 0;
+      max-width: 46rem;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 15px;
+      line-height: 1.55;
+      letter-spacing: 0;
+      font-weight: 400;
       text-wrap: pretty;
     }
 
     .service-panel-intro p + p {
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .service-steps {
@@ -2664,14 +2726,30 @@
     }
 
     .service-form {
+      --form-control-h: 46px;
+      --form-label-gap: 8px;
+      --form-row-gap: 14px;
+      --form-col-gap: 16px;
+      --form-label-size: 13px;
+      --form-control-size: 15px;
+      --form-chip-size: 13px;
+      --form-choice-size: 14px;
+      --form-label-weight: 600;
+      --form-tracking: -0.01em;
+      --form-req: var(--ink);
       display: grid;
-      gap: 14px;
+      gap: var(--form-row-gap);
+    }
+
+    .service-form .req {
+      color: var(--form-req);
+      font-weight: inherit;
     }
 
     .service-form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 14px;
+      gap: var(--form-row-gap) var(--form-col-gap);
     }
 
     .service-form-section {
@@ -2692,18 +2770,94 @@
     .service-form-note {
       margin: -4px 0 0;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.45;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .service-human-check {
+      margin-top: 2px;
+      padding: 14px;
+      border-radius: 10px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .service-human-check label {
+      display: block;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: var(--form-label-size, 13px);
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
+      line-height: 1.35;
+    }
+
+    .service-human-check input {
+      max-width: 160px;
+      height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 46px);
+      padding: 0 14px;
+      font-size: var(--form-control-size, 15px);
+      font-weight: 400;
+      letter-spacing: 0;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ink);
+    }
+
+    .service-human-check input:focus {
+      border-color: rgba(18, 20, 23, 0.34);
+      box-shadow: 0 0 0 4px rgba(18, 20, 23, 0.07);
+    }
+
+    .service-form--quick {
+      container-type: inline-size;
+      container-name: service-form;
     }
 
     .service-form--quick .service-form-grid {
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: var(--form-row-gap) var(--form-col-gap);
     }
 
-    @media (min-width: 640px) {
+    .service-form--quick .service-form-grid--split {
+      grid-template-columns: 1fr;
+      gap: var(--form-row-gap) var(--form-col-gap);
+    }
+
+    @media (min-width: 560px) {
       .service-form--quick .service-form-grid--split {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--form-row-gap) var(--form-col-gap);
+      }
+    }
+
+    @media (min-width: 820px) {
+      .service-form--quick .service-form-grid--split {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @container service-form (min-width: 520px) {
+      .service-form--quick .service-form-grid--split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--form-row-gap) var(--form-col-gap);
+      }
+    }
+
+    @container service-form (min-width: 740px) {
+      .service-form--quick .service-form-grid--split {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 559px) {
+      .service-form--quick .service-form-grid--split {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -2764,7 +2918,9 @@
     }
 
     .service-form-optional-body .service-field label {
-      font-size: 12px;
+      font-size: var(--form-label-size, 13px);
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
       color: var(--ink-soft);
     }
 
@@ -2774,47 +2930,177 @@
 
     .service-field {
       display: grid;
-      gap: 4px;
+      gap: var(--form-label-gap, 8px);
+      align-content: start;
     }
 
     .service-field label {
+      display: block;
+      margin: 0;
       color: var(--ink-soft);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-
-    .service-field label .req {
-      color: var(--ink);
+      font-size: var(--form-label-size, 13px);
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
     }
 
     .service-field input,
     .service-field select,
     .service-field textarea {
+      box-sizing: border-box;
       width: 100%;
-      min-height: 40px;
-      padding: 9px 12px;
+      height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 46px);
+      padding: 0 14px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: #ffffff;
       color: var(--ink);
-      font-size: 13px;
+      font-size: var(--form-control-size, 15px);
+      font-weight: 400;
+      letter-spacing: 0;
       line-height: 1.35;
       outline: 0;
       transition:
         border-color 200ms var(--ease-out),
         background 200ms var(--ease-out),
-        box-shadow 220ms var(--ease-out),
-        transform 180ms var(--ease-out);
+        box-shadow 220ms var(--ease-out);
     }
 
     .service-field textarea {
+      height: auto;
       min-height: 88px;
+      padding: 12px 14px;
       resize: vertical;
     }
 
     .service-field--full {
       grid-column: 1 / -1;
+    }
+
+    .service-form-cluster {
+      grid-column: 1 / -1;
+      display: grid;
+      gap: var(--form-row-gap, 14px) var(--form-col-gap, 16px);
+      grid-template-columns: 1fr;
+      min-width: 0;
+    }
+
+    .service-form-cluster > .service-field {
+      min-width: 0;
+    }
+
+    /* Progressive RWD based on the form’s own width (not just the viewport). */
+    @container service-form (min-width: 420px) {
+      .service-form-cluster--area-budget,
+      .service-form-cluster--status,
+      .service-form-cluster--specs,
+      .service-form-cluster--buy-home,
+      .service-form-cluster--tenant-home,
+      .service-form-cluster--tenant-search,
+      .service-form-cluster--amenities,
+      .service-form-cluster--landlord-status {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @container service-form (min-width: 640px) {
+      .service-form-cluster--specs {
+        grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 0.75fr));
+      }
+
+      .service-form-cluster--buy-home {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.75fr) minmax(0, 0.75fr) minmax(0, 1.05fr);
+      }
+
+      .service-form-cluster--tenant-home {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr) minmax(0, 0.75fr) minmax(0, 0.75fr);
+      }
+
+      .service-form-cluster--tenant-search {
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.05fr) minmax(0, 0.8fr) minmax(0, 0.75fr);
+      }
+
+      .service-form-cluster--area-budget {
+        grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.9fr);
+      }
+
+      .service-form-cluster--amenities {
+        grid-template-columns: repeat(2, minmax(0, 0.85fr)) minmax(0, 1.1fr) minmax(0, 1fr);
+      }
+
+      .service-form-cluster--status {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      /* Rent / Occupancy / Available, then Pets / Utilities on the next row */
+      .service-form-cluster--landlord-status {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @container service-form (min-width: 860px) {
+      .service-form-cluster--landlord-status {
+        grid-template-columns: minmax(0, 1.15fr) repeat(4, minmax(0, 0.9fr));
+      }
+    }
+
+    /* Fallback when container queries aren’t available */
+    @media (min-width: 640px) {
+      .service-form-cluster--area-budget,
+      .service-form-cluster--status {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .service-form-cluster--specs,
+      .service-form-cluster--buy-home,
+      .service-form-cluster--tenant-home,
+      .service-form-cluster--tenant-search,
+      .service-form-cluster--amenities,
+      .service-form-cluster--landlord-status {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 900px) {
+      .service-form-cluster--specs {
+        grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 0.75fr));
+      }
+
+      .service-form-cluster--buy-home {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.75fr) minmax(0, 0.75fr) minmax(0, 1.05fr);
+      }
+
+      .service-form-cluster--tenant-home {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr) minmax(0, 0.75fr) minmax(0, 0.75fr);
+      }
+
+      .service-form-cluster--tenant-search {
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.05fr) minmax(0, 0.8fr) minmax(0, 0.75fr);
+      }
+
+      .service-form-cluster--area-budget {
+        grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.9fr);
+      }
+
+      .service-form-cluster--amenities {
+        grid-template-columns: repeat(2, minmax(0, 0.85fr)) minmax(0, 1.1fr) minmax(0, 1fr);
+      }
+
+      .service-form-cluster--status {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .service-form-cluster--landlord-status {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .service-form-cluster--landlord-status {
+        grid-template-columns: minmax(0, 1.15fr) repeat(4, minmax(0, 0.9fr));
+      }
     }
 
     .service-field input::placeholder,
@@ -2824,11 +3110,15 @@
 
     .service-field input[type="date"] {
       color-scheme: light;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .service-field select {
       appearance: none;
       -webkit-appearance: none;
+      min-width: 0;
+      max-width: 100%;
       padding-right: 36px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2377716a' d='M1.1 1.2 6 6.1l4.9-4.9 1.1 1.1L6 8.2 0 2.3z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
@@ -2861,35 +3151,224 @@
       border-color: rgba(220, 80, 80, 0.72);
     }
 
-    .service-form--lease > fieldset.choice-field {
-      margin: 2px 0 4px;
-    }
-
     .service-form--lease .lease-panel-block {
       display: grid;
-      gap: 10px;
+      gap: var(--form-row-gap, 14px);
     }
 
-    .choice-field {
+    .service-field--followup {
+      margin-top: 0;
+      min-width: 0;
+    }
+
+    .pets-one-line {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 10px 12px;
+      min-width: 0;
+    }
+
+    .pets-one-line-label {
+      flex: 0 0 auto;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: var(--form-label-size, 13px);
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .pets-one-line .choice-group--compact {
+      flex: 0 0 auto;
       display: grid;
-      gap: 6px;
+      grid-template-columns: repeat(2, minmax(72px, 88px));
+      width: max-content;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .pets-one-line .choice-option span {
+      height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 46px);
+      padding: 0 12px;
+      justify-content: center;
+      font-size: var(--form-choice-size, 14px);
+      font-weight: 500;
+      letter-spacing: var(--form-tracking, -0.01em);
+    }
+
+    .pets-one-line-details {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .pets-one-line-details[hidden] {
+      display: none !important;
+    }
+
+    .pets-one-line-details input {
+      box-sizing: border-box;
+      width: 100%;
+      height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 46px);
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: var(--form-control-size, 15px);
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.35;
+      outline: 0;
+    }
+
+    .pets-one-line-details input:focus {
+      border-color: rgba(18, 20, 23, 0.34);
+      box-shadow: 0 0 0 4px rgba(18, 20, 23, 0.07);
+    }
+
+    .service-form.is-attempted .pets-one-line-details input:invalid {
+      border-color: rgba(220, 80, 80, 0.72);
+    }
+
+    @media (max-width: 560px) {
+      .pets-one-line {
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+
+      .pets-one-line .choice-group--compact {
+        flex: 1 1 auto;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pets-one-line-details {
+        flex: 1 1 100%;
+      }
+
+      .service-form {
+        --form-col-gap: 12px;
+        --form-row-gap: 12px;
+      }
+
+      .service-field input,
+      .service-field select,
+      .service-field textarea,
+      .choice-option span,
+      .service-human-check input {
+        font-size: 16px;
+      }
+    }
+
+    .realtor-yes-panel {
+      display: grid;
+      gap: var(--form-row-gap, 14px);
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      border: 1px solid rgba(18, 20, 23, 0.08);
+    }
+
+    .realtor-yes-panel .realtor-yes-note {
       margin: 0;
       padding: 0;
       border: 0;
+      background: transparent;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .realtor-followup {
+      display: grid;
+      gap: var(--form-row-gap, 14px);
+    }
+
+    .realtor-followup[hidden],
+    .realtor-yes-panel[hidden] {
+      display: none !important;
+    }
+
+    .choice-field {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      min-width: 0;
     }
 
     .choice-field legend {
+      display: block;
+      float: none;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
       padding: 0;
       color: var(--ink-soft);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      font-size: var(--form-label-size, 13px);
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
+      line-height: 1.35;
     }
 
+    /* Fieldset legends often ignore flex/grid gap — space via the control group instead. */
     .choice-group {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
+      margin: 0;
+      margin-block-start: var(--form-label-gap, 8px);
+      padding: 0;
+      width: 100%;
+    }
+
+    .choice-group--slots {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    @container service-form (min-width: 420px) {
+      .choice-group--slots {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @container service-form (min-width: 720px) {
+      .choice-group--slots {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 420px) {
+      .choice-group--slots {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 900px) {
+      .choice-group--slots {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .choice-group--slots .choice-option span {
+      height: auto;
+      min-height: 40px;
+      padding: 8px;
+      font-size: var(--form-chip-size, 13px);
+      font-weight: 400;
+      letter-spacing: var(--form-tracking, -0.01em);
+      white-space: normal;
+      text-wrap: balance;
     }
 
     .chip-group {
@@ -2911,18 +3390,20 @@
     }
 
     .chip-option span {
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      min-height: 38px;
-      padding: 8px 10px;
+      height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 46px);
+      padding: 0 12px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: #ffffff;
       color: var(--ink);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
-      line-height: 1.3;
+      line-height: 1.2;
       transition: border-color 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
     }
 
@@ -2942,6 +3423,7 @@
       position: relative;
       display: block;
       cursor: pointer;
+      min-width: 0;
     }
 
     .choice-option input {
@@ -2951,28 +3433,33 @@
     }
 
     .choice-option span {
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 38px;
-      padding: 8px 12px;
+      width: 100%;
+      height: auto;
+      min-height: var(--form-control-h, 46px);
+      padding: 10px 12px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: #ffffff;
       color: var(--ink);
-      font-size: 13px;
+      font-size: var(--form-choice-size, 14px);
       font-weight: 500;
+      letter-spacing: var(--form-tracking, -0.01em);
+      line-height: 1.25;
+      text-align: center;
+      text-wrap: balance;
       transition:
         border-color 200ms var(--ease-out),
         background 200ms var(--ease-out),
         color 200ms var(--ease-out),
-        box-shadow 220ms var(--ease-out),
-        transform 180ms var(--ease-out);
+        box-shadow 220ms var(--ease-out);
     }
 
     .choice-option:hover span {
       border-color: rgba(18, 20, 23, 0.2);
-      transform: translateY(-1px);
     }
 
     .choice-option input:checked + span {
@@ -2980,7 +3467,6 @@
       background: var(--surface-soft);
       color: var(--ink);
       box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.06);
-      transform: none;
     }
 
     .choice-option input:focus-visible + span {
@@ -2996,7 +3482,7 @@
 
     .lease-panel-block {
       display: grid;
-      gap: 18px;
+      gap: var(--form-row-gap, 14px);
     }
 
     .lease-panel-block[hidden] {
@@ -3007,44 +3493,57 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: 14px;
+      gap: 12px;
     }
 
     .service-form-footer-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 16px;
       flex-wrap: wrap;
     }
 
     .service-form-status {
+      display: none;
       margin: 0;
-      min-height: 1.2em;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 500;
+      padding: 0;
+      border-radius: 0;
+      font-size: var(--form-label-size, 13px);
+      line-height: 1.35;
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
+      text-align: left;
+    }
+
+    .service-form-status.is-error,
+    .service-form-status.is-success {
+      display: block;
     }
 
     .service-form-status.is-error {
-      color: #c44;
+      color: #7a1d1d;
+      background: transparent;
+      border: 0;
     }
 
     .service-form-status.is-success {
-      color: #2f6b3f;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
     }
 
     .service-submit {
       margin-left: auto;
-      min-height: 42px;
-      padding: 0 24px;
+      min-height: var(--form-control-h, 46px);
+      padding: 0 22px;
       border: 1px solid var(--ink);
       border-radius: 999px;
       background: var(--ink);
       color: #ffffff;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
+      font-size: var(--form-label-size, 13px);
+      font-weight: var(--form-label-weight, 600);
+      letter-spacing: var(--form-tracking, -0.01em);
       cursor: pointer;
       transition:
         transform 200ms var(--ease-out),
@@ -3155,6 +3654,20 @@
       .service-form-optional summary::after,
       .service-submit {
         transition: none !important;
+      }
+
+      .services-wrap:not(.is-engaged) .service-path,
+      .services-wrap:not(.is-engaged) .service-list li {
+        opacity: 1;
+        animation: none !important;
+        filter: none;
+        transform: none;
+      }
+
+      .services-wrap:not(.is-engaged) .service-path::before,
+      .services-wrap:not(.is-engaged) .service-path::after,
+      .services-wrap:not(.is-engaged) .service-icon {
+        animation: none !important;
       }
 
       .service-path:hover,
@@ -3491,6 +4004,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      -webkit-user-select: none;
       user-select: none;
       overflow: visible;
       opacity: 0.52;
@@ -3502,6 +4016,8 @@
       width: 100%;
       min-height: 0;
       pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
       /* Shift whole scene left; overflow past edges is fine */
       transform: translateX(-96px);
       --ascii-stage-scale: 1;
@@ -3521,6 +4037,9 @@
       text-rendering: geometricPrecision;
       -webkit-font-smoothing: antialiased;
       -webkit-text-stroke: 0.2px currentColor;
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     /* Above Sales Representative */
@@ -3757,26 +4276,29 @@
     }
 
     .contact-bar-details {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: inline-flex;
+      flex-wrap: wrap;
       align-items: center;
-      column-gap: 28px;
-      width: min(100%, 760px);
+      justify-content: center;
+      gap: 12px 22px;
+      width: auto;
+      max-width: 100%;
       overflow: visible;
       transform: translateY(-10px);
     }
 
     .contact-bar-details .call-phone {
-      justify-self: end;
+      justify-self: auto;
     }
 
     .contact-bar-details .copy-email {
-      justify-self: start;
-      text-align: left;
+      justify-self: auto;
+      text-align: inherit;
     }
 
     .contact-bar-details .divider {
-      justify-self: center;
+      justify-self: auto;
+      flex: 0 0 auto;
     }
 
     .contact-bar-details a,
@@ -3837,6 +4359,8 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-align: center;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     .contact-bar-social-links {
@@ -4230,6 +4754,10 @@
         gap: 12px;
       }
 
+      .services-wrap:not(.is-engaged) {
+        width: 100%;
+      }
+
       .service-path,
       .services-wrap.is-engaged .service-path.is-active {
         flex: none;
@@ -4259,9 +4787,9 @@
         font-size: 16px;
       }
 
-      .service-form-grid {
+      .service-form-grid:not(.service-form-grid--split) {
         grid-template-columns: 1fr;
-        gap: 22px;
+        gap: var(--form-row-gap, 14px);
       }
 
       .service-form-footer {
@@ -4804,7 +5332,7 @@
           </p>
         </div>
 
-        <div class="services-wrap reveal" data-reveal>
+        <div class="services-wrap">
           <div class="services-engage-head" aria-hidden="true">
             <button type="button" class="services-back">All services</button>
             <div class="services-tabs" role="tablist" aria-label="Service type">
@@ -4882,13 +5410,16 @@
                 <form
                   class="service-form service-form--quick"
                   id="buyLeadForm"
-                  action="https://formsubmit.co/ajax/f11d7be1eae84a79fdaf68db5a9f0064"
+                  action="https://formsubmit.co/f11d7be1eae84a79fdaf68db5a9f0064"
                   method="POST"
                   novalidate
                 >
-                  <input type="hidden" name="_subject" value="New Buyer Inquiry - Website">
+                  <input type="hidden" name="_subject" value="🏡 Buying Inquiry">
                   <input type="hidden" name="_template" value="table">
                   <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" value="https://openingdoorsforu.com/?sent=buyer#services">
+                  <input type="hidden" name="Lead Type" value="Buyer">
+                  <input type="hidden" name="Service Path" value="Buying">
                   <input class="service-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                   <div class="service-panel-intro">
@@ -4900,51 +5431,148 @@
 
                   <div class="service-form-grid service-form-grid--split">
                     <div class="service-field">
-                      <label for="buy-name">Your name <span class="req" aria-hidden="true">*</span></label>
-                      <input id="buy-name" name="Name" type="text" placeholder="First and last name" autocomplete="name" required>
+                      <label for="buy-name">👤 Your full name <span class="req" aria-hidden="true">*</span></label>
+                      <input id="buy-name" name="Full Name" type="text" placeholder="First and last name" autocomplete="name" required>
                     </div>
 
                     <div class="service-field">
-                      <label for="buy-email">Email <span class="req" aria-hidden="true">*</span></label>
+                      <label for="buy-email">✉️ Email <span class="req" aria-hidden="true">*</span></label>
                       <input id="buy-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
                     </div>
 
                     <div class="service-field">
-                      <label for="buy-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                      <label for="buy-phone">📱 Phone <span class="req" aria-hidden="true">*</span></label>
                       <input id="buy-phone" name="Phone" type="tel" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" required>
-                    </div>
-
-                    <div class="service-field service-field--full">
-                      <label for="buy-location">Where do you want to buy? <span class="req" aria-hidden="true">*</span></label>
-                      <input id="buy-location" name="Desired Area" type="text" placeholder="Neighbourhood or city" required>
-                    </div>
-
-                    <div class="service-field">
-                      <label for="buy-price">Budget <span class="req" aria-hidden="true">*</span></label>
-                      <select id="buy-price" name="Budget" required>
-                        <option value="" selected disabled>Select a range</option>
-                        <option value="Under $500,000">Under $500,000</option>
-                        <option value="$500,000 to $750,000">$500,000 to $750,000</option>
-                        <option value="$750,000 to $1,000,000">$750,000 to $1,000,000</option>
-                        <option value="$1,000,000 to $1,500,000">$1,000,000 to $1,500,000</option>
-                        <option value="$1,500,000+">$1,500,000+</option>
-                      </select>
                     </div>
                   </div>
 
-                  <details class="service-form-optional">
-                    <summary>Bedrooms, property type, timeline</summary>
-                    <div class="service-form-optional-body">
+                  <fieldset class="choice-field choice-field--required" data-realtor-gate>
+                    <legend>🤝🏻 Are you currently working with a realtor? <span class="req" aria-hidden="true">*</span></legend>
+                    <div class="choice-group">
+                      <label class="choice-option">
+                        <input type="radio" name="Working with a realtor" value="No" required>
+                        <span>No</span>
+                      </label>
+                      <label class="choice-option">
+                        <input type="radio" name="Working with a realtor" value="Yes" required>
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <div class="realtor-yes-panel" hidden>
+                    <p class="realtor-yes-note">Please share your realtor’s name and phone so I can coordinate properly.</p>
+                    <div class="service-form-grid service-form-grid--split">
                       <div class="service-field">
-                        <label for="buy-comments">Anything else about what you are looking for</label>
-                        <textarea id="buy-comments" name="Additional Details" placeholder="e.g. 2 bed condo, move in spring, first-time buyer"></textarea>
+                        <label for="buy-realtor-name">🧑🏻‍💼 Realtor’s full name <span class="req" aria-hidden="true">*</span></label>
+                        <input id="buy-realtor-name" name="Current realtor name" type="text" placeholder="Full name" autocomplete="off" data-realtor-yes-field>
+                      </div>
+                      <div class="service-field">
+                        <label for="buy-realtor-phone">📞 Realtor’s phone <span class="req" aria-hidden="true">*</span></label>
+                        <input id="buy-realtor-phone" name="Current realtor phone" type="tel" placeholder="Phone number" inputmode="tel" autocomplete="off" data-realtor-yes-field>
                       </div>
                     </div>
-                  </details>
+                  </div>
+
+                  <div class="realtor-followup" hidden>
+                  <div class="service-form-grid service-form-grid--split">
+                    <div class="service-field">
+                      <label for="buy-first-time">🏡 First-time buyer in Ontario? <span class="req" aria-hidden="true">*</span></label>
+                      <select id="buy-first-time" name="First-time buyer" required>
+                        <option value="" selected disabled>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+
+                    <div class="service-field">
+                      <label for="buy-preapproved">🏦 Mortgage pre-approval? <span class="req" aria-hidden="true">*</span></label>
+                      <select id="buy-preapproved" name="Mortgage pre-approval" required>
+                        <option value="" selected disabled>Select</option>
+                        <option value="Yes - pre-approved">Yes, pre-approved</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Not yet">Not yet</option>
+                        <option value="Cash buyer">Cash buyer</option>
+                      </select>
+                    </div>
+
+                    <div class="service-form-cluster service-form-cluster--area-budget">
+                      <div class="service-field">
+                        <label for="buy-location">📍 Preferred areas <span class="req" aria-hidden="true">*</span></label>
+                        <input id="buy-location" name="Preferred areas" type="text" placeholder="e.g. Mimico, The Queensway, Islington" required>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="buy-price">💰 Purchase budget <span class="req" aria-hidden="true">*</span></label>
+                        <select id="buy-price" name="Purchase budget" required>
+                          <option value="" selected disabled>Select a range</option>
+                          <option value="Under $500,000">Under $500,000</option>
+                          <option value="$500,000 to $750,000">$500,000 to $750,000</option>
+                          <option value="$750,000 to $1,000,000">$750,000 to $1,000,000</option>
+                          <option value="$1,000,000 to $1,500,000">$1,000,000 to $1,500,000</option>
+                          <option value="$1,500,000+">$1,500,000+</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="service-form-cluster service-form-cluster--buy-home">
+                      <div class="service-field">
+                        <label for="buy-type">🏠 Property type <span class="req" aria-hidden="true">*</span></label>
+                        <select id="buy-type" name="Property type" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Condo apartment">Condo apartment</option>
+                          <option value="Condo townhouse">Condo townhouse</option>
+                          <option value="Freehold townhouse">Freehold townhouse</option>
+                          <option value="Semi-detached">Semi-detached</option>
+                          <option value="Detached">Detached</option>
+                          <option value="Open to options">Open to options</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="buy-beds">🛏️ Beds <span class="req" aria-hidden="true">*</span></label>
+                        <select id="buy-beds" name="Bedrooms needed" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Studio / 1">Studio / 1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4+">4+</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="buy-parking">🅿️ Parking <span class="req" aria-hidden="true">*</span></label>
+                        <select id="buy-parking" name="Parking needed" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="None">None</option>
+                          <option value="1">1</option>
+                          <option value="2+">2+</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="buy-timeline">🗓️ Timeline <span class="req" aria-hidden="true">*</span></label>
+                        <select id="buy-timeline" name="Buy timeline" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="ASAP">ASAP</option>
+                          <option value="1 to 3 months">1 to 3 months</option>
+                          <option value="3 to 6 months">3 to 6 months</option>
+                          <option value="6 to 12 months">6 to 12 months</option>
+                          <option value="Just researching">Just researching</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="service-field service-field--full">
+                      <label for="buy-comments">✨ Must-haves or deal-breakers</label>
+                      <textarea id="buy-comments" name="Must-haves or deal-breakers" placeholder="e.g. south-facing, W/D, near TTC, no high condo fees"></textarea>
+                    </div>
+                  </div>
+                  </div>
 
                   <div class="service-form-footer">
+                    <p class="service-form-status" aria-live="polite"></p>
                     <div class="service-form-footer-row">
-                      <p class="service-form-status" aria-live="polite"></p>
                       <button class="service-submit" type="submit">Get started</button>
                     </div>
                   </div>
@@ -5002,13 +5630,16 @@
                 <form
                   class="service-form service-form--quick"
                   id="sellLeadForm"
-                  action="https://formsubmit.co/ajax/f11d7be1eae84a79fdaf68db5a9f0064"
+                  action="https://formsubmit.co/f11d7be1eae84a79fdaf68db5a9f0064"
                   method="POST"
                   novalidate
                 >
-                  <input type="hidden" name="_subject" value="Home Evaluation Request - Website">
+                  <input type="hidden" name="_subject" value="💰 Selling Inquiry">
                   <input type="hidden" name="_template" value="table">
                   <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" value="https://openingdoorsforu.com/?sent=seller#services">
+                  <input type="hidden" name="Lead Type" value="Seller">
+                  <input type="hidden" name="Service Path" value="Selling">
                   <input class="service-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                   <div class="service-panel-intro">
@@ -5019,51 +5650,149 @@
 
                   <div class="service-form-grid service-form-grid--split">
                     <div class="service-field">
-                      <label for="sell-name">Your name <span class="req" aria-hidden="true">*</span></label>
-                      <input id="sell-name" name="Name" type="text" placeholder="First and last name" autocomplete="name" required>
+                      <label for="sell-name">👤 Your full name <span class="req" aria-hidden="true">*</span></label>
+                      <input id="sell-name" name="Full Name" type="text" placeholder="First and last name" autocomplete="name" required>
                     </div>
 
                     <div class="service-field">
-                      <label for="sell-email">Email <span class="req" aria-hidden="true">*</span></label>
+                      <label for="sell-email">✉️ Email <span class="req" aria-hidden="true">*</span></label>
                       <input id="sell-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
                     </div>
 
                     <div class="service-field">
-                      <label for="sell-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                      <label for="sell-phone">📱 Phone <span class="req" aria-hidden="true">*</span></label>
                       <input id="sell-phone" name="Phone" type="tel" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" required>
-                    </div>
-
-                    <div class="service-field service-field--full">
-                      <label for="sell-address">Property address <span class="req" aria-hidden="true">*</span></label>
-                      <input id="sell-address" name="Property Address" type="text" placeholder="Street address, city" autocomplete="street-address" required>
-                    </div>
-
-                    <div class="service-field service-field--full">
-                      <label for="sell-timeline">When are you thinking of selling? <span class="req" aria-hidden="true">*</span></label>
-                      <select id="sell-timeline" name="Timeline" required>
-                        <option value="" selected disabled>Select</option>
-                        <option value="ASAP">ASAP</option>
-                        <option value="1 to 3 months">1 to 3 months</option>
-                        <option value="3 to 6 months">3 to 6 months</option>
-                        <option value="6 to 12 months">6 to 12 months</option>
-                        <option value="Just exploring">Just exploring</option>
-                      </select>
                     </div>
                   </div>
 
-                  <details class="service-form-optional">
-                    <summary>Property type, beds, baths, upgrades</summary>
-                    <div class="service-form-optional-body">
+                  <fieldset class="choice-field choice-field--required" data-realtor-gate>
+                    <legend>🤝🏻 Are you currently working with a realtor? <span class="req" aria-hidden="true">*</span></legend>
+                    <div class="choice-group">
+                      <label class="choice-option">
+                        <input type="radio" name="Working with a realtor" value="No" required>
+                        <span>No</span>
+                      </label>
+                      <label class="choice-option">
+                        <input type="radio" name="Working with a realtor" value="Yes" required>
+                        <span>Yes</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <div class="realtor-yes-panel" hidden>
+                    <p class="realtor-yes-note">Please share your realtor’s name and phone so I can coordinate properly.</p>
+                    <div class="service-form-grid service-form-grid--split">
                       <div class="service-field">
-                        <label for="sell-details">More about your property</label>
-                        <textarea id="sell-details" name="Property Details" placeholder="e.g. 3 bed semi, finished basement, recent kitchen reno"></textarea>
+                        <label for="sell-realtor-name">🧑🏻‍💼 Realtor’s full name <span class="req" aria-hidden="true">*</span></label>
+                        <input id="sell-realtor-name" name="Current realtor name" type="text" placeholder="Full name" autocomplete="off" data-realtor-yes-field>
+                      </div>
+                      <div class="service-field">
+                        <label for="sell-realtor-phone">📞 Realtor’s phone <span class="req" aria-hidden="true">*</span></label>
+                        <input id="sell-realtor-phone" name="Current realtor phone" type="tel" placeholder="Phone number" inputmode="tel" autocomplete="off" data-realtor-yes-field>
                       </div>
                     </div>
-                  </details>
+                  </div>
+
+                  <div class="realtor-followup" hidden>
+                  <div class="service-form-grid service-form-grid--split">
+                    <div class="service-field service-field--full">
+                      <label for="sell-address">📍 Property address <span class="req" aria-hidden="true">*</span></label>
+                      <input id="sell-address" name="Property Address" type="text" placeholder="Street address, city, postal code" autocomplete="street-address" required>
+                    </div>
+
+                    <div class="service-form-cluster service-form-cluster--specs">
+                      <div class="service-field">
+                        <label for="sell-type">🏠 Property type <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-type" name="Property type" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Condo apartment">Condo apartment</option>
+                          <option value="Condo townhouse">Condo townhouse</option>
+                          <option value="Freehold townhouse">Freehold townhouse</option>
+                          <option value="Semi-detached">Semi-detached</option>
+                          <option value="Detached">Detached</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="sell-beds">🛏️ Beds <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-beds" name="Bedrooms" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Studio / 1">Studio / 1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4+">4+</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="sell-baths">🚿 Baths <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-baths" name="Bathrooms" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1.5</option>
+                          <option value="2">2</option>
+                          <option value="2.5+">2.5+</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="sell-parking">🅿️ Parking <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-parking" name="Parking" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="None">None</option>
+                          <option value="1">1</option>
+                          <option value="2+">2+</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="service-form-cluster service-form-cluster--status">
+                      <div class="service-field">
+                        <label for="sell-occupancy">🔑 Occupancy <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-occupancy" name="Current occupancy" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Owner-occupied">Owner-occupied</option>
+                          <option value="Vacant">Vacant</option>
+                          <option value="Tenanted">Tenanted</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="sell-timeline">🗓️ List timeline <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-timeline" name="Listing timeline" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="ASAP">ASAP</option>
+                          <option value="1 to 3 months">1 to 3 months</option>
+                          <option value="3 to 6 months">3 to 6 months</option>
+                          <option value="6 to 12 months">6 to 12 months</option>
+                          <option value="Just exploring">Just exploring</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="sell-mortgage">🏦 Mortgage <span class="req" aria-hidden="true">*</span></label>
+                        <select id="sell-mortgage" name="Mortgage status" required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Owned free and clear">Owned free and clear</option>
+                          <option value="Mortgage under 25% of value">Mortgage under ~25% of value</option>
+                          <option value="Mortgage 25% to 50% of value">Mortgage ~25% to 50% of value</option>
+                          <option value="Mortgage over 50% of value">Mortgage over ~50% of value</option>
+                          <option value="Prefer to discuss">Prefer to discuss</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="service-field service-field--full">
+                      <label for="sell-details">🛠️ Renovations, staging needs, or pricing goals</label>
+                      <textarea id="sell-details" name="Property notes" placeholder="e.g. kitchen reno 2023, tenant leaves June 1, hoping to list near recent comps"></textarea>
+                    </div>
+                  </div>
+                  </div>
 
                   <div class="service-form-footer">
+                    <p class="service-form-status" aria-live="polite"></p>
                     <div class="service-form-footer-row">
-                      <p class="service-form-status" aria-live="polite"></p>
                       <button class="service-submit" type="submit">Get started</button>
                     </div>
                   </div>
@@ -5121,13 +5850,16 @@
                 <form
                   class="service-form service-form--quick service-form--lease"
                   id="leaseLeadForm"
-                  action="https://formsubmit.co/ajax/f11d7be1eae84a79fdaf68db5a9f0064"
+                  action="https://formsubmit.co/f11d7be1eae84a79fdaf68db5a9f0064"
                   method="POST"
                   novalidate
                 >
-                  <input type="hidden" name="_subject" value="New Lease Inquiry - Website">
+                  <input type="hidden" name="_subject" id="leaseSubject" value="🏠 Landlord Inquiry">
                   <input type="hidden" name="_template" value="table">
                   <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" id="leaseNext" value="https://openingdoorsforu.com/?sent=landlord#services">
+                  <input type="hidden" name="Lead Type" id="leaseLeadType" value="Landlord">
+                  <input type="hidden" name="Service Path" value="Leasing">
                   <input class="service-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                   <div class="service-panel-intro">
@@ -5138,100 +5870,397 @@
 
                   <div class="service-form-grid service-form-grid--split">
                     <div class="service-field">
-                      <label for="lease-name">Your name <span class="req" aria-hidden="true">*</span></label>
-                      <input id="lease-name" name="Name" type="text" placeholder="First and last name" autocomplete="name" required>
+                      <label for="lease-name">👤 Your full name <span class="req" aria-hidden="true">*</span></label>
+                      <input id="lease-name" name="Full Name" type="text" placeholder="First and last name" autocomplete="name" required>
                     </div>
 
                     <div class="service-field">
-                      <label for="lease-email">Email <span class="req" aria-hidden="true">*</span></label>
+                      <label for="lease-email">✉️ Email <span class="req" aria-hidden="true">*</span></label>
                       <input id="lease-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required>
                     </div>
 
                     <div class="service-field">
-                      <label for="lease-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                      <label for="lease-phone">📱 Phone <span class="req" aria-hidden="true">*</span></label>
                       <input id="lease-phone" name="Phone" type="tel" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" required>
                     </div>
                   </div>
 
                   <fieldset class="choice-field choice-field--required">
-                    <legend>I am <span class="req" aria-hidden="true">*</span></legend>
+                    <legend>👋🏻 I am <span class="req" aria-hidden="true">*</span></legend>
                     <div class="choice-group">
                       <label class="choice-option">
-                        <input type="radio" name="I am" value="Looking to lease out my property" required checked>
+                        <input type="radio" name="Role" value="Landlord - leasing out my property" required checked>
                         <span>Lease out my property</span>
                       </label>
                       <label class="choice-option">
-                        <input type="radio" name="I am" value="Looking to rent" required>
+                        <input type="radio" name="Role" value="Tenant - looking to rent" required>
                         <span>Looking to rent</span>
                       </label>
                     </div>
                   </fieldset>
 
                   <div class="lease-panel-block" id="leaseTenantPanel" hidden>
-                    <div class="service-form-grid service-form-grid--split">
-                      <div class="service-field service-field--full">
-                        <label for="lease-area">Where do you want to rent? <span class="req" aria-hidden="true">*</span></label>
-                        <input id="lease-area" name="Desired Area" type="text" placeholder="Neighbourhood or city" data-tenant-required>
+                    <fieldset class="choice-field choice-field--required" data-realtor-gate>
+                      <legend>🤝🏻 Are you currently working with a realtor? <span class="req" aria-hidden="true">*</span></legend>
+                      <div class="choice-group">
+                        <label class="choice-option">
+                          <input type="radio" name="Working with a realtor" value="No" data-tenant-required>
+                          <span>No</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="radio" name="Working with a realtor" value="Yes" data-tenant-required>
+                          <span>Yes</span>
+                        </label>
                       </div>
+                    </fieldset>
 
-                      <div class="service-field">
-                        <label for="lease-budget">Monthly budget <span class="req" aria-hidden="true">*</span></label>
-                        <select id="lease-budget" name="Monthly Budget" data-tenant-required>
-                          <option value="" selected disabled>Select a range</option>
-                          <option value="Under $2,000">Under $2,000</option>
-                          <option value="$2,000 to $2,500">$2,000 to $2,500</option>
-                          <option value="$2,500 to $3,000">$2,500 to $3,000</option>
-                          <option value="$3,000 to $4,000">$3,000 to $4,000</option>
-                          <option value="$4,000+">$4,000+</option>
-                        </select>
-                      </div>
-
-                      <div class="service-field">
-                        <label for="lease-timeline">Move timeline <span class="req" aria-hidden="true">*</span></label>
-                        <select id="lease-timeline" name="Move Timeline" data-tenant-required>
-                          <option value="" selected disabled>Select</option>
-                          <option value="ASAP">ASAP</option>
-                          <option value="1 to 3 months">1 to 3 months</option>
-                          <option value="3 to 6 months">3 to 6 months</option>
-                          <option value="Just exploring">Just exploring</option>
-                        </select>
+                    <div class="realtor-yes-panel" hidden>
+                      <p class="realtor-yes-note">Please share your realtor’s name and phone so I can coordinate properly.</p>
+                      <div class="service-form-grid service-form-grid--split">
+                        <div class="service-field">
+                          <label for="lease-tenant-realtor-name">🧑🏻‍💼 Realtor’s full name <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-tenant-realtor-name" name="Current realtor name" type="text" placeholder="Full name" autocomplete="off" data-realtor-yes-field>
+                        </div>
+                        <div class="service-field">
+                          <label for="lease-tenant-realtor-phone">📞 Realtor’s phone <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-tenant-realtor-phone" name="Current realtor phone" type="tel" placeholder="Phone number" inputmode="tel" autocomplete="off" data-realtor-yes-field>
+                        </div>
                       </div>
                     </div>
 
-                    <details class="service-form-optional">
-                      <summary>Employment, credit, pets, viewing times</summary>
-                      <div class="service-form-optional-body">
-                        <div class="service-field">
-                          <label for="lease-tenant-details">Share what helps me match you faster</label>
-                          <textarea id="lease-tenant-details" name="Additional Details" placeholder="e.g. full-time employed, one small dog, free weekday evenings"></textarea>
-                        </div>
-                        <p class="service-form-note">Only share what you are comfortable with. I will follow up personally.</p>
+                    <div class="realtor-followup" hidden>
+                    <div class="service-form-grid service-form-grid--split">
+                      <div class="service-field">
+                        <label for="lease-employment">💼 Employment status <span class="req" aria-hidden="true">*</span></label>
+                        <select id="lease-employment" name="Employment status" data-tenant-required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Full-time employed">Full-time employed</option>
+                          <option value="Part-time employed">Part-time employed</option>
+                          <option value="Self-employed">Self-employed</option>
+                          <option value="Student">Student</option>
+                          <option value="Retired">Retired</option>
+                          <option value="Other">Other</option>
+                        </select>
                       </div>
-                    </details>
+
+                      <div class="service-field">
+                        <label for="lease-credit">📊 Credit score <span class="req" aria-hidden="true">*</span></label>
+                        <select id="lease-credit" name="Credit score" data-tenant-required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="750+">750+</option>
+                          <option value="700 to 749">700 to 749</option>
+                          <option value="650 to 699">650 to 699</option>
+                          <option value="Below 650">Below 650</option>
+                          <option value="Unsure / prefer to discuss">Unsure / prefer to discuss</option>
+                        </select>
+                      </div>
+
+                      <div class="service-field">
+                        <label for="lease-residency">🇨🇦 Residency status in Canada <span class="req" aria-hidden="true">*</span></label>
+                        <select id="lease-residency" name="Residency status in Canada" data-tenant-required>
+                          <option value="" selected disabled>Select</option>
+                          <option value="Canadian citizen">Canadian citizen</option>
+                          <option value="Permanent resident">Permanent resident</option>
+                          <option value="Work permit">Work permit</option>
+                          <option value="Study permit">Study permit</option>
+                          <option value="Other status">Other status</option>
+                        </select>
+                      </div>
+
+                      <div class="service-form-cluster service-form-cluster--tenant-search">
+                        <div class="service-field">
+                          <label for="lease-area">📍 Area <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-area" name="Desired Area" type="text" placeholder="Neighbourhood or city" data-tenant-required>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-budget">💵 Budget <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-budget" name="Monthly rent budget" data-tenant-required>
+                            <option value="" selected disabled>Select a range</option>
+                            <option value="Under $2,000">Under $2,000</option>
+                            <option value="$2,000 to $2,500">$2,000 to $2,500</option>
+                            <option value="$2,500 to $3,000">$2,500 to $3,000</option>
+                            <option value="$3,000 to $4,000">$3,000 to $4,000</option>
+                            <option value="$4,000+">$4,000+</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-occupants">👥 Occupants <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-occupants" name="Number of occupants" data-tenant-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4+">4+</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-beds">🛏️ Beds <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-beds" name="Bedrooms needed" data-tenant-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Studio">Studio</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3+">3+</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-parking">🅿️ Parking <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-parking" name="Parking required" data-tenant-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="No">No</option>
+                            <option value="1 spot">1 spot</option>
+                            <option value="2+ spots">2+ spots</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-locker">📦 Locker <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-locker" name="Locker required" data-tenant-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="Nice to have">Nice to have</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-income">💹 Income <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-income" name="Annual income" data-tenant-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Under $50,000">Under $50,000</option>
+                            <option value="$50,000 to $75,000">$50,000 to $75,000</option>
+                            <option value="$75,000 to $100,000">$75,000 to $100,000</option>
+                            <option value="$100,000 to $150,000">$100,000 to $150,000</option>
+                            <option value="$150,000+">$150,000+</option>
+                            <option value="Prefer to discuss">Prefer to discuss</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-move-in">📅 Move-in <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-move-in" name="Preferred move-in date" type="date" data-tenant-required>
+                        </div>
+                      </div>
+                    </div>
+
+                    <fieldset class="choice-field choice-field--required viewing-slots-field">
+                      <legend>⏰ Best times to view <span class="req" aria-hidden="true">*</span></legend>
+                      <div class="choice-group choice-group--slots">
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Monday 5–8pm" data-viewing-slot>
+                          <span>Mon 5–8pm</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Tuesday 5–8pm" data-viewing-slot>
+                          <span>Tue 5–8pm</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Wednesday 10am–5pm" data-viewing-slot>
+                          <span>Wed 10–5pm</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Wednesday 5–8pm" data-viewing-slot>
+                          <span>Wed 5–8pm</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Friday 10am–1pm" data-viewing-slot>
+                          <span>Fri 10–1pm</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Saturday 10am–1pm" data-viewing-slot>
+                          <span>Sat 10–1pm</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="checkbox" name="viewing_slot" value="Sunday 10am–1pm" data-viewing-slot>
+                          <span>Sun 10–1pm</span>
+                        </label>
+                      </div>
+                      <input type="hidden" name="Preferred viewing timeslots" id="leaseViewingSlotsValue" value="">
+                    </fieldset>
+
+                    <div
+                      class="pets-one-line choice-field--required"
+                      id="leasePetsField"
+                      role="group"
+                      aria-labelledby="leasePetsLabel"
+                    >
+                      <p class="pets-one-line-label" id="leasePetsLabel">
+                        🐾 Any pets? <span class="req" aria-hidden="true">*</span>
+                      </p>
+                      <div class="choice-group choice-group--compact">
+                        <label class="choice-option">
+                          <input type="radio" name="Pets" value="Yes" data-tenant-required>
+                          <span>Yes</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="radio" name="Pets" value="No" data-tenant-required>
+                          <span>No</span>
+                        </label>
+                      </div>
+                      <div class="pets-one-line-details" id="leasePetDetails" hidden>
+                        <label for="lease-pet-details" class="visually-hidden">Type &amp; weight</label>
+                        <input
+                          id="lease-pet-details"
+                          name="Pet type and weight"
+                          type="text"
+                          placeholder="Type & weight (required)"
+                          autocomplete="off"
+                          data-pet-details
+                        >
+                      </div>
+                    </div>
+
+
+                    </div>
                   </div>
 
                   <div class="lease-panel-block" id="leaseLandlordPanel">
-                    <div class="service-form-grid service-form-grid--split">
-                      <div class="service-field service-field--full">
-                        <label for="lease-property-address">Property address <span class="req" aria-hidden="true">*</span></label>
-                        <input id="lease-property-address" name="Property Address" type="text" placeholder="Street address, city" required>
+                    <fieldset class="choice-field choice-field--required" data-realtor-gate>
+                      <legend>🤝🏻 Are you currently working with a realtor? <span class="req" aria-hidden="true">*</span></legend>
+                      <div class="choice-group">
+                        <label class="choice-option">
+                          <input type="radio" name="Working with a realtor" value="No" data-landlord-required>
+                          <span>No</span>
+                        </label>
+                        <label class="choice-option">
+                          <input type="radio" name="Working with a realtor" value="Yes" data-landlord-required>
+                          <span>Yes</span>
+                        </label>
+                      </div>
+                    </fieldset>
+
+                    <div class="realtor-yes-panel" hidden>
+                      <p class="realtor-yes-note">Please share your realtor’s name and phone so I can coordinate properly.</p>
+                      <div class="service-form-grid service-form-grid--split">
+                        <div class="service-field">
+                          <label for="lease-ll-realtor-name">🧑🏻‍💼 Realtor’s full name <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-ll-realtor-name" name="Current realtor name" type="text" placeholder="Full name" autocomplete="off" data-realtor-yes-field>
+                        </div>
+                        <div class="service-field">
+                          <label for="lease-ll-realtor-phone">📞 Realtor’s phone <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-ll-realtor-phone" name="Current realtor phone" type="tel" placeholder="Phone number" inputmode="tel" autocomplete="off" data-realtor-yes-field>
+                        </div>
                       </div>
                     </div>
 
-                    <details class="service-form-optional">
-                      <summary>Expected rent, beds, parking, tenant status</summary>
-                      <div class="service-form-optional-body">
+                    <div class="realtor-followup" hidden>
+                    <div class="service-form-grid service-form-grid--split">
+                      <div class="service-field service-field--full">
+                        <label for="lease-property-address">📍 Property address <span class="req" aria-hidden="true">*</span></label>
+                        <input id="lease-property-address" name="Property Address" type="text" placeholder="Street address, city, postal code" data-landlord-required>
+                      </div>
+
+                      <div class="service-form-cluster service-form-cluster--specs">
                         <div class="service-field">
-                          <label for="lease-landlord-notes">More about the unit</label>
-                          <textarea id="lease-landlord-notes" name="Property Notes" placeholder="e.g. 2 bed, 1 parking, tenant leaves March 1"></textarea>
+                          <label for="lease-ll-type">🏠 Property type <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-type" name="Property type" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Condo apartment">Condo apartment</option>
+                            <option value="Condo townhouse">Condo townhouse</option>
+                            <option value="Basement suite">Basement suite</option>
+                            <option value="Whole house">Whole house</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-beds">🛏️ Beds <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-beds" name="Bedrooms" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Studio">Studio</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3+">3+</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-parking">🅿️ Parking <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-parking" name="Parking included" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="None">None</option>
+                            <option value="1">1</option>
+                            <option value="2+">2+</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-locker">📦 Locker <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-locker" name="Locker included" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                          </select>
                         </div>
                       </div>
-                    </details>
+
+                      <div class="service-form-cluster service-form-cluster--landlord-status">
+                        <div class="service-field">
+                          <label for="lease-ll-rent">💵 Rent <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-rent" name="Expected monthly rent" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Under $2,000">Under $2,000</option>
+                            <option value="$2,000 to $2,500">$2,000 to $2,500</option>
+                            <option value="$2,500 to $3,000">$2,500 to $3,000</option>
+                            <option value="$3,000 to $4,000">$3,000 to $4,000</option>
+                            <option value="$4,000+">$4,000+</option>
+                            <option value="Need pricing advice">Need pricing advice</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-occupancy">🔑 Occupancy <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-occupancy" name="Current occupancy" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Vacant">Vacant</option>
+                            <option value="Owner-occupied">Owner-occupied</option>
+                            <option value="Tenanted">Tenanted</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-available">📅 Available <span class="req" aria-hidden="true">*</span></label>
+                          <input id="lease-ll-available" name="Available date" type="date" data-landlord-required>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-pets">🐾 Pets <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-pets" name="Pets allowed" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Case by case">Case by case</option>
+                          </select>
+                        </div>
+
+                        <div class="service-field">
+                          <label for="lease-ll-utilities">💡 Utilities <span class="req" aria-hidden="true">*</span></label>
+                          <select id="lease-ll-utilities" name="Utilities included" data-landlord-required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="None">None</option>
+                            <option value="Some">Some</option>
+                            <option value="All">All</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="service-field service-field--full">
+                        <label for="lease-landlord-notes">📝 Other property notes</label>
+                        <textarea id="lease-landlord-notes" name="Property notes" placeholder="e.g. 12-month lease preferred, laundry in-suite, tenant leaves March 1"></textarea>
+                      </div>
+                    </div>
+
+                    <p class="service-form-note">For Ontario leases we typically prepare the standard OREA / Residential Tenancy paperwork and screening package after we connect.</p>
+                    </div>
                   </div>
 
                   <div class="service-form-footer">
+                    <p class="service-form-status" aria-live="polite"></p>
                     <div class="service-form-footer-row">
-                      <p class="service-form-status" aria-live="polite"></p>
                       <button class="service-submit" type="submit">Get started</button>
                     </div>
                   </div>
@@ -7397,10 +8426,83 @@
     })();
 
     (function initServiceForms() {
+      /* Cyrillic (RU/UK), Arabic, Hebrew, Devanagari, CJK, Hangul */
+      const nonLatinPattern =
+        /[\u0400-\u04FF\u0500-\u052F\u1C80-\u1C8F\u2DE0-\u2DFF\uA640-\uA69F\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/;
+
+      const isEnglishText = value => {
+        const text = String(value || "").trim();
+        if (!text) return true;
+        return !nonLatinPattern.test(text);
+      };
+
+      const showToast = message => {
+        const toast = document.getElementById("siteToast");
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add("is-visible");
+        window.setTimeout(() => toast.classList.remove("is-visible"), 4200);
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const sentType = params.get("sent");
+      if (sentType) {
+        showToast("Thanks! I will be in touch shortly.");
+        params.delete("sent");
+        const next = `${window.location.pathname}${params.toString() ? `?${params}` : ""}${window.location.hash || "#services"}`;
+        window.history.replaceState({}, "", next);
+      }
+
       document.querySelectorAll(".service-form").forEach(form => {
         const status = form.querySelector(".service-form-status");
         const submitBtn = form.querySelector(".service-submit");
         const defaultLabel = submitBtn ? submitBtn.textContent.trim() : "Send";
+        let humanAnswer = 0;
+        let armedAt = Date.now();
+
+        form.setAttribute("lang", "en");
+
+        const humanWrap = document.createElement("div");
+        humanWrap.className = "service-field service-human-check";
+        const humanId = `${form.id || "lead"}-human`;
+        humanWrap.innerHTML = `
+          <label for="${humanId}">🧮 Human check <span class="req" aria-hidden="true">*</span></label>
+          <input id="${humanId}" name="website_human_check" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Answer" required autocomplete="off" spellcheck="false">
+        `;
+        const footer = form.querySelector(".service-form-footer");
+        if (footer) {
+          footer.before(humanWrap);
+        } else {
+          form.appendChild(humanWrap);
+        }
+        const humanInput = humanWrap.querySelector("input");
+
+        const refreshHumanCheck = () => {
+          const a = 2 + Math.floor(Math.random() * 7);
+          const b = 1 + Math.floor(Math.random() * 8);
+          humanAnswer = a + b;
+          const label = humanWrap.querySelector("label");
+          if (label) {
+            label.innerHTML = `Human check: What is ${a} + ${b}? <span class="req" aria-hidden="true">*</span>`;
+          }
+          if (humanInput) {
+            humanInput.value = "";
+          }
+        };
+
+        refreshHumanCheck();
+        armedAt = Date.now();
+
+        form.addEventListener(
+          "focusin",
+          () => {
+            if (!form.dataset.armed) {
+              form.dataset.armed = "1";
+              armedAt = Date.now();
+            }
+          },
+          true
+        );
 
         form.addEventListener("click", event => {
           event.stopPropagation();
@@ -7410,7 +8512,15 @@
           event.stopPropagation();
         });
 
-        form.addEventListener("submit", async event => {
+        form.addEventListener("reset", () => {
+          window.requestAnimationFrame(() => {
+            refreshHumanCheck();
+            armedAt = Date.now();
+            form.dataset.armed = "";
+          });
+        });
+
+        form.addEventListener("submit", event => {
           event.preventDefault();
           event.stopPropagation();
           form.classList.add("is-attempted");
@@ -7424,8 +8534,102 @@
             return;
           }
 
+          const textFields = form.querySelectorAll(
+            'input[type="text"], input[type="email"], input[type="tel"], input:not([type]), textarea'
+          );
+          const hasNonEnglish = Array.from(textFields).some(field => {
+            if (
+              field.name === "_honey" ||
+              field.name === "website_human_check" ||
+              field.classList.contains("service-honeypot")
+            ) {
+              return false;
+            }
+            if (field.disabled || field.hidden) return false;
+            return !isEnglishText(field.value);
+          });
+
+          if (hasNonEnglish) {
+            if (status) {
+              status.textContent = "Please write your answers in English.";
+              status.classList.add("is-error");
+              status.classList.remove("is-success");
+              status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+            return;
+          }
+
+          const given = Number.parseInt(String(humanInput?.value || "").trim(), 10);
+          if (!Number.isFinite(given) || given !== humanAnswer) {
+            if (status) {
+              status.textContent = "Please solve the human check to continue.";
+              status.classList.add("is-error");
+              status.classList.remove("is-success");
+              status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+            refreshHumanCheck();
+            return;
+          }
+
+          if (Date.now() - armedAt < 3500) {
+            if (status) {
+              status.textContent = "Please take a moment to review your details, then try again.";
+              status.classList.add("is-error");
+              status.classList.remove("is-success");
+            }
+            return;
+          }
+
+          const viewingField = form.querySelector(".viewing-slots-field");
+          const viewingNeeded = viewingField && !viewingField.closest("[hidden]");
+          if (viewingNeeded) {
+            const selectedSlots = form.querySelectorAll("[data-viewing-slot]:checked");
+            if (!selectedSlots.length) {
+              if (status) {
+                status.textContent = "Please choose at least one viewing time.";
+                status.classList.add("is-error");
+                status.classList.remove("is-success");
+                status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }
+              return;
+            }
+            const slotsValue = form.querySelector("#leaseViewingSlotsValue");
+            if (slotsValue) {
+              slotsValue.value = Array.from(selectedSlots)
+                .map(slot => slot.value)
+                .join(", ");
+            }
+          }
+
+          const petsYesSelected = form.querySelector('input[name="Pets"][value="Yes"]:checked');
+          const petDetails = form.querySelector("[data-pet-details]");
+          if (
+            petsYesSelected &&
+            petDetails &&
+            !petDetails.disabled &&
+            !petDetails.closest("[hidden]") &&
+            !String(petDetails.value || "").trim()
+          ) {
+            petDetails.required = true;
+            petDetails.setCustomValidity("Please share pet type and weight.");
+            if (status) {
+              status.textContent = "Please share pet type and weight.";
+              status.classList.add("is-error");
+              status.classList.remove("is-success");
+              status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+            petDetails.focus();
+            petDetails.reportValidity();
+            return;
+          }
+
           if (form.querySelector('[name="_honey"]')?.value) {
             return;
+          }
+
+          if (status) {
+            status.textContent = "Sending your inquiry...";
+            status.classList.remove("is-error", "is-success");
           }
 
           if (submitBtn) {
@@ -7433,44 +8637,162 @@
             submitBtn.textContent = "Sending...";
           }
 
-          if (status) {
-            status.textContent = "";
-            status.classList.remove("is-error", "is-success");
+          /* Exclude local-only fields from FormSubmit payload */
+          if (humanInput) {
+            humanInput.disabled = true;
           }
+          form.querySelectorAll("[data-viewing-slot]").forEach(slot => {
+            slot.disabled = true;
+          });
 
-          try {
-            const response = await fetch(form.action, {
-              method: "POST",
-              body: new FormData(form),
-              headers: { Accept: "application/json" }
+          const endpoint = form.getAttribute("action") || "";
+          const ajaxUrl = endpoint.includes("/ajax/")
+            ? endpoint
+            : endpoint.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
+          const payload = new FormData(form);
+
+          const restoreLocalFields = () => {
+            if (humanInput) humanInput.disabled = false;
+            form.querySelectorAll("[data-viewing-slot]").forEach(slot => {
+              slot.disabled = false;
             });
-
-            if (!response.ok) {
-              throw new Error("Submit failed");
-            }
-
-            if (status) {
-              status.textContent = "Thanks! I will be in touch shortly.";
-              status.classList.add("is-success");
-              status.classList.remove("is-error");
-            }
-
-            form.reset();
-            form.classList.remove("is-attempted");
-          } catch (error) {
-            if (status) {
-              status.textContent = "Couldn't send right now. Please email josh@thaparteam.ca.";
-              status.classList.add("is-error");
-              status.classList.remove("is-success");
-            }
-          } finally {
             if (submitBtn) {
               submitBtn.disabled = false;
               submitBtn.textContent = defaultLabel;
             }
-          }
+          };
+
+          fetch(ajaxUrl, {
+            method: "POST",
+            body: payload,
+            headers: { Accept: "application/json" }
+          })
+            .then(async response => {
+              let data = null;
+              try {
+                data = await response.json();
+              } catch (_) {
+                data = null;
+              }
+              if (!response.ok) {
+                const err = new Error((data && data.message) || "Submit failed");
+                err.data = data;
+                throw err;
+              }
+              return data;
+            })
+            .then(data => {
+              const ok =
+                data == null ||
+                data.success === true ||
+                data.success === "true" ||
+                String(data.message || "")
+                  .toLowerCase()
+                  .includes("success");
+              if (!ok) {
+                const err = new Error(data?.message || "Submit failed");
+                err.data = data;
+                throw err;
+              }
+
+              if (status) {
+                status.textContent = "Thanks! I will be in touch shortly.";
+                status.classList.add("is-success");
+                status.classList.remove("is-error");
+              }
+              showToast("Thanks! I will be in touch shortly.");
+              form.reset();
+              form.classList.remove("is-attempted");
+              refreshHumanCheck();
+              armedAt = Date.now();
+              form.dataset.armed = "";
+              document.dispatchEvent(new CustomEvent("service-form-reset", { detail: { form } }));
+              restoreLocalFields();
+            })
+            .catch(error => {
+              restoreLocalFields();
+              refreshHumanCheck();
+              const msg = String(error?.data?.message || error?.message || "");
+              if (status) {
+                status.textContent = /activat/i.test(msg)
+                  ? "Form is being set up. Please try again in a minute."
+                  : "Something went wrong. Please try again or email me directly.";
+                status.classList.add("is-error");
+                status.classList.remove("is-success");
+                status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }
+            });
         });
       });
+    })();
+
+    (function initRealtorGates() {
+      function setYesPanelOpen(panel, open) {
+        if (!panel) return;
+        panel.hidden = !open;
+        panel.querySelectorAll("[data-realtor-yes-field]").forEach(el => {
+          el.disabled = !open;
+          el.required = open;
+          if (!open) el.value = "";
+        });
+      }
+
+      function setFollowupOpen(followup, open) {
+        if (!followup) return;
+        followup.hidden = !open;
+        followup.querySelectorAll("input, select, textarea").forEach(el => {
+          if (!open) {
+            if (el.required) el.dataset.wasRequired = "1";
+            el.required = false;
+            el.disabled = true;
+          } else {
+            el.disabled = false;
+            if (el.dataset.wasRequired === "1") {
+              el.required = true;
+            }
+          }
+        });
+      }
+
+      function syncGate(gate) {
+        if (!gate) return;
+
+        const scope = gate.parentElement;
+        const followup = scope?.querySelector(":scope > .realtor-followup");
+        const yesPanel = scope?.querySelector(":scope > .realtor-yes-panel");
+
+        if (gate.closest("[hidden]")) {
+          setFollowupOpen(followup, false);
+          setYesPanelOpen(yesPanel, false);
+          return;
+        }
+
+        const checked = gate.querySelector('input[type="radio"]:checked')?.value;
+        const openFull = checked === "No";
+        const choseYes = checked === "Yes";
+
+        setFollowupOpen(followup, openFull);
+        setYesPanelOpen(yesPanel, choseYes);
+      }
+
+      function syncAll() {
+        document.querySelectorAll("[data-realtor-gate]").forEach(syncGate);
+      }
+
+      document.querySelectorAll("[data-realtor-gate]").forEach(gate => {
+        gate.querySelectorAll('input[type="radio"]').forEach(input => {
+          input.addEventListener("change", syncAll);
+        });
+      });
+
+      document.querySelectorAll(".service-form").forEach(form => {
+        form.addEventListener("reset", () => {
+          window.requestAnimationFrame(syncAll);
+        });
+      });
+
+      window.__syncRealtorGates = syncAll;
+      syncAll();
     })();
 
     (function initLeaseForm() {
@@ -7479,11 +8801,46 @@
 
       const tenantPanel = document.getElementById("leaseTenantPanel");
       const landlordPanel = document.getElementById("leaseLandlordPanel");
-      const propertyAddress = document.getElementById("lease-property-address");
       const tenantRequiredFields = form.querySelectorAll("[data-tenant-required]");
+      const landlordRequiredFields = form.querySelectorAll("[data-landlord-required]");
+      const leadType = document.getElementById("leaseLeadType");
+      const subject = document.getElementById("leaseSubject");
+      const nextField = document.getElementById("leaseNext");
+      const petDetailsWrap = document.getElementById("leasePetDetails");
+      const petDetailsInput = form.querySelector("[data-pet-details]");
 
       function isLandlord() {
-        return form.querySelector('input[name="I am"]:checked')?.value === "Looking to lease out my property";
+        return form.querySelector('input[name="Role"]:checked')?.value?.startsWith("Landlord") === true;
+      }
+
+      function setPanelEnabled(panel, enabled) {
+        if (!panel) return;
+        panel.querySelectorAll("input, select, textarea").forEach(el => {
+          el.disabled = !enabled;
+        });
+      }
+
+      function syncPets() {
+        const landlord = isLandlord();
+        const followupOpen = !document.querySelector("#leaseTenantPanel > .realtor-followup")?.hidden;
+        const petsYes = form.querySelector('input[name="Pets"][value="Yes"]:checked');
+        const showPets = !landlord && followupOpen && !!petsYes;
+        if (petDetailsWrap) {
+          petDetailsWrap.hidden = !showPets;
+        }
+        if (petDetailsInput) {
+          petDetailsInput.required = showPets;
+          petDetailsInput.disabled = !showPets;
+          petDetailsInput.setAttribute("aria-required", showPets ? "true" : "false");
+          if (!showPets) {
+            petDetailsInput.value = "";
+            petDetailsInput.setCustomValidity("");
+          } else {
+            petDetailsInput.setCustomValidity(
+              petDetailsInput.value.trim() ? "" : "Please share pet type and weight."
+            );
+          }
+        }
       }
 
       function syncLeaseMode() {
@@ -7497,17 +8854,63 @@
           landlordPanel.hidden = !landlord;
         }
 
+        setPanelEnabled(tenantPanel, !landlord);
+        setPanelEnabled(landlordPanel, landlord);
+
         tenantRequiredFields.forEach(field => {
+          if (field.closest(".realtor-followup")) return;
           field.required = !landlord;
         });
 
-        if (propertyAddress) {
-          propertyAddress.required = landlord;
+        landlordRequiredFields.forEach(field => {
+          if (field.closest(".realtor-followup")) return;
+          field.required = landlord;
+        });
+
+        if (leadType) {
+          leadType.value = landlord ? "Landlord" : "Tenant";
         }
+
+        if (subject) {
+          subject.value = landlord
+            ? "🏠 Landlord Inquiry"
+            : "🔑 Tenant Inquiry";
+        }
+
+        if (nextField) {
+          nextField.value = landlord
+            ? "https://openingdoorsforu.com/?sent=landlord#services"
+            : "https://openingdoorsforu.com/?sent=tenant#services";
+        }
+
+        if (typeof window.__syncRealtorGates === "function") {
+          window.__syncRealtorGates();
+        }
+        syncPets();
       }
 
-      form.querySelectorAll('input[name="I am"]').forEach(input => {
+      form.querySelectorAll('input[name="Role"]').forEach(input => {
         input.addEventListener("change", syncLeaseMode);
+      });
+
+      form.querySelectorAll('input[name="Pets"]').forEach(input => {
+        input.addEventListener("change", syncPets);
+      });
+
+      if (petDetailsInput) {
+        petDetailsInput.addEventListener("input", () => {
+          if (!petDetailsInput.disabled && petDetailsInput.required) {
+            petDetailsInput.setCustomValidity(
+              petDetailsInput.value.trim() ? "" : "Please share pet type and weight."
+            );
+          }
+        });
+      }
+
+      form.querySelectorAll('input[name="Working with a realtor"]').forEach(input => {
+        input.addEventListener("change", () => {
+          window.requestAnimationFrame(syncPets);
+        });
       });
 
       form.addEventListener("reset", () => {
@@ -7526,6 +8929,69 @@
       if (!wrap || !cards.length) return;
 
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let settleTimer = 0;
+
+      function settleCards() {
+        cards.forEach(card => {
+          card.classList.add("is-settled");
+          card.querySelectorAll(".service-list li").forEach(li => {
+            li.classList.add("is-settled");
+          });
+        });
+      }
+
+      function unsettleCards() {
+        window.clearTimeout(settleTimer);
+        cards.forEach(card => {
+          card.classList.remove("is-settled");
+          card.querySelectorAll(".service-list li").forEach(li => {
+            li.classList.remove("is-settled");
+          });
+        });
+      }
+
+      function markReady() {
+        wrap.classList.add("is-ready");
+        window.clearTimeout(settleTimer);
+        if (prefersReducedMotion) {
+          settleCards();
+          return;
+        }
+        settleTimer = window.setTimeout(settleCards, 1100);
+      }
+
+      function replayOverview() {
+        if (prefersReducedMotion) {
+          markReady();
+          return;
+        }
+        unsettleCards();
+        wrap.classList.remove("is-ready");
+        void wrap.offsetWidth;
+        window.requestAnimationFrame(markReady);
+      }
+
+      if (prefersReducedMotion) {
+        markReady();
+      } else if ("IntersectionObserver" in window) {
+        const readyObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              markReady();
+              readyObserver.disconnect();
+            });
+          },
+          { threshold: 0.12, rootMargin: "80px 0px -40px 0px" }
+        );
+        readyObserver.observe(wrap);
+        if (window.location.hash === "#services") {
+          markReady();
+          readyObserver.disconnect();
+        }
+      } else {
+        markReady();
+      }
 
       function setTabState(activeCard) {
         const service = activeCard?.dataset.service;
@@ -7575,6 +9041,7 @@
           tab.setAttribute("aria-selected", "false");
         });
         setExpandedState(null);
+        replayOverview();
       }
 
       function engageCard(card) {
