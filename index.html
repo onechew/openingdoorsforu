@@ -1997,14 +1997,35 @@
       position: relative;
       margin: 0;
       overflow: hidden;
-      touch-action: pan-y;
       cursor: grab;
       -webkit-user-select: none;
       user-select: none;
+      touch-action: pan-y;
     }
 
     .reviews-marquee.is-dragging {
       cursor: grabbing;
+    }
+
+    .reviews-marquee::before,
+    .reviews-marquee::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: min(120px, 14vw);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .reviews-marquee::before {
+      left: 0;
+      background: linear-gradient(90deg, #f7f3ec 0%, rgba(247, 243, 236, 0.85) 42%, transparent 100%);
+    }
+
+    .reviews-marquee::after {
+      right: 0;
+      background: linear-gradient(270deg, #f7f3ec 0%, rgba(247, 243, 236, 0.85) 42%, transparent 100%);
     }
 
     .reviews-track {
@@ -2012,7 +2033,7 @@
       align-items: stretch;
       width: max-content;
       gap: 16px;
-      padding: 8px max(24px, calc((100vw - var(--max)) / 2 + 24px)) 12px;
+      padding: 8px 0 12px;
       will-change: transform;
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
@@ -2021,7 +2042,12 @@
     @media (max-width: 720px) {
       .reviews-track {
         gap: 12px;
-        padding: 6px 16px 10px;
+        padding: 6px 0 10px;
+      }
+
+      .reviews-marquee::before,
+      .reviews-marquee::after {
+        width: min(64px, 18vw);
       }
     }
 
@@ -2045,6 +2071,11 @@
         overflow: visible;
         cursor: default;
         touch-action: auto;
+      }
+
+      .reviews-marquee::before,
+      .reviews-marquee::after {
+        display: none;
       }
     }
 
@@ -2350,6 +2381,20 @@
       .service-path:hover::before {
         transform: scaleX(1);
       }
+
+      .services-wrap:not(.is-engaged) .service-path:hover .service-path-kicker {
+        transform: translateY(-3px);
+        letter-spacing: -0.06em;
+      }
+
+      .services-wrap:not(.is-engaged) .service-path:hover .service-path-kicker::after {
+        transform: scaleX(1);
+      }
+
+      .services-wrap:not(.is-engaged) .service-path:hover .service-path-lead {
+        color: var(--ink-soft);
+        transform: translateY(-2px);
+      }
     }
 
     .service-path:active {
@@ -2499,7 +2544,7 @@
 
     .service-path-head {
       display: grid;
-      gap: 8px;
+      gap: 0;
       align-content: start;
     }
 
@@ -2512,15 +2557,39 @@
       letter-spacing: -0.045em;
       color: var(--ink);
       overflow: visible;
+      display: inline-block;
+      position: relative;
+      width: fit-content;
+      max-width: 100%;
+      transition:
+        transform 340ms var(--ease-out),
+        letter-spacing 340ms var(--ease-out);
+    }
+
+    .service-path-kicker::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0.02em;
+      height: 2px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 420ms var(--ease-out);
+      pointer-events: none;
     }
 
     .service-path-lead {
-      margin: 0;
+      margin: 22px 0 0;
       color: var(--muted);
       font-size: 16px;
       line-height: 1.35;
       font-weight: 500;
       letter-spacing: -0.015em;
+      transition:
+        color 260ms var(--ease-out),
+        transform 340ms var(--ease-out);
     }
 
     .service-path-body {
@@ -2532,7 +2601,7 @@
     .service-list {
       list-style: none;
       margin: 0 0 8px;
-      padding: 4px 0 0;
+      padding: 8px 0 0;
       display: grid;
       gap: 14px;
     }
@@ -2674,13 +2743,11 @@
 
     .service-panel-intro p {
       margin: 0;
-      max-width: 46rem;
       color: var(--muted);
       font-size: 15px;
       line-height: 1.55;
       letter-spacing: 0;
       font-weight: 400;
-      text-wrap: pretty;
     }
 
     .service-panel-intro p + p {
@@ -2726,10 +2793,10 @@
     }
 
     .service-form {
-      --form-control-h: 46px;
-      --form-label-gap: 8px;
+      --form-control-h: 44px;
+      --form-label-gap: 5px;
       --form-row-gap: 14px;
-      --form-col-gap: 16px;
+      --form-col-gap: 14px;
       --form-label-size: 13px;
       --form-control-size: 15px;
       --form-chip-size: 13px;
@@ -2737,6 +2804,12 @@
       --form-label-weight: 600;
       --form-tracking: -0.01em;
       --form-req: var(--ink);
+      --form-border: rgba(18, 20, 23, 0.14);
+      --form-border-hover: rgba(18, 20, 23, 0.34);
+      --form-border-focus: #121417;
+      --form-border-filled: rgba(18, 20, 23, 0.28);
+      --form-ring: 0 0 0 3px rgba(18, 20, 23, 0.12);
+      --form-shadow: 0 1px 2px rgba(18, 20, 23, 0.04);
       display: grid;
       gap: var(--form-row-gap);
     }
@@ -2779,9 +2852,9 @@
     .service-human-check {
       margin-top: 2px;
       padding: 14px;
-      border-radius: 10px;
+      border-radius: 8px;
       background: var(--surface-soft);
-      border: 1px solid var(--line);
+      border: 1px solid var(--form-border, rgba(18, 20, 23, 0.14));
       box-shadow: none;
     }
 
@@ -2797,21 +2870,32 @@
 
     .service-human-check input {
       max-width: 160px;
-      height: var(--form-control-h, 46px);
-      min-height: var(--form-control-h, 46px);
-      padding: 0 14px;
+      height: var(--form-control-h, 44px);
+      min-height: var(--form-control-h, 44px);
+      padding: 0 12px;
       font-size: var(--form-control-size, 15px);
       font-weight: 400;
       letter-spacing: 0;
       background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      border: 1px solid var(--form-border, rgba(18, 20, 23, 0.14));
+      border-radius: 8px;
       color: var(--ink);
+      box-shadow: var(--form-shadow);
+      transition: border-color 160ms ease, box-shadow 180ms ease, background 160ms ease;
+    }
+
+    .service-human-check input:hover {
+      border-color: var(--form-border-hover, rgba(18, 20, 23, 0.34));
     }
 
     .service-human-check input:focus {
-      border-color: rgba(18, 20, 23, 0.34);
-      box-shadow: 0 0 0 4px rgba(18, 20, 23, 0.07);
+      border-color: var(--form-border-focus, #121417);
+      box-shadow: var(--form-ring), var(--form-shadow);
+    }
+
+    .service-human-check input.is-filled {
+      border-color: var(--form-border-filled, rgba(18, 20, 23, 0.28));
+      background: #fbfaf8;
     }
 
     .service-form--quick {
@@ -2930,7 +3014,7 @@
 
     .service-field {
       display: grid;
-      gap: var(--form-label-gap, 8px);
+      gap: var(--form-label-gap, 5px);
       align-content: start;
     }
 
@@ -2941,8 +3025,17 @@
       font-size: var(--form-label-size, 13px);
       font-weight: var(--form-label-weight, 600);
       letter-spacing: var(--form-tracking, -0.01em);
-      line-height: 1.35;
+      line-height: 1.3;
       overflow-wrap: anywhere;
+      transition: color 160ms ease;
+    }
+
+    .service-field:focus-within label {
+      color: var(--ink);
+    }
+
+    .service-field.is-filled label {
+      color: var(--ink);
     }
 
     .service-field input,
@@ -2950,11 +3043,11 @@
     .service-field textarea {
       box-sizing: border-box;
       width: 100%;
-      height: var(--form-control-h, 46px);
-      min-height: var(--form-control-h, 46px);
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      height: var(--form-control-h, 44px);
+      min-height: var(--form-control-h, 44px);
+      padding: 0 12px;
+      border: 1px solid var(--form-border, rgba(18, 20, 23, 0.14));
+      border-radius: 8px;
       background: #ffffff;
       color: var(--ink);
       font-size: var(--form-control-size, 15px);
@@ -2962,10 +3055,12 @@
       letter-spacing: 0;
       line-height: 1.35;
       outline: 0;
+      box-shadow: var(--form-shadow);
       transition:
-        border-color 200ms var(--ease-out),
-        background 200ms var(--ease-out),
-        box-shadow 220ms var(--ease-out);
+        border-color 160ms ease,
+        background 160ms ease,
+        box-shadow 180ms ease,
+        color 160ms ease;
     }
 
     .service-field textarea {
@@ -3134,21 +3229,45 @@
     .service-field input:hover,
     .service-field select:hover,
     .service-field textarea:hover {
-      border-color: rgba(18, 20, 23, 0.18);
+      border-color: var(--form-border-hover, rgba(18, 20, 23, 0.34));
     }
 
     .service-field input:focus,
     .service-field select:focus,
     .service-field textarea:focus {
-      border-color: rgba(18, 20, 23, 0.34);
+      border-color: var(--form-border-focus, #121417);
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(18, 20, 23, 0.07);
+      box-shadow: var(--form-ring), var(--form-shadow);
+    }
+
+    /* Filled / completed — clearer than empty (Stripe-style complete state) */
+    .service-field input.is-filled,
+    .service-field select.is-filled,
+    .service-field textarea.is-filled {
+      border-color: var(--form-border-filled, rgba(18, 20, 23, 0.28));
+      background: #fbfaf8;
+    }
+
+    .service-field input.is-filled:hover,
+    .service-field select.is-filled:hover,
+    .service-field textarea.is-filled:hover {
+      border-color: var(--form-border-hover, rgba(18, 20, 23, 0.34));
+      background: #ffffff;
+    }
+
+    .service-field input.is-filled:focus,
+    .service-field select.is-filled:focus,
+    .service-field textarea.is-filled:focus {
+      border-color: var(--form-border-focus, #121417);
+      background: #ffffff;
+      box-shadow: var(--form-ring), var(--form-shadow);
     }
 
     .service-form.is-attempted .service-field input:invalid,
     .service-form.is-attempted .service-field select:invalid,
     .service-form.is-attempted .service-field textarea:invalid {
-      border-color: rgba(220, 80, 80, 0.72);
+      border-color: #df1b41;
+      box-shadow: 0 0 0 3px rgba(223, 27, 65, 0.12);
     }
 
     .service-form--lease .lease-panel-block {
@@ -3190,8 +3309,8 @@
     }
 
     .pets-one-line .choice-option span {
-      height: var(--form-control-h, 46px);
-      min-height: var(--form-control-h, 46px);
+      height: var(--form-control-h, 44px);
+      min-height: var(--form-control-h, 44px);
       padding: 0 12px;
       justify-content: center;
       font-size: var(--form-choice-size, 14px);
@@ -3211,11 +3330,11 @@
     .pets-one-line-details input {
       box-sizing: border-box;
       width: 100%;
-      height: var(--form-control-h, 46px);
-      min-height: var(--form-control-h, 46px);
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      height: var(--form-control-h, 44px);
+      min-height: var(--form-control-h, 44px);
+      padding: 0 12px;
+      border: 1px solid var(--form-border, rgba(18, 20, 23, 0.14));
+      border-radius: 8px;
       background: #ffffff;
       color: var(--ink);
       font-size: var(--form-control-size, 15px);
@@ -3223,11 +3342,22 @@
       letter-spacing: 0;
       line-height: 1.35;
       outline: 0;
+      box-shadow: var(--form-shadow);
+      transition: border-color 160ms ease, box-shadow 180ms ease, background 160ms ease;
+    }
+
+    .pets-one-line-details input:hover {
+      border-color: var(--form-border-hover, rgba(18, 20, 23, 0.34));
     }
 
     .pets-one-line-details input:focus {
-      border-color: rgba(18, 20, 23, 0.34);
-      box-shadow: 0 0 0 4px rgba(18, 20, 23, 0.07);
+      border-color: var(--form-border-focus, #121417);
+      box-shadow: var(--form-ring), var(--form-shadow);
+    }
+
+    .pets-one-line-details input.is-filled {
+      border-color: var(--form-border-filled, rgba(18, 20, 23, 0.28));
+      background: #fbfaf8;
     }
 
     .service-form.is-attempted .pets-one-line-details input:invalid {
@@ -3317,7 +3447,13 @@
       font-size: var(--form-label-size, 13px);
       font-weight: var(--form-label-weight, 600);
       letter-spacing: var(--form-tracking, -0.01em);
-      line-height: 1.35;
+      line-height: 1.3;
+      transition: color 160ms ease;
+    }
+
+    .choice-field:focus-within legend,
+    .choice-field:has(input:checked) legend {
+      color: var(--ink);
     }
 
     /* Fieldset legends often ignore flex/grid gap — space via the control group instead. */
@@ -3326,7 +3462,7 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
       margin: 0;
-      margin-block-start: var(--form-label-gap, 8px);
+      margin-block-start: var(--form-label-gap, 5px);
       padding: 0;
       width: 100%;
     }
@@ -3394,11 +3530,11 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      height: var(--form-control-h, 46px);
-      min-height: var(--form-control-h, 46px);
+      height: var(--form-control-h, 44px);
+      min-height: var(--form-control-h, 44px);
       padding: 0 12px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      border: 1px solid var(--form-border, rgba(18, 20, 23, 0.14));
+      border-radius: 8px;
       background: #ffffff;
       color: var(--ink);
       font-size: 13px;
@@ -3439,10 +3575,10 @@
       justify-content: center;
       width: 100%;
       height: auto;
-      min-height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 44px);
       padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      border: 1px solid var(--form-border, rgba(18, 20, 23, 0.14));
+      border-radius: 8px;
       background: #ffffff;
       color: var(--ink);
       font-size: var(--form-choice-size, 14px);
@@ -3451,27 +3587,38 @@
       line-height: 1.25;
       text-align: center;
       text-wrap: balance;
+      box-shadow: var(--form-shadow);
       transition:
-        border-color 200ms var(--ease-out),
-        background 200ms var(--ease-out),
-        color 200ms var(--ease-out),
-        box-shadow 220ms var(--ease-out);
+        border-color 160ms ease,
+        background 160ms ease,
+        color 160ms ease,
+        box-shadow 180ms ease,
+        font-weight 160ms ease;
     }
 
     .choice-option:hover span {
-      border-color: rgba(18, 20, 23, 0.2);
+      border-color: var(--form-border-hover, rgba(18, 20, 23, 0.34));
+      background: #fafafa;
     }
 
     .choice-option input:checked + span {
-      border-color: var(--ink);
+      border-color: var(--form-border-focus, #121417);
       background: var(--surface-soft);
       color: var(--ink);
-      box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.06);
+      font-weight: 600;
+      box-shadow:
+        inset 0 0 0 1px rgba(18, 20, 23, 0.08),
+        var(--form-shadow);
     }
 
     .choice-option input:focus-visible + span {
-      outline: 2px solid var(--line-strong);
-      outline-offset: 2px;
+      border-color: var(--form-border-focus, #121417);
+      box-shadow: var(--form-ring), var(--form-shadow);
+    }
+
+    .choice-option:hover input:checked + span {
+      border-color: var(--form-border-focus, #121417);
+      background: #efe9df;
     }
 
     .service-form.is-attempted .choice-field--required:not(:has(input:checked)) .choice-group,
@@ -3535,7 +3682,7 @@
 
     .service-submit {
       margin-left: auto;
-      min-height: var(--form-control-h, 46px);
+      min-height: var(--form-control-h, 44px);
       padding: 0 22px;
       border: 1px solid var(--ink);
       border-radius: 999px;
@@ -3676,8 +3823,14 @@
       .choice-option:hover span,
       .service-submit:hover:not(:disabled),
       .service-submit:active:not(:disabled),
-      .services-back:hover {
+      .services-back:hover,
+      .services-wrap:not(.is-engaged) .service-path:hover .service-path-kicker,
+      .services-wrap:not(.is-engaged) .service-path:hover .service-path-lead {
         transform: none;
+      }
+
+      .services-wrap:not(.is-engaged) .service-path-kicker::after {
+        transition: none !important;
       }
 
       .services-wrap.is-engaged .service-path.is-active,
@@ -3960,8 +4113,9 @@
     .faq-a p {
       margin: 0;
       color: var(--ink-soft);
-      font-size: 14px;
-      line-height: 1.65;
+      font-size: 16px;
+      line-height: 1.55;
+      letter-spacing: -0.015em;
     }
 
     @media (max-width: 900px) {
@@ -3978,6 +4132,10 @@
       .faq-item summary {
         font-size: 15px;
         padding: 14px 0;
+      }
+
+      .faq-a p {
+        font-size: 15px;
       }
 
       .faq-a {
@@ -5294,8 +5452,7 @@
     <section class="reviews" id="reviews" aria-labelledby="reviews-heading">
       <h2 id="reviews-heading" class="visually-hidden">Client reviews for Josh Schwartz, Etobicoke and Toronto realtor</h2>
       <div
-        class="reviews-marquee reveal"
-        data-reveal
+        class="reviews-marquee"
         id="reviewsMarquee"
         tabindex="0"
       >
@@ -6909,36 +7066,46 @@
         .join("");
       track.innerHTML = firstPass + secondPass;
 
-      const reduceMotionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-      let reduceMotion = reduceMotionMq.matches;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let offset = 0;
       let paused = false;
       let inView = true;
-      let interacting = false;
-      let halfWidth = 0;
-      let offset = 0;
-      const speed = 0.55;
-      let resumeTimer = 0;
-      let rafId = 0;
       let dragging = false;
+      let moved = false;
+      let pointerId = null;
+      let lastX = 0;
+      let halfWidth = 0;
+      const speed = 0.45;
 
       const measure = () => {
         const cards = track.children;
         const mid = Math.floor(cards.length / 2);
-        if (mid < 1 || !cards[0] || !cards[mid]) {
+        if (mid > 0 && cards[0] && cards[mid]) {
+          halfWidth = cards[mid].offsetLeft - cards[0].offsetLeft;
+        } else {
           halfWidth = Math.floor(track.scrollWidth / 2);
-          return;
         }
-        /* Seam = start of second copy; avoids padding/subpixel wrap thrash */
-        halfWidth = cards[mid].offsetLeft - cards[0].offsetLeft;
       };
 
-      const normalizeOffset = () => {
+      const wrapOffset = () => {
         if (!halfWidth) return;
-        offset = ((offset % halfWidth) + halfWidth) % halfWidth;
+        while (offset <= -halfWidth) offset += halfWidth;
+        while (offset > 0) offset -= halfWidth;
       };
 
-      const applyOffset = () => {
-        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      const apply = () => {
+        track.style.transform = `translate3d(${offset}px, 0, 0)`;
+      };
+
+      /* Start mid-stream so both edges already show clipped cards — no “first card flush left” look. */
+      const seedMidStart = () => {
+        measure();
+        const firstCard = track.children[0];
+        const cardW = firstCard ? firstCard.getBoundingClientRect().width : 340;
+        const gap = 16;
+        offset = -Math.round(cardW * 0.58 + gap);
+        wrapOffset();
+        apply();
       };
 
       const setPaused = next => {
@@ -6947,46 +7114,32 @@
         marquee.setAttribute("aria-pressed", paused ? "true" : "false");
       };
 
-      const bumpInteraction = (ms = 1800) => {
-        interacting = true;
-        window.clearTimeout(resumeTimer);
-        resumeTimer = window.setTimeout(() => {
-          interacting = false;
-        }, ms);
-      };
-
       marquee.setAttribute("role", "region");
       marquee.setAttribute("aria-roledescription", "carousel");
-      marquee.setAttribute("aria-label", "Client reviews. Swipe sideways to browse.");
+      marquee.setAttribute("aria-label", "Client reviews. Drag sideways. Click to pause or resume.");
       marquee.setAttribute("aria-pressed", "false");
 
-      const tick = () => {
-        if (!reduceMotion && inView && !paused && !interacting && !dragging) {
-          offset += speed;
-          if (halfWidth && offset >= halfWidth) {
-            offset -= halfWidth;
-          }
-          applyOffset();
-        }
-        rafId = requestAnimationFrame(tick);
-      };
-
-      const startAutoScroll = () => {
-        measure();
-        normalizeOffset();
-        applyOffset();
-        if (!rafId) {
-          rafId = requestAnimationFrame(tick);
-        }
-      };
-
       if (!reduceMotion) {
+        const tick = () => {
+          if (inView && !paused && !dragging) {
+            offset -= speed;
+            wrapOffset();
+            apply();
+          }
+          requestAnimationFrame(tick);
+        };
+
         requestAnimationFrame(() => {
-          startAutoScroll();
+          seedMidStart();
+          requestAnimationFrame(tick);
           window.setTimeout(() => {
+            const ratio = halfWidth ? offset / halfWidth : 0;
             measure();
-            normalizeOffset();
-            applyOffset();
+            if (halfWidth) {
+              offset = ratio * halfWidth;
+              wrapOffset();
+              apply();
+            }
           }, 400);
         });
 
@@ -6994,179 +7147,106 @@
           const ratio = halfWidth ? offset / halfWidth : 0;
           measure();
           offset = ratio * halfWidth;
-          normalizeOffset();
-          applyOffset();
+          wrapOffset();
+          apply();
         });
 
         const observeTarget = section || marquee;
         const visibilityObserver = new IntersectionObserver(
           entries => {
             entries.forEach(entry => {
-              const wasInView = inView;
-              inView = entry.isIntersecting && entry.intersectionRatio > 0.08;
-              if (inView && !wasInView) {
-                interacting = false;
-                setPaused(false);
-                measure();
-                normalizeOffset();
-                applyOffset();
-                startAutoScroll();
-              }
+              inView = entry.isIntersecting && entry.intersectionRatio > 0.12;
             });
           },
-          { threshold: [0, 0.08, 0.2, 0.35], rootMargin: "40px 0px" }
+          { threshold: [0, 0.12, 0.25] }
         );
         visibilityObserver.observe(observeTarget);
-
-        document.addEventListener("visibilitychange", () => {
-          if (document.visibilityState === "visible" && inView) {
-            interacting = false;
-            measure();
-            normalizeOffset();
-            applyOffset();
-          }
-        });
       }
 
-      if (typeof reduceMotionMq.addEventListener === "function") {
-        reduceMotionMq.addEventListener("change", event => {
-          reduceMotion = event.matches;
-          if (reduceMotion) {
-            track.style.transform = "";
-          } else {
-            startAutoScroll();
-          }
-        });
-      }
-
-      const beginDrag = (clientX, pointerId) => {
-        if (reduceMotion) return;
-        dragging = true;
-        bumpInteraction(2400);
-        marquee.classList.add("is-dragging");
-        const startX = clientX;
-        const startOffset = offset;
-        let moved = false;
-
-        const onMove = moveX => {
-          const dx = moveX - startX;
-          if (Math.abs(dx) > 3) moved = true;
-          offset = startOffset - dx;
-          normalizeOffset();
-          applyOffset();
-        };
-
-        const onUp = () => {
-          dragging = false;
-          marquee.classList.remove("is-dragging");
-          if (!moved) {
-            setPaused(!paused);
-          } else {
-            bumpInteraction(2200);
-          }
-        };
-
-        if (pointerId != null && marquee.setPointerCapture) {
-          const onPointerMove = event => {
-            if (event.pointerId !== pointerId) return;
-            onMove(event.clientX);
-          };
-          const onPointerUp = event => {
-            if (event.pointerId !== pointerId) return;
-            marquee.removeEventListener("pointermove", onPointerMove);
-            marquee.removeEventListener("pointerup", onPointerUp);
-            marquee.removeEventListener("pointercancel", onPointerUp);
-            onUp();
-          };
-          marquee.addEventListener("pointermove", onPointerMove);
-          marquee.addEventListener("pointerup", onPointerUp);
-          marquee.addEventListener("pointercancel", onPointerUp);
-          try {
-            marquee.setPointerCapture(pointerId);
-          } catch (_) {
-            /* ignore */
-          }
-        }
-
-        return { onMove, onUp };
-      };
-
-      marquee.addEventListener("pointerdown", event => {
-        if (reduceMotion) return;
-        if (event.pointerType === "touch") return;
-        if (event.button !== 0) return;
-        beginDrag(event.clientX, event.pointerId);
-      });
-
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchDragging = false;
-      let touchHandlers = null;
-
       marquee.addEventListener(
-        "touchstart",
+        "wheel",
         event => {
-          if (reduceMotion) return;
-          const touch = event.changedTouches[0];
-          if (!touch) return;
-          touchStartX = touch.clientX;
-          touchStartY = touch.clientY;
-          touchDragging = false;
-          touchHandlers = null;
-        },
-        { passive: true }
-      );
+          const absX = Math.abs(event.deltaX);
+          const absY = Math.abs(event.deltaY);
+          const horizontal = absX > absY || event.shiftKey;
+          if (!horizontal && absX < 1) return;
 
-      marquee.addEventListener(
-        "touchmove",
-        event => {
-          if (reduceMotion) return;
-          const touch = event.changedTouches[0];
-          if (!touch) return;
-          const dx = touch.clientX - touchStartX;
-          const dy = touch.clientY - touchStartY;
-
-          if (!touchDragging) {
-            if (Math.abs(dx) < 8) return;
-            if (Math.abs(dx) <= Math.abs(dy)) return;
-            touchDragging = true;
-            touchHandlers = beginDrag(touchStartX, null);
-          }
-
-          if (touchDragging && touchHandlers) {
-            event.preventDefault();
-            touchHandlers.onMove(touch.clientX);
-          }
+          event.preventDefault();
+          const delta = event.shiftKey && absX < absY ? event.deltaY : event.deltaX || event.deltaY;
+          offset -= delta;
+          wrapOffset();
+          apply();
+          setPaused(true);
         },
         { passive: false }
       );
 
-      const endTouchDrag = () => {
-        if (touchDragging && touchHandlers) {
-          touchHandlers.onUp();
+      marquee.addEventListener("pointerdown", event => {
+        if (event.button !== 0) return;
+        dragging = true;
+        moved = false;
+        pointerId = event.pointerId;
+        lastX = event.clientX;
+        marquee.classList.add("is-dragging");
+        try {
+          marquee.setPointerCapture(pointerId);
+        } catch (_) {
+          /* ignore */
         }
-        touchDragging = false;
-        touchHandlers = null;
+      });
+
+      marquee.addEventListener("pointermove", event => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        const dx = event.clientX - lastX;
+        if (Math.abs(dx) > 2) moved = true;
+        lastX = event.clientX;
+        offset += dx;
+        wrapOffset();
+        apply();
+      });
+
+      const endDrag = event => {
+        if (!dragging || (pointerId !== null && event.pointerId !== pointerId)) return;
+        dragging = false;
+        marquee.classList.remove("is-dragging");
+        if (pointerId !== null && marquee.hasPointerCapture?.(pointerId)) {
+          try {
+            marquee.releasePointerCapture(pointerId);
+          } catch (_) {
+            /* ignore */
+          }
+        }
+        pointerId = null;
+
+        if (!moved) {
+          setPaused(!paused);
+        } else {
+          setPaused(true);
+        }
       };
 
-      marquee.addEventListener("touchend", endTouchDrag, { passive: true });
-      marquee.addEventListener("touchcancel", endTouchDrag, { passive: true });
+      marquee.addEventListener("pointerup", endDrag);
+      marquee.addEventListener("pointercancel", endDrag);
 
       marquee.addEventListener("keydown", event => {
-        if (reduceMotion) return;
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setPaused(!paused);
+          return;
+        }
         if (event.key === "ArrowLeft") {
           event.preventDefault();
-          offset -= 120;
-          normalizeOffset();
-          applyOffset();
-          bumpInteraction();
+          offset += 80;
+          wrapOffset();
+          apply();
+          setPaused(true);
         }
         if (event.key === "ArrowRight") {
           event.preventDefault();
-          offset += 120;
-          normalizeOffset();
-          applyOffset();
-          bumpInteraction();
+          offset -= 80;
+          wrapOffset();
+          apply();
+          setPaused(true);
         }
       });
     }
@@ -8462,6 +8542,15 @@
 
         form.setAttribute("lang", "en");
 
+        const syncFilledState = el => {
+          if (!el || el.disabled || el.type === "hidden" || el.name === "_honey") return;
+          if (el.type === "checkbox" || el.type === "radio") return;
+          const filled = String(el.value || "").trim().length > 0;
+          el.classList.toggle("is-filled", filled);
+          const field = el.closest(".service-field");
+          if (field) field.classList.toggle("is-filled", filled);
+        };
+
         const humanWrap = document.createElement("div");
         humanWrap.className = "service-field service-human-check";
         const humanId = `${form.id || "lead"}-human`;
@@ -8477,6 +8566,17 @@
         }
         const humanInput = humanWrap.querySelector("input");
 
+        form.querySelectorAll("input, select, textarea").forEach(el => {
+          syncFilledState(el);
+          el.addEventListener("input", () => syncFilledState(el));
+          el.addEventListener("change", () => syncFilledState(el));
+        });
+        form.addEventListener("reset", () => {
+          window.requestAnimationFrame(() => {
+            form.querySelectorAll("input, select, textarea").forEach(syncFilledState);
+          });
+        });
+
         const refreshHumanCheck = () => {
           const a = 2 + Math.floor(Math.random() * 7);
           const b = 1 + Math.floor(Math.random() * 8);
@@ -8487,6 +8587,7 @@
           }
           if (humanInput) {
             humanInput.value = "";
+            syncFilledState(humanInput);
           }
         };
 
