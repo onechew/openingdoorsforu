@@ -1206,7 +1206,7 @@ h1 {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 10px 14px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .condo-title-website {
@@ -1241,11 +1241,11 @@ h1 {
 }
 
 .condo-hero-summary {
-  margin: 22px 0 0;
+  margin: 14px 0 0;
   max-width: 40rem;
   color: var(--ink-soft);
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.55;
   font-weight: 450;
   hyphens: none;
   overflow-wrap: normal;
@@ -1434,6 +1434,102 @@ h1 {
   color: rgba(255, 255, 255, 0.5);
   font-size: 12.5px;
   line-height: 1.45;
+}
+
+.condo-contact-towers {
+  display: grid;
+  gap: 16px;
+}
+
+.condo-contact-tower-name {
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.condo-toc {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid rgba(18, 20, 23, 0.14);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(47, 92, 140, 0.06);
+}
+
+.condo-toc-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px 18px;
+  padding: 11px 0;
+  min-width: 0;
+}
+
+.condo-toc-label {
+  flex: 0 0 auto;
+  color: #2f5c8c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.condo-toc-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.condo-toc-links::-webkit-scrollbar {
+  display: none;
+}
+
+.condo-toc-link {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 6px;
+  border-bottom: 2px solid transparent;
+  transition: color 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.condo-toc-link:hover {
+  color: #1a3a66;
+  background: rgba(47, 92, 140, 0.1);
+  border-bottom-color: #2f5c8c;
+}
+
+.condo-toc-link:focus-visible {
+  outline: none;
+  color: #1a3a66;
+  background: rgba(47, 92, 140, 0.12);
+  box-shadow: var(--focus-ring);
+}
+
+.condo-hero,
+.condo-contact-section,
+.condo-building-photo-section,
+.condo-story-section,
+.condo-fees-section,
+.condo-amenities-section,
+.condo-neighbourhood-section,
+.condo-walk-section,
+.condo-fit-section,
+.condo-press-section,
+.condo-action {
+  scroll-margin-top: 56px;
 }
 
 .condo-story-grid {
@@ -2026,7 +2122,7 @@ h1 {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px 28px;
+  gap: 10px 24px;
 }
 
 .condo-location-list li {
@@ -2292,7 +2388,7 @@ h1 {
 
   .condo-location-list {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
   }
 
   .condo-location-line {
@@ -2319,9 +2415,9 @@ h1 {
   }
 
   .condo-hero-summary {
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: 15px;
-    line-height: 1.72;
+    line-height: 1.55;
     letter-spacing: 0;
   }
 
@@ -2637,6 +2733,17 @@ h1 {
 
   .condo-contact-rows {
     grid-template-columns: 1fr;
+  }
+
+  .condo-toc-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 8px 0;
+  }
+
+  .condo-toc-label {
+    font-size: 10px;
   }
 
   .condo-walk-school-cols {

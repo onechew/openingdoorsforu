@@ -9,7 +9,7 @@
     "floors": 44,
     "units": 504,
     "sizeRange": "833–2,894 sqft",
-    "fees": "Cable TV, Air Conditioning, Common Element, Heat, Hydro, Building Insurance, Parking, Water",
+    "fees": "Air Conditioning, Building Insurance, Cable TV, Common Element Maintenance, Heat, Hydro, Water",
     "pets": "Pets allowed · with restrictions",
     "poster": "assets/condo-guide/palace-place-building.jpg",
     "video": "",
@@ -109,12 +109,11 @@
     "feesCover": [
       "Air Conditioning",
       "Building Insurance",
+      "Cable TV",
       "Common Element Maintenance",
       "Heat",
       "Hydro",
-      "Water",
-      "Parking",
-      "Cable TV"
+      "Water"
     ],
     "website": "https://www.palaceplace.ca/",
     "hoodq": "https://www.hoodq.com/explore/toronto-on/mimico-humber-bay-shores",
@@ -157,7 +156,7 @@
     "floors": 45,
     "units": 433,
     "sizeRange": "888–3,303 sqft",
-    "fees": "Heat, Hydro, Water, Air Conditioning, Building Insurance, Common Elements, Parking",
+    "fees": "Air Conditioning, Building Insurance, Cable TV, Common Element Maintenance, Heat, Hydro, Water",
     "pets": "Pets allowed · with restrictions",
     "poster": "assets/condo-guide/palace-pier-exterior.jpg",
     "video": "",
@@ -253,11 +252,11 @@
     "feesCover": [
       "Air Conditioning",
       "Building Insurance",
+      "Cable TV",
       "Common Element Maintenance",
       "Heat",
       "Hydro",
-      "Water",
-      "Parking"
+      "Water"
     ],
     "website": "https://www.crossbridgecondominiums.com/",
     "hoodq": "https://www.hoodq.com/explore/toronto-on/mimico-humber-bay-shores",
@@ -458,7 +457,7 @@
     "floors": 30,
     "units": 344,
     "sizeRange": "465–3,528 sqft",
-    "fees": "Air Conditioning, Common Element, Heat, Building Insurance, Parking, Water",
+    "fees": "Air Conditioning, Building Insurance, Common Element Maintenance, Heat, Water",
     "pets": "Pets allowed · with restrictions",
     "poster": "assets/condo-guide/waterscapes.jpg",
     "video": "",
@@ -554,8 +553,7 @@
       "Building Insurance",
       "Common Element Maintenance",
       "Heat",
-      "Water",
-      "Parking"
+      "Water"
     ],
     "website": "https://www.waterscapescondo.ca/",
     "hoodq": "https://www.hoodq.com/explore/toronto-on/mimico-humber-bay-shores",
@@ -755,7 +753,7 @@
     "floors": 17,
     "units": 238,
     "sizeRange": "672–4,213 sqft",
-    "fees": "Air Conditioning, Common Element, Heat, Hydro, Building Insurance, Parking, Water",
+    "fees": "Air Conditioning, Building Insurance, Common Element Maintenance, Heat, Hydro, Water",
     "pets": "Pets allowed · with restrictions",
     "poster": "assets/condo-guide/newport-beach-building.jpg",
     "video": "",
@@ -851,8 +849,7 @@
       "Common Element Maintenance",
       "Heat",
       "Hydro",
-      "Water",
-      "Parking"
+      "Water"
     ],
     "hoodq": "https://www.hoodq.com/explore/toronto-on/mimico-humber-bay-shores",
     "gallery": [],
@@ -1033,47 +1030,61 @@
   {
     "slug": "beyond-the-sea",
     "name": "Beyond the Sea",
-    "address": "15 Legion Rd",
+    "address": "15 Legion Rd · 2230 & 2240 Lake Shore Blvd W",
     "area": "Mimico",
     "yearBuilt": 2012,
     "builder": "Empire Communities",
-    "floors": 45,
-    "units": 342,
-    "sizeRange": "480–1,590 sqft",
-    "fees": "Air Conditioning, Common Elements, Heat, Parking, Building Insurance, Water",
+    "floors": "North 27 · Star 45 · South 37",
+    "units": 831,
+    "sizeRange": "480–2,636 sqft",
+    "fees": "Air Conditioning, Building Insurance, Common Element Maintenance, Heat, Water",
     "pets": "Pets allowed · with restrictions",
     "poster": "assets/condo-guide/beyond-the-sea-alt.jpg",
     "video": "assets/condo-guide/reels/DbEY8IuCNyD.mp4",
     "instagram": "https://www.instagram.com/openingdoorsforu/reel/DbEY8IuCNyD/",
     "amenities": [
       "Community BBQ",
-      "Putting Green",
-      "Yoga Studio",
-      "Hot Tub / Jacuzzi",
-      "Pool - Indoor",
-      "Media Room / Cinema",
-      "Games / Recreation Room",
-      "Business Centre",
-      "Party Room",
-      "Guest Suites",
-      "Security Guard",
       "Concierge",
+      "Enter Phone System",
+      "Games / Recreation Room",
+      "Guest Suites",
       "Gym / Exercise",
-      "Rooftop Terrace"
+      "Hobby / Craft Room",
+      "Hot Tub / Jacuzzi",
+      "Library",
+      "Media Room / Cinema",
+      "Meeting / Function Room",
+      "Party Room",
+      "Playground",
+      "Pool - Indoor",
+      "Putting Green",
+      "Visitor Lounge",
+      "Visitor Parking",
+      "Yoga Studio"
     ],
-    "summary": "Beyond the Sea at 15 Legion Rd is part of Empire’s recognizable Mimico waterfront community: deep amenities, multiple related addresses nearby, and a lifestyle pitch aimed at end-users who want facilities on site.",
+    "summary": "Beyond the Sea is Empire’s three-tower Mimico waterfront cluster at 15 Legion Rd plus 2230 and 2240 Lake Shore Blvd W. Residents share a large amenity podium, so buyers compare towers within one community rather than as isolated buildings.",
     "why": [
+      "Three-tower complex with shared amenities",
       "Empire-era amenity depth in Mimico",
       "Modern tower living near the waterfront corridor",
-      "Useful alternative to older loft stock nearby",
-      "Concierge-supported day-to-day convenience"
+      "Useful alternative to older loft stock nearby"
     ],
     "idealFor": [
       "Buyers who want newer Mimico high-rise living",
-      "End-users prioritizing amenities and finishes",
+      "End-users prioritizing shared facilities on site",
       "Anyone comparing Empire product across Legion / Lake Shore"
     ],
-    "history": "Empire’s Beyond the Sea cluster helped densify Mimico’s lakeside edge with modern towers and amenity programming. 15 Legion is the address on this guide; related Lake Shore towers share the broader community brand.",
+    "architect": "E.I. Richmond Architect Ltd.",
+    "designer": "Studio Munge",
+    "buildings": 3,
+    "status": "Complete",
+    "condoCorp": "TSCC 2194 / TSCC 2205 / TSCC 2274",
+    "management": "Crossbridge (North & Star) / Duka (South)",
+    "security": "Yes",
+    "waterViews": "Direct / Partial (by tower)",
+    "sizeMin": "480 sqft",
+    "sizeMax": "2,636 sqft",
+    "history": "Developed by Empire Communities around 2011–2012, Beyond the Sea is a master-planned trio: North Tower at 15 Legion Rd, Star Tower at 2230 Lake Shore Blvd W, and South Tower at 2240 Lake Shore Blvd W. The towers share roughly 20,000 sqft of recreational facilities, including fitness, indoor pool, party and theatre rooms, and outdoor terrace space. Confirm corporation, fees, and management for the specific tower you are buying.",
     "media": [
       {
         "title": "Why all your friends are moving to South Etobicoke",
@@ -1145,15 +1156,50 @@
       "Building Insurance",
       "Common Element Maintenance",
       "Heat",
-      "Water",
-      "Parking"
+      "Water"
+    ],
+    "towers": [
+      {
+        "address": "15 Legion Rd",
+        "name": "North Tower",
+        "floors": 27,
+        "units": 208,
+        "height": "337 ft",
+        "yearBuilt": 2011,
+        "condoCorp": "TSCC 2194",
+        "management": "Crossbridge Condo Management",
+        "conciergePhone": "416-503-9116",
+        "managementPhone": "416-503-4219"
+      },
+      {
+        "address": "2230 Lake Shore Blvd W",
+        "name": "Star Tower",
+        "floors": 45,
+        "units": 342,
+        "height": "497 ft",
+        "yearBuilt": 2012,
+        "condoCorp": "TSCC 2274",
+        "management": "Crossbridge Condominium Services"
+      },
+      {
+        "address": "2240 Lake Shore Blvd W",
+        "name": "South Tower",
+        "floors": 37,
+        "units": 281,
+        "height": "422 ft",
+        "yearBuilt": 2011,
+        "condoCorp": "TSCC 2205",
+        "management": "Duka Property Management",
+        "conciergePhone": "416-503-3118",
+        "managementPhone": "416-253-0272"
+      }
     ],
     "gallery": [],
     "hoodq": "https://www.hoodq.com/explore/toronto-on/mimico-humber-bay-shores",
-    "conciergePhone": "416-503-9116",
-    "managementPhone": "416-503-4219",
+    "conciergePhone": "416-503-3118",
+    "managementPhone": "416-253-0272",
     "neighbourhood": {
-      "intro": "Beyond the Sea at 15 Legion Rd sits in Mimico, one of South Etobicoke’s most watched waterfront condo pockets. Mimico blends an older lakeside village feel with loft and mid-rise living near Lake Shore Blvd W. Buyers get waterfront trail access, neighbourhood schools, and a slightly quieter pace than the densest Humber Bay towers, while still staying close to the Gardiner and downtown.",
+      "intro": "Beyond the Sea’s three towers sit at the Legion Rd / Lake Shore Blvd W edge of Mimico, one of South Etobicoke’s most watched waterfront condo pockets. Mimico blends an older lakeside village feel with loft and mid-rise living near Lake Shore. Buyers get waterfront trail access, neighbourhood schools, and a slightly quieter pace than the densest Humber Bay towers, while still staying close to the Gardiner and downtown.",
       "highlights": [
         {
           "title": "Waterfront and parks",
@@ -1167,15 +1213,15 @@
     },
     "sections": [
       {
-        "title": "Community amenities",
-        "body": "Expect a full contemporary amenity set with concierge, useful when comparing against older Mimico stock that offers space but thinner shared facilities."
+        "title": "Shared community amenities",
+        "body": "The three Beyond the Sea towers share a deep amenity set (often cited around 20,000 sqft of recreational space): fitness, indoor pool, hot tub/sauna, party and theatre rooms, guest suites, and outdoor terrace/BBQ space. That shared podium is a core reason the complex trades as a community, not three unrelated buildings."
       },
       {
         "title": "Buyer notes",
-        "body": "Confirm which corporation and management office applies to your specific tower; numbers and policies can differ across the Beyond the Sea addresses."
+        "body": "Confirm which corporation and management office applies to your specific tower; fees, rules, and contact numbers can differ across 15 Legion, 2230 Lake Shore, and 2240 Lake Shore even when amenities are shared."
       }
     ],
-    "suiteNotes": "Modern open-concept layouts with balcony living are typical. View corridors and fee structures vary by tower, compare within the Empire cluster and against Mystic Pointe lofts."
+    "suiteNotes": "Modern open-concept layouts with balcony living are typical. View corridors and fee structures vary by tower—compare within the three-tower Empire cluster and against Mystic Pointe lofts."
   },
   {
     "slug": "ocean-club-waterfront",
@@ -1501,7 +1547,7 @@
     "sizeRange": "366–1,701 sqft",
     "fees": "Air Conditioning, Building Insurance, Common Element Maintenance, Heat, Water",
     "pets": "Pets allowed · with restrictions",
-    "poster": "assets/condo-guide/lago-alt.jpg",
+    "poster": "assets/condo-guide/lago-building.jpg",
     "video": "assets/condo-guide/reels/DQNT21DDgdI.mp4",
     "instagram": "https://www.instagram.com/openingdoorsforu/reel/DQNT21DDgdI/",
     "amenities": [
@@ -1521,7 +1567,7 @@
       "Visitor Lounge",
       "Visitor Parking"
     ],
-    "summary": "Lago at 56 Annie Craig Dr is Mattamy’s statement tower on Annie Craig. Lago Club amenities, floor-to-ceiling views, and a lifestyle package Josh often tours against Ocean Club, Cove, and Eau Du Soleil.",
+    "summary": "Lago at 56 Annie Craig Dr is Mattamy’s statement tower on Annie Craig, with Lago Club amenities and floor-to-ceiling views.",
     "why": [
       "Signature Annie Craig Mattamy tower",
       "Strong amenity branding and programming",

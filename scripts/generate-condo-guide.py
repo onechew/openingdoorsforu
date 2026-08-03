@@ -84,7 +84,7 @@ def page_shell(
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260803bx" />{ld}
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260803toc2" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -248,7 +248,7 @@ FACT_ICONS = {
     "Units": "grid_view",
     "Suite sizes": "square_foot",
     "Developer": "home_work",
-    "Architect": "architecture",
+    "Architect": "brick",
     "Condo corp.": "description",
     "Management": "badge",
     "Interior design": "design_services",
@@ -295,6 +295,7 @@ AMENITY_ICONS = {
     "Business Centre": "laptop_mac",
     "Bike Storage": "pedal_bike",
     "Library": "menu_book",
+    "Hobby / Craft Room": "handyman",
     "Private Shuttle": "airport_shuttle",
     "Valet Parking": "garage",
     "Spa": "spa",
@@ -432,20 +433,27 @@ def location_block(b: dict) -> str:
 
     towers = b.get("towers") or []
     if towers:
-        lines = "".join(
-            f'<li>'
-            f'{building_icon}'
-            f'<div class="condo-location-body">'
-            f'<div class="condo-location-row">'
-            f'<span class="condo-location-line">{esc(t["address"])}</span>'
-            f'{maps_link(t["address"])}'
-            f"</div>"
-            f'<span class="condo-location-meta">{esc(t["name"])} · {esc(t["floors"])} storeys</span>'
-            f"</div>"
-            f"</li>"
-            for t in towers
-        )
-        return f'<ul class="condo-location-list">{lines}</ul>'
+        lines = []
+        for t in towers:
+            meta_bits = [f'{t["name"]} · {t["floors"]} storeys']
+            if t.get("height"):
+                meta_bits.append(str(t["height"]))
+            if t.get("units"):
+                meta_bits.append(f'{t["units"]} units')
+            meta = " · ".join(meta_bits)
+            lines.append(
+                f'<li>'
+                f'{building_icon}'
+                f'<div class="condo-location-body">'
+                f'<div class="condo-location-row">'
+                f'<span class="condo-location-line">{esc(t["address"])}</span>'
+                f'{maps_link(t["address"])}'
+                f"</div>"
+                f'<span class="condo-location-meta">{esc(meta)}</span>'
+                f"</div>"
+                f"</li>"
+            )
+        return f'<ul class="condo-location-list">{"".join(lines)}</ul>'
 
     return f"""
         <div class="condo-location-single">
@@ -508,7 +516,7 @@ def building_photo_block(b: dict, depth: int) -> str:
           {slides}
         </div>"""
     return f"""
-  <section class="section condo-building-photo-section">
+  <section class="section condo-building-photo-section" id="photos">
     <div class="container">
       <div class="condo-photo-layout{" has-rail" if rail else ""}">
         <div class="condo-building-photo">
@@ -548,8 +556,73 @@ def tel_href(phone: object) -> str:
     return f"tel:+{digits}" if digits else ""
 
 
+def _contact_mgmt_html(management: str, management_phone: str) -> str:
+    mgmt_bits = []
+    if management:
+        mgmt_bits.append(f'<span class="condo-contact-company">{esc(management)}</span>')
+    if management_phone:
+        mgmt_bits.append(
+            f'<a class="condo-contact-value" href="{esc(tel_href(management_phone))}">'
+            f"{esc(management_phone)}</a>"
+        )
+    return f'<div class="condo-contact-mgmt">{"".join(mgmt_bits)}</div>' if mgmt_bits else ""
+
+
 def contacts_section(b: dict) -> str:
     """Concierge + management contact strip for residents and buyers."""
+    towers = b.get("towers") or []
+    tower_contacts = [
+        t
+        for t in towers
+        if t.get("conciergePhone") or t.get("managementPhone") or t.get("management")
+    ]
+    # Prefer per-tower rows when any tower has its own contact details.
+    if len(tower_contacts) >= 2 or (
+        tower_contacts and any(t.get("conciergePhone") or t.get("managementPhone") for t in tower_contacts)
+    ):
+        blocks = []
+        for t in towers:
+            concierge = t.get("conciergePhone") or ""
+            management_phone = t.get("managementPhone") or ""
+            management = t.get("management") or ""
+            if not concierge and not management_phone and not management:
+                continue
+            rows = []
+            if concierge:
+                rows.append(
+                    f'<div class="condo-contact-row">'
+                    f'<span class="condo-contact-label">Concierge</span>'
+                    f'<a class="condo-contact-value" href="{esc(tel_href(concierge))}">{esc(concierge)}</a>'
+                    f"</div>"
+                )
+            mgmt_html = _contact_mgmt_html(management, management_phone)
+            if mgmt_html:
+                rows.append(
+                    f'<div class="condo-contact-row">'
+                    f'<span class="condo-contact-label">Management</span>'
+                    f"{mgmt_html}"
+                    f"</div>"
+                )
+            label = t.get("name") or t.get("address") or "Tower"
+            blocks.append(
+                f'<div class="condo-contact-tower">'
+                f'<p class="condo-contact-tower-name">{esc(label)}</p>'
+                f'<div class="condo-contact-rows">{"".join(rows)}</div>'
+                f"</div>"
+            )
+        if blocks:
+            return f"""
+  <section class="section condo-contact-section" id="contacts">
+    <div class="container">
+      <div class="condo-contact-band">
+        <p class="condo-contact-kicker">Building contacts</p>
+        <div class="condo-contact-towers">{"".join(blocks)}</div>
+        <p class="condo-contact-note">Numbers can change. Confirm with the building or Josh before you rely on them.</p>
+      </div>
+    </div>
+  </section>
+"""
+
     concierge = b.get("conciergePhone") or ""
     management_phone = b.get("managementPhone") or ""
     management = b.get("management") or ""
@@ -563,23 +636,16 @@ def contacts_section(b: dict) -> str:
             f'<a class="condo-contact-value" href="{esc(tel_href(concierge))}">{esc(concierge)}</a>'
             f"</div>"
         )
-    if management_phone or management:
-        mgmt_bits = []
-        if management:
-            mgmt_bits.append(f'<span class="condo-contact-company">{esc(management)}</span>')
-        if management_phone:
-            mgmt_bits.append(
-                f'<a class="condo-contact-value" href="{esc(tel_href(management_phone))}">'
-                f"{esc(management_phone)}</a>"
-            )
+    mgmt_html = _contact_mgmt_html(management, management_phone)
+    if mgmt_html:
         rows.append(
             f'<div class="condo-contact-row">'
             f'<span class="condo-contact-label">Management</span>'
-            f'<div class="condo-contact-mgmt">{"".join(mgmt_bits)}</div>'
+            f"{mgmt_html}"
             f"</div>"
         )
     return f"""
-  <section class="section condo-contact-section">
+  <section class="section condo-contact-section" id="contacts">
     <div class="container">
       <div class="condo-contact-band">
         <p class="condo-contact-kicker">Building contacts</p>
@@ -588,6 +654,24 @@ def contacts_section(b: dict) -> str:
       </div>
     </div>
   </section>
+"""
+
+
+def section_nav(items: list[tuple[str, str]]) -> str:
+    """Compact sticky jump links for sections that exist on this page."""
+    if len(items) < 2:
+        return ""
+    links = "".join(
+        f'<a class="condo-toc-link" href="#{esc(anchor)}">{esc(label)}</a>'
+        for anchor, label in items
+    )
+    return f"""
+  <nav class="condo-toc" aria-label="On this page">
+    <div class="container condo-toc-inner">
+      <span class="condo-toc-label">On this page</span>
+      <div class="condo-toc-links">{links}</div>
+    </div>
+  </nav>
 """
 
 
@@ -625,7 +709,7 @@ def story_section(b: dict) -> str:
             f"</div>"
         )
     return f"""
-  <section class="section condo-story-section">
+  <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
       {"".join(blocks)}
     </div>
@@ -710,7 +794,7 @@ def about_neighbourhood_section(b: dict) -> str:
 
     intro_html = f"<p class=\"condo-neighbourhood-intro\">{esc(intro)}</p>" if intro else ""
     return f"""
-  <section class="section condo-neighbourhood-section">
+  <section class="section condo-neighbourhood-section" id="neighbourhood">
     <div class="container">
       <h2>About the neighbourhood</h2>
       {intro_html}
@@ -728,14 +812,14 @@ def fees_amenities_sections(b: dict) -> str:
     fees_html = icon_grid(fees, "Fee inclusions vary. Confirm with the status certificate.")
     amenities_html = icon_grid(amenities, "Ask Josh for the current amenity roster.")
     return f"""
-  <section class="section condo-fees-section">
+  <section class="section condo-fees-section" id="fees">
     <div class="container">
       <h2>Maintenance fees cover</h2>
       {fees_html}
     </div>
   </section>
 
-  <section class="section condo-amenities-section">
+  <section class="section condo-amenities-section" id="amenities">
     <div class="container">
       <h2>Amenities</h2>
       {amenities_html}
@@ -819,7 +903,7 @@ def walkscore_section(b: dict) -> str:
         ]
     )
     return f"""
-  <section class="section condo-walk-section">
+  <section class="section condo-walk-section" id="walk">
     <div class="container">
       <div class="condo-walk-head">
         <h2>Getting around</h2>
@@ -1006,22 +1090,46 @@ def write_building(b: dict) -> None:
             for m in media_items
         )
         media_html = f"""
-  <section class="section condo-press-section">
+  <section class="section condo-press-section" id="press">
     <div class="container">
       <h2>In the media</h2>
       <ul class="condo-press-list">{links}</ul>
     </div>
   </section>"""
 
-    has_tour = " has-tour" if b.get("video") else ""
+    has_video = " has-video" if b.get("video") else ""
     facts = overview_facts(b)
+    contacts_html = contacts_section(b)
+    photos_html = building_photo_block(b, depth)
+    story_html = story_section(b)
+    fees_html = fees_amenities_sections(b)
+    neighbourhood_html = about_neighbourhood_section(b)
+    walk_html = walkscore_section(b)
+
+    # Primary jump links only — skip About / Walk / Fit / Press / Next.
+    toc_items = []
+    if facts:
+        toc_items.append(("overview", "Overview"))
+    if contacts_html:
+        toc_items.append(("contacts", "Contacts"))
+    if photos_html:
+        toc_items.append(("photos", "Photos"))
+    if b.get("feesCover"):
+        toc_items.append(("fees", "Fees"))
+    if b.get("amenities"):
+        toc_items.append(("amenities", "Amenities"))
+    if neighbourhood_html:
+        toc_items.append(("neighbourhood", "Neighbourhood"))
+    elif walk_html:
+        toc_items.append(("walk", "Neighbourhood"))
+
     sms_body = quote(f"Hi Josh, I want to know more about {b['name']} at {b['address']}.")
     sms_href = f"sms:+16473608179?body={sms_body}"
     body = f"""
-  <section class="hero-band condo-hero">
+  <section class="hero-band condo-hero" id="overview">
     <div class="container">
       <p class="breadcrumb"><a href="../../../">Home</a> / <a href="../../">Etobicoke</a> / <a href="../../south-etobicoke-condo-guide/">Condo Guide</a> / {esc(b["name"])}</p>
-      <div class="condo-hero-grid{has_tour}">
+      <div class="condo-hero-grid{has_video}">
           <div class="condo-hero-copy">
             <p class="condo-area-chip-wrap"><span class="condo-area-chip">{esc(area_chip(b.get("area", "Etobicoke")))}</span></p>
             {title_block(b)}
@@ -1034,19 +1142,21 @@ def write_building(b: dict) -> None:
     </div>
   </section>
 
-  {contacts_section(b)}
+  {section_nav(toc_items)}
 
-  {building_photo_block(b, depth)}
+  {contacts_html}
 
-  {story_section(b)}
+  {photos_html}
 
-  {fees_amenities_sections(b)}
+  {story_html}
 
-  {about_neighbourhood_section(b)}
+  {fees_html}
 
-  {walkscore_section(b)}
+  {neighbourhood_html}
 
-  <section class="section condo-fit-section">
+  {walk_html}
+
+  <section class="section condo-fit-section" id="fit">
     <div class="container condo-fit-grid">
       <div>
         <h2>Why consider {esc(b["name"])}</h2>
@@ -1061,7 +1171,7 @@ def write_building(b: dict) -> None:
 
   {media_html}
 
-  <section class="section condo-action">
+  <section class="section condo-action" id="next">
     <div class="container condo-action-inner">
       <div class="condo-action-copy">
         <h2>Buying or selling here?</h2>
@@ -1081,6 +1191,7 @@ def write_building(b: dict) -> None:
     </div>
   </section>
 """
+
     poster = (b.get("poster") or "").strip()
     og_image = f"{ORIGIN}/{poster}" if poster else None
     json_ld = {
