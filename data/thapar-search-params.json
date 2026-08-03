@@ -1,0 +1,173 @@
+{
+  "searchType": "list",
+  "adminUserId": 1581,
+  "clientSearch": {
+    "id": "267100",
+    "active": false,
+    "type": 1,
+    "featuredFirst": false
+  },
+  "favorite": false,
+  "mlsRegionId": 211,
+  "mlsRegions": "211",
+  "hasMultipleRegions": false,
+  "listingClass": 1,
+  "listingStatus": "Active",
+  "quickSearch": {
+    "mls": "",
+    "type": -1
+  },
+  "search": {
+    "acreage": {
+      "max": 0,
+      "min": 0
+    },
+    "age": {
+      "min": 0
+    },
+    "baths": {
+      "max": 0,
+      "min": 0
+    },
+    "beds": {
+      "max": 0,
+      "min": 0
+    },
+    "daysOnMarket": 0,
+    "extra": {
+      "basement": "",
+      "construction": "",
+      "energy": "",
+      "exterior": "",
+      "fencing": "",
+      "interior": "",
+      "lots": "",
+      "owner": "",
+      "stories": "",
+      "styles": "",
+      "searchFeatures": ""
+    },
+    "filter": {
+      "excludeMLSIds": "",
+      "includeAgentIds": "",
+      "includeMLSIds": "",
+      "includeOfficeIds": "267100"
+    },
+    "flags": {
+      "acrossStreetFromOcean": false,
+      "bayFront": false,
+      "beachfront": false,
+      "equestrian": false,
+      "foreclosure": false,
+      "golfCourseFront": false,
+      "gulfFront": false,
+      "hdPhotos": false,
+      "hudHome": false,
+      "mbOnFirstFloor": false,
+      "newConstruction": false,
+      "oceanFront": false,
+      "openHouse": false,
+      "pool": false,
+      "reo": false,
+      "shortSale": false,
+      "singleLevel": false,
+      "spa": false,
+      "viewScenic": false,
+      "virtualTour": false,
+      "waterFront": false,
+      "woodedLot": false,
+      "hasPhoto": false
+    },
+    "garageCap": {
+      "min": 0
+    },
+    "hoaFees": {
+      "max": "",
+      "min": 0
+    },
+    "supportedListTypes": "1,2,3,8",
+    "listType": "1,2,3",
+    "listTypeDescrip": "",
+    "location": {
+      "areas": "",
+      "cities": "",
+      "condoProjectNames": "",
+      "counties": "",
+      "schools": "",
+      "states": "",
+      "subAreas": "",
+      "subDivisions": "",
+      "address": "",
+      "townships": "",
+      "zips": "",
+      "elementarySchools": "",
+      "middleSchools": "",
+      "highSchools": "",
+      "juniorHighSchools": "",
+      "matchType": "AnyOf"
+    },
+    "map": {
+      "eastLong": "",
+      "northLat": "",
+      "searchRegion": "",
+      "southLat": "",
+      "westLong": "",
+      "centerLat": "",
+      "centerLong": "",
+      "zoomLevel": "",
+      "nearby": false,
+      "radius": ""
+    },
+    "alert": {
+      "startDate": "",
+      "priceChangeDate": ""
+    },
+    "price": {
+      "max": 0,
+      "min": 0
+    },
+    "priceReductionPercentage": 0,
+    "soldDays": 0,
+    "openHouseDays": "",
+    "openHouseType": 0,
+    "priceChangeDays": 0,
+    "sortBy": "datelisted desc",
+    "sqft": {
+      "max": 0,
+      "min": 0
+    },
+    "lotSizeSqft": {
+      "max": 0,
+      "min": 0
+    },
+    "yearBuilt": {
+      "max": 0,
+      "min": 0
+    },
+    "offset": {
+      "pageSize": 12,
+      "pageNumber": 1,
+      "listingId": ""
+    },
+    "statusActivityDays": "",
+    "photos": {
+      "max": "",
+      "min": ""
+    },
+    "keywords": [],
+    "keywordsMatchType": "Exact",
+    "listTypes": {
+      "include": [
+        "Residential",
+        "Condominium",
+        "Commercial"
+      ],
+      "exclude": [],
+      "matchType": "AnyOf"
+    },
+    "searchFeatureKeywords": null
+  },
+  "searchId": 3952868,
+  "activeId": 1,
+  "userId": ""
+}

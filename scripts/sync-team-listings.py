@@ -12,12 +12,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LISTINGS_PATH = ROOT / "data" / "listings.json"
 ACTIVE_JS = ROOT / "assets" / "active-listings.js"
+SEARCH_PARAMS_PATH = ROOT / "data" / "thapar-search-params.json"
 SEARCH_URL = "https://www.thaparteam.ca/property-search/results/?searchid=3952868"
 API_URL = (
     "https://www.thaparteam.ca/property-search/res/includes/"
     "search_application/get_listings.asp"
 )
 ORIGIN_THAPAR = "https://www.thaparteam.ca"
+BROWSER_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/122.0.0.0 Safari/537.36"
+)
+SEARCH_PARAMS_RE = re.compile(
+    r"var\s+searchParams\s*=\s*(\{.*?\})\s*;\s*var\s+regionParams",
+    re.S,
+)
 
 # Neighbourhoods that sit in Etobicoke even when city says Toronto
 ETOBICOKE_HOODS = {
@@ -45,15 +55,72 @@ ETOBICOKE_HOODS = {
 }
 
 
-def fetch_search_params() -> dict:
-    html = subprocess.check_output(
-        ["curl", "-sL", "-A", "Mozilla/5.0", SEARCH_URL],
+def _curl_get(url: str) -> str:
+    return subprocess.check_output(
+        [
+            "curl",
+            "-sL",
+            "--max-time",
+            "45",
+            "-A",
+            BROWSER_UA,
+            "-H",
+            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "-H",
+            "Accept-Language: en-CA,en;q=0.9",
+            url,
+        ],
         text=True,
     )
-    m = re.search(r"var searchParams = (\{.*?\});var regionParams", html)
+
+
+def _parse_search_params(html: str) -> dict | None:
+    m = SEARCH_PARAMS_RE.search(html or "")
     if not m:
-        raise RuntimeError("Could not find searchParams on Thapar search page")
+        return None
     return json.loads(m.group(1))
+
+
+def _load_cached_search_params() -> dict | None:
+    if not SEARCH_PARAMS_PATH.is_file():
+        return None
+    try:
+        data = json.loads(SEARCH_PARAMS_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    return data if isinstance(data, dict) and data.get("searchId") else None
+
+
+def _save_search_params(params: dict) -> None:
+    SEARCH_PARAMS_PATH.write_text(
+        json.dumps(params, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def fetch_search_params() -> dict:
+    """Load live Thapar searchParams; fall back to cached JSON for CI/bot blocks."""
+    html = ""
+    try:
+        html = _curl_get(SEARCH_URL)
+        live = _parse_search_params(html)
+        if live:
+            _save_search_params(live)
+            return live
+    except subprocess.CalledProcessError as err:
+        print(f"  Live search page fetch failed ({err.returncode}); trying cache…")
+    else:
+        snippet = re.sub(r"\s+", " ", (html or "")[:240]).strip()
+        print(
+            "  Live search page missing searchParams "
+            f"(len={len(html or '')}, head={snippet!r}); trying cache…"
+        )
+
+    cached = _load_cached_search_params()
+    if cached:
+        print(f"  Using cached searchParams (searchId={cached.get('searchId')})")
+        return cached
+    raise RuntimeError("Could not find searchParams on Thapar search page (no cache)")
 
 
 def post_listings(base: dict, page: int, page_size: int = 12) -> dict:
@@ -78,13 +145,17 @@ def post_listings(base: dict, page: int, page_size: int = 12) -> dict:
             [
                 "curl",
                 "-sL",
+                "--max-time",
+                "45",
                 API_URL,
                 "-H",
-                "User-Agent: Mozilla/5.0",
+                f"User-Agent: {BROWSER_UA}",
                 "-H",
                 "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
                 "-H",
                 "X-Requested-With: XMLHttpRequest",
+                "-H",
+                "Accept: application/json, text/javascript, */*; q=0.01",
                 "-H",
                 "Origin: https://www.thaparteam.ca",
                 "-H",
@@ -95,7 +166,13 @@ def post_listings(base: dict, page: int, page_size: int = 12) -> dict:
                 str(out),
             ]
         )
-        return json.loads(out.read_text(encoding="utf-8"))
+        raw = out.read_text(encoding="utf-8")
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as err:
+            raise RuntimeError(
+                f"Thapar listings API returned non-JSON (len={len(raw)}): {raw[:200]!r}"
+            ) from err
     finally:
         tmp.unlink(missing_ok=True)
         out.unlink(missing_ok=True)
