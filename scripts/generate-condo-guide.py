@@ -261,7 +261,7 @@ FACT_ICONS = {
 
 AMENITY_ICONS = {
     "Air Conditioning": "ac_unit",
-    "Building Insurance": "shield",
+    "Building Insurance": "security",
     "Common Element Maintenance": "build",
     "Heat": "mode_heat",
     "Hydro": "bolt",
@@ -912,7 +912,8 @@ def write_index() -> None:
       <h1>Explore Etobicoke Condos</h1>
       <p class="lead">Building guides for Humber Bay Shores &amp; Mimico.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="sms:+16473608179?body=Hi%20Josh%2C%20I%27d%20like%20help%20comparing%20Etobicoke%20condos.">Text Josh</a>
+        <a class="btn btn-primary" href="../../#service-buy">Buy with Josh</a>
+        <a class="btn btn-secondary" href="../../#service-sell">Sell with Josh</a>
         <a class="btn btn-secondary" href="../">Etobicoke listings</a>
       </div>
     </div>

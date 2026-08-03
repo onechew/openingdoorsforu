@@ -544,12 +544,16 @@ def write_city_pages():
         out_dir = ROOT / key
         out_dir.mkdir(parents=True, exist_ok=True)
         canonical = f"{ORIGIN}/{key}/"
-        condo_cta = (
-            '<a class="btn btn-primary" href="south-etobicoke-condo-guide/">Condo guide</a>'
-            if key == "etobicoke"
-            else ""
-        )
-        listings_btn = "btn-secondary" if key == "etobicoke" else "btn-primary"
+        if key == "etobicoke":
+            condo_cta = (
+                f'<a class="btn btn-primary" href="{asset_href("", depth)}#service-buy">Buy with Josh</a>\n'
+                f'        <a class="btn btn-secondary" href="{asset_href("", depth)}#service-sell">Sell with Josh</a>\n'
+                '        <a class="btn btn-secondary" href="south-etobicoke-condo-guide/">Condo guide</a>'
+            )
+        else:
+            condo_cta = (
+                f'<a class="btn btn-primary" href="{asset_href("", depth)}#listings">View all listings</a>'
+            )
         other_city_links = "".join(
             f'<a href="{asset_href(k + "/", depth)}">{esc(CITIES[k]["name"])}</a>'
             for k in CITIES
@@ -564,7 +568,6 @@ def write_city_pages():
       <p class="lead">{esc(meta.get('lead', meta['about']))}</p>
       <div class="cta-row">
         {condo_cta}
-        <a class="btn {listings_btn}" href="{asset_href('', depth)}#listings">View all listings</a>
       </div>
     </div>
   </section>
