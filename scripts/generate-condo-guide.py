@@ -305,7 +305,7 @@ AMENITY_ICONS = {
 
 
 # Material Security uses the checkered `security` glyph (filled, not outline `shield`).
-FILLED_ICON_LABELS = frozenset({"Security", "Security Guard"})
+FILLED_ICON_LABELS = frozenset({"Security", "Security Guard", "Building Insurance"})
 
 
 def material_icon(name: str, css_class: str, *, filled: bool = False) -> str:
