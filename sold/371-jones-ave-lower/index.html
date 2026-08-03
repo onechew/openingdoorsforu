@@ -20,19 +20,27 @@
   <link rel="icon" href="../../assets/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180" />
   
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../../assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="../../assets/seo-pages.css" />
+  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20260802l" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "371 Jones Ave, Lower", "description": "371 Jones Ave, Lower was leased in East Toronto with Josh Schwartz. Review the neighbourhood context and similar leased homes.", "url": "https://openingdoorsforu.com/sold/371-jones-ave-lower/", "image": "https://openingdoorsforu.com/assets/past/371-jones-lower.jpg", "address": {"@type": "PostalAddress", "streetAddress": "371 Jones Ave, Lower", "addressLocality": "East Toronto", "addressRegion": "ON", "addressCountry": "CA"}}</script>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="/" aria-label="Josh Schwartz home">
-        <img src="../../assets/js.svg" alt="" />
-        Josh Schwartz
+        <div class="brand-mark" aria-hidden="true">
+          <img src="../../assets/js-on-light.svg" alt="Josh Schwartz Opening Doors For U logo" />
+        </div>
+        <div class="brand-lockup">
+          <span class="brand-name">Josh Schwartz</span>
+          <img
+            class="brand-snobar"
+            src="../../assets/snobar-dark.svg"
+            alt="Snobar Realty Group Inc., Brokerage"
+          />
+        </div>
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="../../#listings">Listings</a>
@@ -44,27 +52,41 @@
   
   <section class="section">
     <div class="container">
-      <p class="breadcrumb"><a href="../../">Home</a> / <a href="../../#listings">Sold &amp; Leased</a> / 371 Jones Ave, Lower</p>
+      <p class="breadcrumb"><a href="../../">Home</a> / <a href="../../?tab=sold#listings">Sold &amp; Leased</a> / 371 Jones Ave, Lower</p>
       <div class="listing-hero">
         <div class="listing-hero-media"><img src="../../assets/past/371-jones-lower.jpg" alt="371 Jones Ave, Lower" width="1200" height="900" /></div>
         <div>
           <p class="eyebrow">Leased</p>
           <h1>371 Jones Ave, Lower</h1>
-          <p class="lead">Leased in East Toronto · South Riverdale · Toronto</p>
-          <p class="section-copy">Closed with Josh Schwartz. Sale prices are not displayed here, consistent with Ontario RECO / TRESA advertising rules.</p>
+          <p class="lead">South Riverdale · Toronto</p>
+          <div class="listing-facts"><div class="listing-facts-main"><div class="fact"><svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9l5-3v14M9 20V6l7 4v10M13 10h2M13 13h2M13 16h2M6.5 12H7.5M6.5 15H7.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Apartment</span></div></div></div>
           <div class="cta-row">
             <a class="btn btn-primary" href="../../#contact">Get a home valuation</a>
-            <a class="btn btn-secondary" href="../../#listings">Browse more results</a>
+            <a class="btn btn-secondary" href="../../?tab=sold#listings">Browse more results</a>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="section"><div class="container"><h2>Property Features</h2><div class="prose"><p>371 Jones Ave, Lower is part of Josh’s leased track record in East Toronto. Use this page for neighbourhood context and comparable activity. Then talk to Josh for a tailored brief on your next move.</p></div></div></section>
-  <section class="section"><div class="container"><h2>Neighbourhood</h2><div class="prose"><p>371 Jones Ave, Lower sits in South Riverdale · Toronto. Buyers and renters comparing options in East Toronto usually weigh commute, building or lot utility, and nearby daily needs. Josh Schwartz helps you read those trade-offs with clear local context, not hype.</p><p>See more activity in <a href="../../toronto/">Toronto</a>.</p></div></div></section>
-  <section class="section"><div class="container"><h2>Nearby Schools</h2><div class="prose"><p>School preferences vary by household. If you are buying or leasing nearby, Josh can outline the local options that usually come up for East Toronto.</p></div></div></section>
-  <section class="section"><div class="container"><h2>Why Buyers Love This Area</h2><div class="prose"><p>People looking in East Toronto often want a practical mix of access, amenities, and long-term usability. Whether you are buying, selling, or leasing next, Josh can map comparable homes and a realistic plan.</p></div></div></section>
+  
+  <section class="section">
+    <div class="container">
+      <h2>South Riverdale</h2>
+      <div class="prose">
+        <p>TTC subway, streetcar, and GO connections make many Toronto neighbourhoods workable without a long drive.</p>
+        <p><a href="../../toronto/">Explore homes in Toronto</a></p>
+      </div>
+    </div>
+  </section>
   <section class="section"><div class="container"><h2>Similar Homes</h2><div class="grid">
+      <a class="card" href="../../sold/15-legion-rd-2203/">
+        <div class="card-media"><img src="../../assets/listings/legion.jpg" alt="15 Legion Rd #2203" loading="lazy" /></div>
+        <div class="card-body">
+          <span class="card-status lease">Leased</span>
+          <p class="card-title">15 Legion Rd #2203</p>
+          <p class="card-meta">Mimico · Toronto</p>
+        </div>
+      </a>
       <a class="card" href="../../sold/36-olive-ave-1706/">
         <div class="card-media"><img src="../../assets/past/1706-36-olive.jpg" alt="36 Olive Ave #1706" loading="lazy" /></div>
         <div class="card-body">
@@ -80,21 +102,76 @@
           <p class="card-title">35 Hayden St #911</p>
           <p class="card-meta">Church-Yonge Corridor · Toronto</p>
         </div>
-      </a>
-      <a class="card" href="../../sold/97-lawton-blvd-604/">
-        <div class="card-media"><img src="../../assets/past/604-97-lawton.jpg" alt="97 Lawton Blvd #604" loading="lazy" /></div>
-        <div class="card-body">
-          <span class="card-status lease">Leased</span>
-          <p class="card-title">97 Lawton Blvd #604</p>
-          <p class="card-meta">Yonge-St. Clair · Toronto</p>
-        </div>
       </a></div></div></section>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Josh Schwartz · Sales Representative · Snobar Realty Group Inc., Brokerage</p>
-      <p><a href="../../">Opening Doors For U</a> · Etobicoke, Toronto &amp; GTA</p>
+    <div class="container footer-inner">
+      <div class="footer-meta">
+        <div>© 2026 Josh Schwartz</div>
+        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
+      </div>
+      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
     </div>
   </footer>
+  <script>
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const input = document.createElement("textarea");
+      input.value = text;
+      input.setAttribute("readonly", "");
+      input.style.position = "absolute";
+      input.style.left = "-9999px";
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+    }
+
+    (function initCopyMls() {
+      const defaultTip = "Copy MLS#";
+      let copiedTimer;
+      let activeButton = null;
+
+      function clearCopiedState(button) {
+        if (!button) return;
+        button.setAttribute("data-tip", defaultTip);
+        button.classList.remove("is-copied");
+      }
+
+      document.addEventListener("mousedown", event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button) return;
+        event.preventDefault();
+      });
+
+      document.addEventListener("click", async event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button) return;
+        event.preventDefault();
+        const mls = button.dataset.mls;
+        if (!mls) return;
+        window.clearTimeout(copiedTimer);
+        if (activeButton && activeButton !== button) clearCopiedState(activeButton);
+        try {
+          await copyText(mls);
+          activeButton = button;
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          button.blur();
+          copiedTimer = window.setTimeout(() => {
+            clearCopiedState(button);
+            if (activeButton === button) activeButton = null;
+          }, 1600);
+        } catch (error) {
+          clearCopiedState(button);
+          activeButton = null;
+          window.prompt("Copy MLS#:", mls);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

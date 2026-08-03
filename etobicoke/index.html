@@ -20,19 +20,27 @@
   <link rel="icon" href="../assets/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180" />
   
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="../assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="../assets/seo-pages.css" />
+  <link rel="stylesheet" href="../assets/seo-pages.css?v=20260802l" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Etobicoke Realtor | Homes for Sale, Sold & Lease | Josh Schwartz", "description": "Etobicoke realtor Josh Schwartz with Thapar Team, #1 Team in Etobicoke. Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.", "url": "https://openingdoorsforu.com/etobicoke/", "isPartOf": {"@id": "https://openingdoorsforu.com/#website"}, "about": {"@type": "Place", "name": "Etobicoke"}}</script>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="/" aria-label="Josh Schwartz home">
-        <img src="../assets/js.svg" alt="" />
-        Josh Schwartz
+        <div class="brand-mark" aria-hidden="true">
+          <img src="../assets/js-on-light.svg" alt="Josh Schwartz Opening Doors For U logo" />
+        </div>
+        <div class="brand-lockup">
+          <span class="brand-name">Josh Schwartz</span>
+          <img
+            class="brand-snobar"
+            src="../assets/snobar-dark.svg"
+            alt="Snobar Realty Group Inc., Brokerage"
+          />
+        </div>
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="../#listings">Listings</a>
@@ -47,7 +55,7 @@
       <p class="breadcrumb"><a href="../">Home</a> / Etobicoke</p>
       <p class="eyebrow">Opening Doors For U</p>
       <h1>Etobicoke Real Estate</h1>
-      <p class="lead">Etobicoke sits on Toronto’s west side with lake shore condo corridors, established family streets, and quick links to downtown and the airport. It is a primary focus for Josh Schwartz and Opening Doors For U. Thapar Team is #1 Team in Etobicoke, and Josh works with that team to give buyers, sellers, and renters practical local advice without gimmicks.</p>
+      <p class="lead">Etobicoke is Toronto’s west side — lake shore living, family neighbourhoods, and easy access to downtown and Pearson. Josh works with Thapar Team, #1 Team in Etobicoke.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="../#contact">Work with Josh</a>
         <a class="btn btn-secondary" href="../#listings">View all listings</a>
@@ -58,22 +66,204 @@
   <section class="section">
     <div class="container">
       <h2>Current Listings in Etobicoke</h2>
-      <p class="section-copy">Active homes for sale or lease that Josh is marketing in and around Etobicoke.</p>
+      <p class="section-copy">Live inventory Josh can help you buy or lease in and around Etobicoke. Team listings are with Snobar Realty Group / Thapar Team — not all are personally listed by Josh.</p>
       <div class="grid">
-      <a class="card" href="../listings/150-portland-st-3/">
+      <a class="card" href="https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full" target="_blank" rel="noopener noreferrer">
         <div class="card-media"><img src="../assets/listings/portland.jpg" alt="150 Portland Street Mimico triplex for lease with Josh Schwartz Etobicoke realtor" loading="lazy" width="800" height="600" /></div>
         <div class="card-body">
           <span class="card-status lease">For Lease</span>
           <p class="card-title">150 Portland St #3</p>
           <p class="card-meta">Mimico · Toronto</p>
+          
         </div>
       </a>
-      <a class="card" href="../listings/15-legion-rd-2203/">
-        <div class="card-media"><img src="../assets/listings/legion.jpg" alt="15 Legion Road Mimico condo for lease with Josh Schwartz Etobicoke realtor" loading="lazy" width="800" height="600" /></div>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13623462/2257-lawrence-ave-w-toronto-on-m9p-2a4/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1785486057/211/211_W13623462_01.jpg" alt="2257 Lawrence Ave W · Humber Heights · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
         <div class="card-body">
-          <span class="card-status lease">For Lease</span>
-          <p class="card-title">15 Legion Rd #2203</p>
-          <p class="card-meta">Mimico · Toronto</p>
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">2257 Lawrence Ave W</p>
+          <p class="card-meta">Humber Heights · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13610644/99-jeffcoat-dr-toronto-on-m9w-3b9/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1785208139/211/211_W13610644_01.jpg" alt="99 Jeffcoat Dr · West Humber-Clairville · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">99 Jeffcoat Dr</p>
+          <p class="card-meta">West Humber-Clairville · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13600450/3-burchell-rd-toronto-on-m9w-3r6/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1784859641/211/211_W13600450_01.jpg" alt="3 Burchell Rd · Elms-Old Rexdale · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">3 Burchell Rd</p>
+          <p class="card-meta">Elms-Old Rexdale · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13599276/11-wincott-dr-toronto-on-m9r-2r9/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1784845706/211/211_W13599276_01.jpg" alt="11 Wincott Dr #810 · Kingsview Village-The Westway · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">11 Wincott Dr #810</p>
+          <p class="card-meta">Kingsview Village-The Westway · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13569088/245-dalesford-rd-toronto-on-m8y-4h7/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1784174051/211/211_W13569088_01.jpg" alt="245 Dalesford Rd #415 · Stonegate-Queensway · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">245 Dalesford Rd #415</p>
+          <p class="card-meta">Stonegate-Queensway · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13569084/80-esther-lorrie-dr-toronto-on-m9w-0c6/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1784171595/211/211_W13569084_01.jpg" alt="80 Esther Lorrie Dr #618 · West Humber-Clairville · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">80 Esther Lorrie Dr #618</p>
+          <p class="card-meta">West Humber-Clairville · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13569082/58b-thirty-second-st-toronto-on-m8w-3g5/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1784200662/211/211_W13569082_01.jpg" alt="58B Thirty Second St · Long Branch · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">58B Thirty Second St</p>
+          <p class="card-meta">Long Branch · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13243896/163-gracedale-blvd-toronto-on-m9l-2c2/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1783678324/211/211_W13243896_01.jpg" alt="163 Gracedale Blvd · Humbermede · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">163 Gracedale Blvd</p>
+          <p class="card-meta">Humbermede · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13534304/6-humberline-dr-toronto-on-m9w-6x8/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1783477826/211/211_W13534304_01.jpg" alt="6 Humberline Dr #206 · West Humber-Clairville · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">6 Humberline Dr #206</p>
+          <p class="card-meta">West Humber-Clairville · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13503350/201-thistle-down-blvd-toronto-on-m9v-1k4/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1782789766/211/211_W13503350_01.jpg" alt="201 Thistle Down Blvd · Thistletown-Beaumonde Heights · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">201 Thistle Down Blvd</p>
+          <p class="card-meta">Thistletown-Beaumonde Heights · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13496482/26-annabelle-dr-toronto-on-m9v-3b6/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1782551298/211/211_W13496482_01.jpg" alt="26 Annabelle Dr · Mount Olive-Silverstone-Jamestown · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">26 Annabelle Dr</p>
+          <p class="card-meta">Mount Olive-Silverstone-Jamestown · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13486650/1-aura-lea-blvd-toronto-on-m9m-1k2/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1782366970/211/211_W13486650_01.jpg" alt="1 Aura Lea Blvd · Humberlea-Pelmo Park W5 · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">1 Aura Lea Blvd</p>
+          <p class="card-meta">Humberlea-Pelmo Park W5 · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13440792/42-clearbrooke-circle-toronto-on-m9w-2e4/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1781329691/211/211_W13440792_01.jpg" alt="42 Clearbrooke Circle · Rexdale-Kipling · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">42 Clearbrooke Circle</p>
+          <p class="card-meta">Rexdale-Kipling · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13440786/33-waterford-dr-toronto-on-m9r-2n5/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1781330048/211/211_W13440786_01.jpg" alt="33 Waterford Dr · Willowridge-Martingrove-Richview · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">33 Waterford Dr</p>
+          <p class="card-meta">Willowridge-Martingrove-Richview · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13440768/141-summitcrest-dr-toronto-on-m9r-1a8/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1781330057/211/211_W13440768_01.jpg" alt="141 Summitcrest Dr · Willowridge-Martingrove-Richview · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">141 Summitcrest Dr</p>
+          <p class="card-meta">Willowridge-Martingrove-Richview · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13245538/296-rimilton-ave-toronto-on-m8w-4x6/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1780660045/211/211_W13245538_01.jpg" alt="296 Rimilton Ave · Alderwood · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">296 Rimilton Ave</p>
+          <p class="card-meta">Alderwood · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13245476/293-the-kingsway-na-toronto-on-m9a-0e8/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1780643814/211/211_W13245476_01.jpg" alt="293 The Kingsway #310 · Edenbridge-Humber Valley · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">293 The Kingsway #310</p>
+          <p class="card-meta">Edenbridge-Humber Valley · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13155664/10-carnation-ave-toronto-on-m8v-0b8/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1779444429/211/211_W13155664_01.jpg" alt="10 Carnation Ave #13 · Long Branch · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">10 Carnation Ave #13</p>
+          <p class="card-meta">Long Branch · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13033446/14-tyler-place-toronto-on-m9r-1l9/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1776913151/211/211_W13033446_01.jpg" alt="14 Tyler Place · Kingsview Village-The Westway · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">14 Tyler Place</p>
+          <p class="card-meta">Kingsview Village-The Westway · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W12948496/97-westhampton-dr-toronto-on-m9r-1y1/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1775111574/211/211_W12948496_01.jpg" alt="97 Westhampton Dr · Kingsview Village-The Westway · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">97 Westhampton Dr</p>
+          <p class="card-meta">Kingsview Village-The Westway · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W12845942/46-poplar-ave-toronto-on-m9b-3r4/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1772662125/211/211_W12845942_01.jpg" alt="46 Poplar Ave · Islington-City Centre West · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">46 Poplar Ave</p>
+          <p class="card-meta">Islington-City Centre West · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
         </div>
       </a></div>
     </div>
@@ -82,7 +272,7 @@
   <section class="section">
     <div class="container">
       <h2>Recently Sold in Etobicoke</h2>
-      <p class="section-copy">Closed sales Josh helped bring across the finish line. Prices are not shown, consistent with Ontario RECO / TRESA advertising rules.</p>
+      <p class="section-copy">Closed sales Josh helped bring across the finish line.</p>
       <div class="grid">
       <a class="card" href="../sold/36-ruscoe-cres/">
         <div class="card-media"><img src="../assets/past/36-ruscoe.jpg" alt="36 Ruscoe Cres" loading="lazy" width="800" height="600" /></div>
@@ -90,6 +280,7 @@
           <span class="card-status sold">Sold</span>
           <p class="card-title">36 Ruscoe Cres</p>
           <p class="card-meta">Etobicoke · Toronto</p>
+          
         </div>
       </a></div>
     </div>
@@ -100,12 +291,22 @@
       <h2>Recently Leased in Etobicoke</h2>
       <p class="section-copy">Lease placements for renters and landlords across Etobicoke.</p>
       <div class="grid">
+      <a class="card" href="../sold/15-legion-rd-2203/">
+        <div class="card-media"><img src="../assets/listings/legion.jpg" alt="15 Legion Rd #2203 · Mimico · leased with Josh Schwartz" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status lease">Leased</span>
+          <p class="card-title">15 Legion Rd #2203</p>
+          <p class="card-meta">Mimico · Toronto</p>
+          
+        </div>
+      </a>
       <a class="card" href="../sold/80-marine-parade-dr-403/">
         <div class="card-media"><img src="../assets/past/403-80-marine-parade.jpg" alt="80 Marine Parade Dr #403" loading="lazy" width="800" height="600" /></div>
         <div class="card-body">
           <span class="card-status lease">Leased</span>
           <p class="card-title">80 Marine Parade Dr #403</p>
           <p class="card-meta">Mimico · Toronto</p>
+          
         </div>
       </a>
       <a class="card" href="../sold/2212-lake-shore-blvd-w-1005/">
@@ -114,6 +315,7 @@
           <span class="card-status lease">Leased</span>
           <p class="card-title">2212 Lake Shore Blvd W #1005</p>
           <p class="card-meta">Mimico · Toronto</p>
+          
         </div>
       </a>
       <a class="card" href="../sold/59-annie-craig-dr-1907/">
@@ -122,6 +324,7 @@
           <span class="card-status lease">Leased</span>
           <p class="card-title">59 Annie Craig Dr #1907</p>
           <p class="card-meta">Mimico · Toronto</p>
+          
         </div>
       </a>
       <a class="card" href="../sold/880-the-queensway-605/">
@@ -130,6 +333,7 @@
           <span class="card-status lease">Leased</span>
           <p class="card-title">880 The Queensway #605</p>
           <p class="card-meta">Islington-City Centre West · Toronto</p>
+          
         </div>
       </a>
       <a class="card" href="../sold/20-shore-breeze-dr/">
@@ -138,14 +342,16 @@
           <span class="card-status lease">Leased</span>
           <p class="card-title">20 Shore Breeze Dr</p>
           <p class="card-meta">Mimico · Toronto</p>
+          
         </div>
       </a>
-      <a class="card" href="../sold/15-legion-rd-2203/">
-        <div class="card-media"><img src="../assets/past/2203-15-legion.jpg" alt="15 Legion Rd #2203" loading="lazy" width="800" height="600" /></div>
+      <a class="card" href="../sold/15-legion-rd-2203-2025/">
+        <div class="card-media"><img src="../assets/past/2203-15-legion.jpg" alt="15 Legion Rd #2203 · Mimico · previously leased with Josh Schwartz" loading="lazy" width="800" height="600" /></div>
         <div class="card-body">
           <span class="card-status lease">Leased</span>
           <p class="card-title">15 Legion Rd #2203</p>
           <p class="card-meta">Mimico · Toronto</p>
+          
         </div>
       </a></div>
     </div>
@@ -154,7 +360,7 @@
   <section class="section">
     <div class="container">
       <h2>About Etobicoke</h2>
-      <div class="prose"><p>Etobicoke sits on Toronto’s west side with lake shore condo corridors, established family streets, and quick links to downtown and the airport. It is a primary focus for Josh Schwartz and Opening Doors For U. Thapar Team is #1 Team in Etobicoke, and Josh works with that team to give buyers, sellers, and renters practical local advice without gimmicks.</p></div>
+      <div class="prose"><p>Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance — backed by Thapar Team, #1 Team in Etobicoke.</p></div>
     </div>
   </section>
 
@@ -178,10 +384,10 @@
       <div class="stat-row">
         <div class="stat"><strong>Lake shore condos &amp; family homes</strong><span>Local focus</span></div>
         <div class="stat"><strong>End-users, relocators, lease clients</strong><span>Typical clients</span></div>
-        <div class="stat"><strong>1</strong><span>Sold on site</span></div>
-        <div class="stat"><strong>6</strong><span>Leased on site</span></div>
+        <div class="stat"><strong>Mimico · Islington · Queensway</strong><span>Key pockets</span></div>
+        <div class="stat"><strong>Thapar Team · #1 in Etobicoke</strong><span>Local strength</span></div>
       </div>
-      <p class="section-copy" style="margin-top:18px">Mimico and Queensway pockets can move quickly on well-priced suites. For live numbers, ask Josh for a current Etobicoke brief.</p>
+      <p class="section-copy snapshot-note">Mimico and Queensway pockets can move quickly on well-priced suites. <span class="snapshot-cta">Ask Josh for a current Etobicoke brief.</span></p>
       <div class="city-links" style="margin-top:18px">
         <a href="../toronto/">Toronto</a><a href="../north-york/">North York</a><a href="../markham/">Markham</a><a href="../richmond-hill/">Richmond Hill</a><a href="../vaughan/">Vaughan</a><a href="../mississauga/">Mississauga</a>
       </div>
@@ -189,10 +395,73 @@
   </section>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Josh Schwartz · Sales Representative · Snobar Realty Group Inc., Brokerage</p>
-      <p><a href="../">Opening Doors For U</a> · Etobicoke, Toronto &amp; GTA</p>
+    <div class="container footer-inner">
+      <div class="footer-meta">
+        <div>© 2026 Josh Schwartz</div>
+        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
+      </div>
+      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
     </div>
   </footer>
+  <script>
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const input = document.createElement("textarea");
+      input.value = text;
+      input.setAttribute("readonly", "");
+      input.style.position = "absolute";
+      input.style.left = "-9999px";
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+    }
+
+    (function initCopyMls() {
+      const defaultTip = "Copy MLS#";
+      let copiedTimer;
+      let activeButton = null;
+
+      function clearCopiedState(button) {
+        if (!button) return;
+        button.setAttribute("data-tip", defaultTip);
+        button.classList.remove("is-copied");
+      }
+
+      document.addEventListener("mousedown", event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button) return;
+        event.preventDefault();
+      });
+
+      document.addEventListener("click", async event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button) return;
+        event.preventDefault();
+        const mls = button.dataset.mls;
+        if (!mls) return;
+        window.clearTimeout(copiedTimer);
+        if (activeButton && activeButton !== button) clearCopiedState(activeButton);
+        try {
+          await copyText(mls);
+          activeButton = button;
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          button.blur();
+          copiedTimer = window.setTimeout(() => {
+            clearCopiedState(button);
+            if (activeButton === button) activeButton = null;
+          }, 1600);
+        } catch (error) {
+          clearCopiedState(button);
+          activeButton = null;
+          window.prompt("Copy MLS#:", mls);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

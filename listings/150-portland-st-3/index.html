@@ -20,19 +20,27 @@
   <link rel="icon" href="../../assets/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180" />
   
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../../assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="../../assets/seo-pages.css" />
+  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20260802l" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateListing", "name": "150 Portland St #3", "description": "150 Portland St #3 · For Lease · Mimico · Toronto · 2 beds · $1,999/mo. Listed with Josh Schwartz, Opening Doors For U.", "url": "https://openingdoorsforu.com/listings/150-portland-st-3/", "image": "https://openingdoorsforu.com/assets/listings/portland.jpg"}</script>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="/" aria-label="Josh Schwartz home">
-        <img src="../../assets/js.svg" alt="" />
-        Josh Schwartz
+        <div class="brand-mark" aria-hidden="true">
+          <img src="../../assets/js-on-light.svg" alt="Josh Schwartz Opening Doors For U logo" />
+        </div>
+        <div class="brand-lockup">
+          <span class="brand-name">Josh Schwartz</span>
+          <img
+            class="brand-snobar"
+            src="../../assets/snobar-dark.svg"
+            alt="Snobar Realty Group Inc., Brokerage"
+          />
+        </div>
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="../../#listings">Listings</a>
@@ -51,32 +59,30 @@
           <p class="eyebrow">For Lease</p>
           <h1>150 Portland St #3</h1>
           <p class="lead">Mimico · Toronto</p>
-          <ul class="feature-list"><li>2 Bedrooms</li><li>1 Bathrooms</li><li>700-1,100 SQ.FT.</li><li>MLS# W13580606</li><li>$1,999/mo</li></ul>
+          <div class="listing-facts"><div class="listing-facts-side"><p class="listing-price">$1,999<span class="listing-price-unit">/mo</span></p><button type="button" class="listing-mls" data-mls="W13580606" data-tip="Copy MLS#" aria-label="Copy MLS# W13580606">MLS# W13580606</button></div><div class="listing-facts-main"><div class="fact"><svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11V19M21 11V19M3 14H21M5 14V9.5C5 8.1 6.1 7 7.5 7H11C12.1 7 13 7.6 13.5 8.5C14 7.6 14.9 7 16 7H16.5C17.9 7 19 8.1 19 9.5V14M3 19H21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>2 beds</span></div><div class="fact"><svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12V7.5C5 6.1 6.1 5 7.5 5H9M5 12H20C20.6 12 21 12.4 21 13V15C21 17.2 19.2 19 17 19H7C4.8 19 3 17.2 3 15V13C3 12.4 3.4 12 4 12H5ZM8 19V21M16 19V21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 bath</span></div><div class="fact"><svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 16.5V7.5h3.2c1.7 0 2.8 1 2.8 2.5S14.9 12.5 13.2 12.5H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 parking</span></div><div class="fact"><svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9V5H9M15 5H19V9M19 15V19H15M9 19H5V15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>700–1,100 sqft</span></div><div class="fact"><svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9l5-3v14M9 20V6l7 4v10M13 10h2M13 13h2M13 16h2M6.5 12H7.5M6.5 15H7.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Triplex</span></div></div></div>
           <div class="cta-row">
             <a class="btn btn-primary" href="https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full" target="_blank" rel="noopener noreferrer">View full listing</a>
-            <a class="btn btn-secondary" href="../../#contact">Ask Josh about this home</a>
+            <a class="btn btn-secondary" href="sms:+16473608179?body=Hi%20Josh%2C%20I%20am%20interested%20in%20150%20Portland%20St%20%233.">Text Josh</a>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="section"><div class="container"><h2>Property Features</h2><div class="prose"><p>150 Portland St #3 is presented with clear specs so you can compare apples to apples. Size: 700-1,100 SQ.FT.. For showings, disclosures, and the newest status, contact Josh directly.</p><ul class="feature-list"><li>2 Bedrooms</li><li>1 Bathrooms</li><li>700-1,100 SQ.FT.</li><li>MLS# W13580606</li><li>$1,999/mo</li></ul></div></div></section>
-  <section class="section"><div class="container"><h2>Neighbourhood</h2><div class="prose"><p>150 Portland St #3 sits in Mimico · Toronto. Buyers and renters comparing options in this community usually weigh commute, building or lot utility, and nearby daily needs. Josh Schwartz helps you read those trade-offs with clear local context, not hype.</p><p>Explore more in <a href="../../etobicoke/">Etobicoke</a>.</p></div></div></section>
-  <section class="section"><div class="container"><h2>Nearby Schools</h2><div class="prose"><p>School fit depends on exact catchments and your household needs. Josh can share current local context for Mimico · Toronto before you write an offer or sign a lease.</p></div></div></section>
-  <section class="section"><div class="container"><h2>Why Buyers Love This Area</h2><div class="prose"><p>People looking in the area often want a practical mix of access, amenities, and long-term usability. Whether you are buying, selling, or leasing next, Josh can map comparable homes and a realistic plan.</p></div></div></section>
+  
+  <section class="section">
+    <div class="container">
+      <h2>Mimico</h2>
+      <div class="prose">
+        <p>GO, TTC, and highway access (Gardiner / 427) connect Mimico and Islington-area living to the rest of the GTA.</p>
+        <p><a href="../../etobicoke/">Explore homes in Etobicoke</a></p>
+      </div>
+    </div>
+  </section>
   <section class="section"><div class="container"><h2>Similar Homes</h2><div class="grid">
-      <a class="card" href="../../listings/15-legion-rd-2203/">
+      <a class="card" href="../../sold/15-legion-rd-2203/">
         <div class="card-media"><img src="../../assets/listings/legion.jpg" alt="15 Legion Rd #2203" loading="lazy" /></div>
         <div class="card-body">
-          <span class="card-status lease">For Lease</span>
-          <p class="card-title">15 Legion Rd #2203</p>
-          <p class="card-meta">Mimico · Toronto</p>
-        </div>
-      </a>
-      <a class="card" href="../../listings/15-legion-rd-2203/">
-        <div class="card-media"><img src="../../assets/listings/legion.jpg" alt="15 Legion Rd #2203" loading="lazy" /></div>
-        <div class="card-body">
-          <span class="card-status lease">For Lease</span>
+          <span class="card-status lease">Leased</span>
           <p class="card-title">15 Legion Rd #2203</p>
           <p class="card-meta">Mimico · Toronto</p>
         </div>
@@ -88,13 +94,84 @@
           <p class="card-title">36 Olive Ave #1706</p>
           <p class="card-meta">Willowdale East · Toronto</p>
         </div>
+      </a>
+      <a class="card" href="../../sold/35-hayden-st-911/">
+        <div class="card-media"><img src="../../assets/past/911-35-hayden.jpg" alt="35 Hayden St #911" loading="lazy" /></div>
+        <div class="card-body">
+          <span class="card-status lease">Leased</span>
+          <p class="card-title">35 Hayden St #911</p>
+          <p class="card-meta">Church-Yonge Corridor · Toronto</p>
+        </div>
       </a></div></div></section>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Josh Schwartz · Sales Representative · Snobar Realty Group Inc., Brokerage</p>
-      <p><a href="../../">Opening Doors For U</a> · Etobicoke, Toronto &amp; GTA</p>
+    <div class="container footer-inner">
+      <div class="footer-meta">
+        <div>© 2026 Josh Schwartz</div>
+        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
+      </div>
+      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
     </div>
   </footer>
+  <script>
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const input = document.createElement("textarea");
+      input.value = text;
+      input.setAttribute("readonly", "");
+      input.style.position = "absolute";
+      input.style.left = "-9999px";
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+    }
+
+    (function initCopyMls() {
+      const defaultTip = "Copy MLS#";
+      let copiedTimer;
+      let activeButton = null;
+
+      function clearCopiedState(button) {
+        if (!button) return;
+        button.setAttribute("data-tip", defaultTip);
+        button.classList.remove("is-copied");
+      }
+
+      document.addEventListener("mousedown", event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button) return;
+        event.preventDefault();
+      });
+
+      document.addEventListener("click", async event => {
+        const button = event.target.closest(".listing-mls");
+        if (!button) return;
+        event.preventDefault();
+        const mls = button.dataset.mls;
+        if (!mls) return;
+        window.clearTimeout(copiedTimer);
+        if (activeButton && activeButton !== button) clearCopiedState(activeButton);
+        try {
+          await copyText(mls);
+          activeButton = button;
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          button.blur();
+          copiedTimer = window.setTimeout(() => {
+            clearCopiedState(button);
+            if (activeButton === button) activeButton = null;
+          }, 1600);
+        } catch (error) {
+          clearCopiedState(button);
+          activeButton = null;
+          window.prompt("Copy MLS#:", mls);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

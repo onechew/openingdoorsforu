@@ -486,37 +486,6 @@
             "businessFunction": "https://schema.org/LeaseOut"
           }
         }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "Apartment",
-          "name": "15 Legion Rd #2203, Mimico",
-          "description": "1-bedroom condo for lease in Mimico, Toronto, listed with Josh Schwartz, Etobicoke realtor.",
-          "url": "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/PEnGAbgkZncRBqjN8zPriKgp42gNajtNKBG7PGnmTG2XNrLRLwfGPZpkbMaGIAwGelJOD5CYyw3AJ1LmU6yjX9WmnaFlGZmym6GmS5LOlVl2LlSB3m6b43oeh1qlblqlpXteNeagk/view/listing/TREB-W13524942?view=listing-customer-full",
-          "image": "https://openingdoorsforu.com/assets/listings/legion.jpg",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "15 Legion Rd #2203",
-            "addressLocality": "Toronto",
-            "addressRegion": "ON",
-            "addressCountry": "CA"
-          },
-          "numberOfRooms": 1,
-          "floorSize": {
-            "@type": "QuantitativeValue",
-            "value": "600-699",
-            "unitText": "SQ FT"
-          },
-          "offers": {
-            "@type": "Offer",
-            "price": "2600",
-            "priceCurrency": "CAD",
-            "availability": "https://schema.org/InStock",
-            "businessFunction": "https://schema.org/LeaseOut"
-          }
-        }
       }
     ]
   }
@@ -603,6 +572,9 @@
       --deep: #121417;
       --shadow: 0 18px 48px rgba(18, 20, 23, 0.055);
       --shadow-hover: 0 24px 70px rgba(18, 20, 23, 0.11);
+      --hover-lift: translateY(-2px);
+      --link-underline: rgba(18, 20, 23, 0.28);
+      --focus-ring: 0 0 0 3px rgba(18, 20, 23, 0.12);
       --radius: 16px;
       --radius-sm: 12px;
       --max: 1180px;
@@ -837,10 +809,13 @@
     .header-contact a:hover,
     .header-contact .copy-email:hover {
       opacity: 1;
+      color: #ffffff;
       transform: translateY(-1px);
     }
 
+    .site-header.is-scrolled .header-contact a:hover,
     .site-header.is-scrolled .header-contact .copy-email:hover {
+      color: var(--ink);
       text-shadow: none;
       opacity: 1;
     }
@@ -1425,10 +1400,17 @@
       outline: 0;
       cursor: pointer;
       box-shadow: 0 10px 28px rgba(18, 20, 23, 0.045);
+      transition: border-color 160ms ease, box-shadow 180ms var(--ease-out);
+    }
+
+    .area-select:hover {
+      border-color: rgba(18, 20, 23, 0.22);
+      box-shadow: 0 12px 32px rgba(18, 20, 23, 0.08);
     }
 
     .area-select:focus {
       border-color: var(--line-strong);
+      box-shadow: var(--focus-ring);
     }
 
     .area-select optgroup {
@@ -1458,12 +1440,10 @@
       background: var(--surface);
       border: 1px solid rgba(18, 20, 23, 0.06);
       box-shadow: none;
-      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
-    }
-
-    .listing-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 48px rgba(18, 20, 23, 0.1);
+      transition:
+        transform 220ms var(--ease-out),
+        box-shadow 220ms var(--ease-out),
+        border-color 160ms ease;
     }
 
     .listing-card-link {
@@ -1490,7 +1470,6 @@
       transition: transform 520ms ease;
     }
 
-    .listing-media:hover img,
     .listing-media:focus-visible img {
       transform: scale(1.03);
     }
@@ -1515,6 +1494,10 @@
 
     .tag.lease {
       color: #1f5a40;
+    }
+
+    .tag.sale {
+      color: #1a3a66;
     }
 
     .tag.sold {
@@ -1564,6 +1547,15 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .listing-attribution {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 500;
+      letter-spacing: -0.01em;
     }
 
     .listing-mls {
@@ -1626,7 +1618,13 @@
       font-size: 12px;
       font-weight: 700;
       text-decoration: underline;
-      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      text-decoration-color: var(--link-underline);
+      transition:
+        color 160ms ease,
+        text-decoration-color 160ms ease,
+        text-decoration-thickness 160ms ease;
     }
 
     .listings-more {
@@ -1682,14 +1680,12 @@
 
     .listings-more-name {
       text-decoration: underline;
-      text-decoration-thickness: 1.5px;
-      text-underline-offset: 5px;
-      text-decoration-color: rgba(18, 20, 23, 0.28);
-      transition: text-decoration-color 160ms ease;
-    }
-
-    .listings-more-links a:hover .listings-more-name {
-      text-decoration-color: var(--ink);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      text-decoration-color: var(--link-underline);
+      transition:
+        text-decoration-color 160ms ease,
+        text-decoration-thickness 160ms ease;
     }
 
     .listings-more-claim {
@@ -1744,6 +1740,9 @@
       line-height: 1;
       text-decoration: none;
       transform: translateY(-0.5px);
+      transition:
+        transform 180ms var(--ease-out),
+        opacity 160ms ease;
     }
 
     @media (max-width: 720px) {
@@ -1767,12 +1766,6 @@
       .listings-more-medal {
         font-size: 22px;
       }
-    }
-
-    .tab-button:hover:not(.is-active) {
-      background: #ffffff;
-      color: var(--ink);
-      box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.12);
     }
 
     .pagination {
@@ -1823,11 +1816,6 @@
       width: 16px;
       height: 16px;
       display: block;
-    }
-
-    .page-button:hover:not(:disabled):not(.is-active) {
-      background: rgba(18, 20, 23, 0.06);
-      color: var(--ink);
     }
 
     .page-button.is-active {
@@ -2246,6 +2234,7 @@
     .services-back::before {
       content: "←";
       line-height: 1;
+      transition: transform 180ms var(--ease-out);
     }
 
     .services-back:hover {
@@ -2284,8 +2273,9 @@
     }
 
     .services-tab:hover:not(.is-active) {
-      color: var(--ink-soft);
-      background: rgba(255, 255, 255, 0.55);
+      color: var(--ink);
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.1);
     }
 
     .services-tab:active:not(.is-active) {
@@ -3700,13 +3690,6 @@
         opacity 160ms ease;
     }
 
-    .service-submit:hover:not(:disabled) {
-      background: #2a2d31;
-      border-color: #2a2d31;
-      box-shadow: 0 12px 28px rgba(18, 20, 23, 0.22);
-      transform: translateY(-2px);
-    }
-
     .service-submit:active:not(:disabled) {
       transform: translateY(0) scale(0.98);
     }
@@ -3825,7 +3808,13 @@
       .service-submit:active:not(:disabled),
       .services-back:hover,
       .services-wrap:not(.is-engaged) .service-path:hover .service-path-kicker,
-      .services-wrap:not(.is-engaged) .service-path:hover .service-path-lead {
+      .services-wrap:not(.is-engaged) .service-path:hover .service-path-lead,
+      .listing-card:hover,
+      .reel-card:hover,
+      .listings-more-links a:hover .listings-more-ext,
+      .services-back:hover::before,
+      .contact-bar-social a:hover,
+      .back-to-top.is-visible:hover {
         transform: none;
       }
 
@@ -3865,11 +3854,6 @@
       box-shadow: 0 22px 64px rgba(18, 20, 23, 0.12);
       isolation: isolate;
       transition: transform 260ms ease, box-shadow 260ms ease;
-    }
-
-    .reel-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 30px 82px rgba(18, 20, 23, 0.18);
     }
 
     .reel-card video,
@@ -3964,8 +3948,14 @@
       text-decoration: none;
     }
 
-    .listing-address-link:hover .listing-address {
+    .listing-address-link .listing-address {
       text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+      text-decoration-color: transparent;
+      transition:
+        text-decoration-color 160ms ease,
+        text-decoration-thickness 160ms ease;
     }
 
     .faq-section {
@@ -3996,14 +3986,18 @@
       cursor: pointer;
       text-decoration: underline;
       text-decoration-thickness: 1px;
-      text-underline-offset: 4px;
+      text-underline-offset: 0.2em;
       text-decoration-color: rgba(119, 113, 106, 0.28);
-      transition: color 160ms ease, text-decoration-color 160ms ease;
+      transition:
+        color 160ms ease,
+        text-decoration-color 160ms ease,
+        text-decoration-thickness 160ms ease;
     }
 
     .faq-toggle-all:hover {
       color: var(--ink);
-      text-decoration-color: rgba(18, 20, 23, 0.45);
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 2px;
     }
 
     .faq-list {
@@ -4050,6 +4044,7 @@
       letter-spacing: -0.015em;
       line-height: 1.35;
       color: var(--ink);
+      transition: color 160ms ease;
     }
 
     .faq-item summary::-webkit-details-marker { display: none; }
@@ -4116,6 +4111,87 @@
       font-size: 16px;
       line-height: 1.55;
       letter-spacing: -0.015em;
+    }
+
+    /* Shared hover system — fine pointers only (avoids sticky touch hover) */
+    @media (hover: hover) and (pointer: fine) {
+      .text-link:hover {
+        color: var(--ink);
+        text-decoration-color: currentColor;
+        text-decoration-thickness: 2px;
+      }
+
+      .listings-more-links a:hover .listings-more-name {
+        text-decoration-color: currentColor;
+        text-decoration-thickness: 2px;
+      }
+
+      .listings-more-links a:hover .listings-more-ext {
+        opacity: 1;
+        transform: translate(2px, -2.5px);
+      }
+
+      .listing-address-link:hover .listing-address {
+        text-decoration-color: currentColor;
+        text-decoration-thickness: 2px;
+      }
+
+      .listing-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(18, 20, 23, 0.14);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .listing-card:hover .listing-media img,
+      .listing-media:hover img {
+        transform: scale(1.03);
+      }
+
+      .reel-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 30px 82px rgba(18, 20, 23, 0.18);
+      }
+
+      .tab-button:hover:not(.is-active) {
+        background: #ffffff;
+        color: var(--ink);
+        box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.12);
+      }
+
+      .page-button:hover:not(:disabled):not(.is-active) {
+        background: rgba(18, 20, 23, 0.06);
+        color: var(--ink);
+      }
+
+      .services-back:hover::before {
+        transform: translateX(-3px);
+      }
+
+      .faq-item summary:hover .faq-toggle {
+        background: rgba(18, 20, 23, 0.06);
+        border-color: rgba(18, 20, 23, 0.28);
+      }
+
+      .faq-item[open] summary:hover .faq-toggle {
+        background: #2a2d31;
+        border-color: #2a2d31;
+      }
+
+      .contact-bar-social a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+      }
+
+      .service-submit:hover:not(:disabled) {
+        background: #2a2d31;
+        border-color: #2a2d31;
+        box-shadow: 0 12px 28px rgba(18, 20, 23, 0.22);
+        transform: var(--hover-lift);
+      }
+
+      .back-to-top.is-visible:hover {
+        transform: translateY(-6px) scale(1.07);
+      }
     }
 
     @media (max-width: 900px) {
@@ -4769,10 +4845,6 @@
       transform: translateY(0) scale(1);
     }
 
-    .back-to-top.is-visible:hover {
-      transform: translateY(-6px) scale(1.07);
-    }
-
     .back-to-top.is-visible:active {
       transform: translateY(-2px) scale(0.96);
       transition-duration: 120ms;
@@ -5386,18 +5458,16 @@
           </div>
         </div>
 
-        <p class="listings-compliance" id="listingsCompliance" hidden>
-          Sold&nbsp;&amp;&nbsp;leased highlights. Prices are not shown, consistent with Ontario RECO&nbsp;/&nbsp;TRESA advertising rules.
-        </p>
+        <p class="listings-compliance" id="listingsCompliance" hidden></p>
 
         <div class="listings-panel">
           <div class="listings-grid" id="listingsGrid"></div>
 
           <div class="empty-state" id="emptyState">
-            No sold or leased homes match this area yet.
+            Looking in this area? <a href="#contact">Text Josh</a> — he can pull live matches for you.
           </div>
 
-          <div class="pagination" id="pagination" aria-label="Sold and leased pagination"></div>
+          <div class="pagination" id="pagination" aria-label="Listings pagination"></div>
         </div>
 
         <div class="listings-more reveal" data-reveal>
@@ -6782,6 +6852,7 @@
     </svg>
   </button>
 
+  <script src="assets/active-listings.js?v=20260803001530"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const backToTop = document.getElementById("backToTop");
@@ -7251,39 +7322,42 @@
       });
     }
 
-    const currentListings = [
-      {
-        title: "150 Portland St #3",
-        location: "Mimico · Toronto",
-        status: "For Lease",
-        tagClass: "lease",
-        beds: "2",
-        baths: "1",
-        size: "700-1,100 SQ.FT.",
-        price: "$1,999/mo",
-        mls: "W13580606",
-        image: "assets/listings/portland.jpg",
-        alt: "150 Portland Street Mimico triplex for lease with Josh Schwartz, Etobicoke realtor",
-        url: "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full"
-      },
-      {
-        title: "15 Legion Rd #2203",
-        location: "Mimico · Toronto",
-        status: "For Lease",
-        tagClass: "lease",
-        beds: "1",
-        baths: "1",
-        size: "600-699 SQ.FT.",
-        price: "$2,600/mo",
-        mls: "W13524942",
-        image: "assets/listings/legion.jpg",
-        alt: "15 Legion Road Mimico condo for lease with Josh Schwartz, Etobicoke realtor",
-        url: "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/PEnGAbgkZncRBqjN8zPriKgp42gNajtNKBG7PGnmTG2XNrLRLwfGPZpkbMaGIAwGelJOD5CYyw3AJ1LmU6yjX9WmnaFlGZmym6GmS5LOlVl2LlSB3m6b43oeh1qlblqlpXteNeagk/view/listing/TREB-W13524942?view=listing-customer-full"
-      }
-    ];
+    const currentListings = Array.isArray(window.__ACTIVE_LISTINGS__) && window.__ACTIVE_LISTINGS__.length
+      ? window.__ACTIVE_LISTINGS__
+      : [
+          {
+            title: "150 Portland St #3",
+            location: "Mimico · Toronto",
+            status: "For Lease",
+            tagClass: "lease",
+            beds: "2",
+            baths: "1",
+            parking: "1",
+            size: "700-1,100 SQ.FT.",
+            type: "Triplex",
+            price: "$1,999/mo",
+            mls: "W13580606",
+            image: "assets/listings/portland.jpg",
+            alt: "150 Portland Street Mimico triplex for lease with Josh Schwartz, Etobicoke realtor",
+            url: "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full"
+          }
+        ];
 
     // Past deals newest → oldest. No prices / no external links (RECO / TRESA).
     const soldTransactions = [
+      {
+        title: "15 Legion Rd #2203",
+        location: "Mimico · Toronto",
+        area: "Etobicoke",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-08-02",
+        mls: "W13524942",
+        image: "assets/listings/legion.jpg",
+        alt: "15 Legion Rd #2203 · Mimico · leased with Josh Schwartz",
+        slug: "15-legion-rd-2203"
+      },
       {
         title: "36 Olive Ave #1706",
         location: "Willowdale East · Toronto",
@@ -7567,8 +7641,10 @@
         tagClass: "lease",
         price: "Leased",
         date: "2025-08-04",
+        mls: "W8167436",
         image: "assets/past/2203-15-legion.jpg",
-        alt: "15 Legion Rd #2203"
+        alt: "15 Legion Rd #2203 · Mimico · previously leased with Josh Schwartz",
+        slug: "15-legion-rd-2203-2025"
       },
       {
         title: "37 Metcalfe St #5",
@@ -7902,6 +7978,50 @@
     let activeArea = "all";
     let currentPage = 1;
 
+    function listingsTabFromLocation() {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = String(params.get("tab") || "").toLowerCase();
+      if (tabParam === "sold" || tabParam === "sold-leased" || tabParam === "leased") {
+        return "sold";
+      }
+      if (tabParam === "current" || tabParam === "active") {
+        return "current";
+      }
+
+      const raw = String(window.location.hash || "").replace(/^#/, "").toLowerCase();
+      if (!raw.startsWith("listings")) return null;
+      if (/sold|leased/.test(raw)) return "sold";
+      if (/active|current/.test(raw)) return "current";
+      return "current";
+    }
+
+    function setListingsTab(tab, { syncUrl = false, preserveScroll = true } = {}) {
+      const next = tab === "sold" ? "sold" : "current";
+      activeTab = next;
+      currentPage = 1;
+      tabButtons.forEach((item) => {
+        item.classList.toggle("is-active", item.dataset.tab === next);
+      });
+      renderListings({ preserveScroll });
+      if (syncUrl) {
+        const url = new URL(window.location.href);
+        if (next === "sold") url.searchParams.set("tab", "sold");
+        else url.searchParams.delete("tab");
+        url.hash = "listings";
+        const nextUrl = `${url.pathname}${url.search}${url.hash}`;
+        const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+        if (nextUrl !== currentUrl) {
+          history.replaceState(null, "", nextUrl);
+        }
+      }
+    }
+
+    function applyListingsDeepLink() {
+      const tab = listingsTabFromLocation();
+      if (!tab) return;
+      setListingsTab(tab, { preserveScroll: false });
+    }
+
     function getItemsPerPage() {
       const width = window.innerWidth;
       if (width <= 720) return 6;   // 1 col × 6 rows
@@ -7999,7 +8119,11 @@
       const parts = [];
       if (listing.beds) parts.push(`${listing.beds} Beds`);
       if (listing.baths) parts.push(`${listing.baths} Baths`);
+      if (listing.parking != null && String(listing.parking).trim() !== "") {
+        parts.push(`${listing.parking} Parking`);
+      }
       if (listing.size) parts.push(listing.size);
+      if (listing.type) parts.push(listing.type);
       return parts.join(" • ");
     }
 
@@ -8116,6 +8240,16 @@
     }
 
     function listingPath(listing) {
+      if (listing.slug) {
+        const slug = String(listing.slug);
+        if (listing.url && /for\s+(sale|lease)/i.test(listing.status || "")) {
+          return `listings/${slug}/`;
+        }
+        if (/sold|leased/i.test(listing.status || "") || listing.date) {
+          return `sold/${slug}/`;
+        }
+        return listing.url || `#listings`;
+      }
       const title = String(listing.title || "")
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
@@ -8139,27 +8273,36 @@
       const place = formatListingLocation(listing.location);
       const specs = listingSpecs(listing);
       const imageAlt = escapeAttr(listingImageAlt(listing));
-      const detailPath = listingPath(listing);
+      const externalUrl = listing.url && /^https?:\/\//i.test(listing.url) ? listing.url : "";
+      const isJoshPortal = /realmmlp\.ca/i.test(externalUrl || "");
+      const localPath = listingPath(listing);
+      const mediaLink = externalUrl || localPath;
+      const addressLink = isJoshPortal ? localPath : (externalUrl || localPath);
+      const externalAttrs = externalUrl ? ` target="_blank" rel="noopener noreferrer"` : "";
+      const addressAttrs = !isJoshPortal && externalUrl ? ` target="_blank" rel="noopener noreferrer"` : "";
       const mlsButton = listing.mls
         ? `<button type="button" class="listing-mls" data-mls="${listing.mls}" data-tip="Copy MLS#" aria-label="Copy MLS# ${listing.mls}">MLS# ${listing.mls}</button>`
         : "";
       const mediaInner = `
               <img src="${listing.image}" alt="${imageAlt}" loading="lazy" width="800" height="600" />
               <span class="tag ${listing.tagClass}">${listing.status}</span>`;
-      const mediaHref = listing.url || detailPath;
-      const mediaTarget = listing.url ? ` target="_blank" rel="noopener noreferrer"` : "";
-      const media = mediaHref
-        ? `<a class="listing-media listing-card-link" href="${mediaHref}"${mediaTarget} aria-label="View ${escapeAttr(street)} with Josh Schwartz">${mediaInner}</a>`
+      const media = mediaLink
+        ? `<a class="listing-media listing-card-link" href="${mediaLink}"${externalAttrs} aria-label="View ${escapeAttr(street)} with Josh Schwartz">${mediaInner}</a>`
         : `<div class="listing-media">${mediaInner}</div>`;
-      const addressBlock = detailPath
-        ? `<a class="listing-address-link" href="${detailPath}"><p class="listing-address">${street}</p></a>`
+      const addressBlock = addressLink
+        ? `<a class="listing-address-link" href="${addressLink}"${addressAttrs}><p class="listing-address">${street}</p></a>`
         : `<p class="listing-address">${street}</p>`;
+      const attribution =
+        listing.kind === "team" || listing.source === "thapar"
+          ? `<p class="listing-attribution">${listing.attribution || "Listed with Snobar Realty Group Inc. · Thapar Team"}</p>`
+          : "";
       const body = `
             <div class="listing-body">
               <p class="listing-price">${listing.price}</p>
               ${addressBlock}
               ${place ? `<p class="listing-location">${place}</p>` : ""}
               ${specs ? `<p class="listing-specs">${specs}</p>` : ""}
+              ${attribution}
             </div>`;
 
       return `
@@ -8195,7 +8338,7 @@
       const itemsPerPage = getItemsPerPage();
       const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage) || 1);
 
-      if (activeTab !== "sold" || totalItems <= 0) {
+      if (totalItems <= 0 || totalPages <= 1) {
         pagination.innerHTML = "";
         pagination.classList.remove("is-visible");
         return;
@@ -8203,14 +8346,16 @@
 
       const start = (currentPage - 1) * itemsPerPage + 1;
       const end = Math.min(currentPage * itemsPerPage, totalItems);
-      const pages = totalPages > 1 ? getPaginationPages(currentPage, totalPages) : [1];
+      const pages = getPaginationPages(currentPage, totalPages);
       const chevronPrev = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
       const chevronNext = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const label = activeTab === "current" ? "Active listings pagination" : "Sold and leased pagination";
 
       pagination.classList.add("is-visible");
       pagination.classList.remove("is-status-only");
+      pagination.setAttribute("aria-label", label);
       pagination.innerHTML = `
-        <div class="pagination-nav" role="navigation" aria-label="Pagination">
+        <div class="pagination-nav" role="navigation" aria-label="${label}">
           <button type="button" class="page-button is-nav" data-page="${currentPage - 1}" ${currentPage === 1 ? "disabled" : ""} aria-label="Previous page">${chevronPrev}</button>
           ${pages.map(page => {
             if (page === "ellipsis") {
@@ -8248,11 +8393,17 @@
       }
 
       if (activeTab === "current") {
-        listingsToRender = currentListings;
+        const totalItems = currentListings.length;
+        const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage) || 1);
+        if (currentPage > totalPages) currentPage = totalPages;
+        const start = (currentPage - 1) * itemsPerPage;
+        listingsToRender = currentListings.slice(start, start + itemsPerPage);
         soldControls.classList.remove("is-visible");
-        if (listingsCompliance) listingsCompliance.hidden = true;
-        pagination.innerHTML = "";
-        pagination.classList.remove("is-visible");
+        if (listingsCompliance) {
+          listingsCompliance.hidden = true;
+          listingsCompliance.textContent = "";
+        }
+        renderPagination(totalItems);
       } else {
         const filtered = getFilteredSoldTransactions();
         const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
@@ -8263,7 +8414,10 @@
         const end = start + itemsPerPage;
         listingsToRender = filtered.slice(start, end);
         soldControls.classList.add("is-visible");
-        if (listingsCompliance) listingsCompliance.hidden = false;
+        if (listingsCompliance) {
+          listingsCompliance.hidden = false;
+          listingsCompliance.textContent = "Sold & leased highlights.";
+        }
         renderPagination(filtered.length);
       }
 
@@ -8289,13 +8443,7 @@
 
     tabButtons.forEach(button => {
       button.addEventListener("click", () => {
-        activeTab = button.dataset.tab;
-        currentPage = 1;
-
-        tabButtons.forEach(item => item.classList.remove("is-active"));
-        button.classList.add("is-active");
-
-        renderListings({ preserveScroll: true });
+        setListingsTab(button.dataset.tab, { syncUrl: true });
 
         if (typeof window.__gaTrackPage === "function") {
           window.__gaTrackPage(
@@ -8314,16 +8462,27 @@
     let lastItemsPerPage = getItemsPerPage();
     window.addEventListener("resize", () => {
       const nextItemsPerPage = getItemsPerPage();
-      if (nextItemsPerPage === lastItemsPerPage || activeTab !== "sold") return;
+      if (nextItemsPerPage === lastItemsPerPage) return;
       lastItemsPerPage = nextItemsPerPage;
       renderListings({ preserveScroll: true });
     });
 
     populateAreaFilter();
     updateHeaderState();
+    applyListingsDeepLink();
     renderListings();
     renderReels();
     renderReviewsMarquee();
+
+    window.addEventListener("hashchange", () => {
+      applyListingsDeepLink();
+    });
+    window.addEventListener("popstate", () => {
+      applyListingsDeepLink();
+    });
+    window.addEventListener("pageshow", () => {
+      applyListingsDeepLink();
+    });
 
     window.addEventListener("scroll", updateHeaderState, { passive: true });
     backToTop.addEventListener("click", scrollToTop);
