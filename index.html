@@ -586,13 +586,13 @@
     @property --btn-a {
       syntax: "<color>";
       inherits: false;
-      initial-value: #ffffff;
+      initial-value: #6f7a68;
     }
 
     @property --btn-b {
       syntax: "<color>";
       inherits: false;
-      initial-value: #f4ebe0;
+      initial-value: #121816;
     }
 
     * {
@@ -602,6 +602,7 @@
     html {
       scroll-behavior: smooth;
       overflow-x: clip;
+      scrollbar-gutter: stable;
     }
 
     section[id],
@@ -1011,77 +1012,82 @@
     }
 
     .hero-actions {
-      width: min(100%, 700px);
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 14px;
+      width: max-content;
+      max-width: 100%;
+      margin-top: 36px;
     }
 
     .hero-card {
-      --btn-a: #ffffff;
-      --btn-b: #f3ebe1;
+      --btn-a: #6f7a68;
+      --btn-b: #121816;
       position: relative;
       isolation: isolate;
-      min-height: 76px;
-      display: flex;
+      box-sizing: border-box;
+      width: max-content;
+      max-width: 100%;
+      min-height: 0;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 19px 20px;
-      border-radius: var(--radius);
+      justify-content: flex-start;
+      gap: 16px;
+      padding: 15px 10px 15px 26px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
       text-align: left;
-      backdrop-filter: blur(20px);
-      background: linear-gradient(135deg, var(--btn-a), var(--btn-b));
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: none;
+      overflow: visible;
       transition:
-        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 240ms ease,
+        transform 380ms cubic-bezier(0.34, 1.45, 0.64, 1),
         background 320ms ease,
+        border-color 240ms ease,
+        box-shadow 320ms ease,
         filter 320ms ease;
     }
 
-    .hero-card.primary {
-      --btn-a: rgba(255, 255, 255, 0.96);
-      --btn-b: #f3ebe1;
-      color: #111111;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    .hero-card > .hero-card-copy,
+    .hero-card > .card-arrow {
+      position: relative;
+      z-index: 1;
     }
 
+    .hero-card > .hero-card-copy {
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .hero-card .card-arrow {
+      flex: 0 0 auto;
+      margin-left: 0;
+    }
+
+    /* Shared solid dark hover fill — no drop shadow */
+    .hero-card.primary,
     .hero-card.secondary {
-      --btn-a: rgba(18, 20, 23, 0.78);
-      --btn-b: rgba(40, 36, 30, 0.62);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+      --btn-a: #1c1f24;
+      --btn-b: #07080a;
     }
 
     .hero-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      filter: brightness(1.035);
+      transform: translateY(-6px);
+      background: linear-gradient(135deg, var(--btn-a), var(--btn-b));
+      border-color: rgba(255, 255, 255, 0.92);
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     .hero-card:active {
-      transform: translateY(-2px) scale(1.01);
+      transform: translateY(-2px);
       filter: brightness(0.98);
       transition-duration: 120ms;
-    }
-
-    .hero-card.primary:hover {
-      background: linear-gradient(135deg, #ffffff 0%, #f6efe6 100%);
-      box-shadow:
-        0 18px 48px rgba(0, 0, 0, 0.2),
-        0 36px 90px rgba(0, 0, 0, 0.32);
-    }
-
-    .hero-card.secondary:hover {
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.38);
-      background: linear-gradient(135deg, rgba(34, 36, 40, 0.92), rgba(54, 50, 44, 0.84));
-      box-shadow:
-        0 18px 48px rgba(0, 0, 0, 0.26),
-        0 36px 90px rgba(0, 0, 0, 0.36),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .hero-card:focus-visible {
@@ -1091,31 +1097,33 @@
 
     .card-label {
       display: block;
-      margin-bottom: 7px;
+      margin-bottom: 5px;
       font-size: 10px;
       line-height: 1;
       font-weight: 700;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      opacity: 0.58;
-      transition: opacity 240ms ease;
+      color: rgba(255, 255, 255, 0.62);
+      transition: color 240ms ease;
     }
 
     .hero-card:hover .card-label {
-      opacity: 0.88;
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .card-title {
       display: block;
       font-size: 15px;
-      line-height: 1.35;
+      line-height: 1.2;
       font-weight: 600;
       letter-spacing: -0.025em;
+      white-space: nowrap;
+      color: #ffffff;
     }
 
     .card-arrow {
-      --arrow-size: 52px;
-      --arrow-icon: 28px;
+      --arrow-size: 44px;
+      --arrow-icon: 20px;
       position: relative;
       width: var(--arrow-size);
       height: var(--arrow-size);
@@ -1123,20 +1131,17 @@
       align-self: center;
       display: grid;
       place-items: center;
-      overflow: hidden;
+      overflow: visible;
       border-radius: 50%;
-      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: transparent;
       color: #ffffff;
-      transition: background 240ms ease, box-shadow 320ms ease;
-    }
-
-    .hero-card.secondary .card-arrow {
-      background: #ffffff;
-      color: #111111;
+      box-shadow: none;
+      transition: border-color 240ms ease;
     }
 
     .hero-card:hover .card-arrow {
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+      border-color: rgba(255, 255, 255, 0.92);
     }
 
     .card-arrow-track {
@@ -1154,65 +1159,45 @@
       overflow: visible;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.75;
+      stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
+      transform-origin: center;
+      transition: transform 420ms cubic-bezier(0.34, 1.45, 0.64, 1);
     }
 
-    /* Short shaft at rest; draws longer on hover */
-    .card-arrow .arrow-shaft {
-      stroke-dasharray: 56;
-      stroke-dashoffset: 0;
+    /* Default → ; Buy/Sell hover ↘ ; Listings hover ↓ */
+    .hero-card.primary .card-arrow svg,
+    .hero-card.secondary .card-arrow svg {
+      transform: rotate(0deg);
     }
 
-    .card-arrow .arrow-head {
-      transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
+    .hero-card.primary:hover .card-arrow svg {
+      transform: rotate(45deg);
+    }
+
+    .hero-card.secondary:hover .card-arrow svg {
+      transform: rotate(90deg);
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      @keyframes arrow-shaft-grow {
-        0%,
-        100% {
-          stroke-dasharray: 56;
+      @keyframes hero-card-enter {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
         }
-        45%,
-        55% {
-          stroke-dasharray: 100;
-        }
-      }
-
-      @keyframes arrow-head-x {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        45%,
-        55% {
-          transform: translateX(4px);
-        }
-      }
-
-      @keyframes arrow-head-y {
-        0%,
-        100% {
+        to {
+          opacity: 1;
           transform: translateY(0);
         }
-        45%,
-        55% {
-          transform: translateY(4px);
-        }
       }
 
-      .hero-card:hover .card-arrow .arrow-shaft {
-        animation: arrow-shaft-grow 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      .hero-card.primary {
+        animation: hero-card-enter 780ms var(--ease-out) 80ms both;
       }
 
-      .hero-card:hover .card-arrow--go .arrow-head {
-        animation: arrow-head-x 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      }
-
-      .hero-card:hover .card-arrow--down .arrow-head {
-        animation: arrow-head-y 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      .hero-card.secondary {
+        animation: hero-card-enter 780ms var(--ease-out) 200ms both;
       }
     }
 
@@ -1222,16 +1207,13 @@
         transform: none;
       }
 
-      .hero-card:hover .card-arrow .arrow-shaft {
-        stroke-dasharray: 100;
+      .hero-card.primary,
+      .hero-card.secondary {
+        animation: none !important;
       }
 
-      .hero-card:hover .card-arrow--go .arrow-head {
-        transform: translateX(3px);
-      }
-
-      .hero-card:hover .card-arrow--down .arrow-head {
-        transform: translateY(3px);
+      .card-arrow svg {
+        transition: none;
       }
     }
 
@@ -1239,38 +1221,29 @@
       @keyframes back-arrow-float {
         0%,
         100% {
-          transform: translateY(0);
+          transform: translateY(2px);
         }
         50% {
           transform: translateY(-3px);
         }
       }
 
-      @keyframes back-arrow-boost {
-        0% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        40% {
-          transform: translateY(-9px);
-          opacity: 0;
-        }
-        41% {
-          transform: translateY(7px);
-          opacity: 0;
-        }
+      @keyframes back-arrow-bounce {
+        0%,
         100% {
-          transform: translateY(0);
-          opacity: 1;
+          transform: translateY(3px);
+        }
+        50% {
+          transform: translateY(-7px);
         }
       }
 
       .back-to-top.is-visible svg {
-        animation: back-arrow-float 1.8s ease-in-out infinite;
+        animation: back-arrow-float 1.6s ease-in-out infinite;
       }
 
       .back-to-top.is-visible:hover svg {
-        animation: back-arrow-boost 560ms var(--ease-out) 1;
+        animation: back-arrow-bounce 680ms cubic-bezier(0.34, 1.45, 0.64, 1) infinite;
       }
     }
 
@@ -1781,6 +1754,14 @@
       display: flex;
     }
 
+    .pagination-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px 16px;
+    }
+
     .pagination-nav {
       display: inline-flex;
       align-items: center;
@@ -1790,6 +1771,47 @@
       background: #ffffff;
       border: 1px solid rgba(18, 20, 23, 0.1);
       box-shadow: 0 8px 24px rgba(18, 20, 23, 0.04);
+    }
+
+    .page-size {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .page-size-select {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 72px;
+      height: 36px;
+      padding: 0 30px 0 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(18, 20, 23, 0.1);
+      background-color: #ffffff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2377716a' d='M1.1 1.2 6 6.1l4.9-4.9 1.1 1.1L6 8.2 0 2.3z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 10px 7px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      outline: 0;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(18, 20, 23, 0.04);
+      transition: border-color 160ms ease;
+    }
+
+    .page-size-select:hover {
+      border-color: rgba(18, 20, 23, 0.22);
+    }
+
+    .page-size-select:focus {
+      border-color: var(--line-strong);
+      box-shadow: var(--focus-ring);
     }
 
     .page-button {
@@ -1971,6 +1993,95 @@
 
     .about-copy:last-child {
       margin-bottom: 0;
+    }
+
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 10px 11px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      text-decoration: none;
+      transition:
+        transform 320ms cubic-bezier(0.34, 1.45, 0.64, 1),
+        background 280ms ease,
+        border-color 220ms ease,
+        box-shadow 280ms ease;
+    }
+
+    .about-cta--buy,
+    .about-cta--sell {
+      --fill-a: #1c1f24;
+      --fill-b: #07080a;
+    }
+
+    .about-cta:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, var(--fill-a), var(--fill-b));
+      border-color: rgba(255, 255, 255, 0.88);
+      box-shadow: none;
+    }
+
+    .about-cta:active {
+      transform: translateY(-1px);
+      transition-duration: 120ms;
+    }
+
+    .about-cta-label {
+      font-size: 14px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .about-cta-arrow {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: border-color 220ms ease;
+    }
+
+    .about-cta:hover .about-cta-arrow {
+      border-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .about-cta-arrow svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transform-origin: center;
+      transition: transform 400ms cubic-bezier(0.34, 1.45, 0.64, 1);
+    }
+
+    /* Buy: → → ↓ ; Sell: → → ↘ */
+    .about-cta--buy .about-cta-arrow svg,
+    .about-cta--sell .about-cta-arrow svg {
+      transform: rotate(0deg);
+    }
+
+    .about-cta--buy:hover .about-cta-arrow svg {
+      transform: rotate(90deg);
+    }
+
+    .about-cta--sell:hover .about-cta-arrow svg {
+      transform: rotate(45deg);
     }
 
     .reviews {
@@ -2315,6 +2426,7 @@
       cursor: pointer;
       overflow: hidden;
       isolation: isolate;
+      scroll-margin-top: 96px;
       transform: translateY(0);
       transition:
         border-color 240ms var(--ease-out),
@@ -3946,6 +4058,186 @@
       border-bottom: 1px solid rgba(18, 20, 23, 0.06);
     }
 
+    .condo-guide {
+      padding: 118px 0 120px;
+      background: #f7f5f0;
+      border-top: 1px solid rgba(18, 20, 23, 0.06);
+    }
+
+    .condo-guide-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .condo-guide-header .section-title {
+      margin: 0 0 10px;
+    }
+
+    .condo-guide-header .section-copy {
+      margin: 0;
+      max-width: 36rem;
+    }
+
+    .condo-guide-paths {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .condo-guide-paths a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(18, 20, 23, 0.14);
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      box-shadow: none;
+      transition: background 200ms ease, border-color 200ms ease, transform 220ms ease;
+    }
+
+    .condo-guide-paths a:hover {
+      background: #fff;
+      border-color: rgba(18, 20, 23, 0.28);
+      transform: translateY(-2px);
+    }
+
+    .condo-guide-marquee {
+      position: relative;
+      overflow: hidden;
+      margin: 0 -28px;
+      padding: 4px 0;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+    }
+
+    .condo-guide-marquee.is-dragging {
+      cursor: grabbing;
+    }
+
+    .condo-guide-track {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      padding: 0 28px;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+    }
+
+    .condo-tour {
+      flex: 0 0 auto;
+      width: min(212px, 68vw);
+    }
+
+    .condo-tour-media {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: calc(var(--radius) + 2px);
+      background: #111;
+      box-shadow: none;
+    }
+
+    .condo-tour-media video,
+    .condo-tour-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .condo-tour-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 58%, rgba(0, 0, 0, 0.42) 100%);
+      pointer-events: none;
+    }
+
+    .condo-tour-link {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+    }
+
+    .condo-tour-meta {
+      position: absolute;
+      z-index: 2;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    .condo-tour-area {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .condo-tour-name {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .condo-tour-address {
+      margin: 4px 0 0;
+      font-size: 13px;
+      line-height: 1.3;
+      opacity: 0.92;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .condo-guide-track {
+        transform: none !important;
+        will-change: auto;
+      }
+
+      .condo-guide-marquee {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        cursor: default;
+      }
+
+      .condo-tour {
+        scroll-snap-align: start;
+      }
+
+      .condo-guide-track .condo-tour[aria-hidden="true"] {
+        display: none;
+      }
+    }
+
     .reels-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -3996,7 +4288,13 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, transparent 28%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.22) 0%,
+        transparent 24%,
+        transparent 58%,
+        rgba(0, 0, 0, 0.48) 100%
+      );
       pointer-events: none;
     }
 
@@ -4006,39 +4304,93 @@
       z-index: 4;
     }
 
-    .reel-meta {
+    .reel-meta,
+    .ig-reel-id {
       position: absolute;
       z-index: 3;
       left: 12px;
-      top: 12px;
+      bottom: 14px;
+      right: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      max-width: calc(100% - 24px);
       color: #ffffff;
       pointer-events: none;
+      opacity: 0.92;
+    }
+
+    .ig-reel-avatar {
+      position: relative;
+      box-sizing: border-box;
+      flex: 0 0 38px;
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      min-height: 38px;
+      max-width: 38px;
+      max-height: 38px;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: #1a1c20;
+      box-shadow: none;
+    }
+
+    .ig-reel-avatar img {
+      position: static !important;
+      inset: auto !important;
+      display: block;
+      box-sizing: border-box;
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px;
+      min-height: 36px;
+      max-width: none !important;
+      max-height: none !important;
+      border: 0;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      background: #1a1c20;
+      box-shadow: none;
+    }
+
+    .ig-reel-copy {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      text-shadow: none;
+    }
+
+    .ig-reel-handle {
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0;
+      font-stretch: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: none;
+    }
+
+    .ig-reel-sub {
+      display: none;
     }
 
     .reel-account {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 10px 6px 7px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(12px);
-      font-size: 11px;
-      line-height: 1;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
+      display: none;
     }
 
     .instagram-icon {
-      width: 13px;
-      height: 13px;
-      flex: 0 0 auto;
-      display: block;
+      display: none;
     }
 
     .reel-card.is-embed .reel-meta,
+    .reel-card.is-embed .ig-reel-id,
     .reel-card.is-embed .reel-link-overlay {
       display: none;
     }
@@ -4297,9 +4649,6 @@
         transform: var(--hover-lift);
       }
 
-      .back-to-top.is-visible:hover {
-        transform: translateY(-6px) scale(1.07);
-      }
     }
 
     @media (max-width: 900px) {
@@ -4913,48 +5262,65 @@
 
     .back-to-top {
       position: fixed;
-      right: 24px;
+      right: max(14px, env(safe-area-inset-right, 0px));
       bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 16px));
-      z-index: 900;
-      width: 48px;
-      height: 48px;
+      z-index: 1200;
+      width: 38px;
+      height: 56px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 50%;
-      background: rgba(18, 20, 23, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 10px;
+      background: rgba(18, 20, 23, 0.82);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(12px) scale(0.92);
-      box-shadow: 0 8px 24px rgba(18, 20, 23, 0.12);
+      transform: translateY(14px);
+      transform-origin: center bottom;
+      box-shadow: none;
       transition:
         opacity 220ms var(--ease-out),
-        transform 280ms var(--ease-out),
+        transform 380ms cubic-bezier(0.34, 1.45, 0.64, 1),
         visibility 220ms ease,
         background 220ms var(--ease-out),
-        border-color 220ms var(--ease-out),
-        box-shadow 280ms var(--ease-out);
+        border-color 220ms var(--ease-out);
+    }
+
+    .back-to-top[hidden] {
+      display: none !important;
     }
 
     .back-to-top:hover {
-      background: rgba(18, 20, 23, 0.72);
-      border-color: rgba(255, 255, 255, 0.24);
-      box-shadow: 0 14px 34px rgba(18, 20, 23, 0.22);
+      background: rgba(18, 20, 23, 0.92);
+      border-color: rgba(255, 255, 255, 0.42);
     }
 
     .back-to-top.is-visible {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      .back-to-top {
+        width: 46px;
+        height: 46px;
+        right: max(12px, env(safe-area-inset-right, 0px));
+        bottom: max(18px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+        background: rgba(18, 20, 23, 0.92);
+      }
+    }
+
+    .back-to-top.is-visible:hover {
+      transform: translateY(0);
     }
 
     .back-to-top.is-visible:active {
-      transform: translateY(-2px) scale(0.96);
+      background: rgba(18, 20, 23, 0.82);
       transition-duration: 120ms;
     }
 
@@ -4964,35 +5330,44 @@
     }
 
     .back-to-top svg {
-      width: 20px;
-      height: 20px;
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin: 0;
       fill: none;
       stroke: #ffffff;
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
+      transform: translateY(1px);
       transform-origin: center;
+      transition: none;
+      will-change: transform;
     }
 
     @media (prefers-reduced-motion: no-preference) {
       @keyframes back-to-top-enter {
         0% {
           opacity: 0;
-          transform: translateY(16px) scale(0.88);
+          transform: translateY(20px);
         }
 
         70% {
-          transform: translateY(-2px) scale(1.04);
+          transform: translateY(-3px);
         }
 
         100% {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: translateY(0);
         }
       }
 
-      .back-to-top.is-visible {
+      .back-to-top.is-visible:not(.is-settled):not(:hover) {
         animation: back-to-top-enter 420ms var(--ease-out) both;
+      }
+
+      .back-to-top.is-visible.is-settled:not(:hover) {
+        animation: none;
       }
     }
 
@@ -5005,12 +5380,13 @@
 
       .back-to-top.is-visible:hover,
       .back-to-top.is-visible:active {
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
+        animation: none;
       }
 
       .back-to-top:hover svg,
       .back-to-top:active svg {
-        transform: none;
+        transform: translateY(0);
       }
     }
 
@@ -5021,6 +5397,11 @@
 
       .reels-grid {
         gap: 16px;
+      }
+
+      .condo-guide-header {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .header-social {
@@ -5078,8 +5459,17 @@
       }
 
       .hero-actions {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        width: max-content;
+        max-width: 100%;
+        gap: 10px;
+      }
+
+      .hero-card {
+        width: 100%;
+        justify-content: space-between;
+        gap: 18px;
       }
 
       .section-header {
@@ -5197,15 +5587,41 @@
         margin: 0 auto;
       }
 
-      .reel-meta {
-        top: 10px;
-        left: 10px;
+      .condo-guide {
+        padding: 88px 0 92px;
       }
 
-      .reel-account {
-        font-size: 10px;
-        padding: 5px 9px 5px 6px;
-        gap: 4px;
+      .condo-tour {
+        width: min(176px, 62vw);
+      }
+
+      .ig-reel-id {
+        left: 10px;
+        bottom: 12px;
+        right: auto;
+        gap: 8px;
+      }
+
+      .ig-reel-avatar {
+        flex: 0 0 34px;
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
+        max-width: 34px;
+        max-height: 34px;
+      }
+
+      .ig-reel-avatar img {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px;
+        min-height: 32px;
+      }
+
+      .ig-reel-handle {
+        font-size: 12px;
+        letter-spacing: 0;
       }
 
       .instagram-icon {
@@ -5268,17 +5684,23 @@
       }
 
       .hero-actions {
-        margin-top: 30px;
-        width: min(100%, 420px);
+        margin-top: 28px;
+        width: max-content;
+        max-width: 100%;
       }
 
       .hero-card {
-        min-height: 70px;
-        padding: 16px 18px;
+        min-height: 0;
+        padding: 13px 9px 13px 20px;
       }
 
       .card-title {
         font-size: 14px;
+      }
+
+      .card-arrow {
+        --arrow-size: 40px;
+        --arrow-icon: 18px;
       }
 
       .section,
@@ -5320,6 +5742,10 @@
       .about-copy {
         margin-left: auto;
         margin-right: auto;
+      }
+
+      .about-actions {
+        justify-content: center;
       }
 
       .services {
@@ -5436,7 +5862,7 @@
 
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#listings">Listings</a>
-        <a href="#about">About</a>
+        <a href="#condo-guide">Condo Guide</a>
         <a href="#services">Services</a>
       </nav>
 
@@ -5515,14 +5941,14 @@
 
         <div class="hero-actions">
           <a class="hero-card primary" href="#services" aria-label="Buy or sell a home with Josh">
-            <span>
+            <span class="hero-card-copy">
               <span class="card-label">Work With Josh</span>
               <span class="card-title">Buy or Sell a Home</span>
             </span>
             <span class="card-arrow card-arrow--go" aria-hidden="true">
               <span class="card-arrow-track">
                 <svg viewBox="0 0 24 24">
-                  <path class="arrow-shaft" pathLength="100" d="M5 12h14"></path>
+                  <path class="arrow-shaft" d="M5 12h14"></path>
                   <path class="arrow-head" d="m13 6 6 6-6 6"></path>
                 </svg>
               </span>
@@ -5530,15 +5956,15 @@
           </a>
 
           <a class="hero-card secondary" href="#listings" aria-label="View active listings">
-            <span>
+            <span class="hero-card-copy">
               <span class="card-label">Featured Inventory</span>
               <span class="card-title">View Active Listings</span>
             </span>
             <span class="card-arrow card-arrow--down" aria-hidden="true">
               <span class="card-arrow-track">
                 <svg viewBox="0 0 24 24">
-                  <path class="arrow-shaft" pathLength="100" d="M12 5v14"></path>
-                  <path class="arrow-head" d="m6 13 6 6 6-6"></path>
+                  <path class="arrow-shaft" d="M5 12h14"></path>
+                  <path class="arrow-head" d="m13 6 6 6-6 6"></path>
                 </svg>
               </span>
             </span>
@@ -5572,7 +5998,7 @@
           <div class="listings-grid" id="listingsGrid"></div>
 
           <div class="empty-state" id="emptyState">
-            Looking in this area? <a href="#contact">Text Josh</a> — he can pull live matches for you.
+            Looking in this area? <a href="#contact">Text Josh</a>. He can pull live matches for you.
           </div>
 
           <div class="pagination" id="pagination" aria-label="Listings pagination"></div>
@@ -5609,6 +6035,31 @@
       </div>
     </section>
 
+    <section class="condo-guide" id="condo-guide" aria-labelledby="condo-guide-heading">
+      <div class="container">
+        <div class="condo-guide-header reveal" data-reveal>
+          <div>
+            <h2 id="condo-guide-heading" class="section-title">Etobicoke Condo Guide</h2>
+            <p class="section-copy">
+              Humber Bay Shores &amp; Mimico building guides.
+            </p>
+          </div>
+          <div class="condo-guide-paths">
+            <a href="etobicoke/south-etobicoke-condo-guide/">Full condo guide</a>
+          </div>
+        </div>
+
+        <div
+          class="condo-guide-marquee"
+          id="condoGuideMarquee"
+          tabindex="0"
+          aria-label="Etobicoke condo guides"
+        >
+          <div class="condo-guide-track" id="condoGuideTrack"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="about" id="about">
       <div class="container">
         <div class="about-inner reveal" data-reveal>
@@ -5622,6 +6073,26 @@
             <p class="about-copy">
               Looking for the best realtor in Etobicoke or Toronto? I work with Thapar Team, #1 Team in Etobicoke, helping buyers and sellers across Etobicoke, Toronto, North York, Markham, Richmond Hill, Vaughan, Mississauga, and the GTA with clear facts, no gimmicks. My job is to put you in the driver's seat so you can make confident decisions and get the deal you actually want.
             </p>
+            <div class="about-actions">
+              <a class="about-cta about-cta--buy" href="#service-buy" aria-label="Buy with Josh, open buyer form">
+                <span class="about-cta-label">Buy with Josh</span>
+                <span class="about-cta-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+              </a>
+              <a class="about-cta about-cta--sell" href="#service-sell" aria-label="Sell with Josh, open seller form">
+                <span class="about-cta-label">Sell with Josh</span>
+                <span class="about-cta-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -7004,7 +7475,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 19V5"></path>
+      <path d="M12 18V7"></path>
       <path d="m6 11 6-6 6 6"></path>
     </svg>
   </button>
@@ -7059,6 +7530,8 @@
     const areaFilter = document.getElementById("areaFilter");
     const tabButtons = document.querySelectorAll(".tab-button");
     const reelsGrid = document.getElementById("reelsGrid");
+    const condoGuideRail = document.getElementById("condoGuideTrack");
+    const condoGuideMarquee = document.getElementById("condoGuideMarquee");
 
     const propertyReels = [
       {
@@ -7077,14 +7550,12 @@
 
     function reelMetaMarkup(reel) {
       return `
-        <div class="reel-meta">
-          <div class="reel-account">
-            <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="5" y="5" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.8"></rect>
-              <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.8"></circle>
-              <path d="M16.8 7.4h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
-            </svg>
-            <span>@openingdoorsforu</span>
+        <div class="ig-reel-id" aria-hidden="true">
+          <div class="ig-reel-avatar">
+            <img src="assets/J_S.png" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="ig-reel-copy">
+            <span class="ig-reel-handle">openingdoorsforu</span>
           </div>
         </div>
         <a class="reel-link-overlay" href="${reel.url}" target="_blank" rel="noopener noreferrer" aria-label="Watch on Instagram"></a>
@@ -7125,9 +7596,285 @@
     }
 
     function renderReels() {
+      if (!reelsGrid) return;
       reelsGrid.innerHTML = "";
       propertyReels.forEach(reel => {
         reelsGrid.appendChild(createReelCard(reel));
+      });
+    }
+
+    const condoGuideTours = [
+      { slug: "palace-place", name: "Palace Place", address: "1 Palace Pier Ct", area: "Humber Bay", poster: "assets/condo-guide/palace-place-building.jpg" },
+      { slug: "palace-pier", name: "Palace Pier", address: "2045 Lake Shore Blvd W", area: "Humber Bay", poster: "assets/condo-guide/palace-pier-exterior.jpg" },
+      { slug: "grand-harbour", name: "Grand Harbour", address: "2285 Lake Shore Blvd W", area: "Mimico", poster: "assets/condo-guide/grand-harbour-building.jpg" },
+      { slug: "waterscapes", name: "Waterscapes", address: "80 Marine Parade Dr", area: "Humber Bay", poster: "assets/condo-guide/waterscapes.jpg" },
+      { slug: "riva-del-lago", name: "Riva Del Lago", address: "110 Marine Parade Dr", area: "Humber Bay", poster: "assets/condo-guide/riva-del-lago-building.jpg" },
+      { slug: "newport-beach", name: "Newport Beach", address: "2111 Lake Shore Blvd W", area: "Humber Bay", poster: "assets/condo-guide/newport-beach-building.jpg" },
+      { slug: "south-beach", name: "South Beach Condos and Lofts", address: "88 Park Lawn Rd", area: "Humber Bay", poster: "assets/condo-guide/south-beach-building.jpg" },
+      { slug: "beyond-the-sea", name: "Beyond the Sea", address: "15 Legion Rd", area: "Mimico", poster: "assets/condo-guide/beyond-the-sea-alt.jpg" },
+      { slug: "ocean-club-waterfront", name: "Ocean Club Waterfront", address: "59 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/ocean-club-alt.jpg" },
+      { slug: "cove-at-waterways", name: "Cove at Waterways", address: "39 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/cove-building.jpg" },
+      { slug: "lago", name: "Lago", address: "56 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/lago-alt.jpg" },
+      { slug: "eau-du-soleil", name: "Eau Du Soleil", address: "20 & 30 Shore Breeze Dr", area: "Humber Bay", poster: "assets/condo-guide/eau-du-soleil-building.jpg" },
+      { slug: "33-shore-breeze", name: "Jade Waterfront", address: "33 Shore Breeze Dr", area: "Humber Bay", poster: "assets/condo-guide/33-shore-breeze-building.jpg" },
+      { slug: "200-manitoba", name: "Skylofts II at Mystic Pointe", address: "200 Manitoba St", area: "Mimico", poster: "assets/condo-guide/200-manitoba-exterior.jpg?v=20260803ar" }
+    ];
+
+    function condoAreaChip(area) {
+      const raw = String(area || "").toLowerCase();
+      if (raw.includes("mimico") || raw.includes("mystic")) return "Mimico";
+      return "Humber Bay";
+    }
+
+    function createCondoTourCard(tour, { duplicate = false } = {}) {
+      const href = `etobicoke/condo/${tour.slug}/`;
+      const area = condoAreaChip(tour.area);
+      return `
+        <article class="condo-tour"${duplicate ? ' aria-hidden="true"' : ""}>
+          <div class="condo-tour-media">
+            <img src="${tour.poster}" alt="" loading="lazy" />
+            <div class="condo-tour-meta">
+              <span class="condo-tour-area">${area}</span>
+              <p class="condo-tour-name">${tour.name}</p>
+              <p class="condo-tour-address">${tour.address}</p>
+            </div>
+            <a class="condo-tour-link" href="${href}" aria-label="Open ${tour.name} condo guide" tabindex="${duplicate ? "-1" : "0"}"></a>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCondoGuide() {
+      const track = condoGuideRail;
+      const marquee = condoGuideMarquee;
+      const section = document.getElementById("condo-guide");
+      if (!track || !marquee) return;
+
+      const firstPass = condoGuideTours.map(tour => createCondoTourCard(tour)).join("");
+      const secondPass = condoGuideTours
+        .map(tour => createCondoTourCard(tour, { duplicate: true }))
+        .join("");
+      track.innerHTML = firstPass + secondPass;
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let offset = 0;
+      let paused = false;
+      let hoverPaused = false;
+      let inView = true;
+      let dragging = false;
+      let moved = false;
+      let pointerId = null;
+      let lastX = 0;
+      let halfWidth = 0;
+      const speed = 0.42;
+
+      const measure = () => {
+        const cards = track.children;
+        const mid = Math.floor(cards.length / 2);
+        if (mid > 0 && cards[0] && cards[mid]) {
+          halfWidth = cards[mid].offsetLeft - cards[0].offsetLeft;
+        } else {
+          halfWidth = Math.floor(track.scrollWidth / 2);
+        }
+      };
+
+      const wrapOffset = () => {
+        if (!halfWidth) return;
+        while (offset <= -halfWidth) offset += halfWidth;
+        while (offset > 0) offset -= halfWidth;
+      };
+
+      const apply = () => {
+        track.style.transform = `translate3d(${offset}px, 0, 0)`;
+      };
+
+      const seedMidStart = () => {
+        measure();
+        const firstCard = track.children[0];
+        const cardW = firstCard ? firstCard.getBoundingClientRect().width : 212;
+        const gap = 16;
+        offset = -Math.round(cardW * 0.45 + gap);
+        wrapOffset();
+        apply();
+      };
+
+      const setPaused = next => {
+        paused = next;
+        marquee.classList.toggle("is-paused", paused || hoverPaused);
+        marquee.setAttribute("aria-pressed", paused || hoverPaused ? "true" : "false");
+      };
+
+      const isAutoPlaying = () => inView && !paused && !hoverPaused && !dragging;
+
+      marquee.setAttribute("role", "region");
+      marquee.setAttribute("aria-roledescription", "carousel");
+      marquee.setAttribute(
+        "aria-label",
+        "Etobicoke condo guides. Drag sideways to browse. Hover or click empty space to pause. Click a building to open its guide."
+      );
+      marquee.setAttribute("aria-pressed", "false");
+
+      if (!reduceMotion) {
+        const tick = () => {
+          if (isAutoPlaying()) {
+            offset -= speed;
+            wrapOffset();
+            apply();
+          }
+          requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(() => {
+          seedMidStart();
+          requestAnimationFrame(tick);
+          window.setTimeout(() => {
+            const ratio = halfWidth ? offset / halfWidth : 0;
+            measure();
+            if (halfWidth) {
+              offset = ratio * halfWidth;
+              wrapOffset();
+              apply();
+            }
+          }, 400);
+        });
+
+        window.addEventListener("resize", () => {
+          const ratio = halfWidth ? offset / halfWidth : 0;
+          measure();
+          offset = ratio * halfWidth;
+          wrapOffset();
+          apply();
+        });
+
+        const observeTarget = section || marquee;
+        const visibilityObserver = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              inView = entry.isIntersecting && entry.intersectionRatio > 0.12;
+            });
+          },
+          { threshold: [0, 0.12, 0.25] }
+        );
+        visibilityObserver.observe(observeTarget);
+      }
+
+      marquee.addEventListener("pointerenter", () => {
+        hoverPaused = true;
+        marquee.classList.add("is-paused");
+      });
+
+      marquee.addEventListener("pointerleave", () => {
+        hoverPaused = false;
+        marquee.classList.toggle("is-paused", paused);
+        if (!dragging) {
+          marquee.setAttribute("aria-pressed", paused ? "true" : "false");
+        }
+      });
+
+      marquee.addEventListener(
+        "wheel",
+        event => {
+          if (reduceMotion) return;
+          const absX = Math.abs(event.deltaX);
+          const absY = Math.abs(event.deltaY);
+          const horizontal = absX > absY || event.shiftKey;
+          if (!horizontal && absX < 1) return;
+
+          event.preventDefault();
+          const delta = event.shiftKey && absX < absY ? event.deltaY : event.deltaX || event.deltaY;
+          offset -= delta;
+          wrapOffset();
+          apply();
+          setPaused(true);
+        },
+        { passive: false }
+      );
+
+      marquee.addEventListener("pointerdown", event => {
+        if (reduceMotion) return;
+        if (event.button != null && event.button !== 0) return;
+        dragging = true;
+        moved = false;
+        pointerId = event.pointerId;
+        lastX = event.clientX;
+      });
+
+      marquee.addEventListener("pointermove", event => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        const dx = event.clientX - lastX;
+        if (!moved && Math.abs(dx) < 4) return;
+        if (!moved) {
+          moved = true;
+          marquee.classList.add("is-dragging");
+          try {
+            marquee.setPointerCapture(pointerId);
+          } catch (_) {
+            /* ignore */
+          }
+        }
+        lastX = event.clientX;
+        offset += dx;
+        wrapOffset();
+        apply();
+      });
+
+      const endDrag = event => {
+        if (!dragging || (pointerId !== null && event.pointerId !== pointerId)) return;
+        dragging = false;
+        marquee.classList.remove("is-dragging");
+        if (pointerId !== null && marquee.hasPointerCapture?.(pointerId)) {
+          try {
+            marquee.releasePointerCapture(pointerId);
+          } catch (_) {
+            /* ignore */
+          }
+        }
+        pointerId = null;
+
+        if (moved) {
+          setPaused(true);
+        }
+      };
+
+      marquee.addEventListener("pointerup", endDrag);
+      marquee.addEventListener("pointercancel", endDrag);
+
+      marquee.addEventListener(
+        "click",
+        event => {
+          if (moved) {
+            event.preventDefault();
+            event.stopPropagation();
+            moved = false;
+            return;
+          }
+          if (event.target.closest("a.condo-tour-link")) return;
+          setPaused(!paused);
+        },
+        true
+      );
+
+      marquee.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setPaused(!paused);
+          return;
+        }
+        if (reduceMotion) return;
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          offset += 80;
+          wrapOffset();
+          apply();
+          setPaused(true);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          offset -= 80;
+          wrapOffset();
+          apply();
+          setPaused(true);
+        }
       });
     }
 
@@ -7503,6 +8250,18 @@
     // Past deals newest → oldest. No prices / no external links (RECO / TRESA).
     const soldTransactions = [
       {
+        title: "11 Yorkville Ave #4102",
+        location: "Annex · Toronto",
+        area: "Midtown Toronto",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-08-03",
+        image: "assets/past/4102-11-yorkville.jpg",
+        alt: "11 Yorkville Ave #4102 · Annex · leased with Josh Schwartz",
+        slug: "11-yorkville-ave-4102"
+      },
+      {
         title: "15 Legion Rd #2203",
         location: "Mimico · Toronto",
         area: "Etobicoke",
@@ -7510,7 +8269,6 @@
         tagClass: "lease",
         price: "Leased",
         date: "2026-08-02",
-        mls: "W13524942",
         image: "assets/listings/legion.jpg",
         alt: "15 Legion Rd #2203 · Mimico · leased with Josh Schwartz",
         slug: "15-legion-rd-2203"
@@ -7798,7 +8556,6 @@
         tagClass: "lease",
         price: "Leased",
         date: "2025-08-04",
-        mls: "W8167436",
         image: "assets/past/2203-15-legion.jpg",
         alt: "15 Legion Rd #2203 · Mimico · previously leased with Josh Schwartz",
         slug: "15-legion-rd-2203-2025"
@@ -8134,6 +8891,8 @@
     let activeTab = "current";
     let activeArea = "all";
     let currentPage = 1;
+    let itemsPerPage = 6;
+    const PAGE_SIZE_OPTIONS = [6, 12, 24, 48];
 
     function listingsTabFromLocation() {
       const params = new URLSearchParams(window.location.search);
@@ -8180,10 +8939,7 @@
     }
 
     function getItemsPerPage() {
-      const width = window.innerWidth;
-      if (width <= 720) return 6;   // 1 col × 6 rows
-      if (width <= 1080) return 12; // 2 cols × 6 rows
-      return 18;                    // 3 cols × 6 rows
+      return itemsPerPage;
     }
 
     function getPaginationPages(current, total) {
@@ -8223,10 +8979,20 @@
         header.classList.remove("is-scrolled");
       }
 
-      const showBackToTop = window.scrollY > 480;
+      const backToTopThreshold = window.matchMedia("(max-width: 720px)").matches ? 280 : 480;
+      const showBackToTop = window.scrollY > backToTopThreshold;
       backToTop.classList.toggle("is-visible", showBackToTop);
       backToTop.hidden = !showBackToTop;
+      if (!showBackToTop) {
+        backToTop.classList.remove("is-settled");
+      }
     }
+
+    backToTop.addEventListener("animationend", event => {
+      if (event.animationName === "back-to-top-enter") {
+        backToTop.classList.add("is-settled");
+      }
+    });
 
     function scrollToTop() {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -8492,27 +9258,28 @@
     }
 
     function renderPagination(totalItems) {
-      const itemsPerPage = getItemsPerPage();
-      const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage) || 1);
+      const size = getItemsPerPage();
+      const totalPages = Math.max(1, Math.ceil(totalItems / size) || 1);
 
-      if (totalItems <= 0 || totalPages <= 1) {
+      if (totalItems <= 0) {
         pagination.innerHTML = "";
         pagination.classList.remove("is-visible");
         return;
       }
 
-      const start = (currentPage - 1) * itemsPerPage + 1;
-      const end = Math.min(currentPage * itemsPerPage, totalItems);
+      const start = (currentPage - 1) * size + 1;
+      const end = Math.min(currentPage * size, totalItems);
       const pages = getPaginationPages(currentPage, totalPages);
       const chevronPrev = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
       const chevronNext = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
       const label = activeTab === "current" ? "Active listings pagination" : "Sold and leased pagination";
+      const sizeOptions = PAGE_SIZE_OPTIONS.map(value => {
+        const selected = value === size ? " selected" : "";
+        return `<option value="${value}"${selected}>${value}</option>`;
+      }).join("");
 
-      pagination.classList.add("is-visible");
-      pagination.classList.remove("is-status-only");
-      pagination.setAttribute("aria-label", label);
-      pagination.innerHTML = `
-        <div class="pagination-nav" role="navigation" aria-label="${label}">
+      const navHtml = totalPages > 1
+        ? `<div class="pagination-nav" role="navigation" aria-label="${label}">
           <button type="button" class="page-button is-nav" data-page="${currentPage - 1}" ${currentPage === 1 ? "disabled" : ""} aria-label="Previous page">${chevronPrev}</button>
           ${pages.map(page => {
             if (page === "ellipsis") {
@@ -8522,6 +9289,19 @@
             return `<button type="button" class="page-button${isActive ? " is-active" : ""}" data-page="${page}" aria-label="Go to page ${page}" ${isActive ? 'aria-current="page"' : ""}>${page}</button>`;
           }).join("")}
           <button type="button" class="page-button is-nav" data-page="${currentPage + 1}" ${currentPage === totalPages ? "disabled" : ""} aria-label="Next page">${chevronNext}</button>
+        </div>`
+        : "";
+
+      pagination.classList.add("is-visible");
+      pagination.classList.remove("is-status-only");
+      pagination.setAttribute("aria-label", label);
+      pagination.innerHTML = `
+        <div class="pagination-bar">
+          ${navHtml}
+          <label class="page-size">
+            <span>Per page</span>
+            <select class="page-size-select" data-page-size aria-label="Listings per page">${sizeOptions}</select>
+          </label>
         </div>
         <p class="pagination-status">${start}–${end} of ${totalItems}</p>
       `;
@@ -8535,6 +9315,19 @@
       if (!page || page === currentPage) return;
 
       currentPage = page;
+      renderListings({ preserveScroll: true });
+    });
+
+    pagination.addEventListener("change", event => {
+      const select = event.target.closest("[data-page-size]");
+      if (!select || !pagination.contains(select)) return;
+
+      const nextSize = Number(select.value);
+      if (!PAGE_SIZE_OPTIONS.includes(nextSize) || nextSize === itemsPerPage) return;
+
+      const firstIndex = (currentPage - 1) * itemsPerPage;
+      itemsPerPage = nextSize;
+      currentPage = Math.floor(firstIndex / itemsPerPage) + 1;
       renderListings({ preserveScroll: true });
     });
 
@@ -8616,19 +9409,12 @@
       renderListings({ preserveScroll: true });
     });
 
-    let lastItemsPerPage = getItemsPerPage();
-    window.addEventListener("resize", () => {
-      const nextItemsPerPage = getItemsPerPage();
-      if (nextItemsPerPage === lastItemsPerPage) return;
-      lastItemsPerPage = nextItemsPerPage;
-      renderListings({ preserveScroll: true });
-    });
-
     populateAreaFilter();
     updateHeaderState();
     applyListingsDeepLink();
     renderListings();
     renderReels();
+    renderCondoGuide();
     renderReviewsMarquee();
 
     window.addEventListener("hashchange", () => {
@@ -9537,7 +10323,30 @@
         });
       });
 
-      resetOverview();
+      function openServiceFromHash() {
+        const hash = window.location.hash.replace(/^#/, "");
+        if (hash !== "service-buy" && hash !== "service-sell" && hash !== "service-lease") {
+          return false;
+        }
+        const card = cards.find(item => item.id === hash);
+        if (!card) return false;
+        markReady();
+        engageCard(card);
+        requestAnimationFrame(() => {
+          card.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+        });
+        return true;
+      }
+
+      if (!openServiceFromHash()) {
+        resetOverview();
+      }
+
+      window.addEventListener("hashchange", () => {
+        if (!openServiceFromHash() && window.location.hash === "#services") {
+          resetOverview();
+        }
+      });
     })();
 
     (function initAsciiGarden() {

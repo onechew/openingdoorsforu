@@ -27,7 +27,7 @@ CITIES = {
         "title": "Toronto Realtor | Homes for Sale, Sold & Lease | Josh Schwartz",
         "description": "Buy, sell, or lease in Toronto with Josh Schwartz. Browse current listings, recently sold and leased homes across Downtown, Midtown, East Toronto, and West Toronto.",
         "lead": "From downtown condos to midtown apartments and west-end houses, Josh helps buyers, sellers, and renters find the right Toronto fit with clear local guidance.",
-        "about": "Toronto is the core of the GTA market — waterfront towers, midtown apartments, and established west- and east-end streets. Josh Schwartz helps clients weigh neighbourhood fit, pricing, and timing without the noise.",
+        "about": "Toronto is the core of the GTA market: waterfront towers, midtown apartments, and established west- and east-end streets. Josh Schwartz helps clients weigh neighbourhood fit, pricing, and timing without the noise.",
         "schools": [
             "University of Toronto and nearby college campuses shape strong rental demand downtown.",
             "Families often weigh school catchments in midtown and the east/west ends alongside commute time.",
@@ -53,8 +53,8 @@ CITIES = {
         "areas": ["Etobicoke"],
         "title": "Etobicoke Realtor | Homes for Sale, Sold & Lease | Josh Schwartz",
         "description": "Etobicoke realtor Josh Schwartz with Thapar Team, #1 Team in Etobicoke. Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.",
-        "lead": "Etobicoke is Toronto’s west side — lake shore living, family neighbourhoods, and easy access to downtown and Pearson. Josh works with Thapar Team, #1 Team in Etobicoke.",
-        "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance — backed by Thapar Team, #1 Team in Etobicoke.",
+        "lead": "Etobicoke is Toronto’s west side: lake shore living, family neighbourhoods, and easy access to downtown and Pearson. Josh works with Thapar Team, #1 Team in Etobicoke.",
+        "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance, backed by Thapar Team, #1 Team in Etobicoke.",
         "schools": [
             "Families often compare schools across south Etobicoke and inland neighbourhoods when choosing between houses and condos.",
             "Proximity to parks, the waterfront trail, and community centres matters as much as classroom rankings for many buyers.",
@@ -81,7 +81,7 @@ CITIES = {
         "title": "North York Realtor | Condos & Homes | Josh Schwartz",
         "description": "North York real estate with Josh Schwartz: current listings plus recently sold and leased homes around Willowdale, Yonge corridor, and surrounding North York communities.",
         "lead": "North York mixes Yonge-corridor condos with quieter residential streets. Josh helps buyers and renters weigh amenities, subway access, and value against downtown pricing.",
-        "about": "North York blends high-rise living along Yonge with calmer residential pockets. Josh helps clients read the trade-offs clearly — building amenities, transit, and price — without overselling any one corridor.",
+        "about": "North York blends high-rise living along Yonge with calmer residential pockets. Josh helps clients read the trade-offs clearly (building amenities, transit, and price) without overselling any one corridor.",
         "schools": [
             "Yonge-corridor living attracts students and professionals tied to nearby colleges and tutoring hubs.",
             "Family buyers frequently check school options when choosing between condo and low-rise product.",
@@ -189,7 +189,7 @@ CITIES = {
         "title": "Mississauga Realtor | GTA Homes | Josh Schwartz",
         "description": "Mississauga and west-GTA guidance from Josh Schwartz: sold and leased highlights plus help buying, selling, or leasing across Mississauga.",
         "lead": "Mississauga spans condo nodes, townhomes, and detached streets across the west GTA. Josh helps clients compare commute, schools, and value against Etobicoke and Oakville.",
-        "about": "Mississauga is one of the GTA’s largest markets — and many micro-markets in one. Josh helps buyers, sellers, and renters narrow the map so neighbourhood comps stay relevant.",
+        "about": "Mississauga is one of the GTA’s largest markets, and many micro-markets in one. Josh helps buyers, sellers, and renters narrow the map so neighbourhood comps stay relevant.",
         "schools": [
             "School choice varies widely by neighbourhood. Treat Mississauga as many micro-markets, not one.",
             "Families should align budget, commute, and catchment before touring broadly.",
@@ -239,7 +239,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20260802l"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20260803bq"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -301,11 +301,33 @@ def page_shell(
           />
         </div>
       </a>
-      <nav class="nav-links" aria-label="Primary">
+      <nav class="nav-links" aria-label="Primary navigation">
         <a href="{home}#listings">Listings</a>
+        <a href="{home}#condo-guide">Condo Guide</a>
         <a href="{home}#services">Services</a>
-        <a href="{home}#contact">Contact</a>
       </nav>
+      <div class="header-utils">
+        <div class="header-contact">
+          <a class="call-phone" href="tel:+16473608179" aria-label="Call Josh">
+            <span class="flag" aria-hidden="true">🇨🇦</span>
+            <span class="phone-text">647-360-8179</span>
+          </a>
+        </div>
+        <div class="header-social" aria-label="Social links">
+          <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/></svg>
+          </a>
+          <a class="fill-icon icon-tiktok" href="https://www.tiktok.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.19 8.19 0 0 0 4.76 1.52V6.75a4.85 4.85 0 0 1-.999-.06z"/></svg>
+          </a>
+          <a class="fill-icon icon-fb" href="https://www.facebook.com/OpeningdoorsforU/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4z"/></svg>
+          </a>
+          <a class="icon-ig" href="https://www.instagram.com/openingdoorsforu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.4" y="2.4" width="19.2" height="19.2" rx="5.4" stroke="currentColor" stroke-width="2.35"/><circle cx="12" cy="12" r="4.15" stroke="currentColor" stroke-width="2.35"/><circle cx="17.55" cy="6.45" r="1.35" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </header>
   {body}
@@ -318,7 +340,36 @@ def page_shell(
       <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
     </div>
   </footer>
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 18V7"></path>
+      <path d="m6 11 6-6 6 6"></path>
+    </svg>
+  </button>
   <script>
+    (function initBackToTop() {{
+      const btn = document.getElementById("backToTop");
+      if (!btn) return;
+      const threshold = window.matchMedia("(max-width: 720px)").matches ? 280 : 480;
+      const update = () => {{
+        const show = window.scrollY > threshold;
+        btn.classList.toggle("is-visible", show);
+        btn.hidden = !show;
+        if (!show) btn.classList.remove("is-settled");
+      }};
+      window.addEventListener("scroll", update, {{ passive: true }});
+      update();
+      btn.addEventListener("animationend", (event) => {{
+        if (event.animationName === "back-to-top-enter") {{
+          btn.classList.add("is-settled");
+        }}
+      }});
+      btn.addEventListener("click", () => {{
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({{ top: 0, behavior: reduce ? "auto" : "smooth" }});
+      }});
+    }})();
+
     async function copyText(text) {{
       if (navigator.clipboard && window.isSecureContext) {{
         await navigator.clipboard.writeText(text);
@@ -388,7 +439,7 @@ def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
         home = asset_href("", depth) or "./"
         thapar = "https://www.thaparteam.ca/property-search/results/?searchid=3952868"
         return (
-            f'<p class="empty">Josh can help you buy, sell, or lease here — '
+            f'<p class="empty">Josh can help you buy, sell, or lease here. '
             f'<a href="{home}#contact">text Josh</a> or '
             f'<a href="{thapar}" target="_blank" rel="noopener noreferrer">browse live inventory</a>.</p>'
         )
@@ -493,6 +544,17 @@ def write_city_pages():
         out_dir = ROOT / key
         out_dir.mkdir(parents=True, exist_ok=True)
         canonical = f"{ORIGIN}/{key}/"
+        condo_cta = (
+            '<a class="btn btn-primary" href="south-etobicoke-condo-guide/">Condo guide</a>'
+            if key == "etobicoke"
+            else ""
+        )
+        listings_btn = "btn-secondary" if key == "etobicoke" else "btn-primary"
+        other_city_links = "".join(
+            f'<a href="{asset_href(k + "/", depth)}">{esc(CITIES[k]["name"])}</a>'
+            for k in CITIES
+            if k != key
+        )
         body = f"""
   <section class="hero-band">
     <div class="container">
@@ -501,8 +563,8 @@ def write_city_pages():
       <h1>{esc(meta['name'])} Real Estate</h1>
       <p class="lead">{esc(meta.get('lead', meta['about']))}</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="{asset_href('', depth)}#contact">Work with Josh</a>
-        <a class="btn btn-secondary" href="{asset_href('', depth)}#listings">View all listings</a>
+        {condo_cta}
+        <a class="btn {listings_btn}" href="{asset_href('', depth)}#listings">View all listings</a>
       </div>
     </div>
   </section>
@@ -510,7 +572,7 @@ def write_city_pages():
   <section class="section">
     <div class="container">
       <h2>Current Listings in {esc(meta['name'])}</h2>
-      <p class="section-copy">Live inventory Josh can help you buy or lease in and around {esc(meta['name'])}. Team listings are with Snobar Realty Group / Thapar Team — not all are personally listed by Josh.</p>
+      <p class="section-copy">Live inventory Josh can help you buy or lease in and around {esc(meta['name'])}. Team listings are with Snobar Realty Group / Thapar Team. Not all are personally listed by Josh.</p>
       {cards_html(current, depth, asset_href('listings/', depth))}
     </div>
   </section>
@@ -563,7 +625,7 @@ def write_city_pages():
       </div>
       <p class="section-copy snapshot-note">{esc(meta['snapshot']['note'])} <span class="snapshot-cta">Ask Josh for a current {esc(meta['name'])} brief.</span></p>
       <div class="city-links" style="margin-top:18px">
-        {''.join(f'<a href="{asset_href(k + "/", depth)}">{esc(CITIES[k]["name"])}</a>' for k in CITIES if k != key)}
+        {other_city_links}
       </div>
     </div>
   </section>
@@ -752,7 +814,7 @@ def resolve_city_slug(item: dict) -> str | None:
 
 
 def neighbourhood_section_html(item: dict, depth: int) -> str:
-    """Real area context + city CTA — not a restatement of the address."""
+    """Real area context + city CTA, not a restatement of the address."""
     city_slug = resolve_city_slug(item)
     pocket = (item.get("location") or "").split("·")[0].strip() or item.get("area") or "This area"
     if not city_slug or city_slug not in CITIES:

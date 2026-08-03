@@ -21,6 +21,19 @@
   ],
   "sold": [
     {
+      "title": "11 Yorkville Ave #4102",
+      "location": "Annex · Toronto",
+      "area": "Midtown Toronto",
+      "status": "Leased",
+      "tagClass": "lease",
+      "price": "Leased",
+      "date": "2026-08-03",
+      "image": "assets/past/4102-11-yorkville.jpg",
+      "alt": "11 Yorkville Ave #4102 · Annex · leased with Josh Schwartz",
+      "slug": "11-yorkville-ave-4102",
+      "kind": "past"
+    },
+    {
       "title": "15 Legion Rd #2203",
       "location": "Mimico · Toronto",
       "area": "Etobicoke",
@@ -28,7 +41,6 @@
       "tagClass": "lease",
       "price": "Leased",
       "date": "2026-08-02",
-      "mls": "W13524942",
       "image": "assets/listings/legion.jpg",
       "alt": "15 Legion Rd #2203 · Mimico · leased with Josh Schwartz",
       "slug": "15-legion-rd-2203",
@@ -367,7 +379,6 @@
       "tagClass": "lease",
       "price": "Leased",
       "date": "2025-08-04",
-      "mls": "W8167436",
       "image": "assets/past/2203-15-legion.jpg",
       "alt": "15 Legion Rd #2203 · Mimico · previously leased with Josh Schwartz",
       "slug": "15-legion-rd-2203-2025",
