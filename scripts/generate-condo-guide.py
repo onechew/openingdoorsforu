@@ -53,8 +53,10 @@ def page_shell(
     depth: int,
     body: str,
     json_ld: dict | None = None,
+    og_image: str | None = None,
 ) -> str:
     prefix = "../" * depth
+    image = og_image or f"{ORIGIN}/assets/JS.jpg"
     ld = ""
     if json_ld:
         ld = f'\n  <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>'
@@ -71,8 +73,9 @@ def page_shell(
   <meta property="og:title" content="{esc(title)}" />
   <meta property="og:description" content="{esc(description)}" />
   <meta property="og:url" content="{esc(canonical)}" />
-  <meta property="og:image" content="{ORIGIN}/assets/JS.jpg" />
+  <meta property="og:image" content="{esc(image)}" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{esc(image)}" />
   <link rel="icon" href="{prefix}favicon.ico" sizes="any" />
   <link rel="icon" href="{prefix}assets/js.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="{prefix}apple-touch-icon.png" sizes="180x180" />
@@ -80,8 +83,8 @@ def page_shell(
   <link rel="preload" href="{prefix}assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260803bv" />{ld}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260803bx" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -240,7 +243,7 @@ FACT_ICONS = {
     "Completed": "calendar_month",
     "Status": "check",
     "Buildings": "apartment",
-    "Storeys": "layers",
+    "Storeys": "floor",
     "Height": "height",
     "Units": "grid_view",
     "Suite sizes": "square_foot",
@@ -249,9 +252,9 @@ FACT_ICONS = {
     "Condo corp.": "description",
     "Management": "badge",
     "Interior design": "design_services",
-    "Security": "shield",
+    "Security": "security",
     "Water views": "waves",
-    "Pets": "pets",
+    "Pets": "pet_supplies",
     "Website": "language",
     "HoodQ": "home",
 }
@@ -260,14 +263,14 @@ AMENITY_ICONS = {
     "Air Conditioning": "ac_unit",
     "Building Insurance": "shield",
     "Common Element Maintenance": "build",
-    "Heat": "thermostat",
+    "Heat": "mode_heat",
     "Hydro": "bolt",
     "Water": "water_drop",
-    "Parking": "local_parking",
+    "Parking": "directions_car",
     "Cable TV": "tv",
     "Car Wash Bay": "local_car_wash",
     "Community BBQ": "outdoor_grill",
-    "Concierge": "support_agent",
+    "Concierge": "concierge",
     "Enter Phone System": "dialpad",
     "Games / Recreation Room": "sports_esports",
     "Gym / Exercise": "fitness_center",
@@ -275,15 +278,15 @@ AMENITY_ICONS = {
     "Media Room / Cinema": "theaters",
     "Meeting / Function Room": "meeting_room",
     "Party Room": "liquor",
-    "Pet Wash": "pets",
-    "Playground": "toys",
+    "Pet Wash": "pet_supplies",
+    "Playground": "person_play",
     "Pool - Indoor": "pool",
     "Pool - Outdoor": "pool",
     "Sauna": "sauna",
     "Security Guard": "security",
     "Visitor Lounge": "weekend",
-    "Visitor Parking": "local_parking",
-    "Yoga Studio": "self_improvement",
+    "Visitor Parking": "directions_car",
+    "Yoga Studio": "sports_gymnastics",
     "Guest Suites": "bed",
     "Golf Simulator": "golf_course",
     "Putting Green": "golf_course",
@@ -301,16 +304,33 @@ AMENITY_ICONS = {
 }
 
 
-def material_icon(name: str, css_class: str) -> str:
+# Material Security uses the checkered `security` glyph (filled, not outline `shield`).
+FILLED_ICON_LABELS = frozenset({"Security", "Security Guard"})
+
+
+def material_icon(name: str, css_class: str, *, filled: bool = False) -> str:
     """Google Material Symbols Outlined icon (https://fonts.google.com/icons)."""
+    fill_class = " is-filled" if filled else ""
     return (
-        f'<span class="material-symbols-outlined {css_class}" aria-hidden="true">'
+        f'<span class="material-symbols-outlined {css_class}{fill_class}" aria-hidden="true">'
         f"{name}</span>"
     )
 
 
 def fact_icon(label: str) -> str:
-    return material_icon(FACT_ICONS.get(label) or FACT_ICONS["Complex"], "condo-fact-icon")
+    return material_icon(
+        FACT_ICONS.get(label) or FACT_ICONS["Complex"],
+        "condo-fact-icon",
+        filled=label in FILLED_ICON_LABELS,
+    )
+
+
+def icon_markup(label: str) -> str:
+    return material_icon(
+        AMENITY_ICONS.get(label) or "support_agent",
+        "condo-icon",
+        filled=label in FILLED_ICON_LABELS,
+    )
 
 
 
@@ -509,11 +529,6 @@ def split_primary_note(value: object) -> tuple[str, str]:
             primary, note = text.split(sep, 1)
             return primary.strip(), note.strip()
     return text, ""
-
-
-def icon_markup(label: str) -> str:
-    return material_icon(AMENITY_ICONS.get(label) or "support_agent", "condo-icon")
-
 
 
 def icon_grid(items: list, empty_message: str = "") -> str:
@@ -1065,13 +1080,9 @@ def write_building(b: dict) -> None:
     </div>
   </section>
 """
-    html = page_shell(
-        title=f"{b['name']} | Etobicoke Condo Guide | Josh Schwartz",
-        description=f"{b['name']} at {b['address']} in {b.get('area', 'Etobicoke')}: history, amenities, and local guidance from Josh Schwartz.",
-        canonical=f"{ORIGIN}/etobicoke/condo/{b['slug']}/",
-        depth=depth,
-        body=body,
-        json_ld={
+    poster = (b.get("poster") or "").strip()
+    og_image = f"{ORIGIN}/{poster}" if poster else None
+    json_ld = {
             "@context": "https://schema.org",
             "@type": "Residence",
             "name": b["name"],
@@ -1083,7 +1094,17 @@ def write_building(b: dict) -> None:
                 "addressRegion": "ON",
                 "addressCountry": "CA",
             },
-        },
+        }
+    if og_image:
+        json_ld["image"] = og_image
+    html = page_shell(
+        title=f"{b['name']} | Etobicoke Condo Guide | Josh Schwartz",
+        description=f"{b['name']} at {b['address']} in {b.get('area', 'Etobicoke')}: history, amenities, and local guidance from Josh Schwartz.",
+        canonical=f"{ORIGIN}/etobicoke/condo/{b['slug']}/",
+        depth=depth,
+        body=body,
+        json_ld=json_ld,
+        og_image=og_image,
     )
     (out / "index.html").write_text(html, encoding="utf-8")
 

@@ -239,7 +239,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20260803bq"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20260803ca"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -282,6 +282,9 @@ def page_shell(
   <link rel="icon" href="{icon_png}" type="image/png" sizes="48x48" />
   <link rel="apple-touch-icon" href="{icon_apple}" sizes="180x180" />
   {fonts}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
   <link rel="stylesheet" href="{css}" />
   {ld}
 </head>
@@ -341,10 +344,7 @@ def page_shell(
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 18V7"></path>
-      <path d="m6 11 6-6 6 6"></path>
-    </svg>
+    <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
   </button>
   <script>
     (function initBackToTop() {{
@@ -696,37 +696,31 @@ def count_label(value, singular: str, plural: str | None = None) -> str:
     return f"{raw} {label}"
 
 
-ICON_BED = (
-    '<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true">'
-    '<path d="M3 11V19M21 11V19M3 14H21M5 14V9.5C5 8.1 6.1 7 7.5 7H11C12.1 7 13 7.6 13.5 8.5C14 7.6 14.9 7 16 7H16.5C17.9 7 19 8.1 19 9.5V14M3 19H21" '
-    'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
-    "</svg>"
-)
-ICON_BATH = (
-    '<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true">'
-    '<path d="M5 12V7.5C5 6.1 6.1 5 7.5 5H9M5 12H20C20.6 12 21 12.4 21 13V15C21 17.2 19.2 19 17 19H7C4.8 19 3 17.2 3 15V13C3 12.4 3.4 12 4 12H5ZM8 19V21M16 19V21" '
-    'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
-    "</svg>"
-)
-ICON_PARKING = (
-    '<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true">'
-    '<circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/>'
-    '<path d="M10 16.5V7.5h3.2c1.7 0 2.8 1 2.8 2.5S14.9 12.5 13.2 12.5H10" '
-    'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
-    "</svg>"
-)
-ICON_SIZE = (
-    '<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true">'
-    '<path d="M5 9V5H9M15 5H19V9M19 15V19H15M9 19H5V15" '
-    'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
-    "</svg>"
-)
-ICON_CONDO = (
-    '<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true">'
-    '<path d="M4 20V9l5-3v14M9 20V6l7 4v10M13 10h2M13 13h2M13 16h2M6.5 12H7.5M6.5 15H7.5M4 20h16" '
-    'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
-    "</svg>"
-)
+ICON_BED = "bed"
+ICON_BATH = "shower"
+ICON_PARKING = "directions_car"
+ICON_SIZE = "square_foot"
+
+PROPERTY_TYPE_ICONS = {
+    "Condo Apt": "apartment",
+    "Apartment": "apartment",
+    "Triplex": "apartment",
+    "Duplex": "apartment",
+    "Townhouse": "home",
+    "Home": "home",
+}
+
+
+def material_icon(name: str, css_class: str = "fact-icon") -> str:
+    """Google Material Symbols Outlined — match condo guide weight/fill."""
+    return (
+        f'<span class="material-symbols-outlined {css_class}" aria-hidden="true">'
+        f"{name}</span>"
+    )
+
+
+def property_type_icon(label: str) -> str:
+    return material_icon(PROPERTY_TYPE_ICONS.get(label, "home"))
 
 
 def infer_property_type(item: dict) -> str:
@@ -752,23 +746,30 @@ def listing_facts_html(item: dict) -> str:
     facts = []
     if item.get("beds"):
         facts.append(
-            f'<div class="fact">{ICON_BED}<span>{esc(count_label(item["beds"], "bed"))}</span></div>'
+            f'<div class="fact">{material_icon(ICON_BED)}'
+            f'<span>{esc(count_label(item["beds"], "bed"))}</span></div>'
         )
     if item.get("baths"):
         facts.append(
-            f'<div class="fact">{ICON_BATH}<span>{esc(count_label(item["baths"], "bath"))}</span></div>'
+            f'<div class="fact">{material_icon(ICON_BATH)}'
+            f'<span>{esc(count_label(item["baths"], "bath"))}</span></div>'
         )
     if item.get("parking") is not None and str(item.get("parking")).strip() != "":
         facts.append(
-            f'<div class="fact">{ICON_PARKING}<span>{esc(count_label(item["parking"], "parking", "parking"))}</span></div>'
+            f'<div class="fact">{material_icon(ICON_PARKING)}'
+            f'<span>{esc(count_label(item["parking"], "parking", "parking"))}</span></div>'
         )
     if item.get("size"):
         size = re.sub(r"\s*SQ\.?\s*FT\.?", " sqft", str(item["size"]), flags=re.I)
         size = size.replace("-", "–")
-        facts.append(f'<div class="fact">{ICON_SIZE}<span>{esc(size)}</span></div>')
+        facts.append(
+            f'<div class="fact">{material_icon(ICON_SIZE)}<span>{esc(size)}</span></div>'
+        )
     # Always show property type (condo / home / etc.) on every listing page
+    prop_type = infer_property_type(item)
     facts.append(
-        f'<div class="fact">{ICON_CONDO}<span>{esc(infer_property_type(item))}</span></div>'
+        f'<div class="fact">{property_type_icon(prop_type)}'
+        f'<span>{esc(prop_type)}</span></div>'
     )
 
     price = item.get("price") or ""
