@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="../assets/seo-pages.css?v=20260803ca" />
+  <link rel="stylesheet" href="../assets/seo-pages.css?v=20260806hc" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Etobicoke Realtor | Homes for Sale, Sold & Lease | Josh Schwartz", "description": "Etobicoke realtor Josh Schwartz with Thapar Team, #1 Team in Etobicoke. Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.", "url": "https://openingdoorsforu.com/etobicoke/", "isPartOf": {"@id": "https://openingdoorsforu.com/#website"}, "about": {"@type": "Place", "name": "Etobicoke"}}</script>
 </head>
 <body>
@@ -56,6 +56,15 @@
             <span class="flag" aria-hidden="true">🇨🇦</span>
             <span class="phone-text">647-360-8179</span>
           </a>
+          <button
+            class="copy-email email-text"
+            type="button"
+            data-email="josh@thaparteam.ca"
+            data-tip="Copy email"
+            aria-label="Copy email address"
+          >
+            <span class="copy-email-text">josh@thaparteam.ca</span>
+          </button>
         </div>
         <div class="header-social" aria-label="Social links">
           <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" aria-label="Threads">
@@ -101,6 +110,15 @@
           <p class="card-title">150 Portland St #3</p>
           <p class="card-meta">Mimico · Toronto</p>
           
+        </div>
+      </a>
+      <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13641856/208-la-rose-ave-toronto-on-m9p-1b5/?src=2" target="_blank" rel="noopener noreferrer">
+        <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1786000951/211/211_W13641856_01.jpg" alt="208 La Rose Ave #9 · Willowridge-Martingrove-Richview · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" /></div>
+        <div class="card-body">
+          <span class="card-status sale">For Sale</span>
+          <p class="card-title">208 La Rose Ave #9</p>
+          <p class="card-meta">Willowridge-Martingrove-Richview · Toronto</p>
+          <p class="card-meta card-attr">Listed with Snobar Realty Group Inc.</p>
         </div>
       </a>
       <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13623462/2257-lawrence-ave-w-toronto-on-m9p-2a4/?src=2" target="_blank" rel="noopener noreferrer">
@@ -471,6 +489,27 @@
       document.execCommand("copy");
       document.body.removeChild(input);
     }
+
+    document.querySelectorAll(".copy-email").forEach(button => {
+      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      let copiedTimer;
+      button.addEventListener("click", async () => {
+        const email = button.dataset.email;
+        if (!email) return;
+        try {
+          await copyText(email);
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          window.clearTimeout(copiedTimer);
+          copiedTimer = window.setTimeout(() => {
+            button.setAttribute("data-tip", defaultTip);
+            button.classList.remove("is-copied");
+          }, 2000);
+        } catch (error) {
+          window.prompt("Copy email address:", email);
+        }
+      });
+    });
 
     (function initCopyMls() {
       const defaultTip = "Copy MLS#";

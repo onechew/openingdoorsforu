@@ -1,4 +1,4 @@
-window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-08-03T00:15:30+00:00", "teamCount": 37, "joshCount": 1, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
+window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-08-06T20:38:00+00:00", "teamCount": 39, "joshCount": 1, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
 window.__ACTIVE_LISTINGS__ = [
   {
     "title": "150 Portland St #3",
@@ -17,6 +17,44 @@ window.__ACTIVE_LISTINGS__ = [
     "size": "700-1,100 SQ.FT.",
     "type": "Triplex",
     "mls": "W13580606"
+  },
+  {
+    "title": "299 Mill Rd #1510",
+    "location": "Markland Wood · Toronto",
+    "status": "For Sale",
+    "tagClass": "sale",
+    "price": "$818,888",
+    "image": "https://cdn.listingphotos.sierrastatic.com/pics2x/v1786000652/211/211_W13641968_01.jpg",
+    "alt": "299 Mill Rd #1510 · Markland Wood · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team",
+    "url": "https://www.thaparteam.ca/property-search/detail/211/W13641968/299-mill-rd-toronto-on-m9c-4v9/?src=2",
+    "kind": "team",
+    "source": "thapar",
+    "beds": "3",
+    "baths": "2",
+    "type": "Condo Apartment",
+    "mls": "W13641968",
+    "area": "West Toronto",
+    "office": "Snobar Realty Group Inc.",
+    "attribution": "Listed with Snobar Realty Group Inc."
+  },
+  {
+    "title": "208 La Rose Ave #9",
+    "location": "Willowridge-Martingrove-Richview · Toronto",
+    "status": "For Sale",
+    "tagClass": "sale",
+    "price": "$1,288,888",
+    "image": "https://cdn.listingphotos.sierrastatic.com/pics2x/v1786000951/211/211_W13641856_01.jpg",
+    "alt": "208 La Rose Ave #9 · Willowridge-Martingrove-Richview · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team",
+    "url": "https://www.thaparteam.ca/property-search/detail/211/W13641856/208-la-rose-ave-toronto-on-m9p-1b5/?src=2",
+    "kind": "team",
+    "source": "thapar",
+    "beds": "3",
+    "baths": "4",
+    "type": "Condo Townhouse",
+    "mls": "W13641856",
+    "area": "Etobicoke",
+    "office": "Snobar Realty Group Inc.",
+    "attribution": "Listed with Snobar Realty Group Inc."
   },
   {
     "title": "2257 Lawrence Ave W",

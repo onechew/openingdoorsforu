@@ -286,26 +286,69 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 14px;
 }
 
-.header-contact a {
+.header-contact a,
+.header-contact .copy-email {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 7px;
   color: var(--ink);
+  font: inherit;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
+  white-space: nowrap;
   opacity: 0.92;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   transition: opacity 160ms ease;
 }
 
-.header-contact a:hover {
+.header-contact a:hover,
+.header-contact .copy-email:hover {
   opacity: 1;
 }
 
 .header-contact .flag {
   font-size: 16px;
   line-height: 1;
+}
+
+@media (max-width: 860px) {
+  .header-contact {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* Stacked phone/email: open tips to the left so they don't cover the row below. */
+  .header-contact [data-tip]::after {
+    left: auto;
+    right: calc(100% + 8px);
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) translateX(4px);
+  }
+
+  .header-contact [data-tip]:hover::after,
+  .header-contact [data-tip]:focus-visible::after,
+  .header-contact [data-tip].is-copied::after {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .header-contact a,
+  .header-contact .copy-email {
+    font-size: 14px;
+  }
+
+  .header-contact .flag {
+    font-size: 15px;
+  }
 }
 
 .header-social {
@@ -1005,6 +1048,7 @@ h1 {
   .brand,
   .nav-links a,
   .header-contact a,
+  .header-contact .copy-email,
   .header-social a,
   .prose a,
   .breadcrumb a,
@@ -2805,7 +2849,8 @@ h1 {
     grid-column: auto;
   }
 
-  .header-contact .phone-text {
+  .header-contact .phone-text,
+  .header-contact .copy-email-text {
     font-size: 14px;
   }
 }

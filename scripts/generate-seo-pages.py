@@ -239,7 +239,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20260803ca"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20260806hc"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -315,6 +315,15 @@ def page_shell(
             <span class="flag" aria-hidden="true">🇨🇦</span>
             <span class="phone-text">647-360-8179</span>
           </a>
+          <button
+            class="copy-email email-text"
+            type="button"
+            data-email="josh@thaparteam.ca"
+            data-tip="Copy email"
+            aria-label="Copy email address"
+          >
+            <span class="copy-email-text">josh@thaparteam.ca</span>
+          </button>
         </div>
         <div class="header-social" aria-label="Social links">
           <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" aria-label="Threads">
@@ -385,6 +394,27 @@ def page_shell(
       document.execCommand("copy");
       document.body.removeChild(input);
     }}
+
+    document.querySelectorAll(".copy-email").forEach(button => {{
+      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      let copiedTimer;
+      button.addEventListener("click", async () => {{
+        const email = button.dataset.email;
+        if (!email) return;
+        try {{
+          await copyText(email);
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          window.clearTimeout(copiedTimer);
+          copiedTimer = window.setTimeout(() => {{
+            button.setAttribute("data-tip", defaultTip);
+            button.classList.remove("is-copied");
+          }}, 2000);
+        }} catch (error) {{
+          window.prompt("Copy email address:", email);
+        }}
+      }});
+    }});
 
     (function initCopyMls() {{
       const defaultTip = "Copy MLS#";

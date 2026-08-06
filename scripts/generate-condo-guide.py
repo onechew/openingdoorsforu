@@ -84,7 +84,7 @@ def page_shell(
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260803toc2" />{ld}
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260806hc" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -109,6 +109,15 @@ def page_shell(
             <span class="flag" aria-hidden="true">🇨🇦</span>
             <span class="phone-text">647-360-8179</span>
           </a>
+          <button
+            class="copy-email email-text"
+            type="button"
+            data-email="josh@thaparteam.ca"
+            data-tip="Copy email"
+            aria-label="Copy email address"
+          >
+            <span class="copy-email-text">josh@thaparteam.ca</span>
+          </button>
         </div>
         <div class="header-social" aria-label="Social links">
           <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" aria-label="Threads">
@@ -231,6 +240,43 @@ def page_shell(
       }});
       apply("az");
     }})();
+
+    async function copyText(text) {{
+      if (navigator.clipboard && window.isSecureContext) {{
+        await navigator.clipboard.writeText(text);
+        return;
+      }}
+      const input = document.createElement("textarea");
+      input.value = text;
+      input.setAttribute("readonly", "");
+      input.style.position = "absolute";
+      input.style.left = "-9999px";
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+    }}
+
+    document.querySelectorAll(".copy-email").forEach(button => {{
+      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      let copiedTimer;
+      button.addEventListener("click", async () => {{
+        const email = button.dataset.email;
+        if (!email) return;
+        try {{
+          await copyText(email);
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          window.clearTimeout(copiedTimer);
+          copiedTimer = window.setTimeout(() => {{
+            button.setAttribute("data-tip", defaultTip);
+            button.classList.remove("is-copied");
+          }}, 2000);
+        }} catch (error) {{
+          window.prompt("Copy email address:", email);
+        }}
+      }});
+    }});
   </script>
 </body>
 </html>

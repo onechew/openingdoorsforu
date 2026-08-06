@@ -725,6 +725,46 @@
   ],
   "team": [
     {
+      "title": "299 Mill Rd #1510",
+      "location": "Markland Wood · Toronto",
+      "area": "West Toronto",
+      "status": "For Sale",
+      "tagClass": "sale",
+      "price": "$818,888",
+      "mls": "W13641968",
+      "type": "Condo Apartment",
+      "image": "https://cdn.listingphotos.sierrastatic.com/pics2x/v1786000652/211/211_W13641968_01.jpg",
+      "alt": "299 Mill Rd #1510 · Markland Wood · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team",
+      "url": "https://www.thaparteam.ca/property-search/detail/211/W13641968/299-mill-rd-toronto-on-m9c-4v9/?src=2",
+      "slug": "299-mill-rd-1510-w13641968",
+      "kind": "team",
+      "source": "thapar",
+      "office": "Snobar Realty Group Inc.",
+      "attribution": "Listed with Snobar Realty Group Inc.",
+      "beds": "3",
+      "baths": "2"
+    },
+    {
+      "title": "208 La Rose Ave #9",
+      "location": "Willowridge-Martingrove-Richview · Toronto",
+      "area": "Etobicoke",
+      "status": "For Sale",
+      "tagClass": "sale",
+      "price": "$1,288,888",
+      "mls": "W13641856",
+      "type": "Condo Townhouse",
+      "image": "https://cdn.listingphotos.sierrastatic.com/pics2x/v1786000951/211/211_W13641856_01.jpg",
+      "alt": "208 La Rose Ave #9 · Willowridge-Martingrove-Richview · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team",
+      "url": "https://www.thaparteam.ca/property-search/detail/211/W13641856/208-la-rose-ave-toronto-on-m9p-1b5/?src=2",
+      "slug": "208-la-rose-ave-9-w13641856",
+      "kind": "team",
+      "source": "thapar",
+      "office": "Snobar Realty Group Inc.",
+      "attribution": "Listed with Snobar Realty Group Inc.",
+      "beds": "3",
+      "baths": "4"
+    },
+    {
       "title": "2257 Lawrence Ave W",
       "location": "Humber Heights · Toronto",
       "area": "Etobicoke",
@@ -1461,5 +1501,5 @@
       "baths": "2"
     }
   ],
-  "teamSyncedAt": "2026-08-03T00:15:30+00:00"
+  "teamSyncedAt": "2026-08-06T20:38:00+00:00"
 }

@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20260803ca" />
+  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20260806hc" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "53 Newbury Dr", "description": "53 Newbury Dr was leased in Newmarket with Josh Schwartz. Review the neighbourhood context and similar leased homes.", "url": "https://openingdoorsforu.com/sold/53-newbury-dr/", "image": "https://openingdoorsforu.com/assets/past/53-newbury.jpg", "address": {"@type": "PostalAddress", "streetAddress": "53 Newbury Dr", "addressLocality": "Newmarket", "addressRegion": "ON", "addressCountry": "CA"}}</script>
 </head>
 <body>
@@ -56,6 +56,15 @@
             <span class="flag" aria-hidden="true">🇨🇦</span>
             <span class="phone-text">647-360-8179</span>
           </a>
+          <button
+            class="copy-email email-text"
+            type="button"
+            data-email="josh@thaparteam.ca"
+            data-tip="Copy email"
+            aria-label="Copy email address"
+          >
+            <span class="copy-email-text">josh@thaparteam.ca</span>
+          </button>
         </div>
         <div class="header-social" aria-label="Social links">
           <a class="fill-icon icon-threads" href="https://www.threads.com/@openingdoorsforu" target="_blank" rel="noopener noreferrer" aria-label="Threads">
@@ -171,6 +180,27 @@
       document.execCommand("copy");
       document.body.removeChild(input);
     }
+
+    document.querySelectorAll(".copy-email").forEach(button => {
+      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      let copiedTimer;
+      button.addEventListener("click", async () => {
+        const email = button.dataset.email;
+        if (!email) return;
+        try {
+          await copyText(email);
+          button.setAttribute("data-tip", "Copied!");
+          button.classList.add("is-copied");
+          window.clearTimeout(copiedTimer);
+          copiedTimer = window.setTimeout(() => {
+            button.setAttribute("data-tip", defaultTip);
+            button.classList.remove("is-copied");
+          }, 2000);
+        } catch (error) {
+          window.prompt("Copy email address:", email);
+        }
+      });
+    });
 
     (function initCopyMls() {
       const defaultTip = "Copy MLS#";
