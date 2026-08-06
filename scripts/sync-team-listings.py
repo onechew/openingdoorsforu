@@ -4,10 +4,15 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import urllib.parse
 from pathlib import Path
+
+
+class CloudflareBlockedError(RuntimeError):
+    """Raised when thaparteam.ca returns a Cloudflare bot challenge HTML page."""
 
 ROOT = Path(__file__).resolve().parents[1]
 LISTINGS_PATH = ROOT / "data" / "listings.json"
@@ -74,6 +79,16 @@ def _curl_get(url: str) -> str:
     )
 
 
+def _looks_like_cloudflare(raw: str) -> bool:
+    head = (raw or "")[:4000].lower()
+    return (
+        "just a moment..." in head
+        or "/cdn-cgi/challenge-platform" in head
+        or "cf-chl" in head
+        or "cf-browser-verification" in head
+    )
+
+
 def _parse_search_params(html: str) -> dict | None:
     m = SEARCH_PARAMS_RE.search(html or "")
     if not m:
@@ -103,10 +118,17 @@ def fetch_search_params() -> dict:
     html = ""
     try:
         html = _curl_get(SEARCH_URL)
+        if _looks_like_cloudflare(html):
+            raise CloudflareBlockedError(
+                "Thapar search page blocked by Cloudflare bot challenge "
+                f"(len={len(html)}). GitHub Actions IPs cannot scrape thaparteam.ca."
+            )
         live = _parse_search_params(html)
         if live:
             _save_search_params(live)
             return live
+    except CloudflareBlockedError:
+        raise
     except subprocess.CalledProcessError as err:
         print(f"  Live search page fetch failed ({err.returncode}); trying cache…")
     else:
@@ -167,6 +189,11 @@ def post_listings(base: dict, page: int, page_size: int = 12) -> dict:
             ]
         )
         raw = out.read_text(encoding="utf-8")
+        if _looks_like_cloudflare(raw):
+            raise CloudflareBlockedError(
+                "Thapar listings API blocked by Cloudflare bot challenge "
+                f"(len={len(raw)}). GitHub Actions IPs cannot scrape thaparteam.ca."
+            )
         try:
             return json.loads(raw)
         except json.JSONDecodeError as err:
@@ -441,8 +468,22 @@ def main() -> None:
 
     synced_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     print("Fetching Thapar featured search…")
-    base = fetch_search_params()
-    props = fetch_all_properties(base)
+    try:
+        base = fetch_search_params()
+        props = fetch_all_properties(base)
+    except CloudflareBlockedError as err:
+        print(f"ERROR: {err}")
+        # Cron soft-skip: exit 0 so a re-enabled schedule stays green and keeps
+        # the last committed inventory. Manual workflow_dispatch / local runs fail.
+        if os.environ.get("GITHUB_EVENT_NAME") == "schedule":
+            print(
+                "Scheduled sync skipped; keeping last committed listings. "
+                "Refresh by running `python3 scripts/sync-team-listings.py` locally "
+                "(or from a self-hosted runner / proxy that is not Cloudflare-blocked)."
+            )
+            return
+        raise SystemExit(2) from err
+
     if len(props) < 1:
         raise SystemExit("Thapar feed returned 0 listings")
 
