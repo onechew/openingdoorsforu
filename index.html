@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-722E5PD8H3"></script>
@@ -9617,14 +9619,128 @@
     })();
 
     (function initServiceForms() {
-      /* Cyrillic (RU/UK), Arabic, Hebrew, Devanagari, CJK, Hangul */
-      const nonLatinPattern =
-        /[\u0400-\u04FF\u0500-\u052F\u1C80-\u1C8F\u2DE0-\u2DFF\uA640-\uA69F\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/;
+      /* English only: ASCII letters/numbers/punctuation.
+         Block accented Latin (CS/PL/DE/FR), Arabic, Cyrillic, CJK, etc. */
+      const isAllowedCodePoint = cp => {
+        if (cp === 0x09 || cp === 0x0a || cp === 0x0d) return true;
+        if (cp >= 0x20 && cp <= 0x7e) return true;
+        if (cp === 0x00a0) return true;
+        if (cp === 0x2013 || cp === 0x2014 || cp === 0x2026) return true;
+        return cp >= 0x2018 && cp <= 0x201d;
+      };
+
+      const stripNonEnglish = value =>
+        Array.from(String(value || ""))
+          .filter(ch => isAllowedCodePoint(ch.codePointAt(0)))
+          .join("");
+
+      const ENGLISH_LEXICON = new Set(
+        `
+        a an the and or but if to of in on at by for from with about into over after before
+        i me my we our you your he she they them their it its this that these those
+        is are was were be been being have has had do does did will would can could should
+        not no yes just also only very more most some any all both each other than then
+        want need looking look buy buying sell selling rent renting lease leasing list listing
+        home house condo apartment unit loft townhouse property building complex tower
+        bed beds bedroom bedrooms bath baths bathroom bathrooms den locker parking garage
+        kitchen laundry balcony terrace gym pool sauna concierge elevator
+        south north east west facing waterfront lakeshore lake shore trail park
+        near close ttc subway streetcar bus downtown uptown
+        budget price pricing mortgage preapproval approved approval
+        first time buyer ontario canada gta
+        toronto etobicoke mimico humber bay shores islington queensway longbranch
+        newtoronto swansea bloor west mississauga vaughan markham richmond hill
+        north york scarborough downtown liberty village harbourfront
+        high low fees maintenance tenant landlord move moving date june july august
+        must have has deal breaker breakers reno renovation renovations staging
+        pets pet dog cat allowed restrictions
+        wd washer dryer suite insuite ensuite locker storage
+        please thanks thank hello hi im ive dont doesnt cant wont
+        new old quiet busy family kids school schools
+        sqft square feet ft size small large spacious
+        view views lake city cn tower
+        work working currently realtor agent
+        `.trim().split(/\s+/)
+      );
+
+      const englishTokens = value =>
+        (String(value || "")
+          .toLowerCase()
+          .match(/[a-z]+/g) || []).filter(w => w.length >= 2);
+
+      const FOREIGN_MARKERS = new Set(
+        `
+        voglio vuoi vuole vorrei prova comprare casa sto stai stiamo scherzando
+        grazie ciao buongiorno gli delle della dei uno
+        quiero hola estoy tienes unos unas
+        veux maison acheter merci bonjour suis
+        quero obrigado voce nao uma
+        nicht kaufen bitte danke haus eine
+        niet huis kopen
+        jest chce vreau sunt
+        pagsubok gusto kong bumili bahay biro lang ang mga ako hindi naman pala
+        ako ay ito yan yung
+        saya ingin rumah beli tidak yang untuk ada nak
+        temo adwaro nyiewo atugo mana
+        muon mua nha khong
+        nataka nyumba kununua
+        `.trim().split(/\s+/)
+      );
+
+      const looksLikeEnglish = value => {
+        const words = englishTokens(value);
+        if (!words.length) return true;
+        if (words.some(w => FOREIGN_MARKERS.has(w))) return false;
+        const hits = words.filter(w => ENGLISH_LEXICON.has(w)).length;
+        if (words.length === 1) return hits === 1 || words[0].length < 5;
+        if (hits === 0) return false;
+        return hits / words.length >= 0.3;
+      };
+
+      const keepEnglishOnly = value => {
+        const parts = String(value || "").match(/[A-Za-z]+|[^A-Za-z]+/g) || [];
+        return parts
+          .map(part => {
+            if (!/^[A-Za-z]{2,}$/.test(part)) return part;
+            const lower = part.toLowerCase();
+            if (FOREIGN_MARKERS.has(lower)) return "";
+            return ENGLISH_LEXICON.has(lower) ? part : "";
+          })
+          .join("")
+          .replace(/[ \t]{2,}/g, " ")
+          .replace(/^[ \t]+|[ \t]+$/g, "");
+      };
 
       const isEnglishText = value => {
         const text = String(value || "").trim();
         if (!text) return true;
-        return !nonLatinPattern.test(text);
+        return Array.from(text).every(ch => isAllowedCodePoint(ch.codePointAt(0)));
+      };
+
+      const isWordCheckField = field =>
+        !!field && (field.tagName || "").toLowerCase() === "textarea";
+
+      const isLanguageField = field => {
+        if (!field || field.disabled) return false;
+        if (
+          field.name === "_honey" ||
+          field.name === "website_human_check" ||
+          field.classList.contains("service-honeypot")
+        ) {
+          return false;
+        }
+        if (field.tagName === "SELECT") return false;
+        if (field.type === "hidden" || field.type === "checkbox" || field.type === "radio") {
+          return false;
+        }
+        return (
+          field.tagName === "TEXTAREA" ||
+          field.type === "text" ||
+          field.type === "email" ||
+          field.type === "tel" ||
+          field.type === "" ||
+          !field.type
+        );
       };
 
       const showToast = message => {
@@ -9677,11 +9793,106 @@
         }
         const humanInput = humanWrap.querySelector("input");
 
-        form.querySelectorAll("input, select, textarea").forEach(el => {
+        const rejectNonEnglish = (el, announce = false) => {
+          if (!isLanguageField(el)) return false;
+          let next = stripNonEnglish(el.value);
+          if (isWordCheckField(el) && !looksLikeEnglish(next)) {
+            next = keepEnglishOnly(next);
+          }
+          if (next === el.value) return false;
+          el.value = next;
+          if (announce && status) {
+            status.textContent = "Please write your answers in English.";
+            status.classList.add("is-error");
+            status.classList.remove("is-success");
+          }
           syncFilledState(el);
-          el.addEventListener("input", () => syncFilledState(el));
-          el.addEventListener("change", () => syncFilledState(el));
-        });
+          return true;
+        };
+
+        const scrubFormLanguage = (announce = false) => {
+          let blocked = false;
+          form.querySelectorAll("input, textarea").forEach(el => {
+            if (rejectNonEnglish(el, false)) blocked = true;
+          });
+          if (blocked && announce && status) {
+            status.textContent = "Please write your answers in English.";
+            status.classList.add("is-error");
+            status.classList.remove("is-success");
+          }
+          return blocked;
+        };
+
+        form.querySelectorAll("input, select, textarea").forEach(syncFilledState);
+
+        form.addEventListener(
+          "beforeinput",
+          event => {
+            const el = event.target;
+            if (!isLanguageField(el) || !event.data) return;
+            if (!isEnglishText(event.data)) {
+              event.preventDefault();
+              if (status) {
+                status.textContent = "Please write your answers in English.";
+                status.classList.add("is-error");
+                status.classList.remove("is-success");
+              }
+            }
+          },
+          true
+        );
+        form.addEventListener(
+          "input",
+          event => {
+            rejectNonEnglish(event.target, true);
+            syncFilledState(event.target);
+          },
+          true
+        );
+        form.addEventListener(
+          "compositionend",
+          event => {
+            rejectNonEnglish(event.target, true);
+          },
+          true
+        );
+        form.addEventListener(
+          "paste",
+          event => {
+            const el = event.target;
+            if (!isLanguageField(el)) return;
+            const pasted = event.clipboardData ? event.clipboardData.getData("text") : "";
+            if (!pasted) return;
+            event.preventDefault();
+            const sanitized = isWordCheckField(el)
+              ? keepEnglishOnly(stripNonEnglish(pasted))
+              : stripNonEnglish(pasted);
+            const start = el.selectionStart || 0;
+            const end = el.selectionEnd || 0;
+            const merged = `${el.value.slice(0, start)}${sanitized}${el.value.slice(end)}`;
+            const next = isWordCheckField(el) && !looksLikeEnglish(merged)
+              ? keepEnglishOnly(merged)
+              : merged;
+            el.value = next;
+            if (next !== merged || sanitized !== pasted) {
+              if (status) {
+                status.textContent = "Please write your answers in English.";
+                status.classList.add("is-error");
+                status.classList.remove("is-success");
+              }
+            }
+            syncFilledState(el);
+          },
+          true
+        );
+        form.addEventListener(
+          "change",
+          event => {
+            rejectNonEnglish(event.target, true);
+            syncFilledState(event.target);
+          },
+          true
+        );
         form.addEventListener("reset", () => {
           window.requestAnimationFrame(() => {
             form.querySelectorAll("input, select, textarea").forEach(syncFilledState);
@@ -9737,6 +9948,10 @@
           event.stopPropagation();
           form.classList.add("is-attempted");
 
+          if (scrubFormLanguage(true)) {
+            return;
+          }
+
           if (!form.reportValidity()) {
             if (status) {
               status.textContent = "Please complete all required fields.";
@@ -9746,19 +9961,10 @@
             return;
           }
 
-          const textFields = form.querySelectorAll(
-            'input[type="text"], input[type="email"], input[type="tel"], input:not([type]), textarea'
-          );
-          const hasNonEnglish = Array.from(textFields).some(field => {
-            if (
-              field.name === "_honey" ||
-              field.name === "website_human_check" ||
-              field.classList.contains("service-honeypot")
-            ) {
-              return false;
-            }
-            if (field.disabled || field.hidden) return false;
-            return !isEnglishText(field.value);
+          const hasNonEnglish = Array.from(form.querySelectorAll("input, textarea")).some(field => {
+            if (!isLanguageField(field) || field.hidden) return false;
+            if (!isEnglishText(field.value)) return true;
+            return isWordCheckField(field) && !looksLikeEnglish(field.value);
           });
 
           if (hasNonEnglish) {
