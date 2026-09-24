@@ -457,39 +457,7 @@
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Active Etobicoke & Toronto listings with Josh Schwartz",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "Apartment",
-          "name": "150 Portland St #3, Mimico",
-          "description": "2-bedroom triplex suite for lease in Mimico, Toronto, listed with Josh Schwartz, Etobicoke realtor.",
-          "url": "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full",
-          "image": "https://openingdoorsforu.com/assets/listings/portland.jpg",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "150 Portland St #3",
-            "addressLocality": "Toronto",
-            "addressRegion": "ON",
-            "addressCountry": "CA"
-          },
-          "numberOfRooms": 2,
-          "floorSize": {
-            "@type": "QuantitativeValue",
-            "value": "700-1100",
-            "unitText": "SQ FT"
-          },
-          "offers": {
-            "@type": "Offer",
-            "price": "1999",
-            "priceCurrency": "CAD",
-            "availability": "https://schema.org/InStock",
-            "businessFunction": "https://schema.org/LeaseOut"
-          }
-        }
-      }
-    ]
+    "itemListElement": []
   }
   </script>
 
@@ -7491,7 +7459,7 @@
     </svg>
   </button>
 
-  <script src="assets/active-listings.js?v=20260806203800"></script>
+  <script src="assets/active-listings.js?v=20260924153000"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const backToTop = document.getElementById("backToTop");
@@ -8239,27 +8207,22 @@
 
     const currentListings = Array.isArray(window.__ACTIVE_LISTINGS__) && window.__ACTIVE_LISTINGS__.length
       ? window.__ACTIVE_LISTINGS__
-      : [
-          {
-            title: "150 Portland St #3",
-            location: "Mimico · Toronto",
-            status: "For Lease",
-            tagClass: "lease",
-            beds: "2",
-            baths: "1",
-            parking: "1",
-            size: "700-1,100 SQ.FT.",
-            type: "Triplex",
-            price: "$1,999/mo",
-            mls: "W13580606",
-            image: "assets/listings/portland.jpg",
-            alt: "150 Portland Street Mimico triplex for lease with Josh Schwartz, Etobicoke realtor",
-            url: "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full"
-          }
-        ];
+      : [];
 
     // Past deals newest → oldest. No prices / no external links (RECO / TRESA).
     const soldTransactions = [
+      {
+        title: "150 Portland St #3",
+        location: "Mimico · Toronto",
+        area: "Etobicoke",
+        status: "Leased",
+        tagClass: "lease",
+        price: "Leased",
+        date: "2026-09-24",
+        image: "assets/listings/portland.jpg",
+        alt: "150 Portland St #3 · Mimico · leased with Josh Schwartz",
+        slug: "150-portland-st-3"
+      },
       {
         title: "11 Yorkville Ave #4102",
         location: "Annex · Toronto",

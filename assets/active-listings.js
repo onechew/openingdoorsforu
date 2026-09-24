@@ -1,23 +1,5 @@
-window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-08-06T20:38:00+00:00", "teamCount": 39, "joshCount": 1, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
+window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-09-24T15:30:00+00:00", "teamCount": 39, "joshCount": 0, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
 window.__ACTIVE_LISTINGS__ = [
-  {
-    "title": "150 Portland St #3",
-    "location": "Mimico · Toronto",
-    "status": "For Lease",
-    "tagClass": "lease",
-    "price": "$1,999/mo",
-    "image": "assets/listings/portland.jpg",
-    "alt": "150 Portland Street Mimico triplex for lease with Josh Schwartz Etobicoke realtor",
-    "url": "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/8BMQ6b7PXMF2zO8NAR9kHmg3yAgjYzCBKn9op9YQSBq2OXmPmjI6Wgp17q86TB49OV6qD5fkozp4JMl9HmQRway32mcD9LOKOM9OHk2NXPXb2XS2pMaP8pPXIP6ykV6Kakir8rjz9/view/listing/TREB-W13580606?view=listing-customer-full",
-    "kind": "active",
-    "source": "",
-    "beds": "2",
-    "baths": "1",
-    "parking": "1",
-    "size": "700-1,100 SQ.FT.",
-    "type": "Triplex",
-    "mls": "W13580606"
-  },
   {
     "title": "299 Mill Rd #1510",
     "location": "Markland Wood · Toronto",
