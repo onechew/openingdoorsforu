@@ -491,6 +491,7 @@ def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
         img = asset_href(item.get("image", "assets/JS.jpg"), depth)
         if str(item.get("image") or "").startswith("http"):
             img = item["image"]
+        fallback = asset_href("assets/JS.jpg", depth)
         loc = item.get("location") or item.get("area") or ""
         attr = ""
         if item.get("kind") == "team" or item.get("source") == "thapar":
@@ -499,7 +500,7 @@ def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
         bits.append(
             f"""
       <a class="card" href="{esc(href)}"{target}>
-        <div class="card-media"><img src="{esc(img)}" alt="{esc(item.get('alt') or item['title'])}" loading="lazy" width="800" height="600" /></div>
+        <div class="card-media"><img src="{esc(img)}" alt="{esc(item.get('alt') or item['title'])}" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.src='{esc(fallback)}';" /></div>
         <div class="card-body">
           <span class="card-status {status_class}">{esc(status)}</span>
           <p class="card-title">{esc(item['title'])}</p>

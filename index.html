@@ -7459,7 +7459,7 @@
     </svg>
   </button>
 
-  <script src="assets/active-listings.js?v=20260924153000"></script>
+  <script src="assets/active-listings.js?v=20260924154611"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const backToTop = document.getElementById("backToTop");
@@ -9181,7 +9181,7 @@
         ? `<button type="button" class="listing-mls" data-mls="${listing.mls}" data-tip="Copy MLS#" aria-label="Copy MLS# ${listing.mls}">MLS# ${listing.mls}</button>`
         : "";
       const mediaInner = `
-              <img src="${listing.image}" alt="${imageAlt}" loading="lazy" width="800" height="600" />
+              <img src="${listing.image}" alt="${imageAlt}" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.src='assets/JS.jpg';" />
               <span class="tag ${listing.tagClass}">${listing.status}</span>`;
       const media = mediaLink
         ? `<a class="listing-media listing-card-link" href="${mediaLink}"${externalAttrs} aria-label="View ${escapeAttr(street)} with Josh Schwartz">${mediaInner}</a>`
