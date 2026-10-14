@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "mimico",
+    "name": "Mimico"
+  },
+  {
+    "slug": "long-branch",
+    "name": "Long Branch"
+  },
+  {
+    "slug": "alderwood",
+    "name": "Alderwood"
+  },
+  {
+    "slug": "new-toronto",
+    "name": "New Toronto"
+  },
+  {
+    "slug": "humber-bay",
+    "name": "Humber Bay"
+  },
+  {
+    "slug": "stonegate-queensway",
+    "name": "Stonegate-Queensway"
+  }
+]

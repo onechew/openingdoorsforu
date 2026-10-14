@@ -118,6 +118,7 @@ def page_shell(
           </button>
           <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
             <a href="{prefix}#areas" role="menuitem">Areas</a>
+            <a href="{prefix}etobicoke/neighbourhoods/" role="menuitem">Neighbourhoods</a>
             <a href="{prefix}#condo-guide" role="menuitem">Condo</a>
           </div>
         </div>

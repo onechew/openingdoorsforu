@@ -29,55 +29,42 @@ LASTMOD = (
 )
 ORIGIN = "https://openingdoorsforu.com"
 
-# South Etobicoke pockets live on /etobicoke/#… (same city-page system as /toronto/).
-# Do not ship these as top-level peer URLs.
+# Tile index on /etobicoke/. Full guides: /etobicoke/neighbourhoods/{slug}/
 ETOBICOKE_NEIGHBOURHOODS = [
     {
         "slug": "mimico",
         "name": "Mimico",
         "chip": "South Etobicoke",
-        "blurb": "Waterfront living with village amenities, lake shore condos, and established residential streets.",
-        "about": "Mimico sits on Toronto’s west waterfront in South Etobicoke, with a mix of lake shore condos, low-rise living, and established residential streets. GO, TTC, and highway access connect the community to downtown and the wider GTA.",
         "image": "assets/neighbourhoods/mimico.jpg",
     },
     {
         "slug": "long-branch",
         "name": "Long Branch",
         "chip": "South Etobicoke",
-        "blurb": "Calmer lakeside streets, greenery, and parks such as Marie Curtis Park close at hand.",
-        "about": "Long Branch is one of South Etobicoke’s established lakeside communities. Buyers and renters often weigh housing mix and neighbourhood feel against nearby Mimico, New Toronto, and Alderwood.",
         "image": "assets/neighbourhoods/long-branch.jpg",
     },
     {
         "slug": "alderwood",
         "name": "Alderwood",
         "chip": "South Etobicoke",
-        "blurb": "Established residential streets with a grounded, family-oriented feel.",
-        "about": "Alderwood is a South Etobicoke neighbourhood with established residential streets and a housing mix that often attracts families and long-term owners, compared with high-rise lake shore living.",
         "image": "assets/neighbourhoods/alderwood.jpg",
     },
     {
         "slug": "new-toronto",
         "name": "New Toronto",
         "chip": "South Etobicoke",
-        "blurb": "Lakeside corridor between Mimico and Long Branch, with parks and quieter streets.",
-        "about": "New Toronto sits on South Etobicoke’s lakeside corridor between Mimico and Long Branch. Tree-lined streets, greenery, and Colonel Samuel Smith Park shape day-to-day living.",
         "image": "assets/neighbourhoods/new-toronto.jpg",
     },
     {
         "slug": "humber-bay",
         "name": "Humber Bay",
         "chip": "South Etobicoke",
-        "blurb": "Lake shore condo living along Humber Bay Shores, with trails and amenity-forward towers.",
-        "about": "Humber Bay (including Humber Bay Shores) is known for lake shore condo living, waterfront paths, and easy connections toward downtown along Toronto’s west waterfront.",
         "image": "assets/neighbourhoods/humber-bay.jpg",
     },
     {
         "slug": "stonegate-queensway",
         "name": "Stonegate-Queensway",
         "chip": "Etobicoke",
-        "blurb": "Established streets with Queensway corridor convenience toward the rest of Toronto.",
-        "about": "Stonegate-Queensway sits in South Etobicoke with a blend of residential streets and practical access along the Queensway corridor. Clients often compare it with Mimico and Alderwood.",
         "image": "assets/neighbourhoods/stonegate-queensway.jpg",
     },
 ]
@@ -301,7 +288,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20261014geo"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20261014hood2"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -378,6 +365,7 @@ def page_shell(
           </button>
           <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
             <a href="{home}#areas" role="menuitem">Areas</a>
+            <a href="{home}etobicoke/neighbourhoods/" role="menuitem">Neighbourhoods</a>
             <a href="{home}#condo-guide" role="menuitem">Condo</a>
           </div>
         </div>
@@ -634,14 +622,14 @@ def city_items(city_key: str):
 
 
 def etobicoke_neighbourhoods_html(depth: int) -> str:
-    """Neighbourhood guides folded into the Etobicoke city page (not top-level URLs)."""
+    """McDadi-style tile index on the Etobicoke city page. Full guides live under /etobicoke/neighbourhoods/."""
     tiles = []
-    details = []
     for n in ETOBICOKE_NEIGHBOURHOODS:
         img = asset_href(n["image"], depth)
+        href = asset_href(f"etobicoke/neighbourhoods/{n['slug']}/", depth)
         tiles.append(
             f"""
-      <a class="hood-tile" href="#{esc(n['slug'])}" aria-label="{esc(n['name'])} in Etobicoke">
+      <a class="hood-tile" href="{esc(href)}" aria-label="{esc(n['name'])} neighbourhood guide">
         <img src="{esc(img)}" alt="" loading="lazy" width="1600" height="1000" />
         <span class="hood-tile-label">
           <span class="hood-tile-name">{esc(n['name'])}</span>
@@ -649,24 +637,15 @@ def etobicoke_neighbourhoods_html(depth: int) -> str:
         </span>
       </a>"""
         )
-        details.append(
-            f"""
-    <article class="hood-detail" id="{esc(n['slug'])}">
-      <h3>{esc(n['name'])}</h3>
-      <p class="section-copy">{esc(n['blurb'])}</p>
-      <div class="prose"><p>{esc(n['about'])}</p></div>
-      <p class="section-copy"><a class="text-link" href="tel:+16473608179">Ask Josh about {esc(n['name'])}</a></p>
-    </article>"""
-        )
+    hub = asset_href("etobicoke/neighbourhoods/", depth)
     return f"""
   <section class="section" id="neighbourhoods">
     <div class="container">
       <h2>Neighbourhoods</h2>
-      <p class="section-copy">South Etobicoke communities Josh serves, from Mimico and Humber Bay to Long Branch, New Toronto, Alderwood, and Stonegate-Queensway.</p>
+      <p class="section-copy">South Etobicoke communities Josh serves. Open a guide for lifestyle, housing mix, transit context, and who it tends to fit.</p>
       <div class="hood-grid">{''.join(tiles)}
       </div>
-      <div class="hood-details">{''.join(details)}
-      </div>
+      <p class="section-copy" style="margin-top:22px"><a class="text-link" href="{esc(hub)}">View all Etobicoke neighbourhoods</a></p>
     </div>
   </section>
 """
@@ -1209,10 +1188,25 @@ def write_sitemap(extra_urls: list[tuple[str, str, str]]):
     print(f"sitemap urls: {len(urls)}")
 
 
+def write_neighbourhood_guide_pages() -> list[tuple[str, str, str]]:
+    """Hub + per-neighbourhood guides under /etobicoke/neighbourhoods/."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "neighbourhood_pages",
+        Path(__file__).resolve().parent / "generate-neighbourhood-pages.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+    return mod.write_neighbourhood_pages()
+
+
 def main():
     city_urls = write_city_pages()
     listing_urls = write_listing_pages()
-    write_sitemap(city_urls + listing_urls)
+    neighbourhood_urls = write_neighbourhood_guide_pages()
+    write_sitemap(city_urls + listing_urls + neighbourhood_urls)
     if sync_homepage_footer(ROOT / "index.html"):
         print("synced homepage footer")
     else:

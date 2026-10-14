@@ -1035,9 +1035,9 @@ h1 {
 .hood-tile {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 21 / 9;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 12px;
   background: #111;
   color: #fff;
   text-decoration: none;
@@ -1074,7 +1074,7 @@ h1 {
 
 .hood-tile-name {
   margin: 0;
-  font-size: clamp(22px, 2.6vw, 36px);
+  font-size: clamp(18px, 2.1vw, 28px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -1196,11 +1196,11 @@ h1 {
 @media (max-width: 720px) {
   .hood-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
   }
 
   .hood-tile {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 2 / 1;
   }
 }
 
@@ -1218,6 +1218,206 @@ h1 {
 
 .hood-proof-section figcaption {
   margin-top: 14px;
+}
+
+/* Neighbourhood guide: Walk Score–style scan layer (qualitative, no invented stats) */
+.hood-snapshot {
+  padding-top: 8px;
+}
+
+.hood-snapshot-kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1f3a5f;
+}
+
+.hood-snapshot h2 {
+  margin: 0 0 14px;
+  max-width: 22ch;
+}
+
+.hood-snapshot-prose {
+  max-width: 42rem;
+}
+
+.hood-snapshot-more {
+  margin: 4px 0 22px;
+}
+
+.hood-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 28px;
+}
+
+.hood-jump-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid rgba(18, 20, 23, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: border-color 180ms var(--ease), transform 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+
+.hood-jump-pill:hover {
+  border-color: rgba(18, 20, 23, 0.28);
+  transform: var(--hover-lift);
+  box-shadow: 0 8px 20px rgba(18, 20, 23, 0.06);
+}
+
+.hood-jump-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 1;
+}
+
+.hood-jump-pill.is-nature .hood-jump-icon { color: #2f9e6b; }
+.hood-jump-pill.is-character .hood-jump-icon { color: #d97706; }
+.hood-jump-pill.is-housing .hood-jump-icon { color: #2563eb; }
+.hood-jump-pill.is-transit .hood-jump-icon { color: #0891b2; }
+.hood-jump-pill.is-fit .hood-jump-icon { color: #7c3aed; }
+
+.hood-snapshot-overview {
+  scroll-margin-top: 96px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.hood-snapshot-label {
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1f3a5f;
+}
+
+.hood-trait-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.hood-trait {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(18, 20, 23, 0.08);
+}
+
+.hood-trait:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.hood-trait:first-child {
+  padding-top: 0;
+}
+
+.hood-trait-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  color: var(--ink);
+}
+
+.hood-trait-title {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.hood-trait-detail {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.hood-panel {
+  scroll-margin-top: 96px;
+}
+
+.hood-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.hood-panel-head h2 {
+  margin: 0;
+}
+
+.hood-panel-icon {
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  color: #1f3a5f;
+}
+
+.hood-check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.hood-check-item {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.hood-check-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: #1f3a5f;
+}
+
+@media (max-width: 720px) {
+  .hood-jump {
+    gap: 8px;
+  }
+
+  .hood-jump-pill {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .hood-trait {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 0;
+  }
 }
 
 .hood-proof-section cite {

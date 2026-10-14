@@ -378,4 +378,46 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/mimico/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/long-branch/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/alderwood/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/new-toronto/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/humber-bay/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://openingdoorsforu.com/etobicoke/neighbourhoods/stonegate-queensway/</loc>
+    <lastmod>2026-10-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
