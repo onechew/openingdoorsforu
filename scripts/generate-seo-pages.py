@@ -488,10 +488,10 @@ def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
         external = item.get("url") if str(item.get("url") or "").startswith("http") else ""
         href = external or f"{link_prefix}{item['slug']}/"
         target = ' target="_blank" rel="noopener noreferrer"' if external else ""
-        img = asset_href(item.get("image", "assets/JS.jpg"), depth)
+        img = asset_href(item.get("image", "assets/listing-placeholder.svg"), depth)
         if str(item.get("image") or "").startswith("http"):
             img = item["image"]
-        fallback = asset_href("assets/JS.jpg", depth)
+        fallback = asset_href("assets/listing-placeholder.svg", depth)
         loc = item.get("location") or item.get("area") or ""
         attr = ""
         if item.get("kind") == "team" or item.get("source") == "thapar":
@@ -899,7 +899,7 @@ def write_listing_pages():
         canonical = f"{ORIGIN}/listings/{item['slug']}/"
         title = listing_title(item)
         description = listing_description(item)
-        img = asset_href(item.get("image", "assets/JS.jpg"), depth)
+        img = asset_href(item.get("image", "assets/listing-placeholder.svg"), depth)
         facts_html = listing_facts_html(item)
         similar = similar_items(item, DATA["current"] + DATA["sold"])
         sim_html = cards_html(
@@ -918,7 +918,7 @@ def write_listing_pages():
             sim_bits.append(
                 f"""
       <a class="card" href="{esc(prefix + s['slug'] + '/')}">
-        <div class="card-media"><img src="{esc(asset_href(s.get('image','assets/JS.jpg'), depth))}" alt="{esc(s['title'])}" loading="lazy" /></div>
+        <div class="card-media"><img src="{esc(asset_href(s.get('image','assets/listing-placeholder.svg'), depth))}" alt="{esc(s['title'])}" loading="lazy" /></div>
         <div class="card-body">
           <span class="card-status {status_class}">{esc(status)}</span>
           <p class="card-title">{esc(s['title'])}</p>
@@ -964,7 +964,7 @@ def write_listing_pages():
             "name": item["title"],
             "description": description,
             "url": canonical,
-            "image": f"{ORIGIN}/{item.get('image', 'assets/JS.jpg')}",
+            "image": f"{ORIGIN}/{item.get('image', 'assets/listing-placeholder.svg')}",
         }
         html = page_shell(
             title=title,
@@ -985,7 +985,7 @@ def write_listing_pages():
         canonical = f"{ORIGIN}/sold/{item['slug']}/"
         title = listing_title(item)
         description = listing_description(item)
-        img = asset_href(item.get("image", "assets/JS.jpg"), depth)
+        img = asset_href(item.get("image", "assets/listing-placeholder.svg"), depth)
         facts_html = listing_facts_html(item)
         status = item.get("status") or ""
         location = item.get("location") or item.get("area") or ""
@@ -996,7 +996,7 @@ def write_listing_pages():
             sim_bits.append(
                 f"""
       <a class="card" href="{esc(asset_href('sold/' + s['slug'] + '/', depth))}">
-        <div class="card-media"><img src="{esc(asset_href(s.get('image','assets/JS.jpg'), depth))}" alt="{esc(s['title'])}" loading="lazy" /></div>
+        <div class="card-media"><img src="{esc(asset_href(s.get('image','assets/listing-placeholder.svg'), depth))}" alt="{esc(s['title'])}" loading="lazy" /></div>
         <div class="card-body">
           <span class="card-status {'lease' if 'lease' in (s.get('status') or '').lower() else 'sold'}">{esc(s.get('status') or '')}</span>
           <p class="card-title">{esc(s['title'])}</p>
@@ -1035,7 +1035,7 @@ def write_listing_pages():
             "name": item["title"],
             "description": description,
             "url": canonical,
-            "image": f"{ORIGIN}/{item.get('image', 'assets/JS.jpg')}",
+            "image": f"{ORIGIN}/{item.get('image', 'assets/listing-placeholder.svg')}",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": item["title"],

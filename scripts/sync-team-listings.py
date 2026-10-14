@@ -419,7 +419,7 @@ def write_active_js(josh: list[dict], team: list[dict], synced_at: str) -> None:
             "status": item.get("status") or "For Sale",
             "tagClass": item.get("tagClass") or "sale",
             "price": item.get("price") or "",
-            "image": item.get("image") or "assets/JS.jpg",
+            "image": item.get("image") or "assets/listing-placeholder.svg",
             "alt": item.get("alt") or item["title"],
             "url": item.get("url") or "",
             "kind": item.get("kind") or "active",

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Property photo unavailable">
+  <rect width="800" height="600" fill="#E8E6E1"/>
+  <g fill="none" stroke="#B8B4AC" stroke-width="3" stroke-linejoin="round" transform="translate(280 175)">
+    <path d="M120 40 L220 120 L220 230 L20 230 L20 120 Z"/>
+    <path d="M90 230 V165 H150 V230"/>
+    <rect x="55" y="145" width="40" height="32"/>
+    <rect x="145" y="145" width="40" height="32"/>
+  </g>
+</svg>
