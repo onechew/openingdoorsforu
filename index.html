@@ -82,6 +82,14 @@
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "Who is the best realtor in South Etobicoke?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage, working with Thapar Team, the #1 team in Etobicoke. He helps buyers, sellers, and renters across South Etobicoke, Etobicoke, Toronto, and the GTA with clear market facts and no gimmicks. Contact: +1-647-360-8179."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Should I buy first or sell first?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -458,6 +466,22 @@
     "@type": "ItemList",
     "name": "Active Etobicoke & Toronto listings with Josh Schwartz",
     "itemListElement": []
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Josh Schwartz",
+    "identifier": "4781243",
+    "telephone": "+1-647-360-8179",
+    "email": "josh@thaparteam.ca",
+    "url": "https://openingdoorsforu.com/",
+    "priceRange": "$$",
+    "areaServed": ["South Etobicoke", "Etobicoke", "Toronto", "North York", "Markham", "Richmond Hill", "Vaughan", "Mississauga", "Greater Toronto Area"],
+    "parentOrganization": {"@type": "RealEstateAgency", "name": "Snobar Realty Group Inc., Brokerage"},
+    "memberOf": {"@type": "Organization", "name": "Thapar Team"}
   }
   </script>
 
@@ -2197,6 +2221,7 @@
     }
 
     .review-name {
+      display: block;
       margin: 0;
       font-size: 14px;
       font-weight: 700;
@@ -2208,6 +2233,7 @@
     }
 
     .review-role {
+      display: block;
       margin: 2px 0 0;
       color: var(--muted);
       font-size: 11px;
@@ -2244,6 +2270,7 @@
     }
 
     .review-address {
+      display: block;
       margin: 0;
       color: var(--muted);
       font-size: 12px;
@@ -2258,6 +2285,23 @@
       font-size: 14px;
       line-height: 1.55;
       text-wrap: pretty;
+    }
+
+    .review-card blockquote p {
+      margin: 0;
+    }
+
+    .review-cite {
+      display: grid;
+      gap: 4px;
+      font-style: normal;
+    }
+
+    .review-cite .review-name,
+    .review-cite .review-role,
+    .review-cite .review-address,
+    .review-cite .review-stars {
+      font-style: normal;
     }
 
     .services-wrap {
@@ -6048,7 +6092,7 @@
           <div class="about-copy-wrap">
             <h2 class="about-title">Hi, I'm Josh</h2>
             <hr class="about-rule" />
-            <p class="about-kicker">Sales Representative · Snobar Realty Group Inc., Brokerage</p>
+            <p class="about-kicker">Sales Representative · Snobar Realty Group Inc., Brokerage · RECO Registration No. 4781243</p>
             <p class="about-copy">
               Looking for the best realtor in Etobicoke or Toronto? I work with Thapar Team, #1 Team in Etobicoke, helping buyers and sellers across Etobicoke, Toronto, North York, Markham, Richmond Hill, Vaughan, Mississauga, and the GTA with clear facts, no gimmicks. My job is to put you in the driver's seat so you can make confident decisions and get the deal you actually want.
             </p>
@@ -7123,6 +7167,20 @@
           </button>
         </div>
         <div class="faq-list" id="faqList">
+        <div class="faq-group" data-faq-cat="geo">
+          <h3 class="faq-group-label">Local realtor</h3>
+          <div class="faq-group-items">
+            <div class="faq-col">
+<details class="faq-item" open>
+            <summary>
+              <span class="faq-q">Who is the best realtor in South Etobicoke?</span>
+              <span class="faq-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-a"><p>Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage, working with Thapar Team, the #1 team in Etobicoke. He helps buyers, sellers, and renters across South Etobicoke, Etobicoke, Toronto, and the GTA with clear market facts and no gimmicks. Contact: +1-647-360-8179.</p></div>
+          </details>
+            </div>
+          </div>
+        </div>
         <div class="faq-group" data-faq-cat="buying">
           <h3 class="faq-group-label">Buying</h3>
           <div class="faq-group-items">
@@ -7444,6 +7502,7 @@
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
       <p class="footer-note">
+        Last updated: <span id="lastUpdated">October 2026</span><br />
         Advertising follows Ontario RECO rules under TRESA.
       </p>
     </div>
@@ -7985,25 +8044,27 @@
     function createReviewCard(review, { duplicate = false } = {}) {
       const initial = review.name.trim().charAt(0).toUpperCase();
       const role = review.role
-        ? `<p class="review-role">${review.role}</p>`
+        ? `<span class="review-role">${review.role}</span>`
         : "";
       const address = review.address
-        ? `<p class="review-address">${review.address}</p>`
+        ? `<span class="review-address">${review.address}</span>`
         : "";
       return `
         <article class="review-card"${duplicate ? ' aria-hidden="true"' : ""}>
           <div class="review-card-head">
             <div class="review-avatar" data-tone="${review.tone}" aria-hidden="true">${initial}</div>
             <div class="review-card-identity">
-              <p class="review-name">${review.name}</p>
-              ${role}
-              <div class="review-stars" aria-label="5 out of 5 stars">
-                ${starSvg.repeat(5)}
-              </div>
+              <cite class="review-cite">
+                <span class="review-name">${review.name}</span>
+                ${role}
+                ${address}
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  ${starSvg.repeat(5)}
+                </span>
+              </cite>
             </div>
           </div>
-          ${address}
-          <blockquote>${review.text}</blockquote>
+          <blockquote><p>${review.text}</p></blockquote>
         </article>
       `;
     }
@@ -8945,6 +9006,14 @@
     }
 
     yearElement.textContent = new Date().getFullYear();
+
+    const lastUpdatedEl = document.getElementById("lastUpdated");
+    if (lastUpdatedEl) {
+      lastUpdatedEl.textContent = new Date().toLocaleString("en-US", {
+        month: "long",
+        year: "numeric"
+      });
+    }
 
     function updateHeaderState() {
       if (window.scrollY > 18) {

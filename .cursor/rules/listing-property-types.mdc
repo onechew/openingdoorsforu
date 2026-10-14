@@ -1,0 +1,15 @@
+---
+description: Verify property types against the real address before labeling listings
+alwaysApply: true
+---
+
+# Listing property types
+
+Before setting or inferring a property type (`Condo Apt`, `Triplex`, `Townhouse`, `Apartment`, `Home`, etc.):
+
+1. Look up the address (MLS / listing sites / prior sold records).
+2. Do not treat a unit number alone (e.g. `#3`) as proof it is a condo — freehold multiplexes use low unit numbers.
+3. Prefer an explicit `type` field in `data/listings.json` when the address is known.
+4. If unsure, leave type unset or use a conservative label and confirm with the user.
+
+Example: `150 Portland St #3` (Mimico) is a **Triplex** (residential freehold), not Condo Apt.

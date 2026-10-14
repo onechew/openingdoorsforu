@@ -12,7 +12,8 @@
       "image": "assets/listings/portland.jpg",
       "alt": "150 Portland St #3 · Mimico · leased with Josh Schwartz",
       "slug": "150-portland-st-3",
-      "kind": "past"
+      "kind": "past",
+      "type": "Triplex"
     },
     {
       "title": "11 Yorkville Ave #4102",
@@ -389,7 +390,8 @@
       "image": "assets/past/5-37-metcalfe.jpg",
       "alt": "37 Metcalfe St #5",
       "slug": "37-metcalfe-st-5",
-      "kind": "past"
+      "kind": "past",
+      "type": "Apartment"
     },
     {
       "title": "36 Ruscoe Cres",
@@ -441,7 +443,8 @@
       "image": "assets/past/4-209472-hwy-26.jpg",
       "alt": "209472 Hwy 26 #4",
       "slug": "209472-hwy-26-4",
-      "kind": "past"
+      "kind": "past",
+      "type": "Home"
     },
     {
       "title": "88 Caines Ave, Bsmt",

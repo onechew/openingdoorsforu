@@ -758,9 +758,12 @@ def property_type_icon(label: str) -> str:
 
 
 def infer_property_type(item: dict) -> str:
+    """Prefer an explicit type. Never treat a lone low unit number (#3) as condo —
+    freehold multiplexes use those too. Verify ambiguous addresses before labeling."""
     if item.get("type"):
         return str(item["type"])
     blob = f"{item.get('title', '')} {item.get('alt', '')}"
+    title = item.get("title", "")
     if re.search(r"triplex", blob, re.I):
         return "Triplex"
     if re.search(r"duplex", blob, re.I):
@@ -769,9 +772,12 @@ def infer_property_type(item: dict) -> str:
         return "Townhouse"
     if re.search(r"\b(bsmt|basement|lower|upper)\b", blob, re.I):
         return "Apartment"
-    if re.search(r"condo|apartment|apt", blob, re.I) or re.search(
-        r"#\s*\d+|\d+\s*-\s*\d+", item.get("title", "")
-    ):
+    # Explicit condo wording, or high-rise style suite numbers (#2203 / 1209-…)
+    if re.search(r"\bcondo\b", blob, re.I):
+        return "Condo Apt"
+    if re.search(r"\b(apartment|apt)\b", blob, re.I):
+        return "Condo Apt"
+    if re.search(r"#\s*\d{3,}\b", title) or re.search(r"\b\d{3,}\s*-\s*\d+", title):
         return "Condo Apt"
     return "Home"
 
