@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../../#listings">Listings</a>
-        <a href="../../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../../#areas" role="menuitem">Areas</a>
+            <a href="../../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -134,7 +143,7 @@
   
   <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
-      <div class="condo-story-block"><h2>About Grand Harbour</h2><p>Developed by Rylar Developments in the early 1990s (with architecture often credited in the Beaux-Arts / postmodern vein associated with Matsui Baer Vanstone), Grand Harbour is a trio: two towers plus townhomes. The signature arch connecting the taller buildings is still one of the most recognizable silhouettes on this stretch of Lake Shore.</p></div><div class="condo-story-block"><h3>Architecture and setting</h3><p>Unlike many later Humber Bay towers, Grand Harbour leans classic and community-scaled: courtyard and garden spaces, lakeside presence, and a design language that reads European rather than purely contemporary glass. Addresses span 2285 and 2287 Lake Shore for the towers and 2289 for the townhomes, confirm corporation and management contacts for the specific building you are buying.</p></div><div class="condo-story-block"><h3>Amenity depth</h3><p>Residents typically look for indoor pool, hot tub and sauna, fitness, guest suites, 24/7 concierge and security, party/lounge space, courtyard gardens, visitor parking, and practical extras like an on-site car wash. The programming supports year-round living, not just a lobby checklist.</p></div><div class="condo-story-block"><h3>Why buyers still shortlist it</h3><p>Value versus newer, smaller waterfront suites; larger layouts; and a Mimico lakeside lifestyle with trail and park access. It tends to appeal when someone wants character and space without giving up concierge-level convenience.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Suite sizes historically span from compact plans through expansive multi-bedroom layouts (roughly mid-600s into the 3,000+ sqft range depending on tower and townhome). One-beds often live larger than many new builds; two-beds and den plans, three-beds, and townhomes give families and downsizers real options, always verify current measurements and fee inclusions.</p></div>
+      <div class="condo-story-block"><h2>About Grand Harbour</h2><p>Developed by Rylar Developments in the early 1990s (with architecture often credited in the Beaux-Arts / postmodern vein associated with Matsui Baer Vanstone), Grand Harbour is a trio: two towers plus townhomes. The signature arch connecting the taller buildings is still one of the most recognizable silhouettes on this stretch of Lake Shore.</p></div><div class="condo-story-block"><h3>Architecture and setting</h3><p>Unlike many later Humber Bay towers, Grand Harbour leans classic and community-scaled: courtyard and garden spaces, lakeside presence, and a design language that reads European rather than purely contemporary glass. Addresses span 2285 and 2287 Lake Shore for the towers and 2289 for the townhomes. Confirm corporation and management contacts for the specific building you are buying.</p></div><div class="condo-story-block"><h3>Amenity depth</h3><p>Residents typically look for indoor pool, hot tub and sauna, fitness, guest suites, 24/7 concierge and security, party/lounge space, courtyard gardens, visitor parking, and practical extras like an on-site car wash. The programming supports year-round living, not just a lobby checklist.</p></div><div class="condo-story-block"><h3>Why buyers still shortlist it</h3><p>Value versus newer, smaller waterfront suites. Larger layouts. And a Mimico lakeside lifestyle with trail and park access. It tends to appeal when someone wants character and space without giving up concierge-level convenience.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Suite sizes historically span from compact plans through expansive multi-bedroom layouts (roughly mid-600s into the 3,000+ sqft range depending on tower and townhome). One-beds often live larger than many new builds. Two-beds and den plans, three-beds, and townhomes give families and downsizers real options. Always verify current measurements and fee inclusions.</p></div>
     </div>
   </section>
 
@@ -328,10 +337,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -466,5 +477,6 @@
       });
     });
   </script>
+  <script src="../../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

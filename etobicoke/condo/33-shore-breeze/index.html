@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../../#listings">Listings</a>
-        <a href="../../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../../#areas" role="menuitem">Areas</a>
+            <a href="../../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -154,7 +163,7 @@
   
   <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
-      <div class="condo-story-block"><h2>About Jade Waterfront</h2><p>Jade sits among the newer Shore Breeze towers that completed Humber Bay’s contemporary skyline. Architecture and outdoor living details are part of how it differentiates from neighbouring Empire product.</p></div><div class="condo-story-block"><h3>Design and amenities</h3><p>Expect modern amenity programming with concierge and outdoor lifestyle features. The balcony language is a visual signature from the street and from neighbouring towers.</p></div><div class="condo-story-block"><h3>Corridor comps</h3><p>Tour with Eau Du Soleil and Annie Craig peers to weigh fees, views, outdoor space, and day-to-day feel.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Contemporary open plans; balcony usability and exposure are key decision factors. Verify parking and locker with any offer strategy.</p></div>
+      <div class="condo-story-block"><h2>About Jade Waterfront</h2><p>Jade sits among the newer Shore Breeze towers that completed Humber Bay’s contemporary skyline. Architecture and outdoor living details are part of how it differentiates from neighbouring Empire product.</p></div><div class="condo-story-block"><h3>Design and amenities</h3><p>Expect modern amenity programming with concierge and outdoor lifestyle features. The balcony language is a visual signature from the street and from neighbouring towers.</p></div><div class="condo-story-block"><h3>Corridor comps</h3><p>Tour with Eau Du Soleil and Annie Craig peers to weigh fees, views, outdoor space, and day-to-day feel.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Contemporary open plans. Balcony usability and exposure are key decision factors. Verify parking and locker with any offer strategy.</p></div>
     </div>
   </section>
 
@@ -348,10 +357,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -486,5 +497,6 @@
       });
     });
   </script>
+  <script src="../../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

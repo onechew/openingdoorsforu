@@ -5,12 +5,21 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+from site_footer import (  # noqa: E402
+    render_site_footer,
+    site_footer_script_tag,
+    sync_homepage_footer,
+)
 DATA = json.loads((ROOT / "data" / "listings.json").read_text(encoding="utf-8"))
 # Sitemap lastmod: ISO 8601 with timezone (W3C Datetime / sitemaps.org)
 LASTMOD = (
@@ -19,6 +28,59 @@ LASTMOD = (
     .isoformat()
 )
 ORIGIN = "https://openingdoorsforu.com"
+
+# South Etobicoke pockets live on /etobicoke/#… (same city-page system as /toronto/).
+# Do not ship these as top-level peer URLs.
+ETOBICOKE_NEIGHBOURHOODS = [
+    {
+        "slug": "mimico",
+        "name": "Mimico",
+        "chip": "South Etobicoke",
+        "blurb": "Waterfront living with village amenities, lake shore condos, and established residential streets.",
+        "about": "Mimico sits on Toronto’s west waterfront in South Etobicoke, with a mix of lake shore condos, low-rise living, and established residential streets. GO, TTC, and highway access connect the community to downtown and the wider GTA.",
+        "image": "assets/neighbourhoods/mimico.jpg",
+    },
+    {
+        "slug": "long-branch",
+        "name": "Long Branch",
+        "chip": "South Etobicoke",
+        "blurb": "Calmer lakeside streets, greenery, and parks such as Marie Curtis Park close at hand.",
+        "about": "Long Branch is one of South Etobicoke’s established lakeside communities. Buyers and renters often weigh housing mix and neighbourhood feel against nearby Mimico, New Toronto, and Alderwood.",
+        "image": "assets/neighbourhoods/long-branch.jpg",
+    },
+    {
+        "slug": "alderwood",
+        "name": "Alderwood",
+        "chip": "South Etobicoke",
+        "blurb": "Established residential streets with a grounded, family-oriented feel.",
+        "about": "Alderwood is a South Etobicoke neighbourhood with established residential streets and a housing mix that often attracts families and long-term owners, compared with high-rise lake shore living.",
+        "image": "assets/neighbourhoods/alderwood.jpg",
+    },
+    {
+        "slug": "new-toronto",
+        "name": "New Toronto",
+        "chip": "South Etobicoke",
+        "blurb": "Lakeside corridor between Mimico and Long Branch, with parks and quieter streets.",
+        "about": "New Toronto sits on South Etobicoke’s lakeside corridor between Mimico and Long Branch. Tree-lined streets, greenery, and Colonel Samuel Smith Park shape day-to-day living.",
+        "image": "assets/neighbourhoods/new-toronto.jpg",
+    },
+    {
+        "slug": "humber-bay",
+        "name": "Humber Bay",
+        "chip": "South Etobicoke",
+        "blurb": "Lake shore condo living along Humber Bay Shores, with trails and amenity-forward towers.",
+        "about": "Humber Bay (including Humber Bay Shores) is known for lake shore condo living, waterfront paths, and easy connections toward downtown along Toronto’s west waterfront.",
+        "image": "assets/neighbourhoods/humber-bay.jpg",
+    },
+    {
+        "slug": "stonegate-queensway",
+        "name": "Stonegate-Queensway",
+        "chip": "Etobicoke",
+        "blurb": "Established streets with Queensway corridor convenience toward the rest of Toronto.",
+        "about": "Stonegate-Queensway sits in South Etobicoke with a blend of residential streets and practical access along the Queensway corridor. Clients often compare it with Mimico and Alderwood.",
+        "image": "assets/neighbourhoods/stonegate-queensway.jpg",
+    },
+]
 
 CITIES = {
     "toronto": {
@@ -35,7 +97,7 @@ CITIES = {
         ],
         "transit": [
             "TTC subway, streetcar, and GO connections make many Toronto neighbourhoods workable without a long drive.",
-            "Downtown and midtown towers trade on walkability; west and east pockets often balance transit with parking.",
+            "Downtown and midtown towers trade on walkability. West and east pockets often balance transit with parking.",
             "Commute patterns to the Financial District, hospitals, and campuses still drive absorption for leases and sales.",
         ],
         "snapshot": {
@@ -52,9 +114,9 @@ CITIES = {
         "name": "Etobicoke",
         "areas": ["Etobicoke"],
         "title": "Etobicoke Realtor | Homes for Sale, Sold & Lease | Josh Schwartz",
-        "description": "Etobicoke realtor Josh Schwartz with Thapar Team, #1 Team in Etobicoke. Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.",
-        "lead": "Etobicoke is Toronto’s west side: lake shore living, family neighbourhoods, and easy access to downtown and Pearson. Josh works with Thapar Team, #1 Team in Etobicoke.",
-        "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance, backed by Thapar Team, #1 Team in Etobicoke.",
+        "description": "Etobicoke realtor Josh Schwartz, backed by Thapar Team (#1 team in Etobicoke). Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.",
+        "lead": "Etobicoke is Toronto’s west side: lake shore living, family neighbourhoods, and easy access to downtown and Pearson. Josh Schwartz of Thapar Team, the #1 team in Etobicoke, helps clients buy, sell, and lease with clear local guidance.",
+        "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance, backed by Thapar Team (#1 team in Etobicoke).",
         "schools": [
             "Families often compare schools across south Etobicoke and inland neighbourhoods when choosing between houses and condos.",
             "Proximity to parks, the waterfront trail, and community centres matters as much as classroom rankings for many buyers.",
@@ -70,7 +132,7 @@ CITIES = {
             "buyer": "End-users, relocators, lease clients",
             "metric": "Mimico · Islington · Queensway",
             "metric_label": "Key pockets",
-            "angle": "Thapar Team · #1 in Etobicoke",
+            "angle": "Josh · backed by Thapar Team",
             "angle_label": "Local strength",
             "note": "Mimico and Queensway pockets can move quickly on well-priced suites.",
         },
@@ -239,7 +301,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20260806hc"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20261014geo"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -260,6 +322,9 @@ def page_shell(
     ld = ""
     if json_ld:
         ld = f'<script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>'
+    root_href = "../" * depth
+    footer = render_site_footer(root_href=root_href)
+    footer_js = site_footer_script_tag(root_href=root_href)
     return f"""<!DOCTYPE html>
 <html lang="en-CA">
 <head>
@@ -306,7 +371,16 @@ def page_shell(
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="{home}#listings">Listings</a>
-        <a href="{home}#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="{home}#areas" role="menuitem">Areas</a>
+            <a href="{home}#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="{home}#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -343,15 +417,7 @@ def page_shell(
     </div>
   </header>
   {body}
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-meta">
-        <div>© {date.today().year} Josh Schwartz</div>
-        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
-      </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
-    </div>
-  </footer>
+{footer}
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
     <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
   </button>
@@ -459,6 +525,7 @@ def page_shell(
       }});
     }})();
   </script>
+{footer_js}
 </body>
 </html>
 """
@@ -566,6 +633,45 @@ def city_items(city_key: str):
     return current, past
 
 
+def etobicoke_neighbourhoods_html(depth: int) -> str:
+    """Neighbourhood guides folded into the Etobicoke city page (not top-level URLs)."""
+    tiles = []
+    details = []
+    for n in ETOBICOKE_NEIGHBOURHOODS:
+        img = asset_href(n["image"], depth)
+        tiles.append(
+            f"""
+      <a class="hood-tile" href="#{esc(n['slug'])}" aria-label="{esc(n['name'])} in Etobicoke">
+        <img src="{esc(img)}" alt="" loading="lazy" width="1600" height="1000" />
+        <span class="hood-tile-label">
+          <span class="hood-tile-name">{esc(n['name'])}</span>
+          <span class="hood-tile-meta">{esc(n['chip'])}</span>
+        </span>
+      </a>"""
+        )
+        details.append(
+            f"""
+    <article class="hood-detail" id="{esc(n['slug'])}">
+      <h3>{esc(n['name'])}</h3>
+      <p class="section-copy">{esc(n['blurb'])}</p>
+      <div class="prose"><p>{esc(n['about'])}</p></div>
+      <p class="section-copy"><a class="text-link" href="tel:+16473608179">Ask Josh about {esc(n['name'])}</a></p>
+    </article>"""
+        )
+    return f"""
+  <section class="section" id="neighbourhoods">
+    <div class="container">
+      <h2>Neighbourhoods</h2>
+      <p class="section-copy">South Etobicoke communities Josh serves, from Mimico and Humber Bay to Long Branch, New Toronto, Alderwood, and Stonegate-Queensway.</p>
+      <div class="hood-grid">{''.join(tiles)}
+      </div>
+      <div class="hood-details">{''.join(details)}
+      </div>
+    </div>
+  </section>
+"""
+
+
 def write_city_pages():
     urls = []
     for key, meta in CITIES.items():
@@ -581,10 +687,12 @@ def write_city_pages():
                 f'        <a class="btn btn-secondary" href="{asset_href("", depth)}#service-sell">Sell with Josh</a>\n'
                 '        <a class="btn btn-secondary" href="south-etobicoke-condo-guide/">Condo guide</a>'
             )
+            hood_section = etobicoke_neighbourhoods_html(depth)
         else:
             condo_cta = (
                 f'<a class="btn btn-primary" href="{asset_href("", depth)}#listings">View all listings</a>'
             )
+            hood_section = ""
         other_city_links = "".join(
             f'<a href="{asset_href(k + "/", depth)}">{esc(CITIES[k]["name"])}</a>'
             for k in CITIES
@@ -602,11 +710,11 @@ def write_city_pages():
       </div>
     </div>
   </section>
-
+{hood_section}
   <section class="section">
     <div class="container">
       <h2>Current Listings in {esc(meta['name'])}</h2>
-      <p class="section-copy">Live inventory Josh can help you buy or lease in and around {esc(meta['name'])}. Team listings are with Snobar Realty Group / Thapar Team. Not all are personally listed by Josh.</p>
+      <p class="section-copy">Live inventory Josh Schwartz can help you buy or lease in and around {esc(meta['name'])}. Some homes are listed with Snobar Realty Group / Thapar Team (Josh’s credential network). Not all are personally listed by Josh.</p>
       {cards_html(current, depth, asset_href('listings/', depth))}
     </div>
   </section>
@@ -657,7 +765,6 @@ def write_city_pages():
         <div class="stat"><strong>{esc(meta['snapshot']['metric'])}</strong><span>{esc(meta['snapshot']['metric_label'])}</span></div>
         <div class="stat"><strong>{esc(meta['snapshot']['angle'])}</strong><span>{esc(meta['snapshot']['angle_label'])}</span></div>
       </div>
-      <p class="section-copy snapshot-note">{esc(meta['snapshot']['note'])} <span class="snapshot-cta">Ask Josh for a current {esc(meta['name'])} brief.</span></p>
       <div class="city-links" style="margin-top:18px">
         {other_city_links}
       </div>
@@ -1106,6 +1213,10 @@ def main():
     city_urls = write_city_pages()
     listing_urls = write_listing_pages()
     write_sitemap(city_urls + listing_urls)
+    if sync_homepage_footer(ROOT / "index.html"):
+        print("synced homepage footer")
+    else:
+        print("warning: homepage footer sync failed")
 
 
 if __name__ == "__main__":

@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../../#listings">Listings</a>
-        <a href="../../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../../#areas" role="menuitem">Areas</a>
+            <a href="../../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -145,7 +154,7 @@
   
   <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
-      <div class="condo-story-block"><h2>About Beyond the Sea</h2><p>Developed by Empire Communities around 2011–2012, Beyond the Sea is a master-planned trio: North Tower at 15 Legion Rd, Star Tower at 2230 Lake Shore Blvd W, and South Tower at 2240 Lake Shore Blvd W. The towers share roughly 20,000 sqft of recreational facilities, including fitness, indoor pool, party and theatre rooms, and outdoor terrace space. Confirm corporation, fees, and management for the specific tower you are buying.</p></div><div class="condo-story-block"><h3>Shared community amenities</h3><p>The three Beyond the Sea towers share a deep amenity set (often cited around 20,000 sqft of recreational space): fitness, indoor pool, hot tub/sauna, party and theatre rooms, guest suites, and outdoor terrace/BBQ space. That shared podium is a core reason the complex trades as a community, not three unrelated buildings.</p></div><div class="condo-story-block"><h3>Buyer notes</h3><p>Confirm which corporation and management office applies to your specific tower; fees, rules, and contact numbers can differ across 15 Legion, 2230 Lake Shore, and 2240 Lake Shore even when amenities are shared.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Modern open-concept layouts with balcony living are typical. View corridors and fee structures vary by tower—compare within the three-tower Empire cluster and against Mystic Pointe lofts.</p></div>
+      <div class="condo-story-block"><h2>About Beyond the Sea</h2><p>Developed by Empire Communities around 2011–2012, Beyond the Sea is a master-planned trio: North Tower at 15 Legion Rd, Star Tower at 2230 Lake Shore Blvd W, and South Tower at 2240 Lake Shore Blvd W. The towers share roughly 20,000 sqft of recreational facilities, including fitness, indoor pool, party and theatre rooms, and outdoor terrace space. Confirm corporation, fees, and management for the specific tower you are buying.</p></div><div class="condo-story-block"><h3>Shared community amenities</h3><p>The three Beyond the Sea towers share a deep amenity set (often cited around 20,000 sqft of recreational space): fitness, indoor pool, hot tub/sauna, party and theatre rooms, guest suites, and outdoor terrace/BBQ space. That shared podium is a core reason the complex trades as a community, not three unrelated buildings.</p></div><div class="condo-story-block"><h3>Buyer notes</h3><p>Confirm which corporation and management office applies to your specific tower. Fees, rules, and contact numbers can differ across 15 Legion, 2230 Lake Shore, and 2240 Lake Shore even when amenities are shared.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Modern open-concept layouts with balcony living are typical. View corridors and fee structures vary by tower. Compare within the three-tower Empire cluster and against Mystic Pointe lofts.</p></div>
     </div>
   </section>
 
@@ -339,10 +348,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -477,5 +488,6 @@
       });
     });
   </script>
+  <script src="../../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

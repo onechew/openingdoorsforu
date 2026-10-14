@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../../#listings">Listings</a>
-        <a href="../../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../../#areas" role="menuitem">Areas</a>
+            <a href="../../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -134,7 +143,7 @@
   
   <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
-      <div class="condo-story-block"><h2>About Palace Place</h2><p>Completed in 1993 by Bramalea, Palace Place rises 44 storeys with about 504 suites ranging from roughly 833 to nearly 2,900 sqft. The address sits at the mouth of the Humber River beside the lake, which is why lake-and-city views and a quieter waterfront pace remain part of its pitch decades later.</p></div><div class="condo-story-block"><h3>Full-service waterfront living</h3><p>Valet parking, a private shuttle, tennis, indoor pool, spa amenities, guest suites, and 24-hour staffing are why Palace Place still gets compared with newer towers that offer flashier lobbies but smaller floor plates. Maintenance fees typically cover heat, hydro, water, cable, parking, and building insurance, useful context when you compare net carrying costs.</p></div><div class="condo-story-block"><h3>Who tends to buy here</h3><p>Empty nesters, executives, and luxury buyers who want larger layouts and turnkey services shortlist Palace Place when they are done compromising on square footage. It is less of a first-time investor play and more of an end-user lifestyle building.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Suites are among the larger floor plates in Humber Bay, with many classic layouts that live more like homes than studio-style condos. Expect a wide spread from mid-size one-beds through expansive multi-bedroom residences; always confirm current square footage and fee schedules on any suite you tour.</p></div>
+      <div class="condo-story-block"><h2>About Palace Place</h2><p>Completed in 1993 by Bramalea, Palace Place rises 44 storeys with about 504 suites ranging from roughly 833 to nearly 2,900 sqft. The address sits at the mouth of the Humber River beside the lake, which is why lake-and-city views and a quieter waterfront pace remain part of its pitch decades later.</p></div><div class="condo-story-block"><h3>Full-service waterfront living</h3><p>Valet parking, a private shuttle, tennis, indoor pool, spa amenities, guest suites, and 24-hour staffing are why Palace Place still gets compared with newer towers that offer flashier lobbies but smaller floor plates. Maintenance fees typically cover heat, hydro, water, cable, parking, and building insurance, useful context when you compare net carrying costs.</p></div><div class="condo-story-block"><h3>Who tends to buy here</h3><p>Empty nesters, executives, and luxury buyers who want larger layouts and turnkey services shortlist Palace Place when they are done compromising on square footage. It is less of a first-time investor play and more of an end-user lifestyle building.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Suites are among the larger floor plates in Humber Bay, with many classic layouts that live more like homes than studio-style condos. Expect a wide spread from mid-size one-beds through expansive multi-bedroom residences. Always confirm current square footage and fee schedules on any suite you tour.</p></div>
     </div>
   </section>
 
@@ -255,7 +264,7 @@
     <div class="container condo-fit-grid">
       <div>
         <h2>Why consider Palace Place</h2>
-        <ul class="condo-fit-list"><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>Oversized suites versus most newer Humber Bay towers</span></li><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>True full-service stack: valet, concierge, shuttle, courts, and pool</span></li><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>Prime waterfront position near Humber Bay Park and the trail</span></li><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>Fees often bundle utilities and parking, compare net monthly cost carefully</span></li></ul>
+        <ul class="condo-fit-list"><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>Oversized suites versus most newer Humber Bay towers</span></li><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>True full-service stack: valet, concierge, shuttle, courts, and pool</span></li><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>Prime waterfront position near Humber Bay Park and the trail</span></li><li class="condo-fit-item"><span class="material-symbols-outlined condo-fit-icon" aria-hidden="true">check</span><span>Fees often bundle utilities and parking. Compare net monthly cost carefully</span></li></ul>
       </div>
       <div>
         <h2>Who it fits</h2>
@@ -328,10 +337,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -466,5 +477,6 @@
       });
     });
   </script>
+  <script src="../../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

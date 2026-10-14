@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="../assets/seo-pages.css?v=20260806hc" />
+  <link rel="stylesheet" href="../assets/seo-pages.css?v=20261014geo" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Toronto Realtor | Homes for Sale, Sold & Lease | Josh Schwartz", "description": "Buy, sell, or lease in Toronto with Josh Schwartz. Browse current listings, recently sold and leased homes across Downtown, Midtown, East Toronto, and West Toronto.", "url": "https://openingdoorsforu.com/toronto/", "isPartOf": {"@id": "https://openingdoorsforu.com/#website"}, "about": {"@type": "Place", "name": "Toronto"}}</script>
 </head>
 <body>
@@ -47,7 +47,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../#listings">Listings</a>
-        <a href="../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../#areas" role="menuitem">Areas</a>
+            <a href="../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -99,7 +108,7 @@
   <section class="section">
     <div class="container">
       <h2>Current Listings in Toronto</h2>
-      <p class="section-copy">Live inventory Josh can help you buy or lease in and around Toronto. Team listings are with Snobar Realty Group / Thapar Team. Not all are personally listed by Josh.</p>
+      <p class="section-copy">Live inventory Josh Schwartz can help you buy or lease in and around Toronto. Some homes are listed with Snobar Realty Group / Thapar Team (Josh’s credential network). Not all are personally listed by Josh.</p>
       <div class="grid">
       <a class="card" href="https://www.thaparteam.ca/property-search/detail/211/W13641968/299-mill-rd-toronto-on-m9c-4v9/?src=2" target="_blank" rel="noopener noreferrer">
         <div class="card-media"><img src="https://cdn.listingphotos.sierrastatic.com/pics2x/v1786000652/211/211_W13641968_01.jpg" alt="299 Mill Rd #1510 · Markland Wood · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.src='../assets/listing-placeholder.svg';" /></div>
@@ -326,7 +335,7 @@
   <section class="section">
     <div class="container">
       <h2>Transit</h2>
-      <div class="prose"><ul><li>TTC subway, streetcar, and GO connections make many Toronto neighbourhoods workable without a long drive.</li><li>Downtown and midtown towers trade on walkability; west and east pockets often balance transit with parking.</li><li>Commute patterns to the Financial District, hospitals, and campuses still drive absorption for leases and sales.</li></ul></div>
+      <div class="prose"><ul><li>TTC subway, streetcar, and GO connections make many Toronto neighbourhoods workable without a long drive.</li><li>Downtown and midtown towers trade on walkability. West and east pockets often balance transit with parking.</li><li>Commute patterns to the Financial District, hospitals, and campuses still drive absorption for leases and sales.</li></ul></div>
     </div>
   </section>
 
@@ -339,7 +348,6 @@
         <div class="stat"><strong>Downtown · Midtown · East · West</strong><span>Key pockets</span></div>
         <div class="stat"><strong>Buy · Sell · Lease</strong><span>How Josh helps</span></div>
       </div>
-      <p class="section-copy snapshot-note">Inventory and days-on-market shift by pocket. Downtown lease velocity differs from midtown sales. <span class="snapshot-cta">Ask Josh for a current Toronto brief.</span></p>
       <div class="city-links" style="margin-top:18px">
         <a href="../etobicoke/">Etobicoke</a><a href="../north-york/">North York</a><a href="../markham/">Markham</a><a href="../richmond-hill/">Richmond Hill</a><a href="../vaughan/">Vaughan</a><a href="../mississauga/">Mississauga</a>
       </div>
@@ -349,10 +357,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -462,5 +472,6 @@
       });
     })();
   </script>
+  <script src="../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

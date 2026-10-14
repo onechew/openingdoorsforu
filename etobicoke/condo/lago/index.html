@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../../#listings">Listings</a>
-        <a href="../../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../../#areas" role="menuitem">Areas</a>
+            <a href="../../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -154,7 +163,7 @@
   
   <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
-      <div class="condo-story-block"><h2>About Lago</h2><p>Completed in 2017, Lago helped cement Annie Craig as a destination strip for modern waterfront condo living. The amenity branding and view corridors are central to how the building is sold and resold.</p></div><div class="condo-story-block"><h3>Lago Club living</h3><p>Amenity programming is a headline feature, fitness, social spaces, and outdoor living designed for frequent use. Concierge supports a hotel-adjacent daily rhythm.</p></div><div class="condo-story-block"><h3>Views and location</h3><p>Annie Craig puts lake and city sightlines in play depending on exposure, with trail and park access minutes away.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Glass-forward contemporary suites; balcony and exposure drive lifestyle as much as interior square footage. Compare fee schedules tightly with neighbouring Mattamy and Conservatory product.</p></div>
+      <div class="condo-story-block"><h2>About Lago</h2><p>Completed in 2017, Lago helped cement Annie Craig as a destination strip for modern waterfront condo living. The amenity branding and view corridors are central to how the building is sold and resold.</p></div><div class="condo-story-block"><h3>Lago Club living</h3><p>Amenity programming is a headline feature, fitness, social spaces, and outdoor living designed for frequent use. Concierge supports a hotel-adjacent daily rhythm.</p></div><div class="condo-story-block"><h3>Views and location</h3><p>Annie Craig puts lake and city sightlines in play depending on exposure, with trail and park access minutes away.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Glass-forward contemporary suites. Balcony and exposure drive lifestyle as much as interior square footage. Compare fee schedules tightly with neighbouring Mattamy and Conservatory product.</p></div>
     </div>
   </section>
 
@@ -348,10 +357,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -486,5 +497,6 @@
       });
     });
   </script>
+  <script src="../../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

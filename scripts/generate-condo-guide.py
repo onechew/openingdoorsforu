@@ -4,12 +4,17 @@
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+from site_footer import render_site_footer, site_footer_script_tag  # noqa: E402
 DATA = json.loads((ROOT / "data" / "condo-guide.json").read_text(encoding="utf-8"))
 ORIGIN = "https://openingdoorsforu.com"
 LASTMOD = (
@@ -60,6 +65,12 @@ def page_shell(
     ld = ""
     if json_ld:
         ld = f'\n  <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>'
+    root_href = "../" * depth
+    footer = render_site_footer(
+        root_href=root_href,
+        note_extra="Building facts are for guidance and may change.",
+    )
+    footer_js = site_footer_script_tag(root_href=root_href)
     return f"""<!DOCTYPE html>
 <html lang="en-CA">
 <head>
@@ -100,7 +111,16 @@ def page_shell(
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="{prefix}#listings">Listings</a>
-        <a href="{prefix}#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="{prefix}#areas" role="menuitem">Areas</a>
+            <a href="{prefix}#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="{prefix}#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -137,15 +157,7 @@ def page_shell(
     </div>
   </header>
 {body}
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
-        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
-      </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
-    </div>
-  </footer>
+{footer}
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
     <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
   </button>
@@ -278,6 +290,7 @@ def page_shell(
       }});
     }});
   </script>
+{footer_js}
 </body>
 </html>
 """
@@ -1071,7 +1084,7 @@ def write_index() -> None:
   <section class="section">
     <div class="container prose">
       <h2>Buying in South Etobicoke?</h2>
-      <p>Comparing fees, views, amenities, and resale patterns building-by-building is the difference between a good condo and the right condo. Josh works with Thapar Team, #1 Team in Etobicoke, and can pull live inventory for any of these addresses.</p>
+      <p>Comparing fees, views, amenities, and resale patterns building-by-building is the difference between a good condo and the right condo. Josh Schwartz, backed by Thapar Team (#1 team in Etobicoke), can pull live inventory for any of these addresses.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="../../#service-buy">Buy with Josh</a>
         <a class="btn btn-secondary" href="../../#service-sell">Sell with Josh</a>

@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="../assets/seo-pages.css?v=20260806hc" />
+  <link rel="stylesheet" href="../assets/seo-pages.css?v=20261014geo" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Markham Realtor | Homes for Sale & Sold | Josh Schwartz", "description": "Markham homes with Josh Schwartz. See current opportunities and recently sold or leased properties across Markham and nearby York Region communities.", "url": "https://openingdoorsforu.com/markham/", "isPartOf": {"@id": "https://openingdoorsforu.com/#website"}, "about": {"@type": "Place", "name": "Markham"}}</script>
 </head>
 <body>
@@ -47,7 +47,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../#listings">Listings</a>
-        <a href="../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../#areas" role="menuitem">Areas</a>
+            <a href="../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -99,7 +108,7 @@
   <section class="section">
     <div class="container">
       <h2>Current Listings in Markham</h2>
-      <p class="section-copy">Live inventory Josh can help you buy or lease in and around Markham. Team listings are with Snobar Realty Group / Thapar Team. Not all are personally listed by Josh.</p>
+      <p class="section-copy">Live inventory Josh Schwartz can help you buy or lease in and around Markham. Some homes are listed with Snobar Realty Group / Thapar Team (Josh’s credential network). Not all are personally listed by Josh.</p>
       <p class="empty">Josh can help you buy, sell, or lease here. <a href="../#contact">text Josh</a> or <a href="https://www.thaparteam.ca/property-search/results/?searchid=3952868" target="_blank" rel="noopener noreferrer">browse live inventory</a>.</p>
     </div>
   </section>
@@ -159,7 +168,6 @@
         <div class="stat"><strong>Detached · towns · newer communities</strong><span>Common product</span></div>
         <div class="stat"><strong>Schools · commute · value</strong><span>Decision drivers</span></div>
       </div>
-      <p class="section-copy snapshot-note">Detached and townhome demand often leads condo volume in buyer conversations. <span class="snapshot-cta">Ask Josh for a current Markham brief.</span></p>
       <div class="city-links" style="margin-top:18px">
         <a href="../toronto/">Toronto</a><a href="../etobicoke/">Etobicoke</a><a href="../north-york/">North York</a><a href="../richmond-hill/">Richmond Hill</a><a href="../vaughan/">Vaughan</a><a href="../mississauga/">Mississauga</a>
       </div>
@@ -169,10 +177,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -282,5 +292,6 @@
       });
     })();
   </script>
+  <script src="../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../#listings">Listings</a>
-        <a href="../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../#areas" role="menuitem">Areas</a>
+            <a href="../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -266,7 +275,7 @@
   <section class="section">
     <div class="container prose">
       <h2>Buying in South Etobicoke?</h2>
-      <p>Comparing fees, views, amenities, and resale patterns building-by-building is the difference between a good condo and the right condo. Josh works with Thapar Team, #1 Team in Etobicoke, and can pull live inventory for any of these addresses.</p>
+      <p>Comparing fees, views, amenities, and resale patterns building-by-building is the difference between a good condo and the right condo. Josh Schwartz, backed by Thapar Team (#1 team in Etobicoke), can pull live inventory for any of these addresses.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="../../#service-buy">Buy with Josh</a>
         <a class="btn btn-secondary" href="../../#service-sell">Sell with Josh</a>
@@ -277,10 +286,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -415,5 +426,6 @@
       });
     });
   </script>
+  <script src="../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>

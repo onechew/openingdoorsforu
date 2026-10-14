@@ -39,7 +39,16 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../../../#listings">Listings</a>
-        <a href="../../../#condo-guide">Condo Guide</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
+            Guides
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navGuidesMenu" role="menu">
+            <a href="../../../#areas" role="menuitem">Areas</a>
+            <a href="../../../#condo-guide" role="menuitem">Condo</a>
+          </div>
+        </div>
         <a href="../../../#services">Services</a>
       </nav>
       <div class="header-utils">
@@ -134,7 +143,7 @@
   
   <section class="section condo-story-section" id="about">
     <div class="container condo-story-grid">
-      <div class="condo-story-block"><h2>About South Beach Condos and Lofts</h2><p>South Beach pairs loft-influenced living with a heavy amenity focus near Park Lawn and the lake corridor. It draws buyers who tour amenities as seriously as suite size.</p></div><div class="condo-story-block"><h3>Amenity-forward living</h3><p>Pools, fitness, social spaces, and concierge define the pitch. If you will actually use shared facilities weekly, South Beach tends to outshine thinner amenity buildings nearby.</p></div><div class="condo-story-block"><h3>Location</h3><p>Park Lawn places you between Mimico and Humber Bay Shores, practical for trail access, Lake Shore errands, and commuting.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Loft and condo layouts vary; confirm ceiling heights, outdoor space, and parking when matching lifestyle. Amenity access is a core value driver in pricing conversations.</p></div>
+      <div class="condo-story-block"><h2>About South Beach Condos and Lofts</h2><p>South Beach pairs loft-influenced living with a heavy amenity focus near Park Lawn and the lake corridor. It draws buyers who tour amenities as seriously as suite size.</p></div><div class="condo-story-block"><h3>Amenity-forward living</h3><p>Pools, fitness, social spaces, and concierge define the pitch. If you will actually use shared facilities weekly, South Beach tends to outshine thinner amenity buildings nearby.</p></div><div class="condo-story-block"><h3>Location</h3><p>Park Lawn places you between Mimico and Humber Bay Shores, practical for trail access, Lake Shore errands, and commuting.</p></div><div class="condo-story-block"><h3>Suite features &amp; layouts</h3><p>Loft and condo layouts vary. Confirm ceiling heights, outdoor space, and parking when matching lifestyle. Amenity access is a core value driver in pricing conversations.</p></div>
     </div>
   </section>
 
@@ -328,10 +337,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© 2026 Josh Schwartz</div>
+        <div>© <span id="year">2026</span> Josh Schwartz</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
-      <p class="footer-note">Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.</p>
+      <p class="footer-note">
+        Advertising follows Ontario RECO rules under TRESA. Building facts are for guidance and may change.
+      </p>
     </div>
   </footer>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" hidden>
@@ -466,5 +477,6 @@
       });
     });
   </script>
+  <script src="../../../assets/site-footer.js?v=20261014footer" defer></script>
 </body>
 </html>
