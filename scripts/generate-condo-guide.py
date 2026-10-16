@@ -95,7 +95,7 @@ def page_shell(
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20260806hc" />{ld}
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261016copyonce" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -110,7 +110,16 @@ def page_shell(
         </div>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="{prefix}#listings">Listings</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navListingsMenu">
+            Listings
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navListingsMenu" role="menu">
+            <a href="{prefix}?tab=active#listings" role="menuitem">Active</a>
+            <a href="{prefix}?tab=sold#listings" role="menuitem">Sold &amp; Leased</a>
+          </div>
+        </div>
         <div class="nav-drop" data-nav-drop>
           <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
             Guides
@@ -122,7 +131,29 @@ def page_shell(
             <a href="{prefix}#condo-guide" role="menuitem">Condo</a>
           </div>
         </div>
-        <a href="{prefix}#services">Services</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navServicesMenu">
+            Services
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navServicesMenu" role="menu">
+            <a href="{prefix}#service-buy" role="menuitem">Buy</a>
+            <a href="{prefix}#service-sell" role="menuitem">Sell</a>
+            <a href="{prefix}#service-lease" role="menuitem">Lease</a>
+          </div>
+        </div>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navAboutMenu">
+            About
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navAboutMenu" role="menu">
+            <a href="{prefix}#about" role="menuitem">About</a>
+            <a href="{prefix}#reviews" role="menuitem">Reviews</a>
+            <a href="{prefix}#reels" role="menuitem">Latest</a>
+            <a href="{prefix}#faq" role="menuitem">FAQ</a>
+          </div>
+        </div>
       </nav>
       <div class="header-utils">
         <div class="header-contact">
@@ -134,8 +165,8 @@ def page_shell(
             class="copy-email email-text"
             type="button"
             data-email="josh@thaparteam.ca"
-            data-tip="Copy email"
-            aria-label="Copy email address"
+            data-tip="Copy Josh's email"
+            aria-label="Copy Josh's email"
           >
             <span class="copy-email-text">josh@thaparteam.ca</span>
           </button>
@@ -271,18 +302,27 @@ def page_shell(
     }}
 
     document.querySelectorAll(".copy-email").forEach(button => {{
-      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      const defaultTip = button.getAttribute("data-tip") || "Copy Josh's email";
+      const label = button.querySelector(".copy-email-text");
+      const defaultLabel = label ? label.textContent : "";
+      const swapLabel = button.classList.contains("btn") && label;
       let copiedTimer;
       button.addEventListener("click", async () => {{
         const email = button.dataset.email;
         if (!email) return;
         try {{
           await copyText(email);
-          button.setAttribute("data-tip", "Copied!");
-          button.classList.add("is-copied");
+          if (swapLabel) {{
+            label.textContent = "Copied!";
+            button.classList.add("is-copied");
+          }} else {{
+            button.setAttribute("data-tip", "Copied!");
+            button.classList.add("is-copied");
+          }}
           window.clearTimeout(copiedTimer);
           copiedTimer = window.setTimeout(() => {{
-            button.setAttribute("data-tip", defaultTip);
+            if (swapLabel) label.textContent = defaultLabel;
+            else button.setAttribute("data-tip", defaultTip);
             button.classList.remove("is-copied");
           }}, 2000);
         }} catch (error) {{
@@ -784,18 +824,30 @@ def school_groups_html(b: dict) -> str:
     catholic_schools = schools.get("catholic") or []
     if not public_schools and not catholic_schools:
         return ""
+
+    def _school_items(names: list) -> str:
+        return "".join(
+            f"<li>{material_icon('school', 'condo-school-item-icon')}"
+            f"<span>{esc(s)}</span></li>"
+            for s in names
+        )
+
     groups = []
     if public_schools:
-        items = "".join(f"<li>{esc(s)}</li>" for s in public_schools)
         groups.append(
             f'<div class="condo-walk-school-group">'
-            f'<p class="condo-walk-school-label">Public</p><ul>{items}</ul></div>'
+            f'<p class="condo-walk-school-label">'
+            f'{material_icon("account_balance", "condo-school-board-icon")}'
+            f"<span>Public</span></p>"
+            f"<ul>{_school_items(public_schools)}</ul></div>"
         )
     if catholic_schools:
-        items = "".join(f"<li>{esc(s)}</li>" for s in catholic_schools)
         groups.append(
             f'<div class="condo-walk-school-group">'
-            f'<p class="condo-walk-school-label">Catholic</p><ul>{items}</ul></div>'
+            f'<p class="condo-walk-school-label">'
+            f'{material_icon("church", "condo-school-board-icon")}'
+            f"<span>Catholic</span></p>"
+            f"<ul>{_school_items(catholic_schools)}</ul></div>"
         )
     return f'<div class="condo-walk-school-cols">{"".join(groups)}</div>'
 
@@ -838,12 +890,18 @@ def about_neighbourhood_section(b: dict) -> str:
             hoodq_html = (
                 f'<p class="condo-neighbourhood-hoodq">'
                 f'<a href="{esc(hoodq)}" target="_blank" rel="noopener noreferrer">'
-                f"HoodQ Mimico–Humber Bay Shores neighbourhood guide</a>"
+                f'{material_icon("map", "condo-hoodq-icon")}'
+                f"<span>HoodQ Mimico–Humber Bay Shores neighbourhood guide</span>"
+                f'{material_icon("open_in_new", "condo-hoodq-ext")}</a>'
                 f"<span>Schools, transit, and local context for this pocket.</span>"
                 f"</p>"
             )
         schools_title = (
-            '<p class="condo-walk-schools-title">Nearby schools</p>' if schools else ""
+            f'<p class="condo-walk-schools-title">'
+            f'{material_icon("school", "condo-schools-title-icon")}'
+            f"<span>Nearby schools</span></p>"
+            if schools
+            else ""
         )
         schools_block = f"""
         <div class="condo-neighbourhood-schools">
@@ -1052,9 +1110,9 @@ def write_index() -> None:
   <section class="hero-band">
     <div class="container">
       <p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Etobicoke</a> / Condo Guide</p>
-      <p class="eyebrow">Etobicoke Condo Guide</p>
-      <h1>Explore Etobicoke Condos</h1>
-      <p class="lead">Building guides for Humber Bay Shores &amp; Mimico.</p>
+      <p class="eyebrow">South Etobicoke</p>
+      <h1>South Etobicoke Condo Guide</h1>
+      <p class="lead">Compare Humber Bay Shores and Mimico buildings by age, amenities, location, suite character, fees, and who each tower tends to fit.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="../../#service-buy">Buy with Josh</a>
         <a class="btn btn-secondary" href="../../#service-sell">Sell with Josh</a>
@@ -1068,7 +1126,7 @@ def write_index() -> None:
       <div class="condo-guide-heading">
         <div>
           <h2>Condo buildings</h2>
-          <p class="section-copy">Tap a building for facts, amenities, and who it tends to fit.</p>
+          <p class="section-copy">Open a building for history, amenities, neighbourhood context, fee notes, and who it tends to fit.</p>
         </div>
         <div class="condo-guide-sort" data-condo-sort role="group" aria-label="Sort buildings">
           <span class="condo-guide-sort-label">Sort</span>
@@ -1085,7 +1143,7 @@ def write_index() -> None:
   <section class="section">
     <div class="container prose">
       <h2>Buying in South Etobicoke?</h2>
-      <p>Comparing fees, views, amenities, and resale patterns building-by-building is the difference between a good condo and the right condo. Josh Schwartz, backed by Thapar Team (#1 team in Etobicoke), can pull live inventory for any of these addresses.</p>
+      <p>Comparing fees, views, amenities, and building character tower-by-tower is the difference between a good condo and the right condo. Josh Schwartz can pull live inventory for any of these addresses.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="../../#service-buy">Buy with Josh</a>
         <a class="btn btn-secondary" href="../../#service-sell">Sell with Josh</a>
@@ -1094,17 +1152,22 @@ def write_index() -> None:
   </section>
 """
     html = page_shell(
-        title="Etobicoke Condo Guide | Josh Schwartz",
-        description="Josh’s Etobicoke condo guide: Humber Bay Shores and Mimico buildings with facts, amenities, and amenity tours.",
+        title="South Etobicoke Condo Guide | Humber Bay Shores & Mimico",
+        description="Compare 14 South Etobicoke condo buildings in Humber Bay Shores and Mimico: age, amenities, location, fees, and suitability with Josh Schwartz.",
         canonical=f"{ORIGIN}/etobicoke/south-etobicoke-condo-guide/",
         depth=2,
         body=body,
         json_ld={
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            "name": "Etobicoke Condo Guide",
+            "name": "South Etobicoke Condo Guide",
             "url": f"{ORIGIN}/etobicoke/south-etobicoke-condo-guide/",
-            "about": {"@type": "Place", "name": "South Etobicoke"},
+            "about": [
+                {"@type": "Place", "name": "South Etobicoke"},
+                {"@type": "Place", "name": "Humber Bay Shores"},
+                {"@type": "Place", "name": "Mimico"},
+            ],
+            "isPartOf": {"@type": "WebSite", "url": f"{ORIGIN}/"},
         },
     )
     (GUIDE_DIR / "index.html").write_text(html, encoding="utf-8")
@@ -1269,9 +1332,22 @@ def write_building(b: dict) -> None:
         }
     if og_image:
         json_ld["image"] = og_image
+    area = b.get("area") or "Etobicoke"
+    summary_bit = (b.get("summary") or "").strip()
+    if summary_bit and len(summary_bit) > 140:
+        summary_bit = summary_bit[:137].rsplit(" ", 1)[0] + "…"
+    lead = f"{b['name']} at {b['address']} in {area}."
+    if summary_bit:
+        # Avoid "Name at address… Name at address…" when summary already leads with the building.
+        if summary_bit.lower().startswith(b["name"].lower()):
+            desc = f"{summary_bit} Amenities, fees, neighbourhood context, and who it fits with Josh Schwartz."
+        else:
+            desc = f"{lead} {summary_bit} Amenities, fees, neighbourhood context, and who it fits with Josh Schwartz."
+    else:
+        desc = f"{lead} Amenities, fees, neighbourhood context, and who it fits with Josh Schwartz."
     html = page_shell(
-        title=f"{b['name']} | Etobicoke Condo Guide | Josh Schwartz",
-        description=f"{b['name']} at {b['address']} in {b.get('area', 'Etobicoke')}: history, amenities, and local guidance from Josh Schwartz.",
+        title=f"{b['name']}, {b['address']} | Josh Schwartz",
+        description=desc,
         canonical=f"{ORIGIN}/etobicoke/condo/{b['slug']}/",
         depth=depth,
         body=body,

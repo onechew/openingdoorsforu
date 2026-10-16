@@ -1,4 +1,4 @@
-/*! Shared site footer: copyright year + Guides dropdown. */
+/*! Shared site footer: copyright year + nav dropdowns (Listings, Guides, Services, About). */
 (function initSiteFooter() {
   const yearEl = document.getElementById("year");
   if (yearEl) {

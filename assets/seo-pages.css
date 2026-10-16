@@ -84,6 +84,10 @@
 .condo-title-website-icon,
 .condo-press-ext,
 .fact-icon,
+.hood-jump-icon,
+.hood-trait-icon,
+.hood-panel-icon,
+.hood-check-icon,
 .back-to-top .material-symbols-outlined {
   font-family: "Material Symbols Outlined", sans-serif;
   font-weight: 300;
@@ -767,6 +771,23 @@ h1 {
   box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.18);
 }
 
+button.btn {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+button.btn.copy-email.is-copied {
+  box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.32);
+}
+
+/* CTA already swaps its label to Copied! — no tip toast on top. */
+button.btn.copy-email[data-tip]::after {
+  display: none;
+}
+
 .breadcrumb {
   margin: 0 0 18px;
   color: var(--muted);
@@ -1145,7 +1166,8 @@ h1 {
 .hood-hub-hero-copy {
   position: relative;
   z-index: 1;
-  width: min(calc(100% - 40px), var(--max, 1120px));
+  /* Match .container gutters so breadcrumbs line up with header + page body */
+  width: min(calc(100% - 56px), var(--max));
   margin: 0 auto;
   padding: 48px 0 56px;
 }
@@ -1204,6 +1226,31 @@ h1 {
   }
 }
 
+/* Neighbourhood detail: same light hero-band as city pages + full-width cover */
+.hero-band .hood-cover {
+  margin: 28px 0 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #121417;
+  aspect-ratio: 21 / 9;
+}
+
+.hero-band .hood-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+@media (max-width: 720px) {
+  .hero-band .hood-cover {
+    margin-top: 22px;
+    aspect-ratio: 2 / 1;
+    border-radius: 12px;
+  }
+}
+
 .hood-proof-section blockquote {
   margin: 0;
 }
@@ -1222,43 +1269,42 @@ h1 {
 
 /* Neighbourhood guide: Walk Score–style scan layer (qualitative, no invented stats) */
 .hood-snapshot {
-  padding-top: 8px;
-}
-
-.hood-snapshot-kicker {
-  margin: 0 0 8px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #1f3a5f;
+  padding-top: 28px;
 }
 
 .hood-snapshot h2 {
-  margin: 0 0 14px;
-  max-width: 22ch;
+  margin: 0 0 16px;
+  max-width: none;
+  white-space: normal;
+  text-wrap: pretty;
 }
 
 .hood-snapshot-prose {
-  max-width: 42rem;
+  max-width: none;
 }
 
-.hood-snapshot-more {
-  margin: 4px 0 22px;
+.hood-snapshot-prose p {
+  margin: 0 0 14px;
+  max-width: none;
+}
+
+.hood-snapshot-prose p:last-child {
+  margin-bottom: 0;
 }
 
 .hood-jump {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 0 0 28px;
+  margin: 28px 0;
 }
 
 .hood-jump-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 14px;
+  min-height: 40px;
+  padding: 8px 14px;
   border: 1px solid rgba(18, 20, 23, 0.12);
   border-radius: 999px;
   background: #fff;
@@ -1277,10 +1323,17 @@ h1 {
 }
 
 .hood-jump-icon {
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
-  line-height: 1;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  overflow: hidden;
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20 !important;
 }
 
 .hood-jump-pill.is-nature .hood-jump-icon { color: #2f9e6b; }
@@ -1291,12 +1344,13 @@ h1 {
 
 .hood-snapshot-overview {
   scroll-margin-top: 96px;
-  padding-top: 8px;
+  margin-top: 4px;
+  padding-top: 28px;
   border-top: 1px solid var(--line);
 }
 
 .hood-snapshot-label {
-  margin: 0 0 18px;
+  margin: 0 0 8px;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -1313,33 +1367,42 @@ h1 {
 
 .hood-trait {
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
+  grid-template-columns: 32px minmax(0, 1fr);
   gap: 14px;
   align-items: start;
-  padding: 16px 0;
+  padding: 18px 0;
   border-bottom: 1px solid rgba(18, 20, 23, 0.08);
 }
 
 .hood-trait:last-child {
   border-bottom: 0;
-  padding-bottom: 0;
+  padding-bottom: 4px;
 }
 
 .hood-trait:first-child {
-  padding-top: 0;
+  padding-top: 12px;
 }
 
 .hood-trait-icon {
-  font-size: 24px;
+  box-sizing: border-box;
   width: 24px;
   height: 24px;
-  margin-top: 2px;
+  font-size: 22px;
+  line-height: 24px;
+  margin-top: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  overflow: hidden;
   color: var(--ink);
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24 !important;
+  text-rendering: geometricPrecision;
 }
 
 .hood-trait-title {
   display: block;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -1362,8 +1425,8 @@ h1 {
 .hood-panel-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 0 0 14px;
+  gap: 12px;
+  margin: 0 0 16px;
 }
 
 .hood-panel-head h2 {
@@ -1371,10 +1434,19 @@ h1 {
 }
 
 .hood-panel-icon {
-  font-size: 26px;
-  width: 26px;
-  height: 26px;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  font-size: 22px;
+  line-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  overflow: hidden;
   color: #1f3a5f;
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24 !important;
+  text-rendering: geometricPrecision;
 }
 
 .hood-check-list {
@@ -1382,13 +1454,13 @@ h1 {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
 .hood-check-item {
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 10px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 12px;
   align-items: start;
   color: var(--ink-soft);
   font-size: 15px;
@@ -1396,27 +1468,42 @@ h1 {
 }
 
 .hood-check-icon {
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
   font-size: 20px;
-  width: 20px;
-  height: 20px;
+  line-height: 22px;
   margin-top: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 22px;
+  overflow: hidden;
   color: #1f3a5f;
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24 !important;
+  text-rendering: geometricPrecision;
 }
 
 @media (max-width: 720px) {
   .hood-jump {
     gap: 8px;
+    margin: 24px 0;
   }
 
   .hood-jump-pill {
-    padding: 8px 12px;
+    min-height: 36px;
+    padding: 7px 12px;
     font-size: 12px;
   }
 
   .hood-trait {
-    grid-template-columns: 24px minmax(0, 1fr);
+    grid-template-columns: 28px minmax(0, 1fr);
     gap: 12px;
-    padding: 14px 0;
+    padding: 16px 0;
+  }
+
+  .hood-snapshot-overview {
+    padding-top: 24px;
   }
 }
 
@@ -1439,7 +1526,8 @@ h1 {
 }
 
 @media (max-width: 620px) {
-  .container {
+  .container,
+  .hood-hub-hero-copy {
     width: min(calc(100% - 28px), var(--max));
   }
 
@@ -2149,6 +2237,9 @@ h1 {
 }
 
 .condo-neighbourhood-hoodq a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--ink);
   font-size: 15px;
   font-weight: 650;
@@ -2156,7 +2247,24 @@ h1 {
   text-underline-offset: 3px;
 }
 
-.condo-neighbourhood-hoodq span {
+.condo-hoodq-icon,
+.condo-hoodq-ext {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: #1f3a5f;
+  text-decoration: none;
+}
+
+.condo-hoodq-ext {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.condo-neighbourhood-hoodq > span {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
@@ -2478,21 +2586,34 @@ h1 {
 }
 
 .condo-walk-schools-title {
-  margin: 0 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
   color: var(--ink);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.01em;
+}
+
+.condo-schools-title-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #1f3a5f;
 }
 
 .condo-walk-school-cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px 18px;
+  gap: 16px 22px;
 }
 
 .condo-walk-school-label {
-  margin: 0 0 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 10px;
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
@@ -2500,17 +2621,38 @@ h1 {
   text-transform: uppercase;
 }
 
+.condo-school-board-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #1f3a5f;
+}
+
 .condo-walk-school-group ul {
   margin: 0;
   padding: 0;
   list-style: none;
+  display: grid;
+  gap: 8px;
 }
 
 .condo-walk-school-group li {
-  margin: 0 0 5px;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  margin: 0;
   color: var(--ink-soft);
   font-size: 13.5px;
   line-height: 1.4;
+}
+
+.condo-school-item-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  color: rgba(18, 20, 23, 0.55);
 }
 
 .condo-walk-school-note {

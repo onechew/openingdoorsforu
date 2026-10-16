@@ -100,9 +100,9 @@ CITIES = {
     "etobicoke": {
         "name": "Etobicoke",
         "areas": ["Etobicoke"],
-        "title": "Etobicoke Realtor | Homes for Sale, Sold & Lease | Josh Schwartz",
-        "description": "Etobicoke realtor Josh Schwartz, backed by Thapar Team (#1 team in Etobicoke). Current listings, recently sold and leased homes in Mimico, Islington, lake shore condos, and family neighbourhoods across Etobicoke.",
-        "lead": "Etobicoke is Toronto’s west side: lake shore living, family neighbourhoods, and easy access to downtown and Pearson. Josh Schwartz of Thapar Team, the #1 team in Etobicoke, helps clients buy, sell, and lease with clear local guidance.",
+        "title": "Etobicoke Realtor | South Etobicoke & Humber Bay | Josh Schwartz",
+        "description": "Josh Schwartz for South Etobicoke, Humber Bay Shores, Mimico, and wider Etobicoke. Current listings plus recently sold and leased homes across lake shore condos and family neighbourhoods.",
+        "lead": "Etobicoke is Toronto’s west side, with primary focus on South Etobicoke, Humber Bay Shores, and Mimico lake shore living, plus family neighbourhoods inland. Josh Schwartz helps clients buy, sell, and lease with clear local guidance.",
         "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance, backed by Thapar Team (#1 team in Etobicoke).",
         "schools": [
             "Families often compare schools across south Etobicoke and inland neighbourhoods when choosing between houses and condos.",
@@ -288,7 +288,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20261014hood2"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20261016copyonce"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -357,7 +357,16 @@ def page_shell(
         </div>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="{home}#listings">Listings</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navListingsMenu">
+            Listings
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navListingsMenu" role="menu">
+            <a href="{home}?tab=active#listings" role="menuitem">Active</a>
+            <a href="{home}?tab=sold#listings" role="menuitem">Sold &amp; Leased</a>
+          </div>
+        </div>
         <div class="nav-drop" data-nav-drop>
           <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
             Guides
@@ -369,7 +378,29 @@ def page_shell(
             <a href="{home}#condo-guide" role="menuitem">Condo</a>
           </div>
         </div>
-        <a href="{home}#services">Services</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navServicesMenu">
+            Services
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navServicesMenu" role="menu">
+            <a href="{home}#service-buy" role="menuitem">Buy</a>
+            <a href="{home}#service-sell" role="menuitem">Sell</a>
+            <a href="{home}#service-lease" role="menuitem">Lease</a>
+          </div>
+        </div>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navAboutMenu">
+            About
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navAboutMenu" role="menu">
+            <a href="{home}#about" role="menuitem">About</a>
+            <a href="{home}#reviews" role="menuitem">Reviews</a>
+            <a href="{home}#reels" role="menuitem">Latest</a>
+            <a href="{home}#faq" role="menuitem">FAQ</a>
+          </div>
+        </div>
       </nav>
       <div class="header-utils">
         <div class="header-contact">
@@ -381,8 +412,8 @@ def page_shell(
             class="copy-email email-text"
             type="button"
             data-email="josh@thaparteam.ca"
-            data-tip="Copy email"
-            aria-label="Copy email address"
+            data-tip="Copy Josh's email"
+            aria-label="Copy Josh's email"
           >
             <span class="copy-email-text">josh@thaparteam.ca</span>
           </button>
@@ -450,18 +481,27 @@ def page_shell(
     }}
 
     document.querySelectorAll(".copy-email").forEach(button => {{
-      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      const defaultTip = button.getAttribute("data-tip") || "Copy Josh's email";
+      const label = button.querySelector(".copy-email-text");
+      const defaultLabel = label ? label.textContent : "";
+      const swapLabel = button.classList.contains("btn") && label;
       let copiedTimer;
       button.addEventListener("click", async () => {{
         const email = button.dataset.email;
         if (!email) return;
         try {{
           await copyText(email);
-          button.setAttribute("data-tip", "Copied!");
-          button.classList.add("is-copied");
+          if (swapLabel) {{
+            label.textContent = "Copied!";
+            button.classList.add("is-copied");
+          }} else {{
+            button.setAttribute("data-tip", "Copied!");
+            button.classList.add("is-copied");
+          }}
           window.clearTimeout(copiedTimer);
           copiedTimer = window.setTimeout(() => {{
-            button.setAttribute("data-tip", defaultTip);
+            if (swapLabel) label.textContent = defaultLabel;
+            else button.setAttribute("data-tip", defaultTip);
             button.classList.remove("is-copied");
           }}, 2000);
         }} catch (error) {{
@@ -637,7 +677,6 @@ def etobicoke_neighbourhoods_html(depth: int) -> str:
         </span>
       </a>"""
         )
-    hub = asset_href("etobicoke/neighbourhoods/", depth)
     return f"""
   <section class="section" id="neighbourhoods">
     <div class="container">
@@ -645,7 +684,6 @@ def etobicoke_neighbourhoods_html(depth: int) -> str:
       <p class="section-copy">South Etobicoke communities Josh serves. Open a guide for lifestyle, housing mix, transit context, and who it tends to fit.</p>
       <div class="hood-grid">{''.join(tiles)}
       </div>
-      <p class="section-copy" style="margin-top:22px"><a class="text-link" href="{esc(hub)}">View all Etobicoke neighbourhoods</a></p>
     </div>
   </section>
 """
@@ -1202,11 +1240,24 @@ def write_neighbourhood_guide_pages() -> list[tuple[str, str, str]]:
     return mod.write_neighbourhood_pages()
 
 
+def condo_guide_urls() -> list[tuple[str, str, str]]:
+    """Indexable condo hub + building URLs (generated by generate-condo-guide.py)."""
+    urls: list[tuple[str, str, str]] = [
+        (f"{ORIGIN}/etobicoke/south-etobicoke-condo-guide/", "monthly", "0.85"),
+    ]
+    condo_root = ROOT / "etobicoke" / "condo"
+    if condo_root.is_dir():
+        for child in sorted(condo_root.iterdir()):
+            if child.is_dir() and (child / "index.html").is_file():
+                urls.append((f"{ORIGIN}/etobicoke/condo/{child.name}/", "monthly", "0.8"))
+    return urls
+
+
 def main():
     city_urls = write_city_pages()
     listing_urls = write_listing_pages()
     neighbourhood_urls = write_neighbourhood_guide_pages()
-    write_sitemap(city_urls + listing_urls + neighbourhood_urls)
+    write_sitemap(city_urls + listing_urls + neighbourhood_urls + condo_guide_urls())
     if sync_homepage_footer(ROOT / "index.html"):
         print("synced homepage footer")
     else:

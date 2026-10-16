@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20261014hood2" />
+  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20261016copyonce" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "20 Shore Breeze Dr", "description": "20 Shore Breeze Dr was leased in Etobicoke with Josh Schwartz. Review the neighbourhood context and similar leased homes.", "url": "https://openingdoorsforu.com/sold/20-shore-breeze-dr/", "image": "https://openingdoorsforu.com/assets/past/20-shore-breeze.jpg", "address": {"@type": "PostalAddress", "streetAddress": "20 Shore Breeze Dr", "addressLocality": "Etobicoke", "addressRegion": "ON", "addressCountry": "CA"}}</script>
 </head>
 <body>
@@ -46,7 +46,16 @@
         </div>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="../../#listings">Listings</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navListingsMenu">
+            Listings
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navListingsMenu" role="menu">
+            <a href="../../?tab=active#listings" role="menuitem">Active</a>
+            <a href="../../?tab=sold#listings" role="menuitem">Sold &amp; Leased</a>
+          </div>
+        </div>
         <div class="nav-drop" data-nav-drop>
           <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navGuidesMenu">
             Guides
@@ -58,7 +67,29 @@
             <a href="../../#condo-guide" role="menuitem">Condo</a>
           </div>
         </div>
-        <a href="../../#services">Services</a>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navServicesMenu">
+            Services
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navServicesMenu" role="menu">
+            <a href="../../#service-buy" role="menuitem">Buy</a>
+            <a href="../../#service-sell" role="menuitem">Sell</a>
+            <a href="../../#service-lease" role="menuitem">Lease</a>
+          </div>
+        </div>
+        <div class="nav-drop" data-nav-drop>
+          <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navAboutMenu">
+            About
+            <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" id="navAboutMenu" role="menu">
+            <a href="../../#about" role="menuitem">About</a>
+            <a href="../../#reviews" role="menuitem">Reviews</a>
+            <a href="../../#reels" role="menuitem">Latest</a>
+            <a href="../../#faq" role="menuitem">FAQ</a>
+          </div>
+        </div>
       </nav>
       <div class="header-utils">
         <div class="header-contact">
@@ -70,8 +101,8 @@
             class="copy-email email-text"
             type="button"
             data-email="josh@thaparteam.ca"
-            data-tip="Copy email"
-            aria-label="Copy email address"
+            data-tip="Copy Josh's email"
+            aria-label="Copy Josh's email"
           >
             <span class="copy-email-text">josh@thaparteam.ca</span>
           </button>
@@ -203,18 +234,27 @@
     }
 
     document.querySelectorAll(".copy-email").forEach(button => {
-      const defaultTip = button.getAttribute("data-tip") || "Copy email";
+      const defaultTip = button.getAttribute("data-tip") || "Copy Josh's email";
+      const label = button.querySelector(".copy-email-text");
+      const defaultLabel = label ? label.textContent : "";
+      const swapLabel = button.classList.contains("btn") && label;
       let copiedTimer;
       button.addEventListener("click", async () => {
         const email = button.dataset.email;
         if (!email) return;
         try {
           await copyText(email);
-          button.setAttribute("data-tip", "Copied!");
-          button.classList.add("is-copied");
+          if (swapLabel) {
+            label.textContent = "Copied!";
+            button.classList.add("is-copied");
+          } else {
+            button.setAttribute("data-tip", "Copied!");
+            button.classList.add("is-copied");
+          }
           window.clearTimeout(copiedTimer);
           copiedTimer = window.setTimeout(() => {
-            button.setAttribute("data-tip", defaultTip);
+            if (swapLabel) label.textContent = defaultLabel;
+            else button.setAttribute("data-tip", defaultTip);
             button.classList.remove("is-copied");
           }, 2000);
         } catch (error) {

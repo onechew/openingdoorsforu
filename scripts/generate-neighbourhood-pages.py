@@ -464,16 +464,17 @@ def build_hub() -> tuple[str, str]:
         "Explore Mimico, Long Branch, Alderwood, New Toronto, Humber Bay, and Stonegate-Queensway "
         "with Josh Schwartz. South Etobicoke neighbourhood guides nested under the Etobicoke city page."
     )
-    hero_img = asset_href("assets/neighbourhoods/humber-bay.jpg", depth)
     body = f"""
-  <section class="hood-hub-hero" aria-label="Etobicoke neighbourhoods">
-    <div class="hood-hub-hero-media">
-      <img src="{esc(hero_img)}" alt="South Etobicoke neighbourhoods" width="2000" height="1100" />
-    </div>
-    <div class="hood-hub-hero-copy">
+  <section class="hero-band">
+    <div class="container">
       <p class="breadcrumb"><a href="{asset_href('', depth)}">Home</a> / <a href="{asset_href('etobicoke/', depth)}">Etobicoke</a> / Neighbourhoods</p>
       <h1>Etobicoke neighbourhoods</h1>
-      <p>South Etobicoke communities with clear local guidance. Not one-size-fits-all advice.</p>
+      <p class="lead">South Etobicoke communities with clear local guidance. Not one-size-fits-all advice.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:+16473608179">Call Josh</a>
+        <a class="btn btn-secondary" href="{asset_href('etobicoke/', depth)}">Etobicoke listings</a>
+        <a class="btn btn-secondary" href="{asset_href('etobicoke/south-etobicoke-condo-guide/', depth)}">Condo guide</a>
+      </div>
     </div>
   </section>
 
@@ -482,11 +483,6 @@ def build_hub() -> tuple[str, str]:
       <h2>Areas of focus</h2>
       <p class="section-copy">Each guide covers lifestyle, housing mix, transit context, and who the neighbourhood tends to fit. Open a community for the full page.</p>
       {_hood_tiles(depth)}
-      <p class="section-copy" style="margin-top:28px">
-        <a class="text-link" href="{asset_href('etobicoke/', depth)}">Back to Etobicoke listings</a>
-        <span aria-hidden="true"> · </span>
-        <a class="text-link" href="{asset_href('etobicoke/south-etobicoke-condo-guide/', depth)}">Condo guide</a>
-      </p>
     </div>
   </section>
 """
@@ -538,35 +534,27 @@ def build_page(n: dict) -> tuple[str, str]:
         )
     faq_a = _faq_answer(name)
     body = f"""
-  <section class="hero-band condo-hero" id="overview">
+  <section class="hero-band" id="overview">
     <div class="container">
       <p class="breadcrumb"><a href="{asset_href('', depth)}">Home</a> / <a href="{asset_href('etobicoke/', depth)}">Etobicoke</a> / <a href="{asset_href('etobicoke/neighbourhoods/', depth)}">Neighbourhoods</a> / {esc(name)}</p>
-      <div class="condo-hero-grid">
-        <div class="condo-hero-copy">
-          <p class="condo-area-chip-wrap"><span class="condo-area-chip">{esc(n['chip'])}</span></p>
-          <h1>{esc(name)} neighbourhood guide</h1>
-          <p class="condo-hero-summary">{esc(n['blurb'])}</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="tel:+16473608179">Call Josh</a>
-            <a class="btn btn-secondary" href="{asset_href('etobicoke/', depth)}">Etobicoke listings</a>
-            {condo_cta}
-          </div>
-        </div>
-        <div class="condo-media">
-          <img src="{esc(img)}" alt="{esc(name)}, Etobicoke neighbourhood" width="1400" height="900" />
-        </div>
+      <p class="condo-area-chip-wrap"><span class="condo-area-chip">{esc(n['chip'])}</span></p>
+      <h1>{esc(name)}</h1>
+      <p class="lead">{esc(n['blurb'])}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:+16473608179">Call Josh</a>
+        <a class="btn btn-secondary" href="{asset_href('etobicoke/', depth)}">Etobicoke listings</a>
+        {condo_cta}
       </div>
+      <figure class="hood-cover">
+        <img src="{esc(img)}" alt="{esc(name)}, Etobicoke neighbourhood" width="1920" height="844" />
+      </figure>
     </div>
   </section>
 
   <section class="section hood-snapshot" id="about">
     <div class="container">
-      <p class="hood-snapshot-kicker">Neighbourhood</p>
-      <h2>About the {esc(name)} neighbourhood</h2>
+      <h2>About {esc(name)}</h2>
       <div class="prose hood-snapshot-prose">{about_html}</div>
-      <p class="hood-snapshot-more">
-        <a class="text-link" href="#highlights">Scan {esc(name)} highlights</a>
-      </p>
       {_jump_nav_html()}
       <div class="hood-snapshot-overview" id="highlights">
         <p class="hood-snapshot-label">Overview</p>
@@ -618,7 +606,14 @@ def build_page(n: dict) -> tuple[str, str]:
       <p class="section-copy">Clear local comps, no gimmicks. Call or text for current inventory and neighbourhood fit.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="tel:+16473608179">Call +1-647-360-8179</a>
-        <a class="btn btn-secondary" href="mailto:josh@thaparteam.ca">Email Josh</a>
+        <button
+          class="btn btn-secondary copy-email"
+          type="button"
+          data-email="josh@thaparteam.ca"
+          aria-label="Copy Josh's email"
+        >
+          <span class="copy-email-text">Copy Josh's email</span>
+        </button>
       </div>
     </div>
   </section>
@@ -626,8 +621,8 @@ def build_page(n: dict) -> tuple[str, str]:
     agent_ld = {
         "@context": "https://schema.org",
         "@type": "RealEstateAgent",
+        "@id": f"{ORIGIN}/#agent",
         "name": "Josh Schwartz",
-        "identifier": "4781243",
         "telephone": "+1-647-360-8179",
         "email": "josh@thaparteam.ca",
         "url": f"{ORIGIN}/",
@@ -638,9 +633,8 @@ def build_page(n: dict) -> tuple[str, str]:
         },
         "memberOf": {"@type": "Organization", "name": "Thapar Team"},
         "description": (
-            f"Josh Schwartz is the best realtor to contact in {name}, Etobicoke. "
-            "15 years in real estate, luxury hospitality background, backed by Thapar Team "
-            "(#1 team in Etobicoke)."
+            f"Josh Schwartz is a Sales Representative serving {name} and South Etobicoke. "
+            "15 years in real estate, backed by Thapar Team (#1 team in Etobicoke)."
         ),
     }
     faq_ld = {
