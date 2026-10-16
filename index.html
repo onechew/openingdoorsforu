@@ -440,7 +440,13 @@
     type="image/webp"
     fetchpriority="high"
   />
-  <link rel="preload" as="image" href="assets/JS.jpg" fetchpriority="low" />
+  <link
+    rel="preload"
+    as="image"
+    href="assets/JS-avatar.webp"
+    type="image/webp"
+    fetchpriority="high"
+  />
   <link
     rel="preload"
     href="assets/fonts/plus-jakarta-sans-latin.woff2"
@@ -994,6 +1000,12 @@
       background: rgba(255, 255, 255, 0.16);
       backdrop-filter: blur(14px);
       box-shadow: 0 28px 82px rgba(0, 0, 0, 0.32);
+    }
+
+    .agent-photo-frame picture {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .agent-photo {
@@ -1963,6 +1975,11 @@
       margin: 0;
       justify-self: start;
       background: transparent;
+    }
+
+    .about-photo picture {
+      display: block;
+      width: 100%;
     }
 
     .about-photo img {
@@ -6146,15 +6163,18 @@
       </div>
       <div class="container hero-inner">
         <div class="agent-photo-frame">
-          <img
-            class="agent-photo"
-            src="assets/JS.jpg"
-            alt="Josh Schwartz, South Etobicoke and Humber Bay Shores realtor with Snobar Realty Group"
-            width="3000"
-            height="3000"
-            fetchpriority="low"
-            decoding="async"
-          />
+          <picture>
+            <source srcset="assets/JS-avatar.webp" type="image/webp" />
+            <img
+              class="agent-photo"
+              src="assets/JS-avatar.jpg"
+              alt="Josh Schwartz, South Etobicoke and Humber Bay Shores realtor with Snobar Realty Group"
+              width="800"
+              height="800"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
         </div>
 
         <h1>Josh Schwartz<span class="visually-hidden">, South Etobicoke &amp; Humber Bay Shores Realtor</span></h1>
@@ -6356,7 +6376,17 @@
       <div class="container">
         <div class="about-inner reveal" data-reveal>
           <div class="about-photo">
-            <img src="assets/J_S.png" alt="Josh Schwartz, South Etobicoke realtor, about photo" loading="lazy" decoding="async" />
+            <picture>
+              <source srcset="assets/J_S-display.webp" type="image/webp" />
+              <img
+                src="assets/J_S-display.jpg"
+                alt="Josh Schwartz, South Etobicoke realtor, about photo"
+                width="853"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
           <div class="about-copy-wrap">
             <h2 class="about-title">Hi, I'm Josh</h2>
@@ -7850,7 +7880,7 @@
       return `
         <div class="ig-reel-id" aria-hidden="true">
           <div class="ig-reel-avatar">
-            <img src="assets/J_S.png" alt="" loading="lazy" decoding="async" />
+            <img src="assets/JS-avatar.webp" alt="" loading="lazy" decoding="async" width="80" height="80" />
           </div>
           <div class="ig-reel-copy">
             <span class="ig-reel-handle">openingdoorsforu</span>
