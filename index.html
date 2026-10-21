@@ -992,6 +992,7 @@
       color: #ffffff;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
+      overflow: visible;
     }
 
     .hero-oh-inner {
@@ -5903,26 +5904,6 @@
         display: none;
       }
 
-      .hero-oh-inner {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .hero-oh-dates {
-        grid-template-columns: 1fr;
-        grid-template-rows: none;
-        gap: 10px;
-      }
-
-      .hero-oh-dates li {
-        grid-template-rows: none;
-        grid-row: auto;
-      }
-
-      .hero-oh-cta {
-        width: 100%;
-      }
-
       .hero {
         min-height: 100svh;
       }
@@ -6109,6 +6090,67 @@
       .instagram-icon {
         width: 12px;
         height: 12px;
+      }
+    }
+
+    /* Compact Open House on tablet so the row still fits */
+    @media (max-width: 900px) {
+      .hero-oh-inner {
+        gap: 12px;
+      }
+
+      .hero-oh-title {
+        font-size: clamp(20px, 3.2vw, 26px);
+      }
+
+      .hero-oh-address {
+        font-size: 13px;
+      }
+
+      .hero-oh-dates {
+        column-gap: 8px;
+      }
+
+      .hero-oh-dates li {
+        padding-left: 10px;
+      }
+
+      .hero-oh-lotto {
+        font-size: 10px;
+        white-space: normal;
+      }
+
+      .hero-oh-cta {
+        padding: 0 14px;
+        min-height: 38px;
+        font-size: 12px;
+      }
+    }
+
+    /* Stack Open House only on narrow phones — keep row layout on tablet (~768) */
+    @media (max-width: 720px) {
+      .hero-oh-inner {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .hero-oh-dates {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 10px;
+      }
+
+      .hero-oh-dates li {
+        grid-template-rows: none;
+        grid-row: auto;
+      }
+
+      .hero-oh-cta {
+        width: 100%;
+      }
+
+      .hero-oh-lotto {
+        white-space: normal;
       }
     }
 
@@ -6564,22 +6606,44 @@
             return;
           }
 
-          // Keep exactly 16px from the end of “…by” to the Text Josh button.
+          // Desktop row only: keep ~52px from “…by” to Text Josh without clipping the CTA.
           var lotto = banner.querySelector(".hero-oh-lotto:not(.is-empty)");
           var cta = banner.querySelector(".hero-oh-cta");
           if (!lotto || !cta) return;
+          var desktopRow = window.matchMedia("(min-width: 901px)");
+
+          function clearCtaShift() {
+            cta.style.position = "";
+            cta.style.left = "";
+            cta.style.marginLeft = "";
+            cta.style.marginInlineStart = "";
+            cta.style.transform = "";
+          }
 
           function syncLottoToCtaGap() {
-            cta.style.marginLeft = "";
-            cta.style.position = "relative";
-            cta.style.left = "0px";
+            clearCtaShift();
+            if (!desktopRow.matches) return;
+
             var gap = 52;
-            var fromBy = cta.getBoundingClientRect().left - lotto.getBoundingClientRect().right;
-            cta.style.left = gap - fromBy + "px";
+            var ctaRect = cta.getBoundingClientRect();
+            var fromBy = ctaRect.left - lotto.getBoundingClientRect().right;
+            var needed = gap - fromBy;
+            if (!(needed > 0)) return;
+
+            var innerRight = banner.querySelector(".hero-oh-inner").getBoundingClientRect().right;
+            var maxShift = Math.max(0, innerRight - ctaRect.right - 2);
+            if (maxShift < 1) return;
+
+            // translateX does not reflow columns; hover transform is applied via CSS class timing —
+            // use margin instead when idle so :hover lift still works.
+            cta.style.marginInlineStart = Math.min(needed, maxShift) + "px";
           }
 
           syncLottoToCtaGap();
           window.addEventListener("resize", syncLottoToCtaGap);
+          if (desktopRow.addEventListener) {
+            desktopRow.addEventListener("change", syncLottoToCtaGap);
+          }
           if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(syncLottoToCtaGap).catch(function () {});
           }
