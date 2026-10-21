@@ -4655,6 +4655,19 @@
       z-index: 4;
     }
 
+    /* Phones: let taps hit the <video> for play/pause; IG link lives on the handle. */
+    @media (hover: none), (max-width: 900px) {
+      .reel-link-overlay {
+        display: none;
+      }
+
+      .reel-card video {
+        z-index: 1;
+        cursor: pointer;
+        -webkit-touch-callout: default;
+      }
+    }
+
     .reel-mute {
       position: absolute;
       z-index: 5;
@@ -4714,12 +4727,14 @@
     .reel-meta,
     .ig-reel-id {
       position: absolute;
-      z-index: 3;
+      z-index: 5;
       left: 12px;
       bottom: 14px;
       right: auto;
       display: inline-flex;
       align-items: center;
+      text-decoration: none;
+      color: inherit;
       gap: 10px;
       max-width: calc(100% - 64px);
       color: #ffffff;
@@ -8352,7 +8367,8 @@
     const propertyReels = [
       {
         url: "https://www.instagram.com/openingdoorsforu/reels/",
-        video: "assets/reels/reel-4.mp4?v=prev1"
+        video: "assets/reels/reel-4.mp4?v=mob1",
+        poster: "assets/reels/reel-4-poster.jpg?v=mob1"
       },
       {
         url: "https://www.instagram.com/p/DbJrldzCD0B/",
@@ -8376,14 +8392,14 @@
 
     function reelMetaMarkup(reel) {
       return `
-        <div class="ig-reel-id" aria-hidden="true">
+        <a class="ig-reel-id" href="${reel.url}" target="_blank" rel="noopener noreferrer" aria-label="Watch on Instagram @openingdoorsforu">
           <div class="ig-reel-avatar">
             <img src="assets/JS-avatar.webp" alt="" loading="lazy" decoding="async" width="80" height="80" />
           </div>
           <div class="ig-reel-copy">
             <span class="ig-reel-handle">openingdoorsforu</span>
           </div>
-        </div>
+        </a>
         <button class="reel-mute" type="button" aria-label="Unmute video" aria-pressed="false">
           ${REEL_MUTE_ICON}
         </button>
@@ -8394,18 +8410,43 @@
     function createReelCard(reel) {
       const card = document.createElement("article");
       card.className = "reel-card is-video";
+      const posterAttr = reel.poster ? ` poster="${reel.poster}"` : "";
+      // Mobile Safari: metadata preload + load on view; muted + playsinline for autoplay.
       card.innerHTML = `
         <div class="reel-card-media">
-          <video muted loop playsinline preload="auto" src="${reel.video}"></video>
+          <video muted loop playsinline webkit-playsinline preload="metadata"${posterAttr} src="${reel.video}"></video>
         </div>
         ${reelMetaMarkup(reel)}
       `;
 
       const video = card.querySelector("video");
       const muteBtn = card.querySelector(".reel-mute");
+      video.defaultMuted = true;
+      video.muted = true;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+
+      let loadStarted = false;
+      const ensureLoaded = () => {
+        if (loadStarted) return;
+        loadStarted = true;
+        if (video.preload !== "auto") {
+          video.preload = "auto";
+        }
+        try {
+          video.load();
+        } catch (_) {
+          /* ignore */
+        }
+      };
 
       const tryPlay = () => {
-        const play = () => video.play().catch(() => {});
+        ensureLoaded();
+        const play = () => {
+          const p = video.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        };
         if (video.readyState >= 2) play();
         else video.addEventListener("loadeddata", play, { once: true });
       };
@@ -8438,7 +8479,14 @@
         tryPlay();
       });
 
-      video.addEventListener("loadeddata", tryPlay, { once: true });
+      // Tap video to play/pause when autoplay is blocked (common on iOS low power mode).
+      video.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        ensureLoaded();
+        if (video.paused) tryPlay();
+        else video.pause();
+      });
 
       const playObserver = new IntersectionObserver(
         entries => {
