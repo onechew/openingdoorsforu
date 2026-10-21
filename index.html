@@ -6137,20 +6137,47 @@
       .hero-oh-dates {
         grid-template-columns: 1fr;
         grid-template-rows: none;
-        gap: 10px;
+        gap: 8px;
       }
 
       .hero-oh-dates li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
         grid-template-rows: none;
         grid-row: auto;
+        column-gap: 10px;
+        row-gap: 4px;
+      }
+
+      .hero-oh-day {
+        flex: 0 0 2.6em;
+        font-size: 11px;
+      }
+
+      /* Date + time on one line, same size — readable in the stacked banner */
+      .hero-oh-date,
+      .hero-oh-time {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        color: #ffffff;
+      }
+
+      .hero-oh-lotto {
+        flex: 1 0 100%;
+        margin-left: calc(2.6em + 10px);
+        white-space: normal;
+        font-size: 12px;
+      }
+
+      .hero-oh-lotto.is-empty {
+        display: none;
       }
 
       .hero-oh-cta {
         width: 100%;
-      }
-
-      .hero-oh-lotto {
-        white-space: normal;
       }
     }
 
