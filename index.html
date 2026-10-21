@@ -924,7 +924,9 @@
 
     .hero {
       position: relative;
-      min-height: 920px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
       overflow: hidden;
       color: #ffffff;
       /* Soft lake tone while the photo streams in; avoids black flash */
@@ -978,16 +980,203 @@
       display: none;
     }
 
+    /* Temporary: remove with #open-house markup after Oct 25 */
+    .hero-oh {
+      position: relative;
+      z-index: 3;
+      flex-shrink: 0;
+      margin-top: auto;
+      padding: 12px 0 13px;
+      background: rgba(10, 12, 14, 0.88);
+      border-top: 1px solid rgba(213, 255, 47, 0.45);
+      color: #ffffff;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .hero-oh-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) auto;
+      align-items: center;
+      gap: 16px 16px;
+    }
+
+    .hero-oh-kicker {
+      margin: 0 0 2px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--champagne);
+    }
+
+    .hero-oh-title {
+      margin: 0 0 7px;
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.4vw, 30px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .hero-oh-address {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: rgba(255, 255, 255, 0.92);
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+
+    .hero-oh-address-text {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-oh-address-text::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 320ms var(--ease-out);
+      pointer-events: none;
+    }
+
+    .hero-oh-address:hover {
+      color: var(--champagne);
+    }
+
+    .hero-oh-address:hover .hero-oh-address-text::after,
+    .hero-oh-address:focus-visible .hero-oh-address-text::after {
+      transform: scaleX(1);
+    }
+
+    .hero-oh-address:focus-visible {
+      outline: 2px solid var(--champagne);
+      outline-offset: 3px;
+    }
+
+    .hero-oh-address svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0.92;
+      transform: translateY(0.5px);
+    }
+
+    .hero-oh-dates {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: auto auto auto auto;
+      column-gap: 10px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-oh-dates li {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+      row-gap: 2px;
+      min-width: 0;
+      padding-left: 12px;
+      border-left: 2px solid rgba(213, 255, 47, 0.55);
+    }
+
+    .hero-oh-day {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1;
+    }
+
+    .hero-oh-date {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .hero-oh-time {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.2;
+    }
+
+    .hero-oh-sun .hero-oh-day {
+      color: var(--champagne);
+    }
+
+    .hero-oh-lotto {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: var(--champagne);
+      white-space: nowrap;
+    }
+
+    .hero-oh-lotto.is-empty {
+      visibility: hidden;
+      pointer-events: none;
+      min-height: 1.25em;
+    }
+
+    .hero-oh-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      margin: 0;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--champagne);
+      color: var(--deep);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 180ms var(--ease-out), background 180ms ease;
+    }
+
+    .hero-oh-cta:hover {
+      background: var(--champagne-bright);
+      transform: var(--hover-lift);
+    }
+
+    .hero-oh-cta:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
+
     .hero-inner {
       position: relative;
       z-index: 2;
-      min-height: 920px;
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 138px 0 140px;
+      padding: 120px 0 36px;
     }
 
     .agent-photo-frame {
@@ -1029,7 +1218,7 @@
     }
 
     .hero-eyebrow {
-      margin: 22px 0 0;
+      margin: 12px 0 0;
       color: rgba(255, 255, 255, 0.78);
       font-size: clamp(14px, 1.6vw, 17px);
       line-height: 1.4;
@@ -1039,7 +1228,7 @@
 
     .hero-subtitle {
       margin: 12px 0 0;
-      max-width: 720px;
+      max-width: min(1040px, 92vw);
       font-size: clamp(24px, 3.4vw, 40px);
       line-height: 1.2;
       font-weight: 600;
@@ -1625,7 +1814,7 @@
 
     .text-link {
       color: var(--ink);
-      font-size: 12px;
+      font-size: inherit;
       font-weight: 700;
       text-decoration: underline;
       text-decoration-thickness: 1px;
@@ -4290,12 +4479,12 @@
 
     .condo-tour {
       flex: 0 0 auto;
-      width: min(300px, 78vw);
+      width: min(360px, 84vw);
     }
 
     .condo-tour-media {
       position: relative;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 3 / 5;
       overflow: hidden;
       border-radius: calc(var(--radius) + 2px);
       background: #111;
@@ -4354,7 +4543,7 @@
 
     .condo-tour-name {
       margin: 0;
-      font-size: 19px;
+      font-size: 22px;
       line-height: 1.2;
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -4363,7 +4552,7 @@
 
     .condo-tour-address {
       margin: 5px 0 0;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.3;
       opacity: 0.92;
     }
@@ -4401,11 +4590,20 @@
       aspect-ratio: 9 / 16;
       overflow: hidden;
       border-radius: var(--radius);
-      background: #111111;
+      background: transparent;
       border: 1px solid rgba(18, 20, 23, 0.08);
       box-shadow: 0 22px 64px rgba(18, 20, 23, 0.12);
       isolation: isolate;
       transition: transform 260ms ease, box-shadow 260ms ease;
+    }
+
+    .reel-card-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: inherit;
+      background: #111111;
+      transform: translateZ(0);
     }
 
     .reel-card video,
@@ -4435,17 +4633,17 @@
       left: 0;
     }
 
-    .reel-card.is-video::after {
+    .reel-card.is-video .reel-card-media::after {
       content: "";
       position: absolute;
       inset: 0;
       z-index: 2;
       background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.22) 0%,
-        transparent 24%,
-        transparent 58%,
-        rgba(0, 0, 0, 0.48) 100%
+        rgba(0, 0, 0, 0.1) 0%,
+        transparent 22%,
+        transparent 64%,
+        rgba(0, 0, 0, 0.32) 100%
       );
       pointer-events: none;
     }
@@ -4454,6 +4652,62 @@
       position: absolute;
       inset: 0;
       z-index: 4;
+    }
+
+    .reel-mute {
+      position: absolute;
+      z-index: 5;
+      right: 12px;
+      bottom: 14px;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.45);
+      color: #ffffff;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      backdrop-filter: blur(6px);
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .reel-mute:hover {
+      background: rgba(0, 0, 0, 0.58);
+    }
+
+    .reel-mute:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 2px;
+    }
+
+    .reel-mute svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .reel-mute .icon-muted path:last-child {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+    }
+
+    .reel-mute .icon-unmuted {
+      display: none;
+    }
+
+    .reel-mute.is-unmuted .icon-muted {
+      display: none;
+    }
+
+    .reel-mute.is-unmuted .icon-unmuted {
+      display: block;
     }
 
     .reel-meta,
@@ -4466,7 +4720,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      max-width: calc(100% - 24px);
+      max-width: calc(100% - 64px);
       color: #ffffff;
       pointer-events: none;
       opacity: 0.92;
@@ -5649,9 +5903,28 @@
         display: none;
       }
 
-      .hero,
-      .hero-inner {
-        min-height: 860px;
+      .hero-oh-inner {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .hero-oh-dates {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 10px;
+      }
+
+      .hero-oh-dates li {
+        grid-template-rows: none;
+        grid-row: auto;
+      }
+
+      .hero-oh-cta {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: 100svh;
       }
 
       .hero-actions {
@@ -5788,7 +6061,7 @@
       }
 
       .condo-tour {
-        width: min(248px, 78vw);
+        width: min(300px, 82vw);
       }
 
       .ig-reel-id {
@@ -5796,6 +6069,19 @@
         bottom: 12px;
         right: auto;
         gap: 8px;
+        max-width: calc(100% - 58px);
+      }
+
+      .reel-mute {
+        right: 10px;
+        bottom: 12px;
+        width: 34px;
+        height: 34px;
+      }
+
+      .reel-mute svg {
+        width: 17px;
+        height: 17px;
       }
 
       .ig-reel-avatar {
@@ -5852,9 +6138,8 @@
         gap: 10px;
       }
 
-      .hero,
-      .hero-inner {
-        min-height: 880px;
+      .hero {
+        min-height: 100svh;
       }
 
       .hero-media {
@@ -5866,7 +6151,7 @@
       }
 
       .hero-inner {
-        padding: 108px 0 128px;
+        padding: 100px 0 28px;
       }
 
       .agent-photo-frame {
@@ -6219,6 +6504,87 @@
           </a>
         </div>
       </div>
+
+      <!-- Temporary: remove after Oct 25 open house -->
+      <aside class="hero-oh" id="open-house" aria-labelledby="open-house-heading">
+        <div class="container hero-oh-inner">
+          <div class="hero-oh-copy">
+            <p class="hero-oh-kicker">This week only</p>
+            <h2 id="open-house-heading" class="hero-oh-title">Open House</h2>
+            <a
+              class="hero-oh-address"
+              href="https://www.google.com/maps/search/?api=1&amp;query=56+41st+Street+West%2C+Toronto%2C+ON"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open 56 41st Street West, Toronto in Google Maps"
+            >
+              <span class="hero-oh-address-text">56 41st Street W, Toronto</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"></path>
+                <circle cx="12" cy="10" r="2.4"></circle>
+              </svg>
+            </a>
+          </div>
+          <ul class="hero-oh-dates">
+            <li>
+              <span class="hero-oh-day">Thu</span>
+              <span class="hero-oh-date">Oct 22</span>
+              <span class="hero-oh-time">5–6 PM</span>
+              <span class="hero-oh-lotto is-empty" aria-hidden="true"></span>
+            </li>
+            <li>
+              <span class="hero-oh-day">Sat</span>
+              <span class="hero-oh-date">Oct 24</span>
+              <span class="hero-oh-time">2–4 PM</span>
+              <span class="hero-oh-lotto is-empty" aria-hidden="true"></span>
+            </li>
+            <li class="hero-oh-sun">
+              <span class="hero-oh-day">Sun</span>
+              <span class="hero-oh-date">Oct 25</span>
+              <span class="hero-oh-time">2–4 PM</span>
+              <span class="hero-oh-lotto">Free lotto ticket when you stop by</span>
+            </li>
+          </ul>
+          <a
+            class="hero-oh-cta"
+            href="sms:+16473608179&body=Hi%20Josh%2C%20I%27d%20like%20details%20on%20the%20Open%20House%20at%2056%2041st%20Street%20W%20(Oct%2022%2C%2024%2C%2025)."
+          >
+            Text Josh
+          </a>
+        </div>
+      </aside>
+      <script>
+        (function () {
+          var banner = document.getElementById("open-house");
+          if (!banner) return;
+          // Last slot ends Sun Oct 25, 2026 4:00 PM Toronto (EDT)
+          var endsAt = Date.parse("2026-10-25T16:00:00-04:00");
+          if (Number.isFinite(endsAt) && Date.now() >= endsAt) {
+            banner.remove();
+            return;
+          }
+
+          // Keep exactly 16px from the end of “…by” to the Text Josh button.
+          var lotto = banner.querySelector(".hero-oh-lotto:not(.is-empty)");
+          var cta = banner.querySelector(".hero-oh-cta");
+          if (!lotto || !cta) return;
+
+          function syncLottoToCtaGap() {
+            cta.style.marginLeft = "";
+            cta.style.position = "relative";
+            cta.style.left = "0px";
+            var gap = 52;
+            var fromBy = cta.getBoundingClientRect().left - lotto.getBoundingClientRect().right;
+            cta.style.left = gap - fromBy + "px";
+          }
+
+          syncLottoToCtaGap();
+          window.addEventListener("resize", syncLottoToCtaGap);
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncLottoToCtaGap).catch(function () {});
+          }
+        })();
+      </script>
     </section>
 
     <section class="section compact" id="listings" aria-labelledby="listings-heading">
@@ -7810,7 +8176,7 @@
   </button>
 
   <script src="assets/site-footer.js?v=20261014footer" defer></script>
-  <script src="assets/active-listings.js?v=20261014202735"></script>
+  <script src="assets/active-listings.js?v=20261021151320"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const backToTop = document.getElementById("backToTop");
@@ -7863,18 +8229,28 @@
 
     const propertyReels = [
       {
+        url: "https://www.instagram.com/openingdoorsforu/reels/",
+        video: "assets/reels/reel-4.mp4?v=prev1"
+      },
+      {
         url: "https://www.instagram.com/p/DbJrldzCD0B/",
         video: "assets/reels/reel-1.mp4"
       },
       {
         url: "https://www.instagram.com/openingdoorsforu/reel/DbEY8IuCNyD/",
         video: "assets/reels/reel-2.mp4"
-      },
-      {
-        url: "https://www.instagram.com/reel/Da54U2QiR_y/",
-        video: "assets/reels/reel-3.mp4"
       }
     ];
+
+    const REEL_MUTE_ICON = `
+      <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" stroke="none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path>
+        <path d="m4 4 16 16"></path>
+      </svg>
+      <svg class="icon-unmuted" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" stroke="none" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path>
+      </svg>
+    `;
 
     function reelMetaMarkup(reel) {
       return `
@@ -7886,6 +8262,9 @@
             <span class="ig-reel-handle">openingdoorsforu</span>
           </div>
         </div>
+        <button class="reel-mute" type="button" aria-label="Unmute video" aria-pressed="false">
+          ${REEL_MUTE_ICON}
+        </button>
         <a class="reel-link-overlay" href="${reel.url}" target="_blank" rel="noopener noreferrer" aria-label="Watch on Instagram"></a>
       `;
     }
@@ -7894,15 +8273,48 @@
       const card = document.createElement("article");
       card.className = "reel-card is-video";
       card.innerHTML = `
-        <video muted loop playsinline preload="metadata" src="${reel.video}"></video>
+        <div class="reel-card-media">
+          <video muted loop playsinline preload="auto" src="${reel.video}"></video>
+        </div>
         ${reelMetaMarkup(reel)}
       `;
 
       const video = card.querySelector("video");
+      const muteBtn = card.querySelector(".reel-mute");
 
       const tryPlay = () => {
-        video.play().catch(() => {});
+        const play = () => video.play().catch(() => {});
+        if (video.readyState >= 2) play();
+        else video.addEventListener("loadeddata", play, { once: true });
       };
+
+      const setMuted = muted => {
+        video.muted = muted;
+        muteBtn.classList.toggle("is-unmuted", !muted);
+        muteBtn.setAttribute("aria-pressed", muted ? "false" : "true");
+        muteBtn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
+      };
+
+      muteBtn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const nextMuted = !video.muted;
+        if (!nextMuted) {
+          document.querySelectorAll("#reelsGrid video").forEach(other => {
+            if (other !== video) {
+              other.muted = true;
+              const otherBtn = other.closest(".reel-card")?.querySelector(".reel-mute");
+              if (otherBtn) {
+                otherBtn.classList.remove("is-unmuted");
+                otherBtn.setAttribute("aria-pressed", "false");
+                otherBtn.setAttribute("aria-label", "Unmute video");
+              }
+            }
+          });
+        }
+        setMuted(nextMuted);
+        tryPlay();
+      });
 
       video.addEventListener("loadeddata", tryPlay, { once: true });
 
@@ -7913,6 +8325,7 @@
               tryPlay();
             } else {
               video.pause();
+              if (!video.muted) setMuted(true);
             }
           });
         },
@@ -7931,21 +8344,22 @@
       });
     }
 
+    // A–Z by building name — scannable for a guide rail (not “featured” curation).
     const condoGuideTours = [
-      { slug: "palace-place", name: "Palace Place", address: "1 Palace Pier Ct", area: "Humber Bay", poster: "assets/condo-guide/palace-place-building.jpg" },
-      { slug: "palace-pier", name: "Palace Pier", address: "2045 Lake Shore Blvd W", area: "Humber Bay", poster: "assets/condo-guide/palace-pier-exterior.jpg" },
-      { slug: "grand-harbour", name: "Grand Harbour", address: "2285 Lake Shore Blvd W", area: "Mimico", poster: "assets/condo-guide/grand-harbour-building.jpg" },
-      { slug: "waterscapes", name: "Waterscapes", address: "80 Marine Parade Dr", area: "Humber Bay", poster: "assets/condo-guide/waterscapes.jpg" },
-      { slug: "riva-del-lago", name: "Riva Del Lago", address: "110 Marine Parade Dr", area: "Humber Bay", poster: "assets/condo-guide/riva-del-lago-building.jpg" },
-      { slug: "newport-beach", name: "Newport Beach", address: "2111 Lake Shore Blvd W", area: "Humber Bay", poster: "assets/condo-guide/newport-beach-building.jpg" },
-      { slug: "south-beach", name: "South Beach Condos and Lofts", address: "88 Park Lawn Rd", area: "Humber Bay", poster: "assets/condo-guide/south-beach-building.jpg" },
       { slug: "beyond-the-sea", name: "Beyond the Sea", address: "15 Legion Rd", area: "Mimico", poster: "assets/condo-guide/beyond-the-sea-alt.jpg" },
-      { slug: "ocean-club-waterfront", name: "Ocean Club Waterfront", address: "59 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/ocean-club-alt.jpg" },
       { slug: "cove-at-waterways", name: "Cove at Waterways", address: "39 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/cove-building.jpg" },
-      { slug: "lago", name: "Lago", address: "56 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/lago-alt.jpg" },
       { slug: "eau-du-soleil", name: "Eau Du Soleil", address: "20 & 30 Shore Breeze Dr", area: "Humber Bay", poster: "assets/condo-guide/eau-du-soleil-building.jpg" },
+      { slug: "grand-harbour", name: "Grand Harbour", address: "2285 Lake Shore Blvd W", area: "Mimico", poster: "assets/condo-guide/grand-harbour-building.jpg" },
       { slug: "33-shore-breeze", name: "Jade Waterfront", address: "33 Shore Breeze Dr", area: "Humber Bay", poster: "assets/condo-guide/33-shore-breeze-building.jpg" },
-      { slug: "200-manitoba", name: "Skylofts II at Mystic Pointe", address: "200 Manitoba St", area: "Mimico", poster: "assets/condo-guide/200-manitoba-exterior.jpg?v=20260803ar" }
+      { slug: "lago", name: "Lago", address: "56 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/lago-alt.jpg" },
+      { slug: "newport-beach", name: "Newport Beach", address: "2111 Lake Shore Blvd W", area: "Humber Bay", poster: "assets/condo-guide/newport-beach-building.jpg" },
+      { slug: "ocean-club-waterfront", name: "Ocean Club Waterfront", address: "59 Annie Craig Dr", area: "Humber Bay", poster: "assets/condo-guide/ocean-club-alt.jpg" },
+      { slug: "palace-pier", name: "Palace Pier", address: "2045 Lake Shore Blvd W", area: "Humber Bay", poster: "assets/condo-guide/palace-pier-exterior.jpg" },
+      { slug: "palace-place", name: "Palace Place", address: "1 Palace Pier Ct", area: "Humber Bay", poster: "assets/condo-guide/palace-place-building.jpg" },
+      { slug: "riva-del-lago", name: "Riva Del Lago", address: "110 Marine Parade Dr", area: "Humber Bay", poster: "assets/condo-guide/riva-del-lago-building.jpg" },
+      { slug: "200-manitoba", name: "Skylofts II at Mystic Pointe", address: "200 Manitoba St", area: "Mimico", poster: "assets/condo-guide/200-manitoba-exterior.jpg?v=20260803ar" },
+      { slug: "south-beach", name: "South Beach Condos and Lofts", address: "88 Park Lawn Rd", area: "Humber Bay", poster: "assets/condo-guide/south-beach-building.jpg" },
+      { slug: "waterscapes", name: "Waterscapes", address: "80 Marine Parade Dr", area: "Humber Bay", poster: "assets/condo-guide/waterscapes.jpg" }
     ];
 
     function condoAreaChip(area) {
