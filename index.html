@@ -6369,36 +6369,38 @@
 
     /* Stack Open House only on small phones; keep the row on ~640–768 widths */
     @media (max-width: 480px) {
+      .hero-oh {
+        padding: 16px 0 18px;
+      }
+
       .hero-oh-inner {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 18px;
       }
 
       .hero-oh-copy {
         display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        column-gap: 12px;
-        row-gap: 4px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
       }
 
       .hero-oh-kicker {
-        flex: 1 0 100%;
-        margin: 0 0 2px;
+        margin: 0;
         font-size: 11px;
         letter-spacing: 0.12em;
       }
 
       .hero-oh-title {
         margin: 0;
-        font-size: clamp(22px, 6.5vw, 28px);
+        font-size: clamp(24px, 7vw, 30px);
       }
 
       .hero-oh-address {
         margin: 0;
-        font-size: 16px;
+        font-size: 15px;
         white-space: nowrap;
-        flex-shrink: 0;
+        gap: 7px;
       }
 
       .hero-oh-address-text {
@@ -6408,7 +6410,7 @@
       .hero-oh-dates {
         grid-template-columns: 1fr;
         grid-template-rows: none;
-        gap: 8px;
+        gap: 12px;
       }
 
       .hero-oh-dates li {
@@ -6417,12 +6419,13 @@
         align-items: baseline;
         grid-template-rows: none;
         grid-row: auto;
-        column-gap: 10px;
-        row-gap: 4px;
+        column-gap: 12px;
+        row-gap: 5px;
+        padding-left: 14px;
       }
 
       .hero-oh-day {
-        flex: 0 0 2.6em;
+        flex: 0 0 2.8em;
         font-size: 11px;
       }
 
@@ -6432,15 +6435,17 @@
         font-size: 16px;
         font-weight: 700;
         letter-spacing: -0.02em;
-        line-height: 1.15;
+        line-height: 1.2;
         color: #ffffff;
       }
 
       .hero-oh-lotto {
         flex: 1 0 100%;
-        margin-left: calc(2.6em + 10px);
+        margin-left: calc(2.8em + 12px);
+        margin-top: 2px;
         white-space: normal;
         font-size: 12px;
+        line-height: 1.35;
       }
 
       .hero-oh-lotto.is-empty {
@@ -6449,6 +6454,9 @@
 
       .hero-oh-cta {
         width: 100%;
+        min-height: 44px;
+        margin-top: 2px;
+        font-size: 14px;
       }
     }
 
