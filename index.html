@@ -523,8 +523,8 @@
       --radius: 16px;
       --radius-sm: 12px;
       --max: 1180px;
-      --serif: "Cormorant Garamond", Georgia, serif;
-      --sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: "Cormorant Garamond", Georgia, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", serif;
+      --sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -563,6 +563,17 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: geometricPrecision;
       overflow-x: clip;
+      /* Prefer color emoji over monochrome symbols some text fonts claim */
+      font-variant-emoji: emoji;
+    }
+
+    /* Labels / legends mix Latin + emoji — keep emoji on the color font path */
+    .service-form label,
+    .service-form legend,
+    .service-form .pets-one-line-label,
+    .service-path-lead,
+    .hero-oh-kicker {
+      font-variant-emoji: emoji;
     }
 
     a {
@@ -7275,13 +7286,14 @@
                 <form
                   class="service-form service-form--quick"
                   id="buyLeadForm"
-                  action="https://formsubmit.co/f11d7be1eae84a79fdaf68db5a9f0064"
+                  action="https://formsubmit.co/josh@thaparteam.ca"
                   method="POST"
                   novalidate
                 >
                   <input type="hidden" name="_subject" value="🏡 Buying Inquiry">
                   <input type="hidden" name="_template" value="table">
                   <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_cc" value="wanshuluu@gmail.com">
                   <input type="hidden" name="_next" value="https://openingdoorsforu.com/?sent=buyer#services">
                   <input type="hidden" name="Lead Type" value="Buyer">
                   <input type="hidden" name="Service Path" value="Buying">
@@ -7509,13 +7521,14 @@
                 <form
                   class="service-form service-form--quick"
                   id="sellLeadForm"
-                  action="https://formsubmit.co/f11d7be1eae84a79fdaf68db5a9f0064"
+                  action="https://formsubmit.co/josh@thaparteam.ca"
                   method="POST"
                   novalidate
                 >
                   <input type="hidden" name="_subject" value="💰 Selling Inquiry">
                   <input type="hidden" name="_template" value="table">
                   <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_cc" value="wanshuluu@gmail.com">
                   <input type="hidden" name="_next" value="https://openingdoorsforu.com/?sent=seller#services">
                   <input type="hidden" name="Lead Type" value="Seller">
                   <input type="hidden" name="Service Path" value="Selling">
@@ -7743,13 +7756,14 @@
                 <form
                   class="service-form service-form--quick service-form--lease"
                   id="leaseLeadForm"
-                  action="https://formsubmit.co/f11d7be1eae84a79fdaf68db5a9f0064"
+                  action="https://formsubmit.co/josh@thaparteam.ca"
                   method="POST"
                   novalidate
                 >
                   <input type="hidden" name="_subject" id="leaseSubject" value="🏠 Landlord Inquiry">
                   <input type="hidden" name="_template" value="table">
                   <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_cc" value="wanshuluu@gmail.com">
                   <input type="hidden" name="_next" id="leaseNext" value="https://openingdoorsforu.com/?sent=landlord#services">
                   <input type="hidden" name="Lead Type" id="leaseLeadType" value="Landlord">
                   <input type="hidden" name="Service Path" value="Leasing">
