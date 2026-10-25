@@ -95,7 +95,7 @@ def page_shell(
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261025nobox" />{ld}
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261025navmenu" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -109,7 +109,7 @@ def page_shell(
           <img class="brand-snobar" src="{prefix}assets/snobar-dark.svg" alt="Snobar Realty Group Inc., Brokerage" />
         </div>
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
+      <nav class="nav-links" id="primaryNav" aria-label="Primary navigation">
         <div class="nav-drop" data-nav-drop>
           <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navListingsMenu">
             Listings
@@ -156,6 +156,15 @@ def page_shell(
         </div>
       </nav>
       <div class="header-utils">
+        <button
+          class="nav-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primaryNav"
+          aria-label="Open menu"
+        >
+          <span class="nav-menu-toggle-bars" aria-hidden="true"></span>
+        </button>
         <div class="header-contact">
           <a class="call-phone" href="tel:+16473608179" aria-label="Call Josh">
             <span class="flag" aria-hidden="true">🇨🇦</span>

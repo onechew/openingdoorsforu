@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20261025thin" />
+  <link rel="stylesheet" href="../../assets/seo-pages.css?v=20261025navmenu" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "880 The Queensway #605", "description": "880 The Queensway #605 was leased in Etobicoke with Josh Schwartz. Review the neighbourhood context and similar leased homes.", "url": "https://openingdoorsforu.com/sold/880-the-queensway-605/", "image": "https://openingdoorsforu.com/assets/past/605-880-queensway.jpg", "address": {"@type": "PostalAddress", "streetAddress": "880 The Queensway #605", "addressLocality": "Etobicoke", "addressRegion": "ON", "addressCountry": "CA"}}</script>
 </head>
 <body>
@@ -45,7 +45,7 @@
           />
         </div>
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
+      <nav class="nav-links" id="primaryNav" aria-label="Primary navigation">
         <div class="nav-drop" data-nav-drop>
           <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navListingsMenu">
             Listings
@@ -92,6 +92,15 @@
         </div>
       </nav>
       <div class="header-utils">
+        <button
+          class="nav-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primaryNav"
+          aria-label="Open menu"
+        >
+          <span class="nav-menu-toggle-bars" aria-hidden="true"></span>
+        </button>
         <div class="header-contact">
           <a class="call-phone" href="tel:+16473608179" aria-label="Call Josh">
             <span class="flag" aria-hidden="true">🇨🇦</span>
@@ -312,6 +321,6 @@
       });
     })();
   </script>
-  <script src="../../assets/site-footer.js?v=20261014footer" defer></script>
+  <script src="../../assets/site-footer.js?v=20261025navmenu" defer></script>
 </body>
 </html>

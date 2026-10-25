@@ -40,11 +40,11 @@ def site_footer_script_tag(*, root_href: str = "") -> str:
     """Script tag that fills the copyright year on every page."""
     root = root_href or ""
     if root in {"", "."}:
-        src = "assets/site-footer.js?v=20261014footer"
+        src = "assets/site-footer.js?v=20261025navmenu"
     else:
         if not root.endswith("/"):
             root = f"{root}/"
-        src = f"{root}assets/site-footer.js?v=20261014footer"
+        src = f"{root}assets/site-footer.js?v=20261025navmenu"
     return f'  <script src="{src}" defer></script>'
 
 

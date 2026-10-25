@@ -330,7 +330,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20261025thin"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20261025navmenu"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -398,7 +398,7 @@ def page_shell(
           />
         </div>
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
+      <nav class="nav-links" id="primaryNav" aria-label="Primary navigation">
         <div class="nav-drop" data-nav-drop>
           <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navListingsMenu">
             Listings
@@ -445,6 +445,15 @@ def page_shell(
         </div>
       </nav>
       <div class="header-utils">
+        <button
+          class="nav-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primaryNav"
+          aria-label="Open menu"
+        >
+          <span class="nav-menu-toggle-bars" aria-hidden="true"></span>
+        </button>
         <div class="header-contact">
           <a class="call-phone" href="tel:+16473608179" aria-label="Call Josh">
             <span class="flag" aria-hidden="true">🇨🇦</span>
