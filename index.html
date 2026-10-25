@@ -1236,13 +1236,14 @@
 
     .hero-oh-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) auto;
+      grid-template-columns: minmax(0, 1fr) auto auto auto;
       align-items: center;
-      gap: 16px 16px;
+      column-gap: clamp(16px, 2.2vw, 28px);
+      row-gap: 12px;
     }
 
     .hero-oh-kicker {
-      margin: 0 0 2px;
+      margin: 0 0 4px;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -1250,8 +1251,16 @@
       color: var(--champagne);
     }
 
+    .hero-oh-headline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 14px;
+      min-width: 0;
+    }
+
     .hero-oh-title {
-      margin: 0 0 7px;
+      margin: 0;
       font-family: var(--serif);
       font-size: clamp(24px, 2.4vw, 30px);
       font-weight: 600;
@@ -1264,7 +1273,7 @@
       align-items: center;
       gap: 5px;
       margin: 0;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: -0.01em;
       color: rgba(255, 255, 255, 0.92);
@@ -1325,12 +1334,12 @@
 
     .hero-oh-dates li {
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      column-gap: clamp(18px, 3.5vw, 40px);
-      row-gap: 8px;
+      flex-wrap: nowrap;
+      align-items: center;
+      column-gap: clamp(14px, 2.4vw, 28px);
       min-width: 0;
-      width: 100%;
+      width: max-content;
+      max-width: 100%;
       padding: 2px 0 2px 16px;
       border-left: 2px solid rgba(213, 255, 47, 0.55);
     }
@@ -1348,14 +1357,14 @@
       font-size: clamp(18px, 2vw, 24px);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.1;
+      line-height: 1;
     }
 
     .hero-oh-time {
       font-size: clamp(16px, 1.6vw, 20px);
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.2;
+      line-height: 1;
     }
 
     .hero-oh-sun .hero-oh-day {
@@ -1363,11 +1372,11 @@
     }
 
     .hero-oh-lotto {
-      margin: 0 0 0 auto;
-      font-size: 13px;
+      margin: 0;
+      font-size: clamp(15px, 1.45vw, 18px);
       font-weight: 700;
       letter-spacing: -0.01em;
-      line-height: 1.25;
+      line-height: 1.2;
       color: var(--champagne);
       white-space: nowrap;
     }
@@ -5735,7 +5744,7 @@
       text-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
     }
 
-    /* Above © J&W */
+    /* Above © Design by Wanshu Lu */
     .ascii-garden-left {
       left: max(4px, calc((100% - var(--max)) / 2 - 12px));
       transform: none;
@@ -6141,6 +6150,14 @@
       text-shadow: 0 1px 10px rgba(18, 20, 23, 0.65);
     }
 
+    .footer-legal {
+      margin: 0;
+      max-width: 40rem;
+      font-size: inherit;
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
     .footer-contact {
       position: relative;
       z-index: 2;
@@ -6165,7 +6182,7 @@
       z-index: 2;
       margin: 0;
       max-width: 40rem;
-      color: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.1);
       font-size: 11px;
       line-height: 1.55;
       text-wrap: pretty;
@@ -6678,9 +6695,30 @@
     }
 
     /* Compact Open House on tablet so the row still fits */
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
       .hero-oh-inner {
-        gap: 12px;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px 18px;
+      }
+
+      .hero-oh-dates {
+        justify-self: end;
+      }
+
+      .hero-oh-lotto {
+        grid-column: 1 / 2;
+        justify-self: start;
+        white-space: normal;
+        font-size: 15px;
+      }
+
+      .hero-oh-cta {
+        grid-column: 2 / 3;
+        justify-self: end;
+        align-self: center;
+        padding: 0 14px;
+        min-height: 38px;
+        font-size: 12px;
       }
 
       .hero-oh-title {
@@ -6693,19 +6731,7 @@
 
       .hero-oh-dates li {
         padding-left: 12px;
-        column-gap: 18px;
-      }
-
-      .hero-oh-lotto {
-        margin-left: 0;
-        font-size: 12px;
-        white-space: normal;
-      }
-
-      .hero-oh-cta {
-        padding: 0 14px;
-        min-height: 38px;
-        font-size: 12px;
+        column-gap: 16px;
       }
     }
 
@@ -6717,7 +6743,7 @@
 
       .hero-oh-inner {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 14px;
       }
 
       .hero-oh-copy {
@@ -6729,18 +6755,24 @@
 
       .hero-oh-kicker {
         margin: 0;
-        font-size: 11px;
+        font-size: 12px;
         letter-spacing: 0.12em;
+      }
+
+      .hero-oh-headline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
       }
 
       .hero-oh-title {
         margin: 0;
-        font-size: clamp(24px, 7vw, 30px);
+        font-size: clamp(28px, 8vw, 34px);
       }
 
       .hero-oh-address {
         margin: 0;
-        font-size: 15px;
+        font-size: 16px;
         white-space: nowrap;
         gap: 7px;
       }
@@ -6749,43 +6781,46 @@
         white-space: nowrap;
       }
 
-      .hero-oh-dates {
+      .hero-oh-dates,
+      .hero-oh-lotto,
+      .hero-oh-cta {
+        grid-column: auto;
+        justify-self: stretch;
         width: 100%;
       }
 
       .hero-oh-dates li {
+        width: 100%;
         column-gap: 14px;
-        row-gap: 6px;
         padding-left: 14px;
       }
 
       .hero-oh-day {
-        font-size: 11px;
+        font-size: 12px;
       }
 
       .hero-oh-date,
       .hero-oh-time {
-        font-size: 17px;
+        font-size: 20px;
         font-weight: 700;
         letter-spacing: -0.02em;
-        line-height: 1.2;
+        line-height: 1;
         color: #ffffff;
       }
 
       .hero-oh-lotto {
-        flex: 1 0 100%;
-        margin-left: 0;
-        margin-top: 2px;
+        margin: 0;
         white-space: normal;
-        font-size: 12px;
+        font-size: 18px;
         line-height: 1.35;
       }
 
       .hero-oh-cta {
         width: 100%;
-        min-height: 44px;
-        margin-top: 2px;
-        font-size: 14px;
+        min-height: 48px;
+        margin-top: 0;
+        font-size: 15px;
+        justify-self: stretch;
       }
     }
 
@@ -7195,29 +7230,31 @@
         <div class="container hero-oh-inner">
           <div class="hero-oh-copy">
             <p class="hero-oh-kicker" id="open-house-kicker" aria-live="polite">Today · 2–4 PM</p>
-            <h2 id="open-house-heading" class="hero-oh-title">Open House</h2>
-            <a
-              class="hero-oh-address"
-              href="https://www.google.com/maps/search/?api=1&amp;query=56+41st+Street+West%2C+Toronto%2C+ON"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open 56 41st Street West, Toronto in Google Maps"
-            >
-              <span class="hero-oh-address-text">56 41st Street W, Toronto</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"></path>
-                <circle cx="12" cy="10" r="2.4"></circle>
-              </svg>
-            </a>
+            <div class="hero-oh-headline">
+              <h2 id="open-house-heading" class="hero-oh-title">Open House</h2>
+              <a
+                class="hero-oh-address"
+                href="https://www.google.com/maps/search/?api=1&amp;query=56+41st+Street+West%2C+Toronto%2C+ON"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open 56 41st Street West, Toronto in Google Maps"
+              >
+                <span class="hero-oh-address-text">56 41st Street W, Toronto</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"></path>
+                  <circle cx="12" cy="10" r="2.4"></circle>
+                </svg>
+              </a>
+            </div>
           </div>
           <ul class="hero-oh-dates">
             <li class="hero-oh-sun">
               <span class="hero-oh-day">Sun</span>
               <span class="hero-oh-date">Oct 25</span>
               <span class="hero-oh-time">2–4 PM</span>
-              <span class="hero-oh-lotto">Free lotto ticket when you stop by</span>
             </li>
           </ul>
+          <p class="hero-oh-lotto">Free lotto ticket when you visit!</p>
           <a
             class="hero-oh-cta"
             href="sms:+16473608179&body=Hi%20Josh%2C%20I%27d%20like%20details%20on%20the%20Open%20House%20at%2056%2041st%20Street%20W%20(Oct%2025)."
@@ -7285,48 +7322,6 @@
             syncStatus();
           }, 30000);
 
-          // Desktop row only: keep ~52px from “…by” to Text Josh without clipping the CTA.
-          var lotto = banner.querySelector(".hero-oh-lotto:not(.is-empty)");
-          var cta = banner.querySelector(".hero-oh-cta");
-          if (!lotto || !cta) return;
-          var desktopRow = window.matchMedia("(min-width: 901px)");
-
-          function clearCtaShift() {
-            cta.style.position = "";
-            cta.style.left = "";
-            cta.style.marginLeft = "";
-            cta.style.marginInlineStart = "";
-            cta.style.transform = "";
-          }
-
-          function syncLottoToCtaGap() {
-            clearCtaShift();
-            if (!desktopRow.matches) return;
-
-            // CTA sits on the container’s right edge, so we can’t nudge it further right.
-            // Grow margin-inline-start iteratively — the fr columns shrink and “…by” moves left
-            // until the measured gap is 52px.
-            var gap = 52;
-            for (var i = 0; i < 8; i++) {
-              var fromBy =
-                cta.getBoundingClientRect().left - lotto.getBoundingClientRect().right;
-              var delta = gap - fromBy;
-              if (Math.abs(delta) < 0.5) break;
-              var current = parseFloat(cta.style.marginInlineStart) || 0;
-              var next = current + delta;
-              if (next < 0) next = 0;
-              cta.style.marginInlineStart = next + "px";
-            }
-          }
-
-          syncLottoToCtaGap();
-          window.addEventListener("resize", syncLottoToCtaGap);
-          if (desktopRow.addEventListener) {
-            desktopRow.addEventListener("change", syncLottoToCtaGap);
-          }
-          if (document.fonts && document.fonts.ready) {
-            document.fonts.ready.then(syncLottoToCtaGap).catch(function () {});
-          }
         })();
       </script>
     </section>
@@ -9325,13 +9320,15 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© <span id="year">2026</span> J&amp;W</div>
-        <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
+        <p class="footer-legal">
+          Advertising follows Ontario RECO rules under TRESA.
+          <a href="/privacy/">Privacy</a> ·
+          <a href="/about/">About</a>
+        </p>
+        <div>Josh Schwartz · Sales Representative · Snobar</div>
       </div>
       <p class="footer-note">
-        Advertising follows Ontario RECO rules under TRESA.
-        <a href="/privacy/">Privacy</a> ·
-        <a href="/about/">About</a>
+        © <span id="year">2026</span> Design by Wanshu Lu
       </p>
     </div>
   </footer>

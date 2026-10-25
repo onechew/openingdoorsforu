@@ -1046,6 +1046,14 @@ button.btn.copy-email[data-tip]::after {
   color: rgba(18, 20, 23, 0.45);
 }
 
+.site-footer .footer-legal {
+  margin: 0;
+  max-width: 40rem;
+  font-size: inherit;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
 .site-footer .footer-contact {
   margin: 0;
   color: rgba(18, 20, 23, 0.45);
@@ -1065,7 +1073,7 @@ button.btn.copy-email[data-tip]::after {
 .site-footer .footer-note {
   margin: 0;
   max-width: 40rem;
-  color: rgba(18, 20, 23, 0.28);
+  color: rgba(18, 20, 23, 0.18);
   font-size: 11px;
   line-height: 1.55;
   text-wrap: pretty;
@@ -4103,6 +4111,53 @@ button.btn.copy-email[data-tip]::after {
 
 .about-layout .prose h2:first-child {
   margin-top: 0;
+}
+
+.about-brokerages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0 18px;
+}
+
+.about-brokerage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.about-brokerage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 72px;
+}
+
+.about-brokerage--snobar img {
+  max-height: 56px;
+  max-width: 160px;
+}
+
+.about-brokerage--thapar img {
+  max-height: 72px;
+  max-width: 72px;
+  border-radius: 50%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-brokerage:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+  }
+}
+
+.about-brokerage:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 12px;
 }
 
 .about-layout .about-profiles-heading {
