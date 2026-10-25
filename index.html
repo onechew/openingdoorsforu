@@ -1085,7 +1085,7 @@
 
     .hero-oh-dates {
       display: grid;
-      grid-template-columns: repeat(2, max-content);
+      grid-template-columns: max-content;
       grid-template-rows: auto auto auto auto;
       column-gap: 10px;
       justify-content: start;
@@ -1219,18 +1219,10 @@
         animation: oh-rise 720ms var(--ease-out) both;
       }
 
-      .hero-oh-dates li:nth-child(1) {
-        animation-delay: 90ms;
-      }
-
-      .hero-oh-dates li:nth-child(2) {
-        animation-delay: 160ms;
-      }
-
       .hero-oh-dates li.hero-oh-sun {
         border-left-color: rgba(213, 255, 47, 0.85);
         animation:
-          oh-rise 720ms var(--ease-out) 160ms both,
+          oh-rise 720ms var(--ease-out) 90ms both,
           oh-sun-edge 2.8s ease-in-out 900ms infinite;
       }
 
@@ -6865,7 +6857,7 @@
       <aside class="hero-oh" id="open-house" aria-labelledby="open-house-heading">
         <div class="container hero-oh-inner">
           <div class="hero-oh-copy">
-            <p class="hero-oh-kicker">This week only</p>
+            <p class="hero-oh-kicker">Today only</p>
             <h2 id="open-house-heading" class="hero-oh-title">Open House</h2>
             <a
               class="hero-oh-address"
@@ -6882,12 +6874,6 @@
             </a>
           </div>
           <ul class="hero-oh-dates">
-            <li>
-              <span class="hero-oh-day">Sat</span>
-              <span class="hero-oh-date">Oct 24</span>
-              <span class="hero-oh-time">2–4 PM</span>
-              <span class="hero-oh-lotto is-empty" aria-hidden="true"></span>
-            </li>
             <li class="hero-oh-sun">
               <span class="hero-oh-day">Sun</span>
               <span class="hero-oh-date">Oct 25</span>
@@ -6897,7 +6883,7 @@
           </ul>
           <a
             class="hero-oh-cta"
-            href="sms:+16473608179&body=Hi%20Josh%2C%20I%27d%20like%20details%20on%20the%20Open%20House%20at%2056%2041st%20Street%20W%20(Oct%2024%2C%2025)."
+            href="sms:+16473608179&body=Hi%20Josh%2C%20I%27d%20like%20details%20on%20the%20Open%20House%20at%2056%2041st%20Street%20W%20(Oct%2025)."
           >
             Text Josh
           </a>
