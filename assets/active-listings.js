@@ -14,7 +14,7 @@ window.__ACTIVE_LISTINGS__ = [
     "beds": "4",
     "baths": "2",
     "parking": "2",
-    "size": "1500-2000",
+    "size": "1500-2000 sqft",
     "type": "Detached",
     "mls": "W14105186",
     "area": "Etobicoke",

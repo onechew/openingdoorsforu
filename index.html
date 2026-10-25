@@ -10890,6 +10890,15 @@
       activeArea = areaFilter.value;
     }
 
+    function formatListingSize(size) {
+      let s = String(size || "").trim();
+      if (!s) return "";
+      s = s.replace(/\s*SQ\.?\s*FT\.?/gi, "").replace(/\s*sqft\b/gi, "").trim();
+      s = s.replace(/-/g, "–");
+      if (!/(sq\.?\s*ft|sqft|m²|sq\s*m)/i.test(s)) s = `${s} sqft`;
+      return s;
+    }
+
     function listingSpecs(listing) {
       const parts = [];
       if (listing.beds) parts.push(`${listing.beds} Beds`);
@@ -10897,7 +10906,7 @@
       if (listing.parking != null && String(listing.parking).trim() !== "") {
         parts.push(`${listing.parking} Parking`);
       }
-      if (listing.size) parts.push(listing.size);
+      if (listing.size) parts.push(formatListingSize(listing.size));
       if (listing.type) parts.push(listing.type);
       return parts.join(" • ");
     }

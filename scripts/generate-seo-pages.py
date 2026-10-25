@@ -1084,8 +1084,11 @@ def listing_facts_html(item: dict) -> str:
             f'<span>{esc(count_label(item["parking"], "parking", "parking"))}</span></div>'
         )
     if item.get("size"):
-        size = re.sub(r"\s*SQ\.?\s*FT\.?", " sqft", str(item["size"]), flags=re.I)
+        size = re.sub(r"\s*SQ\.?\s*FT\.?", "", str(item["size"]), flags=re.I)
+        size = re.sub(r"\s*sqft\b", "", size, flags=re.I).strip()
         size = size.replace("-", "–")
+        if size and not re.search(r"sq\.?\s*ft|sqft|m²|sq\s*m", size, re.I):
+            size = f"{size} sqft"
         facts.append(
             f'<div class="fact">{material_icon(ICON_SIZE)}<span>{esc(size)}</span></div>'
         )
