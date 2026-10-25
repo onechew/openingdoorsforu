@@ -22,11 +22,13 @@ def render_site_footer(*, root_href: str = "", note_extra: str = "") -> str:
     return f"""  <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-meta">
-        <div>© <span id="year">2026</span> Josh Schwartz</div>
+        <div>© <span id="year">2026</span> J&amp;W</div>
         <div>Sales Representative · Snobar Realty Group Inc., Brokerage</div>
       </div>
       <p class="footer-note">
         {note}
+        <a href="/privacy/">Privacy</a> ·
+        <a href="/about/">About</a>
       </p>
     </div>
   </footer>"""

@@ -1,0 +1,20 @@
+{
+  "_comment": "Homepage Open House banner. Keep index.html data-oh-* in sync. Banner shows from showFrom until endsAt; kicker switches to Happening now between liveStart and endsAt.",
+  "active": true,
+  "title": "Open House",
+  "address": "56 41st Street W, Toronto",
+  "mapsQuery": "56 41st Street West, Toronto, ON",
+  "showFrom": "2026-10-25T00:00:00-04:00",
+  "liveStart": "2026-10-25T14:00:00-04:00",
+  "endsAt": "2026-10-25T16:00:00-04:00",
+  "slots": [
+    {
+      "day": "Sun",
+      "date": "Oct 25",
+      "time": "2–4 PM",
+      "featured": true,
+      "lotto": "Free lotto ticket when you stop by"
+    }
+  ],
+  "smsBody": "Hi Josh, I'd like details on the Open House at 56 41st Street W (Oct 25)."
+}

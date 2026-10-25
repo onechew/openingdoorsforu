@@ -95,7 +95,7 @@ def page_shell(
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261016copyonce" />{ld}
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261025nobox" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -1248,10 +1248,55 @@ def write_building(b: dict) -> None:
 
     sms_body = quote(f"Hi Josh, I want to know more about {b['name']} at {b['address']}.")
     sms_href = f"sms:+16473608179?body={sms_body}"
+    last_updated = (b.get("lastUpdated") or LASTMOD[:10]).strip()
+    area_label = area_chip(b.get("area", "Etobicoke"))
+    hbs_faq = ""
+    hbs_faq_ld: list[dict] = []
+    if area_label == "Humber Bay":
+        hbs_faq = f"""
+  <section class="section" id="faq">
+    <div class="container prose">
+      <h2>Humber Bay Shores FAQ</h2>
+      <h3>Is {esc(b["name"])} in Humber Bay Shores?</h3>
+      <p>Yes. {esc(b["name"])} at {esc(b["address"])} sits in the Humber Bay / Humber Bay Shores waterfront condo corridor in South Etobicoke.</p>
+      <h3>What should buyers compare before offering here?</h3>
+      <p>Compare maintenance fees, amenities, suite size, parking, views, and recent building comps against neighbouring Humber Bay Shores towers, not a single west-end average.</p>
+      <h3>Who can help with {esc(b["name"])} inventory?</h3>
+      <p>Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage. He works with Thapar Team and helps buyers and sellers compare Humber Bay Shores buildings. Call +1-647-360-8179.</p>
+      <p><a class="text-link" href="../../neighbourhoods/humber-bay-shores/">Humber Bay Shores neighbourhood guide</a></p>
+      <p class="section-copy"><em>Last updated: {esc(last_updated)}</em></p>
+    </div>
+  </section>
+"""
+        hbs_faq_ld = [
+            {
+                "@type": "Question",
+                "name": f"Is {b['name']} in Humber Bay Shores?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": (
+                        f"Yes. {b['name']} at {b['address']} sits in the Humber Bay / "
+                        "Humber Bay Shores waterfront condo corridor in South Etobicoke."
+                    ),
+                },
+            },
+            {
+                "@type": "Question",
+                "name": f"What should buyers compare before offering at {b['name']}?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": (
+                        "Compare maintenance fees, amenities, suite size, parking, views, "
+                        "and recent building comps against neighbouring Humber Bay Shores towers."
+                    ),
+                },
+            },
+        ]
     body = f"""
   <section class="hero-band condo-hero" id="overview">
     <div class="container">
       <p class="breadcrumb"><a href="../../../">Home</a> / <a href="../../">Etobicoke</a> / <a href="../../south-etobicoke-condo-guide/">Condo Guide</a> / {esc(b["name"])}</p>
+      <p class="section-copy" style="margin:0 0 8px;"><em>Last updated: {esc(last_updated)}</em></p>
       <div class="condo-hero-grid{has_video}">
           <div class="condo-hero-copy">
             <p class="condo-area-chip-wrap"><span class="condo-area-chip">{esc(area_chip(b.get("area", "Etobicoke")))}</span></p>
@@ -1307,6 +1352,8 @@ def write_building(b: dict) -> None:
     </div>
   </section>
 
+  {hbs_faq}
+
   <section class="section">
     <div class="container">
       <h2>See more condo guides</h2>
@@ -1317,11 +1364,13 @@ def write_building(b: dict) -> None:
 
     poster = (b.get("poster") or "").strip()
     og_image = f"{ORIGIN}/{poster}" if poster else None
+    canonical = f"{ORIGIN}/etobicoke/condo/{b['slug']}/"
     json_ld = {
             "@context": "https://schema.org",
             "@type": "Residence",
             "name": b["name"],
-            "url": f"{ORIGIN}/etobicoke/condo/{b['slug']}/",
+            "url": canonical,
+            "dateModified": last_updated,
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": b["address"],
@@ -1345,15 +1394,53 @@ def write_building(b: dict) -> None:
             desc = f"{lead} {summary_bit} Amenities, fees, neighbourhood context, and who it fits with Josh Schwartz."
     else:
         desc = f"{lead} Amenities, fees, neighbourhood context, and who it fits with Josh Schwartz."
+    crumbs = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{ORIGIN}/"},
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Etobicoke",
+                "item": f"{ORIGIN}/etobicoke/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Condo Guide",
+                "item": f"{ORIGIN}/etobicoke/south-etobicoke-condo-guide/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": b["name"],
+                "item": canonical,
+            },
+        ],
+    }
     html = page_shell(
         title=f"{b['name']}, {b['address']} | Josh Schwartz",
         description=desc,
-        canonical=f"{ORIGIN}/etobicoke/condo/{b['slug']}/",
+        canonical=canonical,
         depth=depth,
         body=body,
         json_ld=json_ld,
         og_image=og_image,
     )
+    inject = f'<script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>\n'
+    if hbs_faq_ld:
+        faq_ld = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": hbs_faq_ld,
+        }
+        inject += (
+            f'<script type="application/ld+json">'
+            f"{json.dumps(faq_ld, ensure_ascii=False)}"
+            f"</script>\n"
+        )
+    html = html.replace("</head>", inject + "</head>", 1)
     (out / "index.html").write_text(html, encoding="utf-8")
 
 

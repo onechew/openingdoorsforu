@@ -29,6 +29,48 @@ LASTMOD = (
 )
 ORIGIN = "https://openingdoorsforu.com"
 
+# Thin outline SVGs (stroke) so icons stay light — no Google font dependency.
+_SVG_PATHS = {
+    "school": (
+        '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/>'
+        '<path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>'
+    ),
+    "subway": (
+        '<rect x="5" y="3" width="14" height="14" rx="2"/>'
+        '<path d="M5 11h14M9 17l-1.5 3M15 17l1.5 3M9 14h.01M15 14h.01"/>'
+    ),
+    "bus": (
+        '<path d="M4 6c0-1.5 3.6-2 8-2s8 .5 8 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>'
+        '<path d="M4 11h16M8 18v2M16 18v2M8 14h.01M16 14h.01"/>'
+    ),
+    "chart": '<path d="M3 17l5-5 4 4 8-9"/>',
+    "city": (
+        '<path d="M3 21h18M5 21V8l7-4 7 4v13"/>'
+        '<path d="M9 21v-5h6v5M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/>'
+    ),
+    "group": (
+        '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>'
+        '<circle cx="9" cy="7" r="3.5"/>'
+        '<path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'
+    ),
+    "near": '<path d="M3 11l19-8-8 19-2.5-8.5z"/>',
+    "analytics": (
+        '<path d="M4 19V5M4 19h16"/>'
+        '<path d="M8 16v-5M12 16V8M16 16v-3"/>'
+    ),
+}
+
+
+def city_svg(name: str, tone: str, size: str = "lg") -> str:
+    """Self-contained thin outline icon badge (no webfont)."""
+    path = _SVG_PATHS[name]
+    return (
+        f'<span class="city-icon-badge city-icon-badge--{size} is-{tone}" aria-hidden="true">'
+        f'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" focusable="false">{path}</svg>'
+        f"</span>"
+    )
+
+
 # Tile index on /etobicoke/. Full guides: /etobicoke/neighbourhoods/{slug}/
 ETOBICOKE_NEIGHBOURHOODS = [
     {
@@ -56,8 +98,8 @@ ETOBICOKE_NEIGHBOURHOODS = [
         "image": "assets/neighbourhoods/new-toronto.jpg",
     },
     {
-        "slug": "humber-bay",
-        "name": "Humber Bay",
+        "slug": "humber-bay-shores",
+        "name": "Humber Bay Shores",
         "chip": "South Etobicoke",
         "image": "assets/neighbourhoods/humber-bay.jpg",
     },
@@ -103,7 +145,7 @@ CITIES = {
         "title": "Etobicoke Realtor | South Etobicoke & Humber Bay | Josh Schwartz",
         "description": "Josh Schwartz for South Etobicoke, Humber Bay Shores, Mimico, and wider Etobicoke. Current listings plus recently sold and leased homes across lake shore condos and family neighbourhoods.",
         "lead": "Etobicoke is Toronto’s west side, with primary focus on South Etobicoke, Humber Bay Shores, and Mimico lake shore living, plus family neighbourhoods inland. Josh Schwartz helps clients buy, sell, and lease with clear local guidance.",
-        "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance, backed by Thapar Team (#1 team in Etobicoke).",
+        "about": "Etobicoke is a primary focus for Josh Schwartz and Opening Doors For U. From Mimico and the lake shore to Islington and inland family streets, he helps clients buy, sell, and lease with practical guidance. He works with Thapar Team through Snobar Realty Group Inc., Brokerage.",
         "schools": [
             "Families often compare schools across south Etobicoke and inland neighbourhoods when choosing between houses and condos.",
             "Proximity to parks, the waterfront trail, and community centres matters as much as classroom rankings for many buyers.",
@@ -288,7 +330,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20261016copyonce"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20261025thin"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -395,7 +437,7 @@ def page_shell(
             <span class="nav-drop-caret" aria-hidden="true"></span>
           </button>
           <div class="nav-drop-menu" id="navAboutMenu" role="menu">
-            <a href="{home}#about" role="menuitem">About</a>
+            <a href="{home}about/" role="menuitem">About</a>
             <a href="{home}#reviews" role="menuitem">Reviews</a>
             <a href="{home}#reels" role="menuitem">Latest</a>
             <a href="{home}#faq" role="menuitem">FAQ</a>
@@ -564,9 +606,12 @@ def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
         home = asset_href("", depth) or "./"
         thapar = "https://www.thaparteam.ca/property-search/results/?searchid=3952868"
         return (
-            f'<p class="empty">Josh can help you buy, sell, or lease here. '
-            f'<a href="{home}#contact">text Josh</a> or '
-            f'<a href="{thapar}" target="_blank" rel="noopener noreferrer">browse live inventory</a>.</p>'
+            '<div class="empty-cta">'
+            "<p>No closed results in this section right now. Josh can still help you buy, sell, or lease here.</p>"
+            '<div class="cta-row empty-cta-actions">'
+            f'<a class="btn btn-secondary" href="{home}#contact">Text Josh</a>'
+            f'<a class="btn btn-secondary" href="{thapar}" target="_blank" rel="noopener noreferrer">Browse live inventory</a>'
+            "</div></div>"
         )
     bits = []
     for item in items:
@@ -761,26 +806,39 @@ def write_city_pages():
 
   <section class="section">
     <div class="container">
-      <h2>Schools</h2>
-      <div class="prose"><ul>{''.join(f'<li>{esc(x)}</li>' for x in meta['schools'])}</ul></div>
+      <div class="hood-panel-head">
+        {city_svg("school", "school")}
+        <h2>Schools</h2>
+      </div>
+      <ul class="city-note-list">
+        {''.join(f'<li>{city_svg("school", "school", "sm")}<span>{esc(x)}</span></li>' for x in meta['schools'])}
+      </ul>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <h2>Transit</h2>
-      <div class="prose"><ul>{''.join(f'<li>{esc(x)}</li>' for x in meta['transit'])}</ul></div>
+      <div class="hood-panel-head">
+        {city_svg("subway", "transit")}
+        <h2>Transit</h2>
+      </div>
+      <ul class="city-note-list">
+        {''.join(f'<li>{city_svg("bus", "transit", "sm")}<span>{esc(x)}</span></li>' for x in meta['transit'])}
+      </ul>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <h2>Market Snapshot</h2>
-      <div class="stat-row">
-        <div class="stat"><strong>{esc(meta['snapshot']['focus'])}</strong><span>Local focus</span></div>
-        <div class="stat"><strong>{esc(meta['snapshot']['buyer'])}</strong><span>Typical clients</span></div>
-        <div class="stat"><strong>{esc(meta['snapshot']['metric'])}</strong><span>{esc(meta['snapshot']['metric_label'])}</span></div>
-        <div class="stat"><strong>{esc(meta['snapshot']['angle'])}</strong><span>{esc(meta['snapshot']['angle_label'])}</span></div>
+      <div class="hood-panel-head">
+        {city_svg("chart", "market")}
+        <h2>Market Snapshot</h2>
+      </div>
+      <div class="stat-row stat-row--open">
+        <div class="stat stat--open">{city_svg("city", "housing")}<div><strong>{esc(meta['snapshot']['focus'])}</strong><span>Local focus</span></div></div>
+        <div class="stat stat--open">{city_svg("group", "clients")}<div><strong>{esc(meta['snapshot']['buyer'])}</strong><span>Typical clients</span></div></div>
+        <div class="stat stat--open">{city_svg("near", "transit")}<div><strong>{esc(meta['snapshot']['metric'])}</strong><span>{esc(meta['snapshot']['metric_label'])}</span></div></div>
+        <div class="stat stat--open">{city_svg("analytics", "market")}<div><strong>{esc(meta['snapshot']['angle'])}</strong><span>{esc(meta['snapshot']['angle_label'])}</span></div></div>
       </div>
       <div class="city-links" style="margin-top:18px">
         {other_city_links}
@@ -804,6 +862,29 @@ def write_city_pages():
             depth=depth,
             body=body,
             json_ld=json_ld,
+        )
+        crumbs = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": f"{ORIGIN}/",
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": meta["name"],
+                    "item": canonical,
+                },
+            ],
+        }
+        html = html.replace(
+            "</head>",
+            f'<script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>\n</head>',
+            1,
         )
         (out_dir / "index.html").write_text(html)
         urls.append((canonical, "weekly", "0.9"))
@@ -906,6 +987,85 @@ def infer_property_type(item: dict) -> str:
     return "Home"
 
 
+# City → broader region label (factual geography only; no invented stats).
+CITY_REGION = {
+    "whitby": "Durham Region",
+    "oshawa": "Durham Region",
+    "ajax": "Durham Region",
+    "pickering": "Durham Region",
+    "barrie": "Simcoe County",
+    "newmarket": "York Region",
+    "richmond hill": "York Region",
+    "markham": "York Region",
+    "vaughan": "York Region",
+    "mississauga": "Peel Region",
+    "brampton": "Peel Region",
+    "toronto": "Toronto",
+    "etobicoke": "Toronto",
+    "north york": "Toronto",
+    "scarborough": "Toronto",
+}
+
+
+def format_past_location(item: dict) -> str:
+    """Human-readable place line: pocket · city · region, Ontario when useful."""
+    loc = (item.get("location") or "").strip()
+    area = (item.get("area") or "").strip()
+    if loc and "·" in loc:
+        parts = [p.strip() for p in loc.split("·") if p.strip()]
+    elif loc:
+        parts = [loc]
+    elif area:
+        parts = [area]
+    else:
+        parts = []
+
+    city_key = (parts[-1] if parts else area or "").casefold()
+    region = CITY_REGION.get(city_key)
+    if region and region.casefold() not in {p.casefold() for p in parts}:
+        # e.g. Whitby → Whitby · Durham Region
+        if not parts:
+            parts = [region]
+        elif parts[-1].casefold() != region.casefold():
+            parts.append(region)
+
+    base = " · ".join(parts) if parts else "Ontario"
+    if re.search(r"\bON\b|\bOntario\b", base, re.I):
+        return base
+    return f"{base}, Ontario"
+
+
+def format_closed_date(item: dict) -> str:
+    raw = str(item.get("date") or "").strip()
+    if not raw:
+        return ""
+    try:
+        from datetime import datetime
+
+        dt = datetime.strptime(raw[:10], "%Y-%m-%d")
+        return dt.strftime("%B %Y")
+    except ValueError:
+        return raw
+
+
+def past_listing_meta_html(item: dict) -> str:
+    """Closed date + property type for sold/leased detail pages."""
+    bits = []
+    closed = format_closed_date(item)
+    if closed:
+        bits.append(
+            f'<div class="fact">{material_icon("event")}<span>Closed {esc(closed)}</span></div>'
+        )
+    prop_type = infer_property_type(item)
+    bits.append(
+        f'<div class="fact">{property_type_icon(prop_type)}'
+        f'<span>{esc(prop_type)}</span></div>'
+    )
+    if not bits:
+        return ""
+    return f'<div class="listing-facts listing-facts--past"><div class="listing-facts-main">{"".join(bits)}</div></div>'
+
+
 def listing_facts_html(item: dict) -> str:
     facts = []
     if item.get("beds"):
@@ -929,12 +1089,13 @@ def listing_facts_html(item: dict) -> str:
         facts.append(
             f'<div class="fact">{material_icon(ICON_SIZE)}<span>{esc(size)}</span></div>'
         )
-    # Always show property type (condo / home / etc.) on every listing page
-    prop_type = infer_property_type(item)
-    facts.append(
-        f'<div class="fact">{property_type_icon(prop_type)}'
-        f'<span>{esc(prop_type)}</span></div>'
-    )
+    # Property type on active pages; past sold/leased pages use past_listing_meta_html instead.
+    if item.get("kind") != "past":
+        prop_type = infer_property_type(item)
+        facts.append(
+            f'<div class="fact">{property_type_icon(prop_type)}'
+            f'<span>{esc(prop_type)}</span></div>'
+        )
 
     price = item.get("price") or ""
     mls = item.get("mls") or ""
@@ -1118,7 +1279,7 @@ def write_listing_pages():
         img = asset_href(item.get("image", "assets/listing-placeholder.svg"), depth)
         facts_html = listing_facts_html(item)
         status = item.get("status") or ""
-        location = item.get("location") or item.get("area") or ""
+        location_line = format_past_location(item)
 
         similar = similar_items(item, DATA["sold"])
         sim_bits = []
@@ -1130,12 +1291,14 @@ def write_listing_pages():
         <div class="card-body">
           <span class="card-status {'lease' if 'lease' in (s.get('status') or '').lower() else 'sold'}">{esc(s.get('status') or '')}</span>
           <p class="card-title">{esc(s['title'])}</p>
-          <p class="card-meta">{esc(s.get('location') or s.get('area') or '')}</p>
+          <p class="card-meta">{esc(format_past_location(s))}</p>
         </div>
       </a>"""
             )
         sim_html = '<div class="grid">' + "".join(sim_bits) + "</div>" if sim_bits else '<p class="empty">More results coming soon.</p>'
         area_section = neighbourhood_section_html(item, depth)
+        past_facts = past_listing_meta_html(item)
+        eyebrow = f'<p class="eyebrow">{esc(status)}</p>' if status else ""
 
         body = f"""
   <section class="section">
@@ -1144,9 +1307,11 @@ def write_listing_pages():
       <div class="listing-hero">
         <div class="listing-hero-media"><img src="{esc(img)}" alt="{esc(item.get('alt') or item['title'])}" width="1200" height="900" /></div>
         <div>
-          <p class="eyebrow">{esc(status)}</p>
+          {eyebrow}
           <h1>{esc(item['title'])}</h1>
-          <p class="lead">{esc(location)}</p>
+          <p class="listing-place-label">Location</p>
+          <p class="lead listing-location">{esc(location_line)}</p>
+          {past_facts}
           {facts_html}
           <div class="cta-row">
             <a class="btn btn-primary" href="{asset_href('', depth)}#contact">Get a home valuation</a>
@@ -1159,6 +1324,7 @@ def write_listing_pages():
   {area_section}
   <section class="section"><div class="container"><h2>Similar Homes</h2>{sim_html}</div></section>
 """
+        locality = (item.get("area") or item.get("location") or "Ontario").split("·")[-1].strip()
         json_ld = {
             "@context": "https://schema.org",
             "@type": "Residence",
@@ -1169,7 +1335,7 @@ def write_listing_pages():
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": item["title"],
-                "addressLocality": item.get("area") or "Toronto",
+                "addressLocality": locality,
                 "addressRegion": "ON",
                 "addressCountry": "CA",
             },
@@ -1196,6 +1362,8 @@ def write_sitemap(extra_urls: list[tuple[str, str, str]]):
     city_urls = [(f"{ORIGIN}/{k}/", "weekly", "0.9") for k in CITIES]
     base = [
         (f"{ORIGIN}/", "weekly", "1.0"),
+        (f"{ORIGIN}/about/", "monthly", "0.85"),
+        (f"{ORIGIN}/privacy/", "yearly", "0.3"),
         *city_urls,
         *extra_urls,
     ]

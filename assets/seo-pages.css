@@ -122,6 +122,7 @@
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
+  overflow-x: clip;
 }
 
 body {
@@ -130,6 +131,8 @@ body {
   color: var(--ink);
   background: var(--bg);
   line-height: 1.55;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 a { color: inherit; }
@@ -139,6 +142,20 @@ img { max-width: 100%; height: auto; display: block; }
 .container {
   width: min(calc(100% - 56px), var(--max));
   margin: 0 auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: min(calc(100% - 32px), var(--max));
+  }
+
+  .site-footer .footer-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
 }
 
 .site-header {
@@ -253,6 +270,14 @@ img { max-width: 100%; height: auto; display: block; }
 
   .brand-lockup {
     gap: 10px;
+  }
+
+  .header-contact .copy-email {
+    display: none;
+  }
+
+  .header-contact .flag {
+    display: none;
   }
 }
 
@@ -728,7 +753,7 @@ h1 {
   color: var(--ink);
 }
 
-.stat span {
+.stat > div > span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
@@ -3770,4 +3795,435 @@ button.btn.copy-email[data-tip]::after {
 
 .seo-faq-a p {
   margin: 0;
+}
+
+/* —— Empty city listing CTA (buttons only; no outer frame) —— */
+.empty-cta {
+  margin: 0;
+  padding: 0;
+}
+
+.empty-cta p {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.empty-cta-actions {
+  margin-top: 0;
+}
+
+/* —— City Schools / Transit / Snapshot (thin SVG icon badges) —— */
+.city-icon-badge {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  color: #1f3a5f;
+  background: #e8eef6;
+}
+
+.city-icon-badge svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.city-icon-badge--lg {
+  width: 44px;
+  height: 44px;
+}
+
+.city-icon-badge--sm {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+.city-icon-badge--sm svg {
+  width: 18px;
+  height: 18px;
+}
+
+.city-icon-badge.is-school {
+  color: #1b7a4a;
+  background: #e6f4ec;
+}
+
+.city-icon-badge.is-transit {
+  color: #0e7490;
+  background: #e6f6f9;
+}
+
+.city-icon-badge.is-market {
+  color: #4338ca;
+  background: #eef0f8;
+}
+
+.city-icon-badge.is-housing {
+  color: #1d4ed8;
+  background: #e8eefc;
+}
+
+.city-icon-badge.is-clients {
+  color: #b45309;
+  background: #f8efe4;
+}
+
+.hood-panel-head .city-icon-badge {
+  margin-right: 2px;
+}
+
+.city-note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.city-note-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0;
+  padding: 0 0 14px;
+  border-bottom: 1px solid rgba(18, 20, 23, 0.08);
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.city-note-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.stat-row--open {
+  gap: 20px 28px;
+}
+
+.stat--open {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 14px;
+  align-items: start;
+}
+
+.stat--open strong {
+  margin-bottom: 4px;
+}
+
+/* —— Humber Bay Shores building directory (rows, not cards) —— */
+.building-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+}
+
+@media (max-width: 720px) {
+  .building-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.building-list > li {
+  margin: 0;
+  border-bottom: 1px solid rgba(18, 20, 23, 0.1);
+}
+
+.building-list-item {
+  display: grid;
+  gap: 2px;
+  padding: 14px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.building-list-item:hover .building-list-name {
+  color: var(--link);
+}
+
+.building-list-name {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.building-list-addr {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* —— Sold / leased hero clarity —— */
+.listing-place-label {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.listing-location {
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.listing-summary {
+  margin: 0 0 14px;
+  max-width: 42rem;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.listing-facts--past {
+  margin-bottom: 10px;
+}
+
+/* Privacy: match site chrome; brighter white page, no forced narrow wraps */
+.page-privacy {
+  --bg: #ffffff;
+  --ink-soft: #2c3038;
+  --muted: #5a5550;
+  background: #ffffff;
+}
+
+.page-privacy .hero-band {
+  background: #ffffff;
+}
+
+.page-privacy .hero-band .lead,
+.page-privacy .privacy-section .prose p {
+  max-width: none;
+  text-wrap: wrap;
+  color: var(--ink-soft);
+}
+
+.page-privacy .privacy-section .prose p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Privacy: section blocks with hairlines, no cards */
+.privacy-section .container {
+  display: grid;
+  gap: 0;
+}
+
+.privacy-block {
+  padding: 22px 0;
+  border-top: 1px solid rgba(18, 20, 23, 0.1);
+}
+
+.privacy-block:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.privacy-meta {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* About page: single column by default; side-by-side only on wide screens */
+.about-layout {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-photo {
+  margin: 0;
+  width: 100%;
+  max-width: 420px;
+  min-width: 0;
+}
+
+.about-photo picture {
+  display: block;
+  width: 100%;
+}
+
+.about-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.about-layout .prose,
+.about-layout .cta-row {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.about-layout .about-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+.about-layout .about-contact .btn {
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.about-layout .prose h2 {
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+
+.about-layout .prose h2:first-child {
+  margin-top: 0;
+}
+
+.about-layout .about-profiles-heading {
+  margin-top: 28px;
+  margin-bottom: 6px;
+}
+
+.about-layout .about-profiles-lead {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.about-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 16px 10px 10px;
+  border-radius: 14px;
+  text-decoration: none !important;
+  color: var(--ink) !important;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(18, 20, 23, 0.1);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.about-profile-mark {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.about-profile-mark svg {
+  display: block;
+}
+
+.about-profile-copy {
+  display: grid;
+  gap: 1px;
+  line-height: 1.2;
+}
+
+.about-profile-copy strong {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.about-profile-copy span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.about-profile--realtor .about-profile-mark {
+  background: rgba(227, 24, 55, 0.1);
+}
+
+.about-profile--realtor .about-profile-copy strong {
+  color: #e31837;
+}
+
+.about-profile--google .about-profile-mark {
+  background: rgba(66, 133, 244, 0.08);
+}
+
+.about-profile--google .about-profile-copy strong {
+  color: #1a73e8;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-profile:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 0 0 1px rgba(18, 20, 23, 0.16),
+      0 8px 20px rgba(18, 20, 23, 0.06);
+  }
+}
+
+.about-profile:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 799px) {
+  .about-layout .about-contact {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .about-layout .about-contact .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about-profile {
+    flex: 1 1 100%;
+  }
+}
+
+@media (min-width: 800px) {
+  .about-layout {
+    gap: 48px;
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .about-photo {
+    max-width: none;
+  }
 }

@@ -425,7 +425,7 @@ def write_active_js(josh: list[dict], team: list[dict], synced_at: str) -> None:
             "kind": item.get("kind") or "active",
             "source": item.get("source") or "",
         }
-        for key in ("beds", "baths", "parking", "size", "type", "mls", "area", "office", "attribution"):
+        for key in ("beds", "baths", "parking", "size", "type", "mls", "area", "office", "attribution", "badge", "slug"):
             if item.get(key) not in (None, ""):
                 row[key] = item[key]
         slim.append(row)

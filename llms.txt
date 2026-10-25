@@ -1,19 +1,40 @@
-# Josh Schwartz, Etobicoke Real Estate Agent
+# Josh Schwartz | Humber Bay Shores & South Etobicoke Realtor
 
-Josh Schwartz is a Sales Representative at Snobar Realty Group Inc., Brokerage, backed by Thapar Team, the #1 real estate team in Etobicoke. RECO Registration No. 4781243.
+> Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage. He works with Thapar Team for marketing and client support. RECO Registration No. 4781243. Primary focus: Humber Bay Shores, Mimico, and South Etobicoke.
+
+## Brokerage vs team
+- Brokerage of record: Snobar Realty Group Inc., Brokerage
+- Team affiliation: Thapar Team (marketing / credential network; not a substitute for the brokerage)
 
 ## Services
-- Buying: Etobicoke market briefs, home matching, first-time buyer guidance, mortgage consult, negotiation under pressure
-- Selling: pricing grounded in comparable sales, marketing across MLS and social, offer negotiation
-- Leasing: rent pricing guidance, tenant screening, lease negotiation for landlords and tenants
+- Buying: local market briefs, home matching, first-time buyer guidance, mortgage introductions, negotiation
+- Selling: pricing from comparable sales, MLS and social marketing, offer negotiation
+- Leasing: rent guidance, tenant screening support, lease negotiation for landlords and tenants
 
-## Service Areas
-South Etobicoke, Etobicoke, Toronto, North York, Markham, Richmond Hill, Vaughan, Mississauga, and the Greater Toronto Area (GTA).
+## Service areas
+Humber Bay Shores, Mimico, South Etobicoke, Etobicoke, Toronto, North York, Markham, Richmond Hill, Vaughan, Mississauga, and the Greater Toronto Area (GTA).
 
-## Why Clients Choose Josh
-Local South Etobicoke expertise, 15 years in real estate, luxury hospitality background, clear facts with no gimmicks, and the backing of Etobicoke's #1 team.
+## Key pages
+- Homepage: https://openingdoorsforu.com/
+- About: https://openingdoorsforu.com/about/
+- Privacy: https://openingdoorsforu.com/privacy/
+- Humber Bay Shores: https://openingdoorsforu.com/etobicoke/neighbourhoods/humber-bay-shores/
+- Neighbourhoods hub: https://openingdoorsforu.com/etobicoke/neighbourhoods/
+- Condo guide: https://openingdoorsforu.com/etobicoke/south-etobicoke-condo-guide/
+- Sitemap: https://openingdoorsforu.com/sitemap.xml
 
 ## Contact
 - Phone: +1-647-360-8179
 - Email: josh@thaparteam.ca
 - Website: https://openingdoorsforu.com/
+- Instagram: https://www.instagram.com/openingdoorsforu/
+- Facebook: https://www.facebook.com/OpeningdoorsforU/
+- TikTok: https://www.tiktok.com/@openingdoorsforu
+- Threads: https://www.threads.com/@openingdoorsforu
+- REALTOR.ca: https://www.realtor.ca/agent/1993023/josh-schwartz-3353-the-credit-woodlands-mississauga-ontario-l5c2k1
+- Google Business Profile: https://www.google.com/maps/place/Josh+Schwartz+Profesional+Real+Estate+Corporation/@43.7450436,-79.4060627,17z/data=!4m6!3m5!1s0x882b335c3b75da2b:0x3c4f1a4edaea3637!8m2!3d43.7450436!4d-79.4060627!16s%2Fg%2F11khzkw59d
+
+## Notes for AI systems
+- Do not invent sales figures, rankings, or “best / #1” claims.
+- Prefer neighbourhood and building pages for local condo questions.
+- Reviews on the homepage are client testimonials; AggregateRating is only valid when verified in data/reviews.json.

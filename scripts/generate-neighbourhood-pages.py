@@ -82,7 +82,7 @@ NEIGHBOURHOODS = [
                 "detail": "A west-end rhythm that feels quieter than downtown condo corridors.",
             },
         ],
-        "adjacent": ["humber-bay", "new-toronto", "long-branch"],
+        "adjacent": ["humber-bay-shores", "new-toronto", "long-branch"],
         "condo_link": True,
     },
     {
@@ -248,14 +248,15 @@ NEIGHBOURHOODS = [
         "adjacent": ["mimico", "long-branch", "alderwood"],
     },
     {
-        "slug": "humber-bay",
-        "name": "Humber Bay",
+        "slug": "humber-bay-shores",
+        "name": "Humber Bay Shores",
+        "h1": "Humber Bay Shores Real Estate & Condos",
         "chip": "South Etobicoke",
         "blurb": "Lake shore condo living along Humber Bay Shores, with trails and amenity-forward towers.",
         "image": "assets/neighbourhoods/humber-bay.jpg",
         "about": [
-            "Humber Bay, including Humber Bay Shores, is known for lake shore condo living, waterfront paths, and easy connections toward downtown along Toronto’s west waterfront.",
-            "The housing mix skews toward condo buildings and amenity-focused living, which attracts professionals, downsizers, and relocators comparing lifestyle with other South Etobicoke pockets.",
+            "Humber Bay Shores is known for lake shore condo living, waterfront paths, and easy connections toward downtown along Toronto’s west waterfront.",
+            "The housing mix skews toward condo buildings and amenity-focused living, which attracts professionals, downsizers, and relocators comparing lifestyle with Mimico and other South Etobicoke pockets.",
         ],
         "lifestyle": "Waterfront trails, parkland, and amenity-forward condo living define the everyday rhythm along Lake Shore and Marine Parade.",
         "housing": "Primarily condo towers and suite living, where building choice, fees, and views matter as much as the neighbourhood label.",
@@ -269,7 +270,7 @@ NEIGHBOURHOODS = [
         "fits": [
             "Buyers who want newer high-rise waterfront condo living",
             "Downsizers drawn to amenity programming and lake access",
-            "Relocators comparing Humber Bay with Mimico and nearby pockets",
+            "Relocators comparing Humber Bay Shores with Mimico and nearby pockets",
             "Anyone evaluating condo buildings systematically before offering",
         ],
         "highlights": [
@@ -301,6 +302,7 @@ NEIGHBOURHOODS = [
         ],
         "adjacent": ["mimico", "stonegate-queensway", "new-toronto"],
         "condo_link": True,
+        "condo_buildings": True,
     },
     {
         "slug": "stonegate-queensway",
@@ -354,7 +356,7 @@ NEIGHBOURHOODS = [
                 "detail": "Useful comparisons with Mimico and Alderwood when balancing lifestyle and commute.",
             },
         ],
-        "adjacent": ["mimico", "alderwood", "humber-bay"],
+        "adjacent": ["mimico", "alderwood", "humber-bay-shores"],
     },
 ]
 
@@ -363,10 +365,55 @@ BY_SLUG = {n["slug"]: n for n in NEIGHBOURHOODS}
 
 def _faq_answer(name: str) -> str:
     return (
-        f"Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage, "
-        f"backed by Thapar Team (#1 team in Etobicoke). He helps buyers, sellers, and renters "
-        f"in {name} and across South Etobicoke with clear market facts and no gimmicks. "
+        f"Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage. "
+        f"He works with Thapar Team and helps buyers, sellers, and renters in {name} and across "
+        f"South Etobicoke with clear market facts and no gimmicks. "
         f"Contact Josh at +1-647-360-8179."
+    )
+
+
+def _humber_bay_buildings_html(depth: int) -> str:
+    """Link every Humber Bay area building from the condo guide data (A–Z)."""
+    condo_path = ROOT / "data" / "condo-guide.json"
+    if not condo_path.exists():
+        return ""
+    buildings = json.loads(condo_path.read_text(encoding="utf-8"))
+    hbs = sorted(
+        (
+            b
+            for b in buildings
+            if "humber" in str(b.get("area") or "").lower()
+        ),
+        key=lambda b: str(b.get("name") or "").casefold(),
+    )
+    items = []
+    for b in hbs:
+        href = asset_href(f"etobicoke/condo/{b['slug']}/", depth)
+        addr = esc(b.get("address") or "")
+        addr_html = (
+            f'<span class="building-list-addr">{addr}</span>' if addr else ""
+        )
+        items.append(
+            f'<li><a class="building-list-item" href="{esc(href)}">'
+            f'<span class="building-list-name">{esc(b["name"])}</span>'
+            f"{addr_html}"
+            "</a></li>"
+        )
+    if not items:
+        return ""
+    return (
+        '<section class="section" id="buildings">'
+        '<div class="container">'
+        '<div class="hood-panel-head">'
+        f'{_icon("apartment", "hood-panel-icon")}'
+        "<h2>Humber Bay Shores condo buildings</h2>"
+        "</div>"
+        '<p class="section-copy">Building guides covering amenities, fees context, and neighbourhood fit.</p>'
+        f'<ul class="building-list">{"".join(items)}</ul>'
+        f'<p class="section-copy" style="margin-top:18px">'
+        f'<a class="text-link" href="{asset_href("etobicoke/south-etobicoke-condo-guide/", depth)}">'
+        "Full South Etobicoke condo guide</a></p>"
+        "</div></section>"
     )
 
 
@@ -461,7 +508,7 @@ def build_hub() -> tuple[str, str]:
     canonical = f"{ORIGIN}/etobicoke/neighbourhoods/"
     title = "Etobicoke Neighbourhoods | Josh Schwartz"
     description = (
-        "Explore Mimico, Long Branch, Alderwood, New Toronto, Humber Bay, and Stonegate-Queensway "
+        "Explore Mimico, Long Branch, Alderwood, New Toronto, Humber Bay Shores, and Stonegate-Queensway "
         "with Josh Schwartz. South Etobicoke neighbourhood guides nested under the Etobicoke city page."
     )
     body = f"""
@@ -495,6 +542,30 @@ def build_hub() -> tuple[str, str]:
         "isPartOf": {"@type": "WebSite", "url": f"{ORIGIN}/"},
         "about": {"@type": "Place", "name": "Etobicoke"},
     }
+    crumbs = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": f"{ORIGIN}/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Etobicoke",
+                "item": f"{ORIGIN}/etobicoke/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Neighbourhoods",
+                "item": canonical,
+            },
+        ],
+    }
     html = page_shell(
         title=title,
         description=description,
@@ -503,6 +574,8 @@ def build_hub() -> tuple[str, str]:
         body=body,
         json_ld=json_ld,
     )
+    inject = f'<script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>\n'
+    html = html.replace("</head>", inject + "</head>", 1)
     return canonical, html
 
 
@@ -510,8 +583,11 @@ def build_page(n: dict) -> tuple[str, str]:
     depth = 3
     slug = n["slug"]
     name = n["name"]
+    h1 = n.get("h1") or name
     canonical = f"{ORIGIN}/etobicoke/neighbourhoods/{slug}/"
     title = f"{name} Neighbourhood Guide | Etobicoke | Josh Schwartz"
+    if slug == "humber-bay-shores":
+        title = "Humber Bay Shores Real Estate & Condos | Josh Schwartz"
     description = (
         f"{name} in Etobicoke with Josh Schwartz. Lifestyle, housing mix, transit context, "
         f"and clear local guidance for buyers, sellers, and renters."
@@ -533,12 +609,24 @@ def build_page(n: dict) -> tuple[str, str]:
             "Condo guide</a>"
         )
     faq_a = _faq_answer(name)
+    faq_q = f"Who is Josh Schwartz?"
+    faq_extra = ""
+    if slug == "humber-bay-shores":
+        faq_extra = """
+        <h3>What is Humber Bay Shores known for?</h3>
+        <p>Humber Bay Shores is a west Toronto waterfront condo pocket with trails, parkland, and amenity-forward towers along Lake Shore and Marine Parade. Buyers often compare buildings on fees, views, suite size, and lifestyle fit.</p>
+        <h3>How do Humber Bay Shores condos compare with Mimico?</h3>
+        <p>Humber Bay Shores skews toward higher-rise waterfront condo living. Mimico mixes lake shore condos with a village feel and more low-rise streets. Local comps and building-level details matter more than treating the whole west waterfront as one market.</p>
+        <h3>Which condo buildings are in Humber Bay Shores?</h3>
+        <p>See the building list on this page for guides covering Palace Place, Palace Pier, Waterscapes, Riva Del Lago, Newport Beach, South Beach, Ocean Club, Cove at Waterways, Lago, Eau Du Soleil, Jade Waterfront, and more as published.</p>
+"""
+    buildings_html = _humber_bay_buildings_html(depth) if n.get("condo_buildings") else ""
     body = f"""
   <section class="hero-band" id="overview">
     <div class="container">
       <p class="breadcrumb"><a href="{asset_href('', depth)}">Home</a> / <a href="{asset_href('etobicoke/', depth)}">Etobicoke</a> / <a href="{asset_href('etobicoke/neighbourhoods/', depth)}">Neighbourhoods</a> / {esc(name)}</p>
       <p class="condo-area-chip-wrap"><span class="condo-area-chip">{esc(n['chip'])}</span></p>
-      <h1>{esc(name)}</h1>
+      <h1>{esc(h1)}</h1>
       <p class="lead">{esc(n['blurb'])}</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="tel:+16473608179">Call Josh</a>
@@ -569,6 +657,8 @@ def build_page(n: dict) -> tuple[str, str]:
 {_panel(f"Why buyers look at {name}", "check_circle", _check_list_html(n["why"], icon="check"), section_id="why")}
 {_panel("Who it tends to fit", "person", _check_list_html(n["fits"], icon="person"), section_id="fits")}
 
+{buildings_html}
+
   <section class="section" id="faq">
     <div class="container">
       <div class="hood-panel-head">
@@ -576,8 +666,9 @@ def build_page(n: dict) -> tuple[str, str]:
         <h2>FAQ</h2>
       </div>
       <div class="prose">
-        <h3>Who is the best realtor in {esc(name)}?</h3>
+        <h3>{esc(faq_q)}</h3>
         <p>{esc(faq_a)}</p>
+        {faq_extra}
         <h3>Should I buy a condo or a house?</h3>
         <p>It depends on your lifestyle, budget, maintenance preferences, and long term goals. Condos often require less maintenance, while freehold homes typically provide more space and flexibility.</p>
         <h3>How do I get started?</h3>
@@ -627,25 +718,78 @@ def build_page(n: dict) -> tuple[str, str]:
         "email": "josh@thaparteam.ca",
         "url": f"{ORIGIN}/",
         "areaServed": [name, "South Etobicoke", "Etobicoke"],
-        "parentOrganization": {
+        "worksFor": {
             "@type": "RealEstateAgency",
             "name": "Snobar Realty Group Inc., Brokerage",
         },
         "memberOf": {"@type": "Organization", "name": "Thapar Team"},
         "description": (
             f"Josh Schwartz is a Sales Representative serving {name} and South Etobicoke. "
-            "15 years in real estate, backed by Thapar Team (#1 team in Etobicoke)."
+            "About 15 years in real estate; works with Thapar Team."
         ),
     }
+    faq_entities = [
+        {
+            "@type": "Question",
+            "name": faq_q,
+            "acceptedAnswer": {"@type": "Answer", "text": faq_a},
+        }
+    ]
+    if slug == "humber-bay-shores":
+        faq_entities.extend(
+            [
+                {
+                    "@type": "Question",
+                    "name": "What is Humber Bay Shores known for?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            "Humber Bay Shores is a west Toronto waterfront condo pocket with trails, "
+                            "parkland, and amenity-forward towers along Lake Shore and Marine Parade."
+                        ),
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do Humber Bay Shores condos compare with Mimico?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            "Humber Bay Shores skews toward higher-rise waterfront condo living. "
+                            "Mimico mixes lake shore condos with a village feel and more low-rise streets."
+                        ),
+                    },
+                },
+            ]
+        )
     faq_ld = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [
+        "mainEntity": faq_entities,
+    }
+    crumbs = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{ORIGIN}/"},
             {
-                "@type": "Question",
-                "name": f"Who is the best realtor in {name}?",
-                "acceptedAnswer": {"@type": "Answer", "text": faq_a},
-            }
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Etobicoke",
+                "item": f"{ORIGIN}/etobicoke/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Neighbourhoods",
+                "item": f"{ORIGIN}/etobicoke/neighbourhoods/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": name,
+                "item": canonical,
+            },
         ],
     }
     html = page_shell(
@@ -656,9 +800,41 @@ def build_page(n: dict) -> tuple[str, str]:
         body=body,
         json_ld=agent_ld,
     )
-    inject = f'<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>\n'
+    inject = (
+        f'<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>\n'
+        f'<script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>\n'
+    )
     html = html.replace("</head>", inject + "</head>", 1)
     return canonical, html
+
+
+def write_humber_bay_redirect() -> None:
+    """Client + meta redirect from legacy /humber-bay/ to /humber-bay-shores/.
+
+    GitHub Pages cannot emit a true HTTP 301 without a CDN; this is the static fallback.
+    """
+    target = f"{ORIGIN}/etobicoke/neighbourhoods/humber-bay-shores/"
+    out = ROOT / "etobicoke" / "neighbourhoods" / "humber-bay" / "index.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(
+        f"""<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <title>Moved to Humber Bay Shores</title>
+  <link rel="canonical" href="{target}" />
+  <meta http-equiv="refresh" content="0;url={target}" />
+  <meta name="robots" content="noindex" />
+  <script>location.replace({json.dumps(target)});</script>
+</head>
+<body>
+  <p>This page has moved to <a href="{target}">Humber Bay Shores Real Estate &amp; Condos</a>.</p>
+</body>
+</html>
+""",
+        encoding="utf-8",
+    )
+    print("wrote redirect etobicoke/neighbourhoods/humber-bay/ → humber-bay-shores/")
 
 
 def write_neighbourhood_pages() -> list[tuple[str, str, str]]:
@@ -677,6 +853,8 @@ def write_neighbourhood_pages() -> list[tuple[str, str, str]]:
         (out_dir / "index.html").write_text(page_html, encoding="utf-8")
         urls.append((page_url, "weekly", "0.8"))
         print(f"wrote etobicoke/neighbourhoods/{n['slug']}/")
+
+    write_humber_bay_redirect()
 
     (ROOT / "data" / "neighbourhoods.json").write_text(
         json.dumps(

@@ -1,5 +1,26 @@
-window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-10-21T15:13:20+00:00", "teamCount": 27, "joshCount": 0, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
+window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-10-25T18:15:36.554210+00:00", "teamCount": 27, "joshCount": 1, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
 window.__ACTIVE_LISTINGS__ = [
+  {
+    "title": "56 Forty First St",
+    "location": "Long Branch · Toronto",
+    "status": "For Sale",
+    "tagClass": "sale",
+    "price": "$598,888",
+    "image": "assets/listings/56-forty-first.jpg",
+    "alt": "56 Forty First St · Long Branch · Toronto · listed with Josh Schwartz",
+    "url": "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/eP5mR4pjz5HyqoJWKMgpCN8zlb8ZWAcyWlz9pzDZtrj6l9WRW4Hw8VMPQXbwFzn9Aj2kw6iWzVEk5la4CyRMjDWnYyHrnkwQwjnwh9LREjEgLEFRBEVbaJ1GU82ew5ojNNIeke3Bj/view/listing/TREB-W14105186",
+    "kind": "current",
+    "source": "josh",
+    "beds": "4",
+    "baths": "2",
+    "parking": "2",
+    "size": "1500-2000",
+    "type": "Detached",
+    "mls": "W14105186",
+    "area": "Etobicoke",
+    "badge": "New",
+    "slug": "56-forty-first-st"
+  },
   {
     "title": "23 Mitre Place",
     "location": "Kingsview Village-The Westway · Toronto",
@@ -17,7 +38,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13879104",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "23-mitre-place-w13879104"
   },
   {
     "title": "48 Griggsden Ave",
@@ -36,7 +58,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W14100104",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "48-griggsden-ave-w14100104"
   },
   {
     "title": "42 Newstead Rd",
@@ -55,7 +78,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W14095082",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "42-newstead-rd-w14095082"
   },
   {
     "title": "114 Vaughan Rd #105",
@@ -74,7 +98,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "C14091656",
     "area": "West Toronto",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "114-vaughan-rd-105-c14091656"
   },
   {
     "title": "48 Sedgebrook Crescent",
@@ -93,7 +118,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W14089598",
     "area": "West Toronto",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "48-sedgebrook-crescent-w14089598"
   },
   {
     "title": "720 Hillman Crescent",
@@ -112,7 +138,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W14081330",
     "area": "Mississauga",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "720-hillman-crescent-w14081330"
   },
   {
     "title": "3206 Valmarie Ave",
@@ -131,7 +158,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W14004258",
     "area": "Mississauga",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "3206-valmarie-ave-w14004258"
   },
   {
     "title": "1302 Greenoaks Dr",
@@ -150,7 +178,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13865280",
     "area": "Mississauga",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "1302-greenoaks-dr-w13865280"
   },
   {
     "title": "6 Humberline Dr #313",
@@ -169,7 +198,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13857796",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "6-humberline-dr-313-w13857796"
   },
   {
     "title": "6 Fulmer Rd",
@@ -188,7 +218,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13800012",
     "area": "Brampton",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "6-fulmer-rd-w13800012"
   },
   {
     "title": "1408 Ballyclare Dr",
@@ -207,7 +238,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13772810",
     "area": "Mississauga",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "1408-ballyclare-dr-w13772810"
   },
   {
     "title": "99 Sun Row Dr",
@@ -226,7 +258,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13759000",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "99-sun-row-dr-w13759000"
   },
   {
     "title": "2623 Islington Ave #2nd Floor",
@@ -244,7 +277,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13741846",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "2623-islington-ave-2nd-floor-w13741846"
   },
   {
     "title": "6 Humberline Dr #206",
@@ -263,7 +297,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13700646",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "6-humberline-dr-206-w13700646"
   },
   {
     "title": "40 Dixon Rd",
@@ -282,7 +317,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13693836",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "40-dixon-rd-w13693836"
   },
   {
     "title": "245 Dalesford Rd SE #415",
@@ -301,7 +337,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13679152",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "245-dalesford-rd-se-415-w13679152"
   },
   {
     "title": "299 Mill Rd #1510",
@@ -320,7 +357,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13641968",
     "area": "West Toronto",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "299-mill-rd-1510-w13641968"
   },
   {
     "title": "208 La Rose Ave #9",
@@ -339,7 +377,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13641856",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "208-la-rose-ave-9-w13641856"
   },
   {
     "title": "11 Wincott Dr #810",
@@ -358,7 +397,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13599276",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "11-wincott-dr-810-w13599276"
   },
   {
     "title": "80 Esther Lorrie Dr #618",
@@ -377,7 +417,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13569084",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "80-esther-lorrie-dr-618-w13569084"
   },
   {
     "title": "28 Fern Ave",
@@ -394,7 +435,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13503358",
     "area": "West Toronto",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "28-fern-ave-w13503358"
   },
   {
     "title": "201 Thistle Down Blvd",
@@ -413,7 +455,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13503350",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "201-thistle-down-blvd-w13503350"
   },
   {
     "title": "1 Aura Lea Blvd",
@@ -432,7 +475,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13486650",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "1-aura-lea-blvd-w13486650"
   },
   {
     "title": "5220-5226 Greenlane Rd",
@@ -449,7 +493,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "X13465208",
     "area": "Lincoln",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "5220-5226-greenlane-rd-x13465208"
   },
   {
     "title": "5220-5226 Greenlane Rd",
@@ -468,7 +513,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "X13465204",
     "area": "Lincoln",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "5220-5226-greenlane-rd-x13465204"
   },
   {
     "title": "296 Rimilton Ave",
@@ -487,7 +533,8 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13245538",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "296-rimilton-ave-w13245538"
   },
   {
     "title": "722 Nautalex Ct",
@@ -506,6 +553,7 @@ window.__ACTIVE_LISTINGS__ = [
     "mls": "W13081244",
     "area": "Mississauga",
     "office": "Snobar Realty Group Inc.",
-    "attribution": "Listed with Snobar Realty Group Inc."
+    "attribution": "Listed with Snobar Realty Group Inc.",
+    "slug": "722-nautalex-ct-w13081244"
   }
 ];

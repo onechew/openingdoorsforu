@@ -1,0 +1,134 @@
+{
+  "_comment": "Server-rendered client reviews. Do not invent reviews or ratings. Set aggregate.verified to true only after confirming counts. Add new entries with status published.",
+  "aggregate": {
+    "ratingValue": "5.0",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "12",
+    "reviewCount": "12",
+    "verified": true,
+    "_note": "Derived from published review.rating fields in this file. Re-verify before advertising rankings."
+  },
+  "reviews": [
+    {
+      "id": "review-aaron-damaris-michael",
+      "status": "published",
+      "name": "Aaron, Damaris & Michael",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "1",
+      "text": "Josh made the somewhat daunting home buying experience comforting at every turn. From setting up showings at a moments notice, at locations across the city, to drawing up a successful hardball negotiation strategy that wound up landing us our dream home. Our growing family, which includes our 6mo old son, owe a lot of future memories in our new forever home to Josh's hard work, careful attention, and outstanding industry expertise."
+    },
+    {
+      "id": "review-keswick",
+      "status": "published",
+      "name": "Keswick Clients",
+      "role": "",
+      "address": "Keswick, ON",
+      "rating": 5,
+      "tone": "2",
+      "text": "Josh has been so patient and helpful during our search for our first home. He stuck with us while we were looking into renting, buying, renting then finally making the big move to buy! He always jumped at the opportunity to meet us at showings all around the GTA and beyond always with a great attitude and some good jokes to help ease the stress! Thank you Josh we are so happy we found our first home with you!"
+    },
+    {
+      "id": "review-roz",
+      "status": "published",
+      "name": "Roz York Brodsky",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "1",
+      "text": "I was impressed with every aspect of dealing with Josh during a recent real estate transaction. From the time he listed our property to the time he sold it for over the asking price to his post sale service he has been a consummate professional and a charming and thoughtful man. Josh is a hard worker who truly does the utmost for his clients and I recommend him highly."
+    },
+    {
+      "id": "review-jeffrey",
+      "status": "published",
+      "name": "Jeffrey Carl McCart",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "2",
+      "text": "One of the best! Josh is always my first call when I'm thinking real estate."
+    },
+    {
+      "id": "review-rukie",
+      "status": "published",
+      "name": "Rukie Liyanage",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "3",
+      "text": "Josh was an absolute pleasure to deal with, and was tremendously patient when it came to finding the right place for me! He really goes above and beyond!"
+    },
+    {
+      "id": "review-aly",
+      "status": "published",
+      "name": "Aly Somani",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "4",
+      "text": "I would definitely recommend Josh as a trusted and intelligent real estate agent."
+    },
+    {
+      "id": "review-ainsley",
+      "status": "published",
+      "name": "Ainsley Bainsley",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "5",
+      "text": "Josh is a dedicated real estate professional who goes above and beyond for all his clients. He is extremely thoughtful, patient, and supportive in his approach to finding you the perfect home. I would absolutely recommend him to any of my friends or family."
+    },
+    {
+      "id": "review-rick-kathi",
+      "status": "published",
+      "name": "Rick & Kathi",
+      "role": "",
+      "address": "124 McCauley Court, Newmarket",
+      "rating": 5,
+      "tone": "1",
+      "text": "Thank You Josh! You did a fantastic job! Even the Co-Op Agent said to us, \"you have a great Agent.\" She is right! We are amazed at your great communication and the pace you work at. Please use us a reference any time."
+    },
+    {
+      "id": "review-dean-linda",
+      "status": "published",
+      "name": "Dean & Linda",
+      "role": "",
+      "address": "125 McCauley Court, Newmarket",
+      "rating": 5,
+      "tone": "2",
+      "text": "Josh worked tirelessly to sell our family home in a shifting market. He was quick to change strategies when we faced hurdles and communicated with us every step of the way. His top priority was getting us the most amount of money for our home, and he did that and more. From start to finish, we are very glad we chose Josh as our Realtor."
+    },
+    {
+      "id": "review-greg",
+      "status": "published",
+      "name": "Greg Monroe",
+      "role": "NBA · Toronto Raptors",
+      "address": "St. Regis, Toronto",
+      "rating": 5,
+      "tone": "3",
+      "text": "Josh's knowledge and experience in the Toronto real estate scene helped me identify and secure the best solution for my needs during the 2018–19 season."
+    },
+    {
+      "id": "review-susan",
+      "status": "published",
+      "name": "Susan",
+      "role": "",
+      "address": "128 McCauley Crt, Newmarket",
+      "rating": 5,
+      "tone": "5",
+      "text": "My neighbour had a very successful experience selling their home with Josh as realtor. They advised me to contact Josh if I was ever considering selling my home of 30 years. I contacted Josh and met with him numerous times during the sales process. He made helpful suggestions and adjusted the plan during the very volatile market. My home sold for over asking and I am very grateful for Josh's guidance. I would highly recommend Josh Schwartz for any real estate transaction."
+    },
+    {
+      "id": "review-don-cathy",
+      "status": "published",
+      "name": "Don & Cathy",
+      "role": "",
+      "address": "298 Plymouth Tr, Newmarket",
+      "rating": 5,
+      "tone": "1",
+      "text": "Josh impressed us from the start. We have sold a number of houses and compared to other agents, his marketing knowledge, materials and strategies to sell our house are far superior, from the quality of his brochures and the wonderful work he did in showcasing our house. It took us some time to realize we weren't going to get the price we wanted for our house, but Josh was patient, very positive and professional with us during the process. We are still working with Josh to find a property to build on. Josh's hard work and commitment is impressive, but he is also fun to work with. We give Josh our highest recommendation."
+    }
+  ]
+}
