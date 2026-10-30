@@ -1,5 +1,26 @@
-window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-10-29T02:29:22+00:00", "teamCount": 27, "joshCount": 0, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
+window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-10-30T10:58:50+00:00", "teamCount": 27, "joshCount": 1, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
 window.__ACTIVE_LISTINGS__ = [
+  {
+    "title": "56 Forty First St",
+    "location": "Long Branch · Toronto",
+    "status": "For Sale",
+    "tagClass": "sale",
+    "price": "$598,888",
+    "image": "assets/listings/56-forty-first.jpg",
+    "alt": "56 Forty First St · Long Branch · Toronto · listed with Josh Schwartz",
+    "url": "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/eP5mR4pjz5HyqoJWKMgpCN8zlb8ZWAcyWlz9pzDZtrj6l9WRW4Hw8VMPQXbwFzn9Aj2kw6iWzVEk5la4CyRMjDWnYyHrnkwQwjnwh9LREjEgLEFRBEVbaJ1GU82ew5ojNNIeke3Bj/view/listing/TREB-W14105186",
+    "kind": "current",
+    "source": "josh",
+    "beds": "4",
+    "baths": "2",
+    "parking": "2",
+    "size": "1500-2000 sqft",
+    "type": "Detached",
+    "mls": "W14105186",
+    "area": "Etobicoke",
+    "badge": "New",
+    "slug": "56-forty-first-st"
+  },
   {
     "title": "23 Mitre Place",
     "location": "Kingsview Village-The Westway · Toronto",
