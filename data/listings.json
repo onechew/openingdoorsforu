@@ -1,28 +1,44 @@
 {
-  "current": [
+  "current": [],
+  "sold": [
     {
       "title": "56 Forty First St",
       "location": "Long Branch · Toronto",
       "area": "Etobicoke",
-      "status": "For Sale",
-      "tagClass": "sale",
-      "badge": "New",
-      "price": "$598,888",
-      "mls": "W14105186",
+      "status": "Sold",
+      "tagClass": "sold",
+      "price": "Sold",
+      "date": "2026-10-31",
+      "image": "assets/listings/56-forty-first.jpg",
+      "alt": "56 Forty First St · Long Branch · Toronto · sold with Josh Schwartz",
+      "slug": "56-forty-first-st",
+      "kind": "past",
       "type": "Detached",
       "beds": "4",
       "baths": "2",
       "parking": "2",
       "size": "1500-2000 sqft",
-      "image": "assets/listings/56-forty-first.jpg",
-      "alt": "56 Forty First St · Long Branch · Toronto · listed with Josh Schwartz",
-      "url": "https://app.realmmlp.ca/shared/portal/71O9ZDOJw5fYNReL4BA2/eP5mR4pjz5HyqoJWKMgpCN8zlb8ZWAcyWlz9pzDZtrj6l9WRW4Hw8VMPQXbwFzn9Aj2kw6iWzVEk5la4CyRMjDWnYyHrnkwQwjnwh9LREjEgLEFRBEVbaJ1GU82ew5ojNNIeke3Bj/view/listing/TREB-W14105186",
-      "slug": "56-forty-first-st",
-      "kind": "current",
-      "source": "josh"
-    }
-  ],
-  "sold": [
+      "mls": "W14105186"
+    },
+    {
+      "title": "10 Creekbank Rd, Main",
+      "location": "Rustic · Toronto",
+      "area": "North York",
+      "status": "Leased",
+      "tagClass": "lease",
+      "price": "Leased",
+      "date": "2026-10-31",
+      "image": "assets/past/10-creekbank-main.jpg",
+      "alt": "10 Creekbank Rd, Main · Rustic · leased with Josh Schwartz",
+      "slug": "10-creekbank-rd-main",
+      "kind": "past",
+      "type": "Semi-Detached",
+      "beds": "2",
+      "baths": "3",
+      "parking": "1",
+      "size": "1100-1500 sqft",
+      "mls": "W13804980"
+    },
     {
       "title": "150 Portland St #3",
       "location": "Mimico · Toronto",
