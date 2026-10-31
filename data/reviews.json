@@ -4,12 +4,123 @@
     "ratingValue": "5.0",
     "bestRating": "5",
     "worstRating": "1",
-    "ratingCount": "12",
-    "reviewCount": "12",
+    "ratingCount": "22",
+    "reviewCount": "22",
     "verified": true,
     "_note": "Derived from published review.rating fields in this file. Re-verify before advertising rankings."
   },
   "reviews": [
+    {
+      "id": "review-google-josh-j-rafih",
+      "status": "published",
+      "name": "J Rafih",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "1",
+      "source": "Google · Josh Schwartz Etobicoke Realtor",
+      "text": "Josh has been nothing short of WONDERFUL! Toronto market is a difficult task to tackle but has been very easy to maneuver through with the help of Josh! We were running short on time and had little to no experience with the Toronto market, coming from Alberta. Josh helped us secure a beautiful walk out basement with beautiful interior design, in a great location and for an AMAZING price. Could not be happier with our outcome. Thank you so much Josh!"
+    },
+    {
+      "id": "review-google-josh-luba-gdan",
+      "status": "published",
+      "name": "Luba Gdan",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "2",
+      "source": "Google · Josh Schwartz Etobicoke Realtor",
+      "text": "Josh did everything right to sell my house when the market was shifting and prices were going down. It was stressful but his advice and professionalism made me feel like I was making the best decision for my family. From start to finish, I’m very glad I chose Josh as my Realtor, and won’t hesitate to use him again!"
+    },
+    {
+      "id": "review-google-josh-s-l",
+      "status": "published",
+      "name": "S L",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "3",
+      "source": "Google · Josh Schwartz Etobicoke Realtor",
+      "text": "Best real estate agent around! Goes above and beyond to help his clients in every aspect. Helped us get our dream home for a great price during a crazy housing market and got us well over asking on the sale of our house. Surrounded by a great team, amazing marketing, unmatched knowledge and honesty, always available and ready to answer any questions. Could not be happier with Josh and his amazing work. We owe ya!"
+    },
+    {
+      "id": "review-google-josh-h-r",
+      "status": "published",
+      "name": "h r",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "4",
+      "source": "Google · Josh Schwartz Etobicoke Realtor",
+      "text": "Thank you so so so much Josh for all your help! You made the process of moving across the country so easy and answered literally every single question. As students, we were lost and STRUGGLING to land a place before classes start, but Josh got the job done so quick! This is a huge stress relief, and I couldn’t be happier!"
+    },
+    {
+      "id": "review-google-mitch-ranft",
+      "status": "published",
+      "name": "Mitch Ranft",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "1",
+      "source": "Google · Thapar Team",
+      "text": "When I met Josh Schwartz with the Monica Thapar Team it was clear he was the right choice! Josh’s market analysis was thorough, and the resulting listing strategy was spot on. Everything was handled so professionally; the amazing social media reach, the photography, prepping for listing and communication. Josh was a pleasure to work with and provided stellar support throughout the process; he was quick to respond to any questions/concerns and Josh didn’t hesitate to accommodate my request to be on-site to review offers. Josh was skillful in negotiating and - end result -I had multiple offers and sold for well over asking! I highly recommend Josh Schwartz with the Monica Thapar Team!"
+    },
+    {
+      "id": "review-google-darren-gobin",
+      "status": "published",
+      "name": "Darren Gobin",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "2",
+      "source": "Google · Thapar Team",
+      "text": "We had the pleasure of working with Josh Schwartz of Team Thapar and we couldn't be happier with the experience. Josh's knowledge of the market and dedication to finding the perfect home for us were evident from our very first meeting. He was always available to answer our questions, address any concerns, and provide expert guidance throughout the entire process. Josh's professionalism, integrity, and genuine care for his clients truly set him apart. We highly recommend Josh to anyone in need of a top-notch realtor."
+    },
+    {
+      "id": "review-google-bryan-mills",
+      "status": "published",
+      "name": "Bryan Mills",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "3",
+      "source": "Google · Thapar Team",
+      "text": "Josh from The Thapar Team helped me and my friend find a place in the east Toronto area. It was great to work with him; he was super flexible with timing and willing to put in work at all hours to close the deal. He was friendly and straightforward, so we always felt like we were getting all the facts and could trust him. All in all great experience."
+    },
+    {
+      "id": "review-google-carine-rozen",
+      "status": "published",
+      "name": "Carine Rozen",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "4",
+      "source": "Google · Thapar Team",
+      "text": "Working with Josh Schwartz from the Thapar Team totally exceeded my expectations! His positive attitude, professionalism, responsiveness and wealth of experience helped me secure wonderful new tenants for my rental property in Humber Bay.  Highly recommended to anyone looking to buy/sell/lease a property!"
+    },
+    {
+      "id": "review-google-dana-blufarb",
+      "status": "published",
+      "name": "Dana Blufarb",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "5",
+      "source": "Google · Thapar Team",
+      "text": "I needed a place to live and with the assistance and guidance from Josh Schwartz at Team Thapar. If you need to move your real estate Josh is the man he has a keen understanding of the market and also an ability to move properties quickly!"
+    },
+    {
+      "id": "review-facebook-josh-humberbay",
+      "status": "published",
+      "name": "Josh Humberbay",
+      "role": "",
+      "address": "",
+      "rating": 5,
+      "tone": "2",
+      "source": "Facebook · Opening Doors For U",
+      "text": "Best realtor in Toronto, no question. If you want someone who actually knows what they’re doing, this is the one",
+      "date": "2025-11-01"
+    },
     {
       "id": "review-aaron-damaris-michael",
       "status": "published",
@@ -48,7 +159,8 @@
       "address": "",
       "rating": 5,
       "tone": "2",
-      "text": "One of the best! Josh is always my first call when I'm thinking real estate."
+      "text": "One of the best! Josh is always my first call when I'm thinking real estate.",
+      "source": "Facebook · Opening Doors For U"
     },
     {
       "id": "review-rukie",
@@ -58,7 +170,8 @@
       "address": "",
       "rating": 5,
       "tone": "3",
-      "text": "Josh was an absolute pleasure to deal with, and was tremendously patient when it came to finding the right place for me! He really goes above and beyond!"
+      "text": "Josh was an absolute pleasure to deal with, and was tremendously patient when it came to finding the right place for me! He really goes above and beyond!",
+      "source": "Facebook · Opening Doors For U"
     },
     {
       "id": "review-aly",

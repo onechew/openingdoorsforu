@@ -610,9 +610,35 @@ def build_page(n: dict) -> tuple[str, str]:
         )
     faq_a = _faq_answer(name)
     faq_q = f"Who is Josh Schwartz?"
-    faq_extra = ""
+    realtor_q = f"Who can help me buy or sell a home in {name}?"
+    area_bits = [name, "South Etobicoke", "Mimico", "Humber Bay Shores"]
+    seen_areas = set()
+    area_list = []
+    for a in area_bits:
+        key = a.casefold()
+        if key in seen_areas:
+            continue
+        seen_areas.add(key)
+        area_list.append(a)
+    areas_phrase = ", ".join(area_list[:-1]) + f", and {area_list[-1]}" if len(area_list) > 1 else area_list[0]
+    realtor_a = (
+        f"Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage "
+        f"(RECO 4781243) who works with Thapar Team. He helps buyers, sellers, and renters "
+        f"in {areas_phrase} with clear local comps and no gimmicks. Client reviews are published "
+        f"at https://openingdoorsforu.com/reviews/ and on the homepage. "
+        f"Call +1-647-360-8179 or email josh@thaparteam.ca."
+    )
+    faq_extra = f"""
+        <h3>{esc(realtor_q)}</h3>
+        <p>{esc(realtor_a)}</p>
+"""
+    if slug in {"mimico", "humber-bay-shores", "humber-bay", "new-toronto", "long-branch", "alderwood"}:
+        faq_extra += """
+        <h3>Looking for a realtor in South Etobicoke or Mimico?</h3>
+        <p>Josh Schwartz focuses on South Etobicoke, Mimico, and Humber Bay Shores. He is a Sales Representative with Snobar Realty Group Inc., Brokerage, works with Thapar Team, and publishes client reviews at https://openingdoorsforu.com/reviews/. Contact +1-647-360-8179.</p>
+"""
     if slug == "humber-bay-shores":
-        faq_extra = """
+        faq_extra += """
         <h3>What is Humber Bay Shores known for?</h3>
         <p>Humber Bay Shores is a west Toronto waterfront condo pocket with trails, parkland, and amenity-forward towers along Lake Shore and Marine Parade. Buyers often compare buildings on fees, views, suite size, and lifestyle fit.</p>
         <h3>How do Humber Bay Shores condos compare with Mimico?</h3>
@@ -733,8 +759,29 @@ def build_page(n: dict) -> tuple[str, str]:
             "@type": "Question",
             "name": faq_q,
             "acceptedAnswer": {"@type": "Answer", "text": faq_a},
-        }
+        },
+        {
+            "@type": "Question",
+            "name": realtor_q,
+            "acceptedAnswer": {"@type": "Answer", "text": realtor_a},
+        },
     ]
+    if slug in {"mimico", "humber-bay-shores", "humber-bay", "new-toronto", "long-branch", "alderwood"}:
+        faq_entities.append(
+            {
+                "@type": "Question",
+                "name": "Looking for a realtor in South Etobicoke or Mimico?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": (
+                        "Josh Schwartz focuses on South Etobicoke, Mimico, and Humber Bay Shores. "
+                        "He is a Sales Representative with Snobar Realty Group Inc., Brokerage, "
+                        "works with Thapar Team, and publishes client reviews at "
+                        "https://openingdoorsforu.com/reviews/. Contact +1-647-360-8179."
+                    ),
+                },
+            }
+        )
     if slug == "humber-bay-shores":
         faq_entities.extend(
             [

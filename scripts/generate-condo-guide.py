@@ -149,7 +149,7 @@ def page_shell(
           </button>
           <div class="nav-drop-menu" id="navAboutMenu" role="menu">
             <a href="{prefix}#about" role="menuitem">About</a>
-            <a href="{prefix}#reviews" role="menuitem">Reviews</a>
+            <a href="{prefix}reviews/" role="menuitem">Reviews</a>
             <a href="{prefix}#reels" role="menuitem">Latest</a>
             <a href="{prefix}#faq" role="menuitem">FAQ</a>
           </div>

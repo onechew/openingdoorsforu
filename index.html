@@ -495,6 +495,91 @@
       "@type": "Review",
       "author": {
         "@type": "Person",
+        "name": "Mitch Ranft"
+      },
+      "reviewBody": "When I met Josh Schwartz with the Monica Thapar Team it was clear he was the right choice! Josh’s market analysis was thorough, and the resulting listing strategy was spot on. Everything was handled so professionally; the amazing social media reach, the photography, prepping for listing and communication. Josh was a pleasure to work with and provided stellar support throughout the process; he was quick to respond to any questions/concerns and Josh didn’t hesitate to accommodate my request to be on-site to review offers. Josh was skillful in negotiating and - end result -I had multiple offers and sold for well over asking! I highly recommend Josh Schwartz with the Monica Thapar Team!",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "itemReviewed": {
+        "@id": "https://openingdoorsforu.com/#agent"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Darren Gobin"
+      },
+      "reviewBody": "We had the pleasure of working with Josh Schwartz of Team Thapar and we couldn't be happier with the experience. Josh's knowledge of the market and dedication to finding the perfect home for us were evident from our very first meeting. He was always available to answer our questions, address any concerns, and provide expert guidance throughout the entire process. Josh's professionalism, integrity, and genuine care for his clients truly set him apart. We highly recommend Josh to anyone in need of a top-notch realtor.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "itemReviewed": {
+        "@id": "https://openingdoorsforu.com/#agent"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Mills"
+      },
+      "reviewBody": "Josh from The Thapar Team helped me and my friend find a place in the east Toronto area. It was great to work with him; he was super flexible with timing and willing to put in work at all hours to close the deal. He was friendly and straightforward, so we always felt like we were getting all the facts and could trust him. All in all great experience.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "itemReviewed": {
+        "@id": "https://openingdoorsforu.com/#agent"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Carine Rozen"
+      },
+      "reviewBody": "Working with Josh Schwartz from the Thapar Team totally exceeded my expectations! His positive attitude, professionalism, responsiveness and wealth of experience helped me secure wonderful new tenants for my rental property in Humber Bay.  Highly recommended to anyone looking to buy/sell/lease a property!",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "itemReviewed": {
+        "@id": "https://openingdoorsforu.com/#agent"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Dana Blufarb"
+      },
+      "reviewBody": "I needed a place to live and with the assistance and guidance from Josh Schwartz at Team Thapar. If you need to move your real estate Josh is the man he has a keen understanding of the market and also an ability to move properties quickly!",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "itemReviewed": {
+        "@id": "https://openingdoorsforu.com/#agent"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
         "name": "Aaron, Damaris & Michael"
       },
       "reviewBody": "Josh made the somewhat daunting home buying experience comforting at every turn. From setting up showings at a moments notice, at locations across the city, to drawing up a successful hardball negotiation strategy that wound up landing us our dream home. Our growing family, which includes our 6mo old son, owe a lot of future memories in our new forever home to Josh's hard work, careful attention, and outstanding industry expertise.",
@@ -701,8 +786,8 @@
     "ratingValue": "5.0",
     "bestRating": "5",
     "worstRating": "1",
-    "ratingCount": "12",
-    "reviewCount": "12"
+    "ratingCount": "22",
+    "reviewCount": "22"
   }
 }
   </script>
@@ -3012,7 +3097,6 @@
     .reviews-more-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       color: var(--ink);
       font-size: 14px;
       font-weight: 700;
@@ -3022,31 +3106,16 @@
       transition: opacity 160ms ease, color 160ms ease;
     }
 
-    .reviews-more-icon {
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .reviews-more-ext {
-      font-size: 13px;
-      opacity: 0.55;
-      transition: transform 160ms ease, opacity 160ms ease;
-    }
-
     .reviews-more-link:hover,
     .reviews-more-link:focus-visible {
       opacity: 1;
-      color: #1a73e8;
-    }
-
-    .reviews-more-link:hover .reviews-more-ext,
-    .reviews-more-link:focus-visible .reviews-more-ext {
-      opacity: 1;
-      transform: translate(1px, -1px);
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .reviews-more-link:focus-visible {
-      outline: 2px solid #1a73e8;
+      outline: 2px solid var(--ink);
       outline-offset: 4px;
       border-radius: 4px;
     }
@@ -3231,6 +3300,35 @@
       font-weight: 500;
       white-space: nowrap;
       padding-top: 2px;
+    }
+
+
+    .review-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+
+    .review-source .review-google-g {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .review-card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .review-card-link:focus-visible .review-card {
+      outline: 2px solid #1a73e8;
+      outline-offset: 2px;
     }
 
     .review-address {
@@ -7369,7 +7467,7 @@
           </button>
           <div class="nav-drop-menu" id="navAboutMenu" role="menu">
             <a href="/about/" role="menuitem">About</a>
-            <a href="#reviews" role="menuitem">Reviews</a>
+            <a href="/reviews/" role="menuitem">Reviews</a>
             <a href="#reels" role="menuitem">Latest</a>
             <a href="#faq" role="menuitem">FAQ</a>
           </div>
@@ -7807,13 +7905,172 @@
     </section>
 
     <section class="reviews" id="reviews" aria-labelledby="reviews-heading">
-      <h2 id="reviews-heading" class="visually-hidden">Client reviews for Josh Schwartz, Etobicoke and Toronto realtor</h2>
+      <h2 id="reviews-heading" class="visually-hidden">Reviews for Josh Schwartz, Etobicoke and Toronto realtor</h2>
       <div
         class="reviews-marquee"
         id="reviewsMarquee"
         tabindex="0"
       >
         <div class="reviews-track" id="reviewsTrack">
+        <article class="review-card" data-review-id="review-google-josh-j-rafih">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="1" aria-hidden="true">J</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">J Rafih</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Josh</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Josh has been nothing short of WONDERFUL! Toronto market is a difficult task to tackle but has been very easy to maneuver through with the help of Josh! We were running short on time and had little to no experience with the Toronto market, coming from Alberta. Josh helped us secure a beautiful walk out basement with beautiful interior design, in a great location and for an AMAZING price. Could not be happier with our outcome. Thank you so much Josh!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-josh-luba-gdan">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="2" aria-hidden="true">L</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Luba Gdan</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Josh</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Josh did everything right to sell my house when the market was shifting and prices were going down. It was stressful but his advice and professionalism made me feel like I was making the best decision for my family. From start to finish, I’m very glad I chose Josh as my Realtor, and won’t hesitate to use him again!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-josh-s-l">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="3" aria-hidden="true">S</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">S L</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Josh</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Best real estate agent around! Goes above and beyond to help his clients in every aspect. Helped us get our dream home for a great price during a crazy housing market and got us well over asking on the sale of our house. Surrounded by a great team, amazing marketing, unmatched knowledge and honesty, always available and ready to answer any questions. Could not be happier with Josh and his amazing work. We owe ya!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-josh-h-r">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="4" aria-hidden="true">H</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">h r</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Josh</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Thank you so so so much Josh for all your help! You made the process of moving across the country so easy and answered literally every single question. As students, we were lost and STRUGGLING to land a place before classes start, but Josh got the job done so quick! This is a huge stress relief, and I couldn’t be happier!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-mitch-ranft">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="1" aria-hidden="true">M</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Mitch Ranft</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Thapar Team</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>When I met Josh Schwartz with the Monica Thapar Team it was clear he was the right choice! Josh’s market analysis was thorough, and the resulting listing strategy was spot on. Everything was handled so professionally; the amazing social media reach, the photography, prepping for listing and communication. Josh was a pleasure to work with and provided stellar support throughout the process; he was quick to respond to any questions/concerns and Josh didn’t hesitate to accommodate my request to be on-site to review offers. Josh was skillful in negotiating and - end result -I had multiple offers and sold for well over asking! I highly recommend Josh Schwartz with the Monica Thapar Team!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-darren-gobin">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="2" aria-hidden="true">D</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Darren Gobin</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Thapar Team</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>We had the pleasure of working with Josh Schwartz of Team Thapar and we couldn&#x27;t be happier with the experience. Josh&#x27;s knowledge of the market and dedication to finding the perfect home for us were evident from our very first meeting. He was always available to answer our questions, address any concerns, and provide expert guidance throughout the entire process. Josh&#x27;s professionalism, integrity, and genuine care for his clients truly set him apart. We highly recommend Josh to anyone in need of a top-notch realtor.</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-bryan-mills">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="3" aria-hidden="true">B</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Bryan Mills</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Thapar Team</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Josh from The Thapar Team helped me and my friend find a place in the east Toronto area. It was great to work with him; he was super flexible with timing and willing to put in work at all hours to close the deal. He was friendly and straightforward, so we always felt like we were getting all the facts and could trust him. All in all great experience.</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-carine-rozen">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="4" aria-hidden="true">C</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Carine Rozen</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Thapar Team</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Working with Josh Schwartz from the Thapar Team totally exceeded my expectations! His positive attitude, professionalism, responsiveness and wealth of experience helped me secure wonderful new tenants for my rental property in Humber Bay.  Highly recommended to anyone looking to buy/sell/lease a property!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-google-dana-blufarb">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="5" aria-hidden="true">D</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Dana Blufarb</span>
+                <span class="review-source"><svg class="review-google-g" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google · Thapar Team</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>I needed a place to live and with the assistance and guidance from Josh Schwartz at Team Thapar. If you need to move your real estate Josh is the man he has a keen understanding of the market and also an ability to move properties quickly!</p></blockquote>
+        </article>
+
+        <article class="review-card" data-review-id="review-facebook-josh-humberbay">
+          <div class="review-card-head">
+            <div class="review-avatar" data-tone="2" aria-hidden="true">J</div>
+            <div class="review-card-identity">
+              <cite class="review-cite">
+                <span class="review-name">Josh Humberbay</span>
+                <span class="review-source"><svg class="review-fb-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#1877F2" d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4z"/></svg><span>Facebook review</span></span>
+                <span class="review-stars" aria-label="5 out of 5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
+                </span>
+              </cite>
+            </div>
+          </div>
+          <blockquote><p>Best realtor in Toronto, no question. If you want someone who actually knows what they’re doing, this is the one</p></blockquote>
+        </article>
 
         <article class="review-card" data-review-id="review-aaron-damaris-michael">
           <div class="review-card-head">
@@ -7822,7 +8079,6 @@
               <cite class="review-cite">
                 <span class="review-name">Aaron, Damaris &amp; Michael</span>
                 
-                
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7831,13 +8087,13 @@
           </div>
           <blockquote><p>Josh made the somewhat daunting home buying experience comforting at every turn. From setting up showings at a moments notice, at locations across the city, to drawing up a successful hardball negotiation strategy that wound up landing us our dream home. Our growing family, which includes our 6mo old son, owe a lot of future memories in our new forever home to Josh&#x27;s hard work, careful attention, and outstanding industry expertise.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-keswick">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="2" aria-hidden="true">K</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Keswick Clients</span>
-                
                 <span class="review-address">Keswick, ON</span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
@@ -7847,6 +8103,7 @@
           </div>
           <blockquote><p>Josh has been so patient and helpful during our search for our first home. He stuck with us while we were looking into renting, buying, renting then finally making the big move to buy! He always jumped at the opportunity to meet us at showings all around the GTA and beyond always with a great attitude and some good jokes to help ease the stress! Thank you Josh we are so happy we found our first home with you!</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-roz">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="1" aria-hidden="true">R</div>
@@ -7854,7 +8111,6 @@
               <cite class="review-cite">
                 <span class="review-name">Roz York Brodsky</span>
                 
-                
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7863,14 +8119,14 @@
           </div>
           <blockquote><p>I was impressed with every aspect of dealing with Josh during a recent real estate transaction. From the time he listed our property to the time he sold it for over the asking price to his post sale service he has been a consummate professional and a charming and thoughtful man. Josh is a hard worker who truly does the utmost for his clients and I recommend him highly.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-jeffrey">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="2" aria-hidden="true">J</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Jeffrey Carl McCart</span>
-                
-                
+                <span class="review-source"><svg class="review-fb-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#1877F2" d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4z"/></svg><span>Facebook review</span></span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7879,14 +8135,14 @@
           </div>
           <blockquote><p>One of the best! Josh is always my first call when I&#x27;m thinking real estate.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-rukie">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="3" aria-hidden="true">R</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Rukie Liyanage</span>
-                
-                
+                <span class="review-source"><svg class="review-fb-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#1877F2" d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4z"/></svg><span>Facebook review</span></span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7895,6 +8151,7 @@
           </div>
           <blockquote><p>Josh was an absolute pleasure to deal with, and was tremendously patient when it came to finding the right place for me! He really goes above and beyond!</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-aly">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="4" aria-hidden="true">A</div>
@@ -7902,7 +8159,6 @@
               <cite class="review-cite">
                 <span class="review-name">Aly Somani</span>
                 
-                
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7911,6 +8167,7 @@
           </div>
           <blockquote><p>I would definitely recommend Josh as a trusted and intelligent real estate agent.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-ainsley">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="5" aria-hidden="true">A</div>
@@ -7918,7 +8175,6 @@
               <cite class="review-cite">
                 <span class="review-name">Ainsley Bainsley</span>
                 
-                
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7927,13 +8183,13 @@
           </div>
           <blockquote><p>Josh is a dedicated real estate professional who goes above and beyond for all his clients. He is extremely thoughtful, patient, and supportive in his approach to finding you the perfect home. I would absolutely recommend him to any of my friends or family.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-rick-kathi">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="1" aria-hidden="true">R</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Rick &amp; Kathi</span>
-                
                 <span class="review-address">124 McCauley Court, Newmarket</span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
@@ -7943,13 +8199,13 @@
           </div>
           <blockquote><p>Thank You Josh! You did a fantastic job! Even the Co-Op Agent said to us, &quot;you have a great Agent.&quot; She is right! We are amazed at your great communication and the pace you work at. Please use us a reference any time.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-dean-linda">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="2" aria-hidden="true">D</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Dean &amp; Linda</span>
-                
                 <span class="review-address">125 McCauley Court, Newmarket</span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
@@ -7959,14 +8215,14 @@
           </div>
           <blockquote><p>Josh worked tirelessly to sell our family home in a shifting market. He was quick to change strategies when we faced hurdles and communicated with us every step of the way. His top priority was getting us the most amount of money for our home, and he did that and more. From start to finish, we are very glad we chose Josh as our Realtor.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-greg">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="3" aria-hidden="true">G</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Greg Monroe</span>
-                <span class="review-role">NBA · Toronto Raptors</span>
-                <span class="review-address">St. Regis, Toronto</span>
+                <span class="review-role">NBA · Toronto Raptors</span><span class="review-address">St. Regis, Toronto</span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
                 </span>
@@ -7975,13 +8231,13 @@
           </div>
           <blockquote><p>Josh&#x27;s knowledge and experience in the Toronto real estate scene helped me identify and secure the best solution for my needs during the 2018–19 season.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-susan">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="5" aria-hidden="true">S</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Susan</span>
-                
                 <span class="review-address">128 McCauley Crt, Newmarket</span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
@@ -7991,13 +8247,13 @@
           </div>
           <blockquote><p>My neighbour had a very successful experience selling their home with Josh as realtor. They advised me to contact Josh if I was ever considering selling my home of 30 years. I contacted Josh and met with him numerous times during the sales process. He made helpful suggestions and adjusted the plan during the very volatile market. My home sold for over asking and I am very grateful for Josh&#x27;s guidance. I would highly recommend Josh Schwartz for any real estate transaction.</p></blockquote>
         </article>
+
         <article class="review-card" data-review-id="review-don-cathy">
           <div class="review-card-head">
             <div class="review-avatar" data-tone="1" aria-hidden="true">D</div>
             <div class="review-card-identity">
               <cite class="review-cite">
                 <span class="review-name">Don &amp; Cathy</span>
-                
                 <span class="review-address">298 Plymouth Tr, Newmarket</span>
                 <span class="review-stars" aria-label="5 out of 5 stars">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
@@ -8008,233 +8264,10 @@
           <blockquote><p>Josh impressed us from the start. We have sold a number of houses and compared to other agents, his marketing knowledge, materials and strategies to sell our house are far superior, from the quality of his brochures and the wonderful work he did in showcasing our house. It took us some time to realize we weren&#x27;t going to get the price we wanted for our house, but Josh was patient, very positive and professional with us during the process. We are still working with Josh to find a property to build on. Josh&#x27;s hard work and commitment is impressive, but he is also fun to work with. We give Josh our highest recommendation.</p></blockquote>
         </article>
 
-        <article class="review-card" aria-hidden="true" data-review-id="review-aaron-damaris-michael">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="1" aria-hidden="true">A</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Aaron, Damaris &amp; Michael</span>
-                
-                
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh made the somewhat daunting home buying experience comforting at every turn. From setting up showings at a moments notice, at locations across the city, to drawing up a successful hardball negotiation strategy that wound up landing us our dream home. Our growing family, which includes our 6mo old son, owe a lot of future memories in our new forever home to Josh&#x27;s hard work, careful attention, and outstanding industry expertise.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-keswick">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="2" aria-hidden="true">K</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Keswick Clients</span>
-                
-                <span class="review-address">Keswick, ON</span>
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh has been so patient and helpful during our search for our first home. He stuck with us while we were looking into renting, buying, renting then finally making the big move to buy! He always jumped at the opportunity to meet us at showings all around the GTA and beyond always with a great attitude and some good jokes to help ease the stress! Thank you Josh we are so happy we found our first home with you!</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-roz">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="1" aria-hidden="true">R</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Roz York Brodsky</span>
-                
-                
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>I was impressed with every aspect of dealing with Josh during a recent real estate transaction. From the time he listed our property to the time he sold it for over the asking price to his post sale service he has been a consummate professional and a charming and thoughtful man. Josh is a hard worker who truly does the utmost for his clients and I recommend him highly.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-jeffrey">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="2" aria-hidden="true">J</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Jeffrey Carl McCart</span>
-                
-                
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>One of the best! Josh is always my first call when I&#x27;m thinking real estate.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-rukie">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="3" aria-hidden="true">R</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Rukie Liyanage</span>
-                
-                
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh was an absolute pleasure to deal with, and was tremendously patient when it came to finding the right place for me! He really goes above and beyond!</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-aly">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="4" aria-hidden="true">A</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Aly Somani</span>
-                
-                
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>I would definitely recommend Josh as a trusted and intelligent real estate agent.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-ainsley">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="5" aria-hidden="true">A</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Ainsley Bainsley</span>
-                
-                
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh is a dedicated real estate professional who goes above and beyond for all his clients. He is extremely thoughtful, patient, and supportive in his approach to finding you the perfect home. I would absolutely recommend him to any of my friends or family.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-rick-kathi">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="1" aria-hidden="true">R</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Rick &amp; Kathi</span>
-                
-                <span class="review-address">124 McCauley Court, Newmarket</span>
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Thank You Josh! You did a fantastic job! Even the Co-Op Agent said to us, &quot;you have a great Agent.&quot; She is right! We are amazed at your great communication and the pace you work at. Please use us a reference any time.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-dean-linda">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="2" aria-hidden="true">D</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Dean &amp; Linda</span>
-                
-                <span class="review-address">125 McCauley Court, Newmarket</span>
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh worked tirelessly to sell our family home in a shifting market. He was quick to change strategies when we faced hurdles and communicated with us every step of the way. His top priority was getting us the most amount of money for our home, and he did that and more. From start to finish, we are very glad we chose Josh as our Realtor.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-greg">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="3" aria-hidden="true">G</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Greg Monroe</span>
-                <span class="review-role">NBA · Toronto Raptors</span>
-                <span class="review-address">St. Regis, Toronto</span>
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh&#x27;s knowledge and experience in the Toronto real estate scene helped me identify and secure the best solution for my needs during the 2018–19 season.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-susan">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="5" aria-hidden="true">S</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Susan</span>
-                
-                <span class="review-address">128 McCauley Crt, Newmarket</span>
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>My neighbour had a very successful experience selling their home with Josh as realtor. They advised me to contact Josh if I was ever considering selling my home of 30 years. I contacted Josh and met with him numerous times during the sales process. He made helpful suggestions and adjusted the plan during the very volatile market. My home sold for over asking and I am very grateful for Josh&#x27;s guidance. I would highly recommend Josh Schwartz for any real estate transaction.</p></blockquote>
-        </article>
-        <article class="review-card" aria-hidden="true" data-review-id="review-don-cathy">
-          <div class="review-card-head">
-            <div class="review-avatar" data-tone="1" aria-hidden="true">D</div>
-            <div class="review-card-identity">
-              <cite class="review-cite">
-                <span class="review-name">Don &amp; Cathy</span>
-                
-                <span class="review-address">298 Plymouth Tr, Newmarket</span>
-                <span class="review-stars" aria-label="5 out of 5 stars">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3 5.8 21l1.6-7.1L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.7L18.2 21z"/></svg>
-                </span>
-              </cite>
-            </div>
-          </div>
-          <blockquote><p>Josh impressed us from the start. We have sold a number of houses and compared to other agents, his marketing knowledge, materials and strategies to sell our house are far superior, from the quality of his brochures and the wonderful work he did in showcasing our house. It took us some time to realize we weren&#x27;t going to get the price we wanted for our house, but Josh was patient, very positive and professional with us during the process. We are still working with Josh to find a property to build on. Josh&#x27;s hard work and commitment is impressive, but he is also fun to work with. We give Josh our highest recommendation.</p></blockquote>
-        </article>
-        </div>
       </div>
-      <p class="reviews-more">
-        <a
-          class="reviews-more-link"
-          href="https://www.google.com/maps/search/?api=1&query=Josh+Schwartz+Profesional+Real+Estate+Corporation%2C+362+Royal+York+Rd%2C+Etobicoke%2C+ON+M8Y+2R2"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg class="reviews-more-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          <span>More reviews on Google</span>
-          <span class="reviews-more-ext" aria-hidden="true">↗</span>
-        </a>
-      </p>
-    </section>
-
-    <section class="journal" id="reels">
-      <div class="container">
-        <div class="section-header reveal" data-reveal>
-          <div>
-            <h2 class="section-title">Latest from Josh</h2>
-          </div>
-
-          <p class="section-copy">
-            Recent Etobicoke &amp; Toronto real estate clips from
-            <a class="text-link" href="https://www.instagram.com/openingdoorsforu/reels/" target="_blank" rel="noopener noreferrer">@openingdoorsforu</a>.
-          </p>
-        </div>
-
-        <div class="reels-grid reveal" data-reveal id="reelsGrid"></div>
+      </div>
+      <div class="reviews-more">
+        <a class="reviews-more-link" href="/reviews/">View all reviews</a>
       </div>
     </section>
 
@@ -10285,7 +10318,7 @@
 
       marquee.setAttribute("role", "region");
       marquee.setAttribute("aria-roledescription", "carousel");
-      marquee.setAttribute("aria-label", "Client reviews. Drag sideways. Click to pause or resume.");
+      marquee.setAttribute("aria-label", "Reviews. Drag sideways. Click to pause or resume.");
       marquee.setAttribute("aria-pressed", "false");
 
       if (!reduceMotion) {

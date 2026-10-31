@@ -133,7 +133,7 @@ CITIES = {
             "focus": "Condos and city homes",
             "buyer": "First-time buyers, downsizers, investors",
             "metric": "Downtown, Midtown, East and West",
-            "note": "A strong sale starts with a realistic price estimate, then staging, presentation, and marketing that match each pocket — downtown leases and midtown sales rarely move the same way.",
+            "note": "A strong sale starts with a realistic price estimate, then staging, presentation, and marketing that match each pocket. Downtown leases and midtown sales rarely move the same way.",
         },
     },
     "etobicoke": {
@@ -181,7 +181,7 @@ CITIES = {
             "focus": "Yonge condos and quieter houses",
             "buyer": "Professionals, investors, relocators",
             "metric": "Willowdale and the Yonge subway",
-            "note": "Compare buildings one by one — city averages miss too much. Price from recent comps, then match staging and marketing to that building’s buyer pool.",
+            "note": "Compare buildings one by one. City averages miss too much. Price from recent comps, then match staging and marketing to that building’s buyer pool.",
         },
     },
     "markham": {
@@ -417,7 +417,7 @@ def page_shell(
           </button>
           <div class="nav-drop-menu" id="navAboutMenu" role="menu">
             <a href="{home}about/" role="menuitem">About</a>
-            <a href="{home}#reviews" role="menuitem">Reviews</a>
+            <a href="{home}reviews/" role="menuitem">Reviews</a>
             <a href="{home}#reels" role="menuitem">Latest</a>
             <a href="{home}#faq" role="menuitem">FAQ</a>
           </div>
@@ -1445,7 +1445,12 @@ def main():
     sold_hub_urls = write_sold_hub_page()
     neighbourhood_urls = write_neighbourhood_guide_pages()
     write_sitemap(
-        city_urls + listing_urls + sold_hub_urls + neighbourhood_urls + condo_guide_urls()
+        city_urls
+        + listing_urls
+        + sold_hub_urls
+        + neighbourhood_urls
+        + condo_guide_urls()
+        + [(f"{ORIGIN}/reviews/", "weekly", "0.9"), (f"{ORIGIN}/about/", "monthly", "0.8")]
     )
     if sync_homepage_footer(ROOT / "index.html"):
         print("synced homepage footer")
