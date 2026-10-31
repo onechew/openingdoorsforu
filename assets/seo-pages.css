@@ -890,6 +890,7 @@ h1 {
 
 @media (max-width: 720px) {
   .stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat-row.stat-row--open { grid-template-columns: 1fr; }
 }
 
 .stat {
@@ -4072,23 +4073,91 @@ button.btn.copy-email[data-tip]::after {
   padding-bottom: 0;
 }
 
-.stat-row--open {
-  gap: 20px 28px;
+.market-snapshot .hood-panel-head {
+  margin-bottom: 8px;
 }
 
-.stat--open {
+.market-snapshot-lead {
+  margin: 0 0 18px;
+  max-width: none;
+}
+
+.stat-row.stat-row--open {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+  align-items: start;
+}
+
+.stat.stat--open {
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 12px 14px;
+  column-gap: 12px;
+  row-gap: 0;
   align-items: start;
 }
 
-.stat--open strong {
-  margin-bottom: 4px;
+.stat.stat--open strong {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.stat.stat--open > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stat.stat--open > div > span {
+  order: -1;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.3;
+}
+
+.market-snapshot .stat-row.stat-row--open {
+  margin-bottom: 0;
+}
+
+.market-snapshot-links {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(18, 20, 23, 0.08);
+}
+
+@media (max-width: 900px) {
+  .market-snapshot .stat-row.stat-row--open {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .market-snapshot .stat.stat--open {
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(18, 20, 23, 0.08);
+  }
+
+  .market-snapshot .stat.stat--open:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .market-snapshot-lead {
+    margin-bottom: 14px;
+  }
+
+  .market-snapshot-links {
+    margin-top: 36px;
+    padding-top: 24px;
+  }
 }
 
 /* —— Humber Bay Shores building directory (rows, not cards) —— */

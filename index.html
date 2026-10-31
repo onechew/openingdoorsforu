@@ -2165,9 +2165,11 @@
       border-radius: 999px;
       background: transparent;
       color: #2c3038;
+      font: inherit;
       font-size: 15px;
       font-weight: 700;
       letter-spacing: 0.01em;
+      text-decoration: none;
       cursor: pointer;
       transition: background 180ms ease, color 180ms ease;
     }
@@ -7332,8 +7334,8 @@
             <span class="nav-drop-caret" aria-hidden="true"></span>
           </button>
           <div class="nav-drop-menu" id="navListingsMenu" role="menu">
-            <a href="?tab=active#listings" role="menuitem">Active</a>
-            <a href="?tab=sold#listings" role="menuitem">Sold &amp; Leased</a>
+            <a href="#listings" role="menuitem">Active</a>
+            <a href="#listings-sold" role="menuitem">Sold &amp; Leased</a>
           </div>
         </div>
         <div class="nav-drop" data-nav-drop>
@@ -9675,7 +9677,7 @@
   </button>
 
   <script src="assets/site-footer.js?v=20261025navmenu" defer></script>
-  <script src="assets/active-listings.js?v=20261031054154"></script>
+  <script src="assets/active-listings.js?v=20261031060236"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const backToTop = document.getElementById("backToTop");
@@ -11130,9 +11132,9 @@
       renderListings({ preserveScroll });
       if (syncUrl) {
         const url = new URL(window.location.href);
-        if (next === "sold") url.searchParams.set("tab", "sold");
-        else url.searchParams.delete("tab");
-        url.hash = "listings";
+        url.searchParams.delete("tab");
+        // Clean hash deep-link (no ?tab=). /sold-leased/ also redirects here.
+        url.hash = next === "sold" ? "listings-sold" : "listings";
         const nextUrl = `${url.pathname}${url.search}${url.hash}`;
         const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
         if (nextUrl !== currentUrl) {
@@ -11145,6 +11147,15 @@
       const tab = listingsTabFromLocation();
       if (!tab) return;
       setListingsTab(tab, { preserveScroll: false });
+      // Normalize old ?tab=sold bookmarks to the clean hash.
+      if (tab === "sold") {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has("tab") || url.hash.toLowerCase() !== "#listings-sold") {
+          url.searchParams.delete("tab");
+          url.hash = "listings-sold";
+          history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+        }
+      }
     }
 
     function getItemsPerPage() {
@@ -11370,7 +11381,7 @@
         name:
           activeTab === "current"
             ? "Active Etobicoke & Toronto listings with Josh Schwartz"
-            : "Sold & leased highlights with Josh Schwartz, Etobicoke realtor",
+            : "Sold and leased homes with Josh Schwartz",
         itemListElement: (listings || []).map((listing, index) =>
           listingToSchemaItem(listing, index + 1)
         )
@@ -11585,8 +11596,8 @@
         listingsToRender = filtered.slice(start, end);
         soldControls.classList.add("is-visible");
         if (listingsCompliance) {
-          listingsCompliance.hidden = false;
-          listingsCompliance.textContent = "Sold & leased highlights.";
+          listingsCompliance.hidden = true;
+          listingsCompliance.textContent = "";
         }
         renderPagination(filtered.length);
       }

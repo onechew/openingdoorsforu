@@ -130,13 +130,10 @@ CITIES = {
             "Commute patterns to the Financial District, hospitals, and campuses still drive absorption for leases and sales.",
         ],
         "snapshot": {
-            "focus": "Condos & urban homes",
-            "buyer": "First-time, downsizers, investors",
-            "metric": "Downtown · Midtown · East · West",
-            "metric_label": "Key pockets",
-            "angle": "Buy · Sell · Lease",
-            "angle_label": "How Josh helps",
-            "note": "Inventory and days-on-market shift by pocket. Downtown lease velocity differs from midtown sales.",
+            "focus": "Condos and city homes",
+            "buyer": "First-time buyers, downsizers, investors",
+            "metric": "Downtown, Midtown, East and West",
+            "note": "A strong sale starts with a realistic price estimate, then staging, presentation, and marketing that match each pocket — downtown leases and midtown sales rarely move the same way.",
         },
     },
     "etobicoke": {
@@ -157,13 +154,10 @@ CITIES = {
             "Sellers benefit when staging and pricing reflect how buyers actually commute from Etobicoke.",
         ],
         "snapshot": {
-            "focus": "Lake shore condos & family homes",
-            "buyer": "End-users, relocators, lease clients",
-            "metric": "Mimico · Islington · Queensway",
-            "metric_label": "Key pockets",
-            "angle": "Josh · backed by Thapar Team",
-            "angle_label": "Local strength",
-            "note": "Mimico and Queensway pockets can move quickly on well-priced suites.",
+            "focus": "Lake shore condos and family homes",
+            "buyer": "Buyers, relocators, and renters",
+            "metric": "Mimico, Islington, The Queensway",
+            "note": "Well-priced lakeshore homes sell fast. It takes accurate comps, smart staging, and marketing that reaches active buyers.",
         },
     },
     "north-york": {
@@ -184,13 +178,10 @@ CITIES = {
             "Lease demand often tracks transit convenience for professionals working downtown or midtown.",
         ],
         "snapshot": {
-            "focus": "Yonge-corridor condos",
+            "focus": "Yonge condos and quieter houses",
             "buyer": "Professionals, investors, relocators",
-            "metric": "Line 1 · Willowdale · nearby pockets",
-            "metric_label": "Key pockets",
-            "angle": "Building-level comps",
-            "angle_label": "How we price",
-            "note": "Building-level comps matter more than broad North York averages.",
+            "metric": "Willowdale and the Yonge subway",
+            "note": "Compare buildings one by one — city averages miss too much. Price from recent comps, then match staging and marketing to that building’s buyer pool.",
         },
     },
     "markham": {
@@ -211,13 +202,10 @@ CITIES = {
             "Local retail and employment hubs reduce the need for a daily downtown commute for some households.",
         ],
         "snapshot": {
-            "focus": "Family homes & townhomes",
-            "buyer": "Growing families, upsizers",
-            "metric": "Detached · towns · newer communities",
-            "metric_label": "Common product",
-            "angle": "Schools · commute · value",
-            "angle_label": "Decision drivers",
-            "note": "Detached and townhome demand often leads condo volume in buyer conversations.",
+            "focus": "Family houses and townhomes",
+            "buyer": "Growing families and move-up buyers",
+            "metric": "Detached homes and newer towns",
+            "note": "Most buyers compare houses and towns first. A solid plan covers estimated value, presentation, and marketing aimed at families shopping schools and commute.",
         },
     },
     "richmond-hill": {
@@ -238,13 +226,10 @@ CITIES = {
             "Sellers should price to the commute story buyers are actually shopping.",
         ],
         "snapshot": {
-            "focus": "Residential homes",
+            "focus": "Quiet residential homes",
             "buyer": "Families and move-up buyers",
-            "metric": "Established · newer communities",
-            "metric_label": "Neighbourhood mix",
-            "angle": "Condition · lot · commute",
-            "angle_label": "What separates offers",
-            "note": "Condition and lot utility often separate similar list prices.",
+            "metric": "Established and newer streets",
+            "note": "Condition and lot size often separate similar prices. Get the estimate right first, then staging and marketing that show how the home actually lives.",
         },
     },
     "vaughan": {
@@ -265,13 +250,10 @@ CITIES = {
             "Lease and sale demand can follow employment nodes and retail destinations in Vaughan.",
         ],
         "snapshot": {
-            "focus": "Newer homes & townhomes",
-            "buyer": "Families, relocators",
-            "metric": "Highway 400 / 407 access",
-            "metric_label": "Lifestyle factor",
-            "angle": "Builder era · product type",
-            "angle_label": "What drives comps",
-            "note": "Product type and builder era drive comps more than city-wide averages.",
+            "focus": "Newer houses and townhomes",
+            "buyer": "Families and relocators",
+            "metric": "Near Highways 400 and 407",
+            "note": "Home type and age matter more than city averages. Price from the right comps, then present and market to buyers comparing Vaughan with nearby York Region options.",
         },
     },
     "mississauga": {
@@ -292,13 +274,10 @@ CITIES = {
             "Pricing strategy should reflect how buyers weigh transit versus parking and driving.",
         ],
         "snapshot": {
-            "focus": "West GTA homes & condos",
-            "buyer": "Diverse end-users and investors",
-            "metric": "Condo · town · detached nodes",
-            "metric_label": "Market mix",
-            "angle": "Neighbourhood-level comps",
-            "angle_label": "How we advise",
-            "note": "Neighbourhood-level comps beat city-wide averages every time.",
+            "focus": "Condos, towns, and houses",
+            "buyer": "Buyers, renters, and investors",
+            "metric": "Condo, town, and house areas",
+            "note": "Mississauga is many small markets, not one average. Strategy still starts with a local price estimate, then interiors and marketing tuned to that neighbourhood.",
         },
     },
 }
@@ -330,7 +309,7 @@ def page_shell(
     body: str,
     json_ld: dict | None = None,
 ) -> str:
-    css = asset_href("assets/seo-pages.css", depth) + "?v=20261025navmenu"
+    css = asset_href("assets/seo-pages.css", depth) + "?v=20261031snapshot"
     icon_svg = asset_href("assets/js.svg", depth)
     icon_png = asset_href("assets/favicon-48.png", depth)
     icon_apple = asset_href("apple-touch-icon.png", depth)
@@ -405,8 +384,8 @@ def page_shell(
             <span class="nav-drop-caret" aria-hidden="true"></span>
           </button>
           <div class="nav-drop-menu" id="navListingsMenu" role="menu">
-            <a href="{home}?tab=active#listings" role="menuitem">Active</a>
-            <a href="{home}?tab=sold#listings" role="menuitem">Sold &amp; Leased</a>
+            <a href="{home}#listings" role="menuitem">Active</a>
+            <a href="{home}#listings-sold" role="menuitem">Sold &amp; Leased</a>
           </div>
         </div>
         <div class="nav-drop" data-nav-drop>
@@ -610,16 +589,22 @@ def page_shell(
 """
 
 
-def cards_html(items: list[dict], depth: int, link_prefix: str) -> str:
+def cards_html(
+    items: list[dict],
+    depth: int,
+    link_prefix: str,
+    *,
+    empty: str = "Nothing to show here right now.",
+) -> str:
     if not items:
         home = asset_href("", depth) or "./"
         thapar = "https://www.thaparteam.ca/property-search/results/?searchid=3952868"
         return (
             '<div class="empty-cta">'
-            "<p>No closed results in this section right now. Josh can still help you buy, sell, or lease here.</p>"
+            f"<p>{esc(empty)}</p>"
             '<div class="cta-row empty-cta-actions">'
             f'<a class="btn btn-secondary" href="{home}#contact">Text Josh</a>'
-            f'<a class="btn btn-secondary" href="{thapar}" target="_blank" rel="noopener noreferrer">Browse live inventory</a>'
+            f'<a class="btn btn-secondary" href="{thapar}" target="_blank" rel="noopener noreferrer">Browse more homes</a>'
             "</div></div>"
         )
     bits = []
@@ -785,24 +770,24 @@ def write_city_pages():
   <section class="section">
     <div class="container">
       <h2>Current Listings in {esc(meta['name'])}</h2>
-      <p class="section-copy">Live inventory Josh Schwartz can help you buy or lease in and around {esc(meta['name'])}. Some homes are listed with Snobar Realty Group / Thapar Team (Josh’s credential network). Not all are personally listed by Josh.</p>
-      {cards_html(current, depth, asset_href('listings/', depth))}
+      <p class="section-copy">Homes for sale in and around {esc(meta['name'])}. Team listings are labelled on the card.</p>
+      {cards_html(current, depth, asset_href('listings/', depth), empty=f"No active listings in {meta['name']} on this page right now.")}
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <h2>Recently Sold in {esc(meta['name'])}</h2>
-      <p class="section-copy">Closed sales Josh helped bring across the finish line.</p>
-      {cards_html(sold, depth, asset_href('sold/', depth))}
+      <p class="section-copy">Homes Josh helped sell in {esc(meta['name'])}.</p>
+      {cards_html(sold, depth, asset_href('sold/', depth), empty=f"No recent sales in {meta['name']} to show yet.")}
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <h2>Recently Leased in {esc(meta['name'])}</h2>
-      <p class="section-copy">Lease placements for renters and landlords across {esc(meta['name'])}.</p>
-      {cards_html(leased, depth, asset_href('sold/', depth))}
+      <p class="section-copy">Homes Josh helped lease in {esc(meta['name'])}.</p>
+      {cards_html(leased, depth, asset_href('sold/', depth), empty=f"No recent leases in {meta['name']} to show yet.")}
     </div>
   </section>
 
@@ -815,10 +800,7 @@ def write_city_pages():
 
   <section class="section">
     <div class="container">
-      <div class="hood-panel-head">
-        {city_svg("school", "school")}
-        <h2>Schools</h2>
-      </div>
+      <h2>Schools</h2>
       <ul class="city-note-list">
         {''.join(f'<li>{city_svg("school", "school", "sm")}<span>{esc(x)}</span></li>' for x in meta['schools'])}
       </ul>
@@ -827,29 +809,22 @@ def write_city_pages():
 
   <section class="section">
     <div class="container">
-      <div class="hood-panel-head">
-        {city_svg("subway", "transit")}
-        <h2>Transit</h2>
-      </div>
+      <h2>Transit</h2>
       <ul class="city-note-list">
         {''.join(f'<li>{city_svg("bus", "transit", "sm")}<span>{esc(x)}</span></li>' for x in meta['transit'])}
       </ul>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section market-snapshot">
     <div class="container">
-      <div class="hood-panel-head">
-        {city_svg("chart", "market")}
-        <h2>Market Snapshot</h2>
-      </div>
+      <h2>Market Snapshot</h2>
+      <p class="section-copy market-snapshot-lead">{esc(meta['snapshot'].get('note', ''))}</p>
       <div class="stat-row stat-row--open">
-        <div class="stat stat--open">{city_svg("city", "housing")}<div><strong>{esc(meta['snapshot']['focus'])}</strong><span>Local focus</span></div></div>
-        <div class="stat stat--open">{city_svg("group", "clients")}<div><strong>{esc(meta['snapshot']['buyer'])}</strong><span>Typical clients</span></div></div>
-        <div class="stat stat--open">{city_svg("near", "transit")}<div><strong>{esc(meta['snapshot']['metric'])}</strong><span>{esc(meta['snapshot']['metric_label'])}</span></div></div>
-        <div class="stat stat--open">{city_svg("analytics", "market")}<div><strong>{esc(meta['snapshot']['angle'])}</strong><span>{esc(meta['snapshot']['angle_label'])}</span></div></div>
+        <div class="stat stat--open">{city_svg("city", "housing")}<div><span>Homes</span><strong>{esc(meta['snapshot']['focus'])}</strong></div></div>
+        <div class="stat stat--open">{city_svg("group", "clients")}<div><span>Who looks here</span><strong>{esc(meta['snapshot']['buyer'])}</strong></div></div>
       </div>
-      <div class="city-links" style="margin-top:18px">
+      <div class="city-links market-snapshot-links">
         {other_city_links}
       </div>
     </div>
@@ -1315,7 +1290,7 @@ def write_listing_pages():
         body = f"""
   <section class="section">
     <div class="container">
-      <p class="breadcrumb"><a href="{asset_href('', depth)}">Home</a> / <a href="{asset_href('', depth)}?tab=sold#listings">Sold &amp; Leased</a> / {esc(item['title'])}</p>
+      <p class="breadcrumb"><a href="{asset_href('', depth)}">Home</a> / <a href="{asset_href('', depth)}#listings-sold">Sold &amp; Leased</a> / {esc(item['title'])}</p>
       <div class="listing-hero">
         <div class="listing-hero-media"><img src="{esc(img)}" alt="{esc(item.get('alt') or item['title'])}" width="1200" height="900" /></div>
         <div>
@@ -1327,7 +1302,7 @@ def write_listing_pages():
           {facts_html}
           <div class="cta-row">
             <a class="btn btn-primary" href="{asset_href('', depth)}#contact">Get a home valuation</a>
-            <a class="btn btn-secondary" href="{asset_href('', depth)}?tab=sold#listings">Browse more results</a>
+            <a class="btn btn-secondary" href="{asset_href('', depth)}#listings-sold">Browse more results</a>
           </div>
         </div>
       </div>
@@ -1364,6 +1339,37 @@ def write_listing_pages():
         urls.append((canonical, "monthly", "0.7"))
 
     return urls
+
+
+def write_sold_hub_page() -> list[tuple[str, str, str]]:
+    """Clean URL entry for Sold & Leased → homepage tab (same Active Listings design).
+
+    Detail pages stay under /sold/{slug}/. The listings UI itself lives on the homepage
+    so Active and Sold & Leased stay visually identical.
+    """
+    target = "/#listings-sold"
+    redirect_html = f"""<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url={target}" />
+  <link rel="canonical" href="{ORIGIN}/#listings-sold" />
+  <title>Sold &amp; Leased Homes | Josh Schwartz</title>
+  <meta name="description" content="Recently sold and leased homes with Josh Schwartz across Toronto and the GTA." />
+  <meta name="robots" content="noindex, follow" />
+  <script>location.replace({target!r});</script>
+</head>
+<body>
+  <p><a href="{target}">Sold &amp; Leased homes</a></p>
+</body>
+</html>
+"""
+    for folder in ("sold-leased", "sold"):
+        out = ROOT / folder
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "index.html").write_text(redirect_html, encoding="utf-8")
+    print("wrote sold-leased/ + sold/ → /#listings-sold (homepage listings UI)")
+    return []
 
 
 def write_sitemap(extra_urls: list[tuple[str, str, str]]):
@@ -1436,8 +1442,11 @@ def condo_guide_urls() -> list[tuple[str, str, str]]:
 def main():
     city_urls = write_city_pages()
     listing_urls = write_listing_pages()
+    sold_hub_urls = write_sold_hub_page()
     neighbourhood_urls = write_neighbourhood_guide_pages()
-    write_sitemap(city_urls + listing_urls + neighbourhood_urls + condo_guide_urls())
+    write_sitemap(
+        city_urls + listing_urls + sold_hub_urls + neighbourhood_urls + condo_guide_urls()
+    )
     if sync_homepage_footer(ROOT / "index.html"):
         print("synced homepage footer")
     else:

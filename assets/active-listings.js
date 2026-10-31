@@ -1,4 +1,4 @@
-window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-10-31T05:41:54+00:00", "teamCount": 27, "joshCount": 0, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
+window.__ACTIVE_LISTINGS_META__ = {"syncedAt": "2026-10-21T15:13:20+00:00", "teamCount": 27, "joshCount": 0, "source": "https://www.thaparteam.ca/property-search/results/?searchid=3952868"};
 window.__ACTIVE_LISTINGS__ = [
   {
     "title": "23 Mitre Place",
@@ -285,7 +285,7 @@ window.__ACTIVE_LISTINGS__ = [
     "status": "For Sale",
     "tagClass": "sale",
     "price": "$958,888",
-    "image": "https://cdn.listingphotos.sierrastatic.com/pics2x/v1787185695/211/211_W13693836_01.jpg",
+    "image": "assets/listings/40-dixon.jpg",
     "alt": "40 Dixon Rd · Humber Heights · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team",
     "url": "https://www.thaparteam.ca/property-search/detail/211/W13693836/40-dixon-rd-toronto-on-m9p-2l3/?src=2",
     "kind": "team",
@@ -443,19 +443,19 @@ window.__ACTIVE_LISTINGS__ = [
     "status": "For Sale",
     "tagClass": "sale",
     "price": "$1,248,888",
-    "image": "https://cdn.listingphotos.sierrastatic.com/pics2x/v1782366970/211/211_W13486650_01.jpg",
+    "image": "assets/listings/aura-lea.jpg",
     "alt": "1 Aura Lea Blvd · Humberlea-Pelmo Park W5 · Toronto · listed with Snobar Realty Group Inc. · available via Thapar Team",
-    "url": "https://www.thaparteam.ca/property-search/detail/211/W13486650/1-aura-lea-blvd-toronto-on-m9m-1k2/?src=2",
+    "url": "https://www.thaparteam.ca/property-search/detail/211/W14104348/1-aura-lea-blvd-toronto-on-m9m-1k2/?src=2",
     "kind": "team",
     "source": "thapar",
     "beds": "5",
     "baths": "4",
     "type": "Detached",
-    "mls": "W13486650",
+    "mls": "W14104348",
     "area": "Etobicoke",
     "office": "Snobar Realty Group Inc.",
     "attribution": "Listed with Snobar Realty Group Inc.",
-    "slug": "1-aura-lea-blvd-w13486650"
+    "slug": "1-aura-lea-blvd-w14104348"
   },
   {
     "title": "5220-5226 Greenlane Rd",

@@ -95,7 +95,7 @@ def page_shell(
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0..1,0&display=swap" />
-  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261025navmenu" />{ld}
+  <link rel="stylesheet" href="{prefix}assets/seo-pages.css?v=20261031snapshot" />{ld}
 </head>
 <body>
   <header class="site-header">
@@ -116,8 +116,8 @@ def page_shell(
             <span class="nav-drop-caret" aria-hidden="true"></span>
           </button>
           <div class="nav-drop-menu" id="navListingsMenu" role="menu">
-            <a href="{prefix}?tab=active#listings" role="menuitem">Active</a>
-            <a href="{prefix}?tab=sold#listings" role="menuitem">Sold &amp; Leased</a>
+            <a href="{prefix}#listings" role="menuitem">Active</a>
+            <a href="{prefix}#listings-sold" role="menuitem">Sold &amp; Leased</a>
           </div>
         </div>
         <div class="nav-drop" data-nav-drop>
