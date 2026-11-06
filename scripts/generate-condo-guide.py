@@ -726,7 +726,6 @@ def contacts_section(b: dict) -> str:
       <div class="condo-contact-band">
         <p class="condo-contact-kicker">Building contacts</p>
         <div class="condo-contact-towers">{"".join(blocks)}</div>
-        <p class="condo-contact-note">Numbers can change. Confirm with the building or Josh before you rely on them.</p>
       </div>
     </div>
   </section>
@@ -759,7 +758,6 @@ def contacts_section(b: dict) -> str:
       <div class="condo-contact-band">
         <p class="condo-contact-kicker">Building contacts</p>
         <div class="condo-contact-rows">{"".join(rows)}</div>
-        <p class="condo-contact-note">Numbers can change. Confirm with the building or Josh before you rely on them.</p>
       </div>
     </div>
   </section>
@@ -1273,7 +1271,6 @@ def write_building(b: dict) -> None:
       <h3>Who can help with {esc(b["name"])} inventory?</h3>
       <p>Josh Schwartz is a Sales Representative with Snobar Realty Group Inc., Brokerage. He works with Thapar Team and helps buyers and sellers compare Humber Bay Shores buildings. Call +1-647-360-8179.</p>
       <p><a class="text-link" href="../../neighbourhoods/humber-bay-shores/">Humber Bay Shores neighbourhood guide</a></p>
-      <p class="section-copy"><em>Last updated: {esc(last_updated)}</em></p>
     </div>
   </section>
 """
@@ -1305,7 +1302,6 @@ def write_building(b: dict) -> None:
   <section class="hero-band condo-hero" id="overview">
     <div class="container">
       <p class="breadcrumb"><a href="../../../">Home</a> / <a href="../../">Etobicoke</a> / <a href="../../south-etobicoke-condo-guide/">Condo Guide</a> / {esc(b["name"])}</p>
-      <p class="section-copy" style="margin:0 0 8px;"><em>Last updated: {esc(last_updated)}</em></p>
       <div class="condo-hero-grid{has_video}">
           <div class="condo-hero-copy">
             <p class="condo-area-chip-wrap"><span class="condo-area-chip">{esc(area_chip(b.get("area", "Etobicoke")))}</span></p>
