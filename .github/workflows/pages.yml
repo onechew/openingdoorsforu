@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: read
   pages: write
   id-token: write
@@ -27,12 +28,32 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Remove previous pages artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            for (const artifact of artifacts.data.artifacts) {
+              if (artifact.name !== "github-pages") continue;
+              await github.rest.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: artifact.id,
+              });
+              core.info(`Deleted github-pages artifact ${artifact.id}`);
+            }
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
-          include-hidden-files: false
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 1800000
