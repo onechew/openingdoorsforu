@@ -622,10 +622,10 @@ def cards_html(
         external = item.get("url") if str(item.get("url") or "").startswith("http") else ""
         href = external or f"{link_prefix}{item['slug']}/"
         target = ' target="_blank" rel="noopener noreferrer"' if external else ""
-        img = asset_href(item.get("image", "assets/listing-placeholder.svg"), depth)
-        if str(item.get("image") or "").startswith("http"):
-            img = item["image"]
-        fallback = asset_href("assets/listing-placeholder.svg", depth)
+        raw_img = str(item.get("image") or "")
+        if not raw_img or "listing-placeholder.svg" in raw_img:
+            continue
+        img = raw_img if raw_img.startswith("http") else asset_href(raw_img, depth)
         loc = item.get("location") or item.get("area") or ""
         attr = ""
         if item.get("kind") == "team" or item.get("source") == "thapar":
@@ -634,7 +634,7 @@ def cards_html(
         bits.append(
             f"""
       <a class="card" href="{esc(href)}"{target}>
-        <div class="card-media"><img src="{esc(img)}" alt="{esc(item.get('alt') or item['title'])}" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.src='{esc(fallback)}';" /></div>
+        <div class="card-media"><img src="{esc(img)}" alt="{esc(item.get('alt') or item['title'])}" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.closest('.card')?.remove();" /></div>
         <div class="card-body">
           <span class="card-status {status_class}">{esc(status)}</span>
           <p class="card-title">{esc(item['title'])}</p>

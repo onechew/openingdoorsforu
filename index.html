@@ -9729,7 +9729,7 @@
   </button>
 
   <script src="assets/site-footer.js?v=20261025navmenu" defer></script>
-  <script src="assets/active-listings.js?v=20261031060236"></script>
+  <script src="assets/active-listings.js?v=20261106151746"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const backToTop = document.getElementById("backToTop");
@@ -11488,8 +11488,9 @@
       const newBadge = listing.badge
         ? `<span class="tag tag-new">${listing.badge}</span>`
         : "";
+      if (!listing.image || /listing-placeholder\.svg/.test(listing.image)) return "";
       const mediaInner = `
-              <img src="${listing.image}" alt="${imageAlt}" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.src='assets/listing-placeholder.svg';" />
+              <img src="${listing.image}" alt="${imageAlt}" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.closest('.listing-card')?.remove();" />
               <span class="tag ${listing.tagClass}">${listing.status}</span>
               ${newBadge}`;
       const media = mediaLink

@@ -280,6 +280,32 @@ def format_title(address1: str) -> str:
     return title
 
 
+def photo_is_live(url: str) -> bool:
+    """Reject empty CDN URLs before they render as the house placeholder."""
+    if not url.startswith("http"):
+        return (ROOT / url).is_file()
+    try:
+        code = subprocess.check_output(
+            [
+                "curl",
+                "-sI",
+                "-o",
+                "/dev/null",
+                "-w",
+                "%{http_code}",
+                "--max-time",
+                "12",
+                "-A",
+                BROWSER_UA,
+                url,
+            ],
+            text=True,
+        ).strip()
+    except subprocess.CalledProcessError:
+        return False
+    return code == "200"
+
+
 def photo_url(prop: dict) -> str:
     photos = prop.get("photos") or {}
     if isinstance(photos, dict):
@@ -336,8 +362,8 @@ def convert(prop: dict) -> dict:
         raise ValueError(f"Non-active status for {mls}: {status_raw}")
     office = ((prop.get("office") or {}).get("name") or "Snobar Realty Group Inc.").strip()
     img = photo_url(prop)
-    if not img:
-        raise ValueError(f"Missing photo for {mls}")
+    if not img or "listing-placeholder" in img or not photo_is_live(img):
+        raise ValueError(f"Missing or dead photo for {mls}")
     slug = slugify(f"{address}-{mls}")
 
     item = {
@@ -413,13 +439,16 @@ def write_active_js(josh: list[dict], team: list[dict], synced_at: str) -> None:
     combined = list(josh) + list(team)
     slim = []
     for item in combined:
+        image = item.get("image") or ""
+        if not image or "listing-placeholder" in image:
+            continue
         row = {
             "title": item["title"],
             "location": item.get("location") or "",
             "status": item.get("status") or "For Sale",
             "tagClass": item.get("tagClass") or "sale",
             "price": item.get("price") or "",
-            "image": item.get("image") or "assets/listing-placeholder.svg",
+            "image": item.get("image") or "",
             "alt": item.get("alt") or item["title"],
             "url": item.get("url") or "",
             "kind": item.get("kind") or "active",
